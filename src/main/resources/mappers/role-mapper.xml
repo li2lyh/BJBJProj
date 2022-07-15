@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="roleMapper">
+
+	<insert id="insert" parameterType="com.bjbj.bookclub.RoleDTO">
+		insert into Role
+		values
+		(#{email}, #{room_id}, #{role})
+	</insert>
+
+
+
+	<select id="selectRole" parameterType="String"
+		resultType="com.bjbj.bookclub.RoleDTO">
+		select * from Role
+		where email = #{email}
+	</select>
+
+
+</mapper>
