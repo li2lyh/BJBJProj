@@ -1,5 +1,7 @@
 package com.bjbj.member;
 
+
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +15,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MemberController {
 	@Autowired
 	private MemberService service;
-	// �쉶�썝怨� 愿��젴�맂 �슂泥��쓣 泥섎━�븯�뒗 而⑦듃濡ㅻ윭
-	// �쉶�썝媛��엯, 濡쒓렇�씤
-	// 留덉씠�럹�씠吏�
+	@Autowired
+	private HttpSession session;
 
 	//
 	@RequestMapping(value = "/toLogin")
 	public String toLogin() {
-
 		return "";
 	}
 
-	// 로그인 요청
-	@RequestMapping(value = "/login")
-	public String login() {
+	/* ************ 로그인 ************ */
 
-		return "";
+	// 로그인 요청
+	@ResponseBody
+	@RequestMapping(value = "/login")
+
+	public String login(String email, String password) throws Exception{
+		MemberDTO dto = service.login(email, password);
+		if(dto != null) {
+			session.setAttribute("loginSession", dto);
+			System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
+			return "success";
+		} else {
+			return "fail";
+		}
+		
 	}
 
 	/* ************ 회원가입 ************ */
@@ -41,34 +52,29 @@ public class MemberController {
 
 	// 회원가입 요청
 	@RequestMapping(value = "/signUp")
-	public String signUp(MemberDTO dto) throws Exception {
+	public String signUp(MemberDTO dto) throws Exception{
 		System.out.println(dto.toString());
-
+    
 		service.signUp(dto);
 		return "redirect:/";
 	}
-
+	
 	// 이메일 중복 확인
 	@RequestMapping(value = "/confirmEmail")
 	@ResponseBody
-	public String confirmEmail(String email) throws Exception {
+	public String confirmEmail(String email) throws Exception{
 		// checkEmail이 false를 반환하면 사용가능 email
-		if (!service.confirmEmail(email))
-			return "available";
+		if(!service.confirmEmail(email)) return "available";
 		// checkEmail이 true를 반환하면 중복 email
-		else
-			return "unavailable";
+		else return "unavailable";
 	}
-
+	
 	// 닉네임 중복 확인
 	@RequestMapping(value = "/confirmNickname")
 	@ResponseBody
-	public String confirmNickname(String nickname) throws Exception {
-		if (!service.confirmNickname(nickname))
-			return "available";
-		else
-			return "unavailable";
-	}
+	public String confirmNickname(String nickname) throws Exception{
+		if(!service.confirmNickname(nickname)) return "available";
+		else return "unavailable";
 
 	/* ************ 아이디, 비밀번호 찾기 ************ */
 	// 아이디,비밀번호찾기 페이지 요청
@@ -94,7 +100,8 @@ public class MemberController {
 			System.out.println("dto : " + dto);
 			return "";
 		}
-
+	}
+		
 	}
 
 }

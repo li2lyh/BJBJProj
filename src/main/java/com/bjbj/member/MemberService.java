@@ -10,6 +10,11 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
+  /* *************** �α��� *************** */
+	public MemberDTO login(String email, String password) throws Exception{
+		return memberDAO.login(email, password);
+	}
+	
 	/* *************** ȸ������ *************** */
 	public int signUp(MemberDTO dto) throws Exception {
 		return memberDAO.insert(dto);
@@ -35,5 +40,9 @@ public class MemberService {
 		// System.out.println("memberService : " + memberDAO.selectByEmail(email));
 		return memberDAO.selectByEmail(email);
 	}
-
+  
+  /*  ��й�ȣ ����  */
+	public void modifyPw(String email, String tempPw)throws Exception{
+		memberDAO.modifyPw(email, tempPw);
+	}
 }
