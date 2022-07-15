@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bjbj.utils.PageDTO;
+
 @Service
 public class BookclubService {
 	@Autowired
@@ -45,7 +47,7 @@ public class BookclubService {
       int endRowNum = pageNum * PAGE_ROW_COUNT;
       
       //startRowNum 과 endRowNum  을 BookclubDTO 객체에 담고
-      BookclubDTO dto = new BookclubDTO();
+      PageDTO dto = new PageDTO();
       dto.setStartRowNum(startRowNum);
       dto.setEndRowNum(endRowNum);
       

@@ -7,27 +7,17 @@ public class LetterDTO {
 	private String email;
 	private String title;
 	private String content;
-	private Date written_date;
-	
-	private int startRowNum;
-	private int endRowNum;
-	private int prevNum; //이전글의 글번호
-	private int nextNum; //다음글의 글번호
+	private String written_date;
 	
 	public LetterDTO() {}
 
-	public LetterDTO(int no, String email, String title, String content, Date written_date, int startRowNum,
-	         int endRowNum, int prevNum, int nextNum) {
+	public LetterDTO(int no, String email, String title, String content, String written_date) {
 		super();
 		this.no = no;
 		this.email = email;
 		this.title = title;
 		this.content = content;
 		this.written_date = written_date;
-	    this.startRowNum = startRowNum;
-	    this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
 	}
 
 
@@ -63,43 +53,11 @@ public class LetterDTO {
 		this.content = content;
 	}
 
-	public Date getWritten_date() {
+	public String getWritten_date() {
 		return written_date;
 	}
 
-	public void setWritten_date(Date written_date) {
+	public void setWritten_date(String written_date) {
 		this.written_date = written_date;
 	}
-
-	public int getStartRowNum() {
-		return startRowNum;
-	}
-
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
-
-	public int getEndRowNum() {
-		return endRowNum;
-	}
-
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	}
-	
-	public int getPrevNum() {
-		return prevNum;
-	}
-
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
-	}
-
-	public int getNextNum() {
-		return nextNum;
-	}
-
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
-	}	
 }

@@ -1,7 +1,6 @@
 package com.bjbj.bookclub;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 public class BookclubDTO {
 	private int room_id;
@@ -20,17 +19,10 @@ public class BookclubDTO {
 	private int meet_week;
 	private String place;
 	
-	private int startRowNum;
-	private int endRowNum;
-	private int prevNum; //이전글의 글번호
-	private int nextNum; //다음글의 글번호
-
-	
 	public BookclubDTO() {}
 	public BookclubDTO(int room_id, String room_title, String room_detail, String book_title, String book_cover,
-			int room_people, Date recruit_start, Date recruit_end, Date open_date, Date close_date,
-			String room_status, String img_id, String tag, int meet_week, String place, int startRowNum,
-	         int endRowNum, int prevNum, int nextNum) {
+			int room_people, Date recruit_start, Date recruit_end, Date open_date, Date close_date, String room_status,
+			String img_id, String tag, int meet_week, String place) {
 		super();
 		this.room_id = room_id;
 		this.room_title = room_title;
@@ -47,12 +39,7 @@ public class BookclubDTO {
 		this.tag = tag;
 		this.meet_week = meet_week;
 		this.place = place;
-	    this.startRowNum = startRowNum;
-	    this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
 	}
-
 	public int getRoom_id() {
 		return room_id;
 	}
@@ -142,36 +129,7 @@ public class BookclubDTO {
 	}
 	public void setPlace(String place) {
 		this.place = place;
-	}	
+	}
 	
-	public int getStartRowNum() {
-		return startRowNum;
-	}
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
-	public int getEndRowNum() {
-		return endRowNum;
-	}
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	}
-	public int getPrevNum() {
-		return prevNum;
-	}
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
-	}
-	public int getNextNum() {
-		return nextNum;
-	}
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
-	}
-	@Override
-	public String toString() {
-		return room_id + " : " + room_title + " : " + room_detail + " : " + book_title + " : " + book_cover + " : " + room_people
-				+ " : " + recruit_start + " : " + recruit_end + " : " + open_date + " : " + close_date + " : " + room_status+ " : " + img_id
-				+ " : " + tag + " : " + meet_week + " : " + place;
-	}
+	
 }
