@@ -91,8 +91,8 @@ public class BookclubController {
 
 		// 여기서부터 로그인세션 이메일 받아와서 다시 작성
 
-		service.updateMydesc("abc7@gmail.com", mydesc); // 자기소개 업데이트
-		service.insertWaiting(new WaitingDTO(room_id, "abc7@gmail.com", null)); // waiting테이블 데이터 삽입
+		service.updateMydesc("abc8@gmail.com", mydesc); // 자기소개 업데이트
+		service.insertWaiting(new WaitingDTO(room_id, "abc8@gmail.com", null)); // waiting테이블 데이터 삽입
 
 		return "redirect:/club/toClub";
 	}
