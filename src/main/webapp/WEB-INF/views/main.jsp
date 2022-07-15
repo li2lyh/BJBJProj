@@ -71,10 +71,10 @@ body {
 	width: 13rem;
 }
 </style>
+
 </head>
 
 <body>
-
 
 	<div class="container">
 
@@ -451,6 +451,7 @@ body {
                             next = next.nextElementSibling
                         }
                     })
-                </script>
+        </script>
+
 </body>
 </html>

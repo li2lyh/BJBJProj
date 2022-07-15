@@ -7,8 +7,9 @@ public class MemberDTO {
 	private String nickname;
 	private String phone;
 	private String mydesc;
-	
-	public MemberDTO() {}
+
+	public MemberDTO() {
+	}
 
 	public MemberDTO(String email, String password, String name, String nickname, String phone, String mydesc) {
 		super();
@@ -73,6 +74,5 @@ public class MemberDTO {
 		return "MemberDTO [email=" + email + ", password=" + password + ", name=" + name + ", nickname=" + nickname
 				+ ", phone=" + phone + ", mydesc=" + mydesc + "]";
 	}
-	
 
 }

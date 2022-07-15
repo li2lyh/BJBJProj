@@ -8,36 +8,40 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberService {
 	@Autowired
-	private MemberDAO memberDAO; 
-	/* *************** ·Î±×ÀÎ *************** */
+	private MemberDAO memberDAO;
+
+  /* *************** ï¿½Î±ï¿½ï¿½ï¿½ *************** */
 	public MemberDTO login(String email, String password) throws Exception{
 		return memberDAO.login(email, password);
 	}
 	
-	/* *************** È¸¿ø°¡ÀÔ *************** */
-	public int signUp(MemberDTO dto) throws Exception{
+	/* *************** È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ *************** */
+	public int signUp(MemberDTO dto) throws Exception {
 		return memberDAO.insert(dto);
 	}
-	
-	/*  È¸¿ø°¡ÀÔ _ Email Áßº¹ È®ÀÎ  */
-	public boolean confirmEmail(String email)throws Exception{
+
+	/* È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ _ Email ï¿½ßºï¿½ È®ï¿½ï¿½ */
+	public boolean confirmEmail(String email) throws Exception {
 		return memberDAO.confirmEmail(email);
 	}
-	
-	/*  È¸¿ø°¡ÀÔ _ Nickname Áßº¹ È®ÀÎ  */
-	public boolean confirmNickname(String nickname)throws Exception{
+
+	/* È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ _ Nickname ï¿½ßºï¿½ È®ï¿½ï¿½ */
+	public boolean confirmNickname(String nickname) throws Exception {
 		return memberDAO.confirmNickname(nickname);
 	}
-	
-	
-	
-	/* *************** ¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â *************** */
-	/*  ¾ÆÀÌµð Ã£±â  */
-	public MemberDTO searchEmail(String name, String phone)throws Exception{
+
+	/* *************** ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ *************** */
+	/* ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ */
+	public MemberDTO searchEmail(String name, String phone) throws Exception {
 		return memberDAO.searchEmail(name, phone);
 	}
-	
-	/*  ºñ¹Ð¹øÈ£ º¯°æ  */
+
+	public MemberDTO selectByEmail(String email) throws Exception {
+		// System.out.println("memberService : " + memberDAO.selectByEmail(email));
+		return memberDAO.selectByEmail(email);
+	}
+  
+  /*  ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½  */
 	public void modifyPw(String email, String tempPw)throws Exception{
 		memberDAO.modifyPw(email, tempPw);
 	}

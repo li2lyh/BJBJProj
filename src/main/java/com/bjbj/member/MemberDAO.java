@@ -13,7 +13,7 @@ public class MemberDAO {
 	@Autowired
 	private SqlSession session;
 	
-	/* *************** ·Î±×ÀÎ *************** */
+	/* *************** ï¿½Î±ï¿½ï¿½ï¿½ *************** */
 	public MemberDTO login(String email, String password)throws Exception{
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
@@ -21,30 +21,31 @@ public class MemberDAO {
 		return session.selectOne("memberMapper.login", map);
 	}
 	
-	/* *************** È¸¿ø°¡ÀÔ *************** */
+	/* *************** È¸ï¿½ï¿½ï¿½ï¿½ *************** */
 	public int insert(MemberDTO dto)throws Exception{
 		return session.insert("memberMapper.insert", dto);
 	}
 	
-	/* *************** ÀÌ¸ŞÀÏ Áßº¹È®ÀÎ *************** */
+	/* *************** ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ßºï¿½È®ï¿½ï¿½ *************** */
 	public boolean confirmEmail(String email)throws Exception{
 		return session.selectOne("memberMapper.confirmEmail", email);
 	}
 	
-	/* *************** ´Ğ³×ÀÓ Áßº¹È®ÀÎ *************** */
+	/* *************** ï¿½Ğ³ï¿½ï¿½ï¿½ ï¿½ßºï¿½È®ï¿½ï¿½ *************** */
 	public boolean confirmNickname(String nickname)throws Exception{
 		return session.selectOne("memberMapper.confirmNickname", nickname);
 	}
-	
-	/* *************** Email Ã£±â *************** */
-	public MemberDTO searchEmail(String name, String phone)throws Exception{
+
+	/* *************** Email Ã£ï¿½ï¿½ *************** */
+	public MemberDTO searchEmail(String name, String phone) throws Exception {
+
 		Map<String, String> map = new HashMap<>();
 		map.put("name", name);
 		map.put("phone", phone);
 		return session.selectOne("memberMapper.searchEmail", map);
 	}
 	
-	/* *************** ºñ¹Ğ¹øÈ£ º¯°æ *************** */
+	/* *************** ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ *************** */
 	public void modifyPw(String email, String tempPw)throws Exception{
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
@@ -54,7 +55,19 @@ public class MemberDAO {
 		System.out.println(map.toString());
 		
 		session.update("memberMapper.modifyPw", map);
+
+	// ìê¸°ì†Œê°œ ì—…ë°ì´íŠ¸
+	public int updateMydesc(String email, String mydesc) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("mydesc", mydesc);
+		return session.update("memberMapper.updateMydesc", map);
+
 	}
 
-	
+	// ì´ë©”ì¼ë¡œ í•´ë‹¹ ì •ë³´ ë°›ê¸°
+	public MemberDTO selectByEmail(String email) throws Exception {
+		return session.selectOne("memberMapper.selectByEmail", email);
+	}
+
 }
