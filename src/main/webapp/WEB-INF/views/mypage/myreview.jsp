@@ -15,7 +15,7 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<title>참여 독서 모임</title>
+<title>도서 리뷰</title>
 <style>
 /* Contents */
 /* 메뉴 */
@@ -47,9 +47,10 @@ a:hover {
 	background-color: white;
 }
 
-/* 참여 독서 모임 */
-th, td {
-	text-align: center;
+/* 도서 리뷰 */
+#reviewImg {
+	width: 100%;
+	height: 100%;
 }
 
 .page-link {
@@ -107,83 +108,84 @@ th, td {
 				</div>
 			</div>
 
-			<!-- 참여 독서 모임 -->
+			<!-- 도서 리뷰 -->
 			<div class="col-8 p-4">
 				<div class="row">
 					<div class="d-flex justify-content-center p-2">
-						<h4>참여 독서 모임</h4>
+						<h4>도서 리뷰</h4>
 					</div>
-					<div class="p-0">최근 참여한 독서모임 순으로 보여드립니다.</div>
-					<table class="table">
-						<thead class="table-secondary">
-							<tr>
-								<th scope="col">No.</th>
-								<th scope="col">책</th>
-								<th scope="col">모임이름</th>
-								<th scope="col">기간</th>
-								<th scope="col">진행상황</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${list.size() == 0}">
-								<tr>
-									<td colspan="5">참여한 독서모임이 없습니다.</td>
-								</tr>
-							</c:if>
-							<c:if test="${list.size() > 0}">
-								<c:forEach items="${list}" var="dto">
-									<tr>
-										<td>${dto.room_id}</td>
-										<td>${dto.book_title}</td>
-										<td class="fw-bold"><a href="#">${dto.room_title}</a></td>
-										<td>${dto.open_date} ~ ${dto.close_date}</td>
-										<td>${dto.room_status}</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-						</tbody>
-					</table>
-					<nav>
-						<ul class="pagination justify-content-center">
-							<c:choose>
-								<c:when test="${startPageNum ne 1}">
-									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${startPageNum - 1}"><<</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item d-none"><a class="page-link"
-										href="javascript:"></a></li>
-								</c:otherwise>
-							</c:choose>
-							<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
-								<c:choose>
-									<c:when test="${i eq pageNum }">
-										<li class="page-item active"><a class="page-link"
-											href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${i}">${i}</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${i}">${i}</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<c:choose>
-								<c:when test="${endPageNum lt totalPageCount}">
-									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${endPageNum + 1}">>></a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item d-none"><a class="page-link"
-										href="javascript:"></a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</nav>
+					<div class="p-2">최근 작성한 리뷰 순으로 보여드립니다.</div>
 				</div>
+				<c:if test="${list.size() == 0}">
+					<div class="review p-2">
+						<div class="row border-top p-3">
+							<div class="col-12 d-flex justify-content-center">
+								<p class="fw-bold">작성한 리뷰가 없습니다.</p>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${list.size() > 0}">
+					<c:forEach items="${list}" var="dto">
+						<div class="review p-2">
+							<div class="row border-top p-3">
+								<div class="col-3">
+									<img src="/resources/images/noimage.gif" id="reviewImg">
+								</div>
+								<div class="col-9">
+									<p>${dto.book_title}</p>
+									<p class="fw-bold">${dto.review_title}</p>
+									<span>${dto.writer_nickname}</span> <span>${dto.written_date}</span>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+				<div class="row border-top p-2">
+					<div class="col d-flex justify-content-end p-0">
+						<button type="button" class="btn btn-secondary" id="writeBtn">작성하기</button>
+					</div>
+				</div>
+				<nav>
+					<ul class="pagination justify-content-center">
+						<c:choose>
+							<c:when test="${startPageNum ne 1}">
+								<li class="page-item"><a class="page-link"
+									href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${startPageNum - 1}"><<</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item d-none"><a class="page-link"
+									href="javascript:"></a></li>
+							</c:otherwise>
+						</c:choose>
+						<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
+							<c:choose>
+								<c:when test="${i eq pageNum }">
+									<li class="page-item active"><a class="page-link"
+										href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${i}">${i}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${i}">${i}</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${endPageNum lt totalPageCount}">
+								<li class="page-item"><a class="page-link"
+									href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${endPageNum + 1}">>></a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item d-none"><a class="page-link"
+									href="javascript:"></a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
