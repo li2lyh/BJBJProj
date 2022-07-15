@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="managerMapper">
+
+<!-- 블랙리스트 조회  -->
+<select id="selectBlacklist" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+	select email, name, nickname, black_detail from blacklist join member using (email)
+</select>
+
+<!-- 블랙리스트 삭제 -->
+<delete id="delete" parameterType="String">
+	delete from blacklist where email=#{email}
+</delete>
+
+<!-- 블랙리스트 개별 추가 (여기 고치기....)-->
+<insert id="insert" parameterType="com.bjbj.manager.BlacklistDTO">
+	insert into blacklist values
+		(#{email} ,#{name}, #{nickname}, #{black_detail} )
+</insert>
+
+
+<!-- 블랙리스트 검색 -->
+<select id="searchBlacklist" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+	select * from member inner join blacklist using(email)
+		where ${category} like '%' || #{keyword} || '%'
+</select>
+
+<!-- 전체 회원 조회 -->
+<select id="selectAllmember" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+	select email, name, nickname, warning_count from member left outer join report using(email)
+</select>
+
+<!-- 전체 회원 검색 -->
+<select id="searchMember" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap" >
+	select email, name, nickname, warning_count from member  
+		 left outer join report using(email)
+			where ${category} like '%' || #{keyword} || '%'
+</select>
+
+
+<!-- 전체 모임 조회 --> 
+<select id="selectAllclub" resultType="com.bjbj.bookclub.BookclubDTO">
+	select * from bookroom 
+</select>
+
+
+<!-- 리뷰 전체 조회 -->
+<select id="selectAllreview" resultType="com.bjbj.review.ReviewDTO">
+	select * from review
+</select>
+
+<!-- 리뷰 검색 -->
+<select id="searchReview" parameterType="map" resultType="com.bjbj.review.ReviewDTO">
+	select * from review 
+		where ${category} like '%' || #{keyword} || '%'
+</select>
+
+
+<!-- 리뷰 개별 삭제 -->
+<delete id="deleteReview" parameterType="int">
+	delete from review where review_no = #{review_no}
+</delete>
+
+<!-- 리뷰 전체 삭제 (수정하기)-->
+<delete id="deleteAllReview" parameterType="int">
+	delete from review
+		where review_no in
+			<foreach collection="deleteArr" item="num" open="(" close=")" separator=",">
+				#{num}
+			</foreach>
+</delete>
+
+<!-- 새로운 메세지 시퀀스 -->
+<!--  <select id="messageSeq" resultType="int">
+	select seq_letter.nextval from dual
+</select>-->
+
+
+<!-- 메세지 개별 저장--> 
+<!--  <insert id="insertLetter" parameterType="com.bjbj.letter.LetterDTO">
+	insert into letter
+		values(seq_letter.nextval , #{email}, #{title},#{content},#{written_date} )
+</insert>-->
+
+
+
+</mapper>
