@@ -1,4 +1,4 @@
-package com.bjbj.review;
+package com.bjbj.letter;
 
 import java.util.List;
 
@@ -8,18 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReviewService {
+public class LetterService {
 	@Autowired
-	private ReviewDAO dao;
-	
-	/* 전제 조회 */
-	public List<ReviewDTO> selectAll() throws Exception{
-		return dao.selectAll();
+	private LetterDAO dao;
+
+	// 최근순으로 전체 조회
+	public List<LetterDTO> selectLately() throws Exception {
+		return dao.selectLately();
 	}
 	
-	/* 최근순으로 조회 */
-	public List<ReviewDTO> selectLately() throws Exception {
-		return dao.selectLately();
+	// 쪽지 삭제
+	public void delete(int[] no) throws Exception{
+		dao.delete(no);
 	}
 	
 	/* 페이징 */
@@ -44,13 +44,13 @@ public class ReviewService {
       //보여줄 페이지의 끝 ROWNUM
       int endRowNum = pageNum * PAGE_ROW_COUNT;
       
-      //startRowNum 과 endRowNum  을 ReviewDTO 객체에 담고
-      ReviewDTO dto = new ReviewDTO();
+      //startRowNum 과 endRowNum  을 LetterDTO 객체에 담고
+      LetterDTO dto = new LetterDTO();
       dto.setStartRowNum(startRowNum);
       dto.setEndRowNum(endRowNum);
       
-      // ReviewDTO 객체를 이용해서 목록을 얻어온다.
-      List<ReviewDTO> list = dao.selectPage(startRowNum, endRowNum);
+      // LetterDTO 객체를 이용해서 목록을 얻어온다.
+      List<LetterDTO> list = dao.selectPage(startRowNum, endRowNum);
       
       //하단 시작 페이지 번호 
       int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
@@ -65,12 +65,12 @@ public class ReviewService {
       if(endPageNum > totalPageCount){
          endPageNum = totalPageCount; //보정해 준다. 
       }
-      
+
       //request 영역에 담아주기
-      request.setAttribute("list", list);   //ReviewDTO list
+      request.setAttribute("list", list);   //LetterDTO list
       request.setAttribute("startPageNum", startPageNum);   //시작 페이지 번호
       request.setAttribute("endPageNum", endPageNum);   //끝 페이지 번호
       request.setAttribute("pageNum", pageNum);   //현재 페이지 번호
-      request.setAttribute("totalPageCount", totalPageCount);   //모든 페이지 count	      
+  	  request.setAttribute("totalPageCount", totalPageCount);   //모든 페이지 count	      
 	}
 }

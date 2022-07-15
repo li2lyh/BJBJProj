@@ -1,5 +1,6 @@
 package com.bjbj.bookclub;
 
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -14,6 +15,16 @@ import org.springframework.stereotype.Repository;
 public class BookclubDAO {
 	@Autowired
 	private SqlSession session;
+
+	/* 전제 조회 */
+	public List<BookclubDTO> selectAll() throws Exception {
+		return session.selectList("clubMapper.selectAll");
+	}
+	
+	/* 최근순으로 조회 */
+	public List<BookclubDTO> selectLately() throws Exception {
+		return session.selectList("clubMapper.selectLately");
+   }
 
 	public List<BookclubDTO> selectList() throws Exception {
 		return session.selectList("clubMapper.selectList");
@@ -94,4 +105,21 @@ public class BookclubDAO {
 		return session.update("clubMapper.updateStatus", map);
 	}
 
+	/* 페이징 */
+	public int getCount() throws Exception {
+		return session.selectOne("clubMapper.getCount");
+	}
+	
+	/* 페이징 */
+	public List<BookclubDTO> selectPage(int start, int end) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+		return session.selectList("clubMapper.selectPage", map);
+	}
+	
+	/* 찜한 모임 조회 */
+	public List<BookclubDTO> likeClub() throws Exception {
+		return session.selectList("clubMapper.likeClub");
+	}
 }

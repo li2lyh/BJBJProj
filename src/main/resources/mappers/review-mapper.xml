@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="reviewMapper">
+
+	<!-- 전체 조회 -->
+	<select id="selectAll" resultType="com.bjbj.review.ReviewDTO">
+		select * from review
+	</select>
+	
+	<!-- 최근순으로 조회 -->
+	<select id="selectLately" resultType="com.bjbj.review.ReviewDTO">
+		select * from review order by written_date desc
+	</select>
+
+	<!-- 페이징 -->
+	<select id="getCount" resultType="int">
+		select count(*) from review
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="selectPage" parameterType="map" resultType="com.bjbj.review.ReviewDTO">
+		select * from (select review.*, row_number() over(order by written_date desc) as num from review)
+        where num between #{start} and #{end} 
+	</select>
+</mapper>
