@@ -7,8 +7,9 @@ public class MemberDTO {
 	private String nickname;
 	private String phone;
 	private String mydesc;
-	
-	public MemberDTO() {}
+
+	public MemberDTO() {
+	}
 
 	public MemberDTO(String email, String pw, String name, String nickname, String phone, String mydesc) {
 		super();
@@ -72,6 +73,5 @@ public class MemberDTO {
 	public String toString() {
 		return email + " : " + pw+ " : " + name + " : " + nickname + " : " + phone + " : " + mydesc;
 	}
-	
 
 }
