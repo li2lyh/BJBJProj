@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="letterMapper">
+
+	<!-- 최근순으로 전체 조회 -->
+	<select id="selectLately" resultType="com.bjbj.letter.LetterDTO">
+		select * from letter order by written_date desc
+	</select>
+	
+	<!-- 쪽지 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from letter where no in
+			<foreach collection="deleteArr" item="num" open="(" close=")" separator=",">
+				#{num}
+			</foreach>
+	</delete>
+	
+	<!-- 페이징 -->
+	<select id="getCount" resultType="int">
+		select count(*) from letter
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="selectPage" parameterType="map" resultType="com.bjbj.letter.LetterDTO">
+		select * from (select letter.*, row_number() over(order by written_date desc) as num from letter)
+        where num between #{start} and #{end} 
+	</select>
+
+</mapper>

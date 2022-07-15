@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="bookclubMapper">
+
+	<!-- 전체 조회 -->
+	<select id="selectAll" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from bookroom
+	</select>
+	
+	<!-- 최근순으로 조회 -->
+	<select id="selectLately" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from bookroom order by close_date desc
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="getCount" resultType="int">
+		select count(*) from bookroom
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="selectPage" parameterType="map" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from (select bookroom.*, row_number() over(order by room_id desc) as num from bookroom)
+        where num between #{start} and #{end} 
+	</select>
+	
+	<!-- 찜한 모임 조회 -->
+	<select id="likeClub" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from like_room join bookroom using(room_id)
+	</select>
+</mapper>
