@@ -2,7 +2,7 @@ package com.bjbj.member;
 
 public class MemberDTO {
 	private String email;
-	private String pw;
+	private String password;
 	private String name;
 	private String nickname;
 	private String phone;
@@ -14,7 +14,7 @@ public class MemberDTO {
 	public MemberDTO(String email, String pw, String name, String nickname, String phone, String mydesc) {
 		super();
 		this.email = email;
-		this.pw = pw;
+		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
 		this.phone = phone;
@@ -30,11 +30,11 @@ public class MemberDTO {
 	}
 
 	public String getPw() {
-		return pw;
+		return password;
 	}
 
 	public void setPw(String pw) {
-		this.pw = pw;
+		this.password = pw;
 	}
 
 	public String getName() {
@@ -71,7 +71,7 @@ public class MemberDTO {
 
 	@Override
 	public String toString() {
-		return email + " : " + pw+ " : " + name + " : " + nickname + " : " + phone + " : " + mydesc;
+		return email + " : " + password+ " : " + name + " : " + nickname + " : " + phone + " : " + mydesc;
 	}
 
 }
