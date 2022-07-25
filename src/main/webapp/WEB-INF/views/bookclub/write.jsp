@@ -66,6 +66,8 @@ h3 {
 #p1 {
 	margin-top: 15px;
 }
+
+
 </style>
 </head>
 <body>
@@ -170,12 +172,12 @@ h3 {
 				</div>
 				<div class="col">
 					<input type="text" id="open_date" class="form-control"
-						name="open_date" value="202-07-11" />
+						name="open_date" value="" />
 				</div>
 
 				<div class="col">
 					<input type="text" id="close_date" class="form-control"
-						name="close_date" value="202-07-11" />
+						name="close_date" value="종료날짜 선택" />
 				</div>
 			</div>
 
@@ -201,6 +203,8 @@ h3 {
 		</div>
 	</form>
 	<script>
+		
+	
 		// 뒤로 가기 버튼
 		document.getElementById("toCancle").onclick = function() {
 			location.href = "/club/toClub";
@@ -229,6 +233,19 @@ h3 {
 			changeMonth : true
 		// 콤보박스에서 월 선택 가능
 		})
+		
+		let today = new Date();   
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		let date = today.getDate();  // 날짜
+		let day = today.getDay();  // 요일
+		let sysdate = year + '-' + month + '-' + date; // 현자 날짜 표기
+		
+		$("#open_date").val(sysdate);
+			
+		
+		
+		
 	</script>
 </body>
 </html>

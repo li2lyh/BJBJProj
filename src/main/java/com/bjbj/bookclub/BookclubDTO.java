@@ -166,8 +166,7 @@ public class BookclubDTO {
 		this.place = place;
 	}
 
-
-	public String getStrDate(Date date) {
+public String getStrDate(Date date) {
 		String rs = null;
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
@@ -185,6 +184,6 @@ public class BookclubDTO {
 			+ ", room_current=" + room_current + ", recruit_start=" + recruit_start + ", recruit_end=" + recruit_end
 			+ ", open_date=" + open_date + ", close_date=" + close_date + ", room_status=" + room_status
 			+ ", img_id=" + img_id + ", tag=" + tag + ", meet_week=" + meet_week + ", place=" + place + "]";
-	}
 
+  }
 }

@@ -57,6 +57,9 @@ public class BookclubService {
       dto.setStartRowNum(startRowNum);
       dto.setEndRowNum(endRowNum);
       
+      
+      
+      
       // BookclubDTO 객체를 이용해서 목록을 얻어온다.
       List<BookclubDTO> list = dao.selectPage(startRowNum, endRowNum);
       
@@ -154,5 +157,36 @@ public class BookclubService {
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		return dao.updateStatus(room_status, room_id);
 	}
+	
+	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
+		return dao.selectRoleByRoom(room_id);
+	}
+	
+	// 클럽내 게시판 글쓰기
+	public void insertBoard(BoardDTO dto) throws Exception{
+		dao.insertBoard(dto);
+	}
+	
+	// 클럽내 게시판 목록
+		public List<BoardDTO> selectAllBoard() throws Exception{
+		return dao.selectAllBoard();
+		}
+		
+		// 클럽내 게시판 목록
+				public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+				return dao.selectAllBoard();
+				}
+	
+	
+				// 클럽내 게시판 게시글 수정
+				public void updateBoard(BoardDTO dto) throws Exception{
+					dao.updateBoard(dto);
+				}
+			
+				// 게시글 삭제
+				public void deleteBoard(int board_seq) throws Exception{
+					dao.deleteBoard(board_seq);
+				}
+	
 	
 }

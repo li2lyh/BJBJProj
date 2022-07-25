@@ -120,7 +120,6 @@ public class MemberController {
 			return "";
 		}
 	}
-
 	// 마이페이지 페이지 요청
 	@RequestMapping(value = "/toMyinfo")
 	public String toMyinfo(Model model) throws Exception {
