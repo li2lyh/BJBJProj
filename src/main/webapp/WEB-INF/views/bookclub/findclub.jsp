@@ -92,6 +92,7 @@ h4 {
 		<div class="row">
 			<div class="col">
 				<h4>모집 중 클럽</h4>
+				<button type="button" id="clubBoard">임시 참여중인 클럽버튼(main에서 BookClub헤더 네비바 내리면 보이게)</button>
 			</div>
 		</div>
 
@@ -145,6 +146,11 @@ h4 {
 		$("#btnClass").on("click", function() {
 			location.href = "/club/toWrite";
 		})
+		
+		$("#clubBoard").on("click", function(){
+			location.href = "/club/clubBoard?room_id="+'${role.room_id}';
+		})
+		
 	</script>
 
 
