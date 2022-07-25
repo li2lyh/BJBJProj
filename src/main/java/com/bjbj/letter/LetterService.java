@@ -46,7 +46,8 @@ public class LetterService {
       //보여줄 페이지의 끝 ROWNUM
       int endRowNum = pageNum * PAGE_ROW_COUNT;
       
-      //startRowNum 과 endRowNum  을 LetterDTO 객체에 담고
+      //startRowNum 과 endRowNum  을 PageDTO 객체에 담고
+
       PageDTO dto = new PageDTO();
       dto.setStartRowNum(startRowNum);
       dto.setEndRowNum(endRowNum);
@@ -75,4 +76,16 @@ public class LetterService {
       request.setAttribute("pageNum", pageNum);   //현재 페이지 번호
   	  request.setAttribute("totalPageCount", totalPageCount);   //모든 페이지 count	      
 	}
+	
+	
+	
+	
+	
+	/*-----------------------*/
+	//개별 쪽지 전송 (관리자 기능)
+	public void insertLetter(LetterDTO dto) throws Exception{
+		dao.insertLetter(dto);
+	}
+	
+	
 }

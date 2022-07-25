@@ -47,6 +47,9 @@ textarea {
 .sendTo {
 	width: 300px;
 }
+.titleBox{
+	width:300px;
+}
 </style>
 </head>
 <body>
@@ -84,6 +87,7 @@ textarea {
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>
+								
 								<th>모임명</th>
 								<th>모임장</th>
 								<th></th>
@@ -97,20 +101,21 @@ textarea {
 						<tbody>
 							<c:if test="${list.size() == 0}">
 								<tr>
-									<td colspan="5">등록된 모임이 없습니다.</td>
+									<td colspan="8">등록된 모임이 없습니다.</td>
 								</tr>
 							</c:if>
 							<c:if test ="${list.size() > 0 }">
 								<c:forEach items="${list}" var="dto">
 									<tr>
+										
 										<td>${dto.room_title}</td>
-										<td>내용</td>
+										<td>모임장</td>
 										<td><button type="button" class="messageBtn">쪽지</button></td>
 										<td>${dto.room_people}</td>
-										<td>내용</td>
-										<td>내용</td>
-										<td>내용</td>
-										<td><button type="button">삭제</button></td>
+										<td>${dto.open_date}~${dto.close_date}</td>
+										<td>${dto.room_status}</td>
+										<td>경고</td>
+										<td><button type="button" class="deleteBtn" value="${dto.room_id}">삭제</button></td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -138,6 +143,12 @@ textarea {
 								</div>
 							</div>
 							<div class="row p-2">
+								<div class="col-3">제목</div>
+								<div class="col-9">
+									<input type="text" class="titleBox">
+								</div>
+							</div>
+							<div class="row p-2">
 								<div class="col-3">내용</div>
 								<div class="col-9 contentBox">
 									<textarea></textarea>
@@ -153,7 +164,7 @@ textarea {
 				</div>
 			</div>
 		</form>
-
+	</div>
 		<script>
 			//쪽지 모달
 			$(".messageBtn").on("click", function() {
@@ -163,10 +174,18 @@ textarea {
 			document.getElementById("closeBtn").onclick = function() {
 				$(".modal").hide();
 			}
-			//폼 전송 
+			//쪽지 form 전송 
 			$("#submitBtn").on("click", function() {
 				$("#roomMessageForm").submit();
 			})
+			
+			
+			//모임 삭제
+			$(".deleteBtn").on("click", function(){
+				location.href="/manager/deleteBookroom?room_id="+this.value;
+			})
+			
+			
 		</script>
 </body>
 </html>

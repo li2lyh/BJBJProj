@@ -37,4 +37,17 @@ public class LetterDAO {
 		map.put("end", end);
 		return session.selectList("letterMapper.selectPage", map);
 	}
+	
+	
+	
+	
+	/*----------------*/
+	// 쪽지 개별 전송 (관리자 기능)
+	public void insertLetter(LetterDTO dto)throws Exception{
+		session.insert("letterMapper.insertLetter" , dto);
+	}
+	
+
+	
+	
 }
