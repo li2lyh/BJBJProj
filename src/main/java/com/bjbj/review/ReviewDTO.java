@@ -4,10 +4,12 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class ReviewDTO {
+	
+	private String review_no;
 	private String review_title;
 	private String email;
 	private String book_title;
-	private String writer_nickname;
+	private String nickname;
 	private Date written_date;
 	private String content;
 	private int views;
@@ -15,25 +17,36 @@ public class ReviewDTO {
 	
 	private int startRowNum;
 	private int endRowNum;
-	private int prevNum; //이전글의 글번호
-	private int nextNum; //다음글의 글번호
+	private int prevNum; // 이전글의 글번호
+	private int nextNum; // 다음글의 글번호
 	
 	public ReviewDTO() {}
-	public ReviewDTO(String review_title, String email, String book_title, String writer_nickname, Date written_date,
-			String content, int views, String img_id, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+
+	public ReviewDTO(String review_no, String review_title, String email, String book_title, String nickname,
+			Date written_date, String content, int views, String img_id, int startRowNum, int endRowNum, int prevNum,
+			int nextNum) {
 		super();
+		this.review_no = review_no;
 		this.review_title = review_title;
 		this.email = email;
 		this.book_title = book_title;
-		this.writer_nickname = writer_nickname;
+		this.nickname = nickname;
 		this.written_date = written_date;
 		this.content = content;
 		this.views = views;
 		this.img_id = img_id;
-	    this.startRowNum = startRowNum;
-	    this.endRowNum = endRowNum;
+		this.startRowNum = startRowNum;
+		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
+	}
+
+	public String getReview_no() {
+		return review_no;
+	}
+
+	public void setReview_no(String review_no) {
+		this.review_no = review_no;
 	}
 
 	public String getReview_title() {
@@ -60,12 +73,12 @@ public class ReviewDTO {
 		this.book_title = book_title;
 	}
 
-	public String getWriter_nickname() {
-		return writer_nickname;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setWriter_nickname(String writer_nickname) {
-		this.writer_nickname = writer_nickname;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getWritten_date() {
@@ -99,33 +112,45 @@ public class ReviewDTO {
 	public void setImg_id(String img_id) {
 		this.img_id = img_id;
 	}
+
 	public int getStartRowNum() {
 		return startRowNum;
 	}
+
 	public void setStartRowNum(int startRowNum) {
 		this.startRowNum = startRowNum;
 	}
+
 	public int getEndRowNum() {
 		return endRowNum;
 	}
+
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
 	}
+
 	public int getPrevNum() {
 		return prevNum;
 	}
+
 	public void setPrevNum(int prevNum) {
 		this.prevNum = prevNum;
 	}
+
 	public int getNextNum() {
 		return nextNum;
 	}
+
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
+
 	@Override
 	public String toString() {
-		return review_title + " : " + email + " : " + book_title + " : " + writer_nickname + " : " + written_date + 
-				" : " + content + " : " + views + " : " + img_id;
+		return "ReviewDTO [review_no=" + review_no + ", review_title=" + review_title + ", email=" + email
+				+ ", book_title=" + book_title + ", nickname=" + nickname + ", written_date=" + written_date
+				+ ", content=" + content + ", views=" + views + ", img_id=" + img_id + ", startRowNum=" + startRowNum
+				+ ", endRowNum=" + endRowNum + ", prevNum=" + prevNum + ", nextNum=" + nextNum + "]";
 	}
+	
 }

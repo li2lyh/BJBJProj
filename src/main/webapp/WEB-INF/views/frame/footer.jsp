@@ -11,8 +11,8 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <style>
     /* ******** 기준 ******** */
-    body{
-      font-size: 20px;
+    body {
+      font-size: 15px;
     }
 
     /* ******** policyBox ******** */

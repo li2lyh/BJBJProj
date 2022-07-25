@@ -1,7 +1,6 @@
 package com.bjbj.member;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,7 @@ public class MemberService {
 	public int modify(MemberDTO dto) throws Exception{
 		return memberDAO.modify(dto);
 	}
+
   /* *************** �α��� *************** */
 	public MemberDTO login(String email, String password) throws Exception{
 		return memberDAO.login(email, password);

@@ -1,16 +1,59 @@
 package com.bjbj.review;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.bjbj.file.FileDAO;
 
 @Service
 public class ReviewService {
 	@Autowired
 	private ReviewDAO dao;
+	@Autowired
+	private FileDAO fileDao;
+	
+	// 게시글 등록
+	public void insertReview(ReviewDTO dto, String path, MultipartFile file) throws Exception {
+		
+		// int img_no = fileDao.selectImgNo();
+		// dto.setImg_id(img_id);
+		dao.insertReview(dto);
+		
+		// 파일 업로드 - 서버 root에 폴더가 있는지 확인
+		File realPath = new File(path);
+		if (!realPath.exists()) realPath.mkdir();
+		// 첨부된 파일이 있을 때
+		if (!file.isEmpty()) {
+			String ori_name = file.getOriginalFilename();
+			String sys_name = UUID.randomUUID() + "_" + ori_name;
+			
+			file.transferTo(new File(path + File.separator + sys_name));
+			// fileDao.uploadPhoto(new FileDTO(img_no, ori_name, sys_name));
+		}
+	}
+	
+	// 게시글 전체목록 출력
+	public List<Map<String, Object>> selectAllReview() throws Exception {
+		return dao.selectAllReview();
+	}
+	
+	// 게시글 클릭해서 조회
+	public ReviewDTO selectByNo(int review_no) throws Exception {
+		return dao.selectByNo(review_no);
+	}
+	
+	// 게시글 삭제
+	public int deleteReview(int review_no) throws Exception {
+		return dao.deleteReview(review_no);
+	}
 	
 	/* 전제 조회 */
 	public List<ReviewDTO> selectAll() throws Exception{
@@ -23,7 +66,7 @@ public class ReviewService {
 	}
 	
 	/* 페이징 */
-	public void getPage(HttpServletRequest request) throws Exception{
+	public void getPage(HttpServletRequest request) throws Exception {
       //한 페이지에 몇개씩 표시할 것인지
       final int PAGE_ROW_COUNT=5;
       //하단 페이지를 몇개씩 표시할 것인지

@@ -166,7 +166,6 @@ public class BookclubDTO {
 		this.place = place;
 	}
 
-
 public String getStrDate(Date date) {
 		String rs = null;
 		try {
@@ -178,14 +177,13 @@ public String getStrDate(Date date) {
 		return rs;
 	}
 
-@Override
-public String toString() {
+	@Override
+	public String toString() {
 	return "BookclubDTO [room_id=" + room_id + ", room_title=" + room_title + ", room_detail=" + room_detail
 			+ ", book_title=" + book_title + ", book_cover=" + book_cover + ", room_people=" + room_people
 			+ ", room_current=" + room_current + ", recruit_start=" + recruit_start + ", recruit_end=" + recruit_end
 			+ ", open_date=" + open_date + ", close_date=" + close_date + ", room_status=" + room_status
 			+ ", img_id=" + img_id + ", tag=" + tag + ", meet_week=" + meet_week + ", place=" + place + "]";
-}
 
-
+  }
 }
