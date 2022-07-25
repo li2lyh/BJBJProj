@@ -2,36 +2,75 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-   <mapper namespace="clubMapper">
-   		<select id="selectList" resultType="com.bjbj.bookclub.BookclubDTO">
-   			select * from bookroom order by open_date
-   		</select>
-   		
-   		<insert id="insert" parameterType="com.bjbj.bookclub.BookclubDTO">
-   			insert into bookroom
-   				values( #{room_id}, #{room_title}, #{room_detail}
-   				, null, null, #{room_people}, sysdate, sysdate+14
-   				, #{open_date}, #{close_date}, default, null, #{tag}, #{meet_week}, #{place} )
-   		</insert>
-   		
-   		<select id="selectOne" parameterType="int" resultType="com.bjbj.bookclub.BookclubDTO">
-   			select * from bookroom where room_id=#{room_id}
-   		</select>
-   		
-   		
-   		
-   		
-   		
-   		
-   		 <!-- create Room_id(seq_room) sequence  -->
-   		<select id="selectSeq" resultType="int">
-   			select seq_room.nextval from dual
-   		</select>
-   		
-   	
-   </mapper>
-   
-  
-   
-  
+<mapper namespace="clubMapper">
+   <!-- 전체 조회 -->
+	<select id="selectAll" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from bookroom
+	</select>
+	
+	<!-- 최근순으로 조회 -->
+	<select id="selectLately" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from bookroom order by close_date desc
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="getCount" resultType="int">
+		select count(*) from bookroom
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="selectPage" parameterType="map" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from (select bookroom.*, row_number() over(order by room_id desc) as num from bookroom)
+        where num between #{start} and #{end} 
+	</select>
+	
+	<!-- 찜한 모임 조회 -->
+	<select id="likeClub" resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from like_room join bookroom using(room_id)
+	</select>
+
+
+	<select id="selectList"
+		resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from bookroom order by open_date
+	</select>
+
+	<insert id="insert"
+		parameterType="com.bjbj.bookclub.BookclubDTO">
+		insert into bookroom
+		values( #{room_id}, #{room_title}, #{room_detail}
+		, null, null, #{room_people}, default, sysdate, sysdate+14
+		, #{open_date}, #{close_date}, default, null, #{tag}, #{meet_week},
+		#{place} )
+	</insert>
+
+	<select id="selectOne" parameterType="int"
+		resultType="com.bjbj.bookclub.BookclubDTO">
+		select * from bookroom where room_id=#{room_id}
+	</select>
+
+	<update id="updateCurrent" parameterType="int">
+		update bookroom set room_current = room_current+1 where room_id = #{room_id}
+	</update>
+
+	<update id="updateStatus" parameterType="map">
+		update bookroom set room_status = #{room_status} where room_id = #{room_id}
+	</update>
+
+
+	<!-- create Room_id(seq_room) sequence -->
+	<select id="selectSeq" resultType="int">
+		select seq_room.nextval from dual
+	</select>
+	
+	<!-- 모임 신고 -->
+	<insert id="insertReportBookroom" parameterType="com.bjbj.manager.ReportBookroomDTO">
+	insert into report_bookroom value(#{room_id}, #{room_title}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	</insert>
+	<!-- 회원 신고-->
+	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
+	insert into report value(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	</insert>
+	
+</mapper>
+
