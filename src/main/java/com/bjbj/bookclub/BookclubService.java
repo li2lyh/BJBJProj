@@ -24,6 +24,8 @@ public class BookclubService {
 	@Autowired
 	private MemberDAO memberDao;
 
+
+
 	/* 전제 조회 */
 	public List<BookclubDTO> selectAll() throws Exception {
 		return dao.selectAll();
@@ -52,6 +54,7 @@ public class BookclubService {
 	/* 찜한 모임 삭제 */
 	public void deleteLikeClub(int[] no) throws Exception {
 		dao.deleteLikeClub(no);
+
 	}
 
 	public List<BookclubDTO> selectList() throws Exception {
@@ -60,7 +63,7 @@ public class BookclubService {
 	}
 
 	public void insert(BookclubDTO dto, RoleDTO roleDto) throws Exception {
-		// room_id 시퀀스 미리 생성 (role table, bookroom table 동시 적용)
+		// room_id �떆���뒪 誘몃━ �깮�꽦 (role table, bookroom table �룞�떆 �쟻�슜)
 		int room_id = dao.selectSeq();
 		dto.setRoom_id(room_id);
 		roleDto.setRoom_id(room_id);
@@ -72,18 +75,18 @@ public class BookclubService {
 		dao.insertRole(dto);
 	}
 
-	// room_id 에 따른 한개 리스트 가져오기
+	// room_id �뿉 �뵲瑜� �븳媛� 由ъ뒪�듃 媛��졇�삤湲�
 	public BookclubDTO selectOne(int room_id) throws Exception {
 		return dao.selectOne(room_id);
 	}
 
-	// email로 해당 role 데이터 가져오기
+	// email濡� �빐�떦 role �뜲�씠�꽣 媛��졇�삤湲�
 	public RoleDTO selectRole(String email) throws Exception {
 
 		return dao.selectRole(email);
 	}
 
-	// 날짜표기 format (String to String)
+	// �궇吏쒗몴湲� format (String to String)
 	public String getStrDate(String string) throws Exception {
 		return dao.getStrDate(string);
 	}
@@ -93,32 +96,32 @@ public class BookclubService {
 		return dao.getDate(string);
 	}
 
-	// 자기소개 데이터 업데이트
+	// �옄湲곗냼媛� �뜲�씠�꽣 �뾽�뜲�씠�듃
 	public int updateMydesc(String email, String mydesc) throws Exception {
 		return memberDao.updateMydesc(email, mydesc);
 	}
 
-	// waiting 테이블 데이터 삽입
+	// waiting �뀒�씠釉� �뜲�씠�꽣 �궫�엯
 	public void insertWaiting(WaitingDTO dto) throws Exception {
 		dao.insertWaiting(dto);
 	}
 
-	// 이메일로 waiting 테이블 조회
+	// �씠硫붿씪濡� waiting �뀒�씠釉� 議고쉶
 	public WaitingDTO selectByEmail(String email) throws Exception {
 		return dao.selectByEmail(email);
 	}
 
-	// Room_id 에 따른 지원 인원 보기
+	// Room_id �뿉 �뵲瑜� 吏��썝 �씤�썝 蹂닿린
 	public List<String> selectByRoom(int room_id) throws Exception {
 		return dao.selectByRoom(room_id);
 	}
 
-	// waiting 테이블에서 이메일로 해당 데이터 삭제
+	// waiting �뀒�씠釉붿뿉�꽌 �씠硫붿씪濡� �빐�떦 �뜲�씠�꽣 �궘�젣
 	public void deleteByEmail(String email) throws Exception {
 		dao.deleteByEmail(email);
 	}
 
-	// 현재인원 + 1
+	// �쁽�옱�씤�썝 + 1
 	public void updateCurrent(int room_id) throws Exception {
 		dao.updateCurrent(room_id);
 	}

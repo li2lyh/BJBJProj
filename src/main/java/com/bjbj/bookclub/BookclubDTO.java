@@ -10,7 +10,6 @@ public class BookclubDTO {
 	private String book_title;
 	private String book_cover;
 	private int room_people;
-
 	private int room_current;
 
 	private String recruit_start; // sysdate
@@ -25,8 +24,9 @@ public class BookclubDTO {
 	
 	private int rank; // 순위
 
-	public BookclubDTO() {}
-  
+	public BookclubDTO() {
+	}
+
 	public BookclubDTO(int room_id, String room_title, String room_detail, String book_title, String book_cover,
 			int room_people, int room_current, String recruit_start, String recruit_end, String open_date,
 			String close_date, String room_status, String img_id, String tag, int meet_week, String place, int rank) {
@@ -49,17 +49,28 @@ public class BookclubDTO {
 		this.place = place;
 		this.rank = rank;
 	}
-  
-  public String getStrDate(Date date) {
 
-		String rs = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
-			rs = sdf.format(date);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return rs;
+	public BookclubDTO(int room_id, String room_title, String room_detail, String book_title, String book_cover,
+			int room_people, int room_current, String recruit_start, String recruit_end, Date open_date,
+			Date close_date, String room_status, String img_id, String tag, int meet_week, String place, int rank) {
+		super();
+		this.room_id = room_id;
+		this.room_title = room_title;
+		this.room_detail = room_detail;
+		this.book_title = book_title;
+		this.book_cover = book_cover;
+		this.room_people = room_people;
+		this.room_current = room_current;
+		this.recruit_start = recruit_start;
+		this.recruit_end = recruit_end;
+		this.open_date = getStrDate(open_date);
+		this.close_date = getStrDate(close_date);
+		this.room_status = room_status;
+		this.img_id = img_id;
+		this.tag = tag;
+		this.meet_week = meet_week;
+		this.place = place;
+		this.rank = rank;
 	}
 
 	public int getRoom_id() {
@@ -153,7 +164,63 @@ public class BookclubDTO {
 	public String getRoom_status() {
 		return room_status;
 	}
-	  
+
+	public void setRoom_status(String room_status) {
+		this.room_status = room_status;
+	}
+
+	public String getImg_id() {
+		return img_id;
+	}
+
+	public void setImg_id(String img_id) {
+		this.img_id = img_id;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public int getMeet_week() {
+		return meet_week;
+	}
+
+	public void setMeet_week(int meet_week) {
+		this.meet_week = meet_week;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	public String getStrDate(Date date) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+			rs = sdf.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
 	@Override
 	public String toString() {
 		return "BookclubDTO [room_id=" + room_id + ", room_title=" + room_title + ", room_detail=" + room_detail
@@ -164,3 +231,4 @@ public class BookclubDTO {
 	}
 
 }
+

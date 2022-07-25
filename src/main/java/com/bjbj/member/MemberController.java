@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -63,6 +64,28 @@ public class MemberController {
 
 	}
 
+	// 카카오 로그인
+	@ResponseBody
+	@RequestMapping(value = "/kakaoLogin")
+	public String kakaoLogin(String email) throws Exception {
+		MemberDTO dto = Mservice.kakaoLogin(email);
+		if (dto != null) {
+			session.setAttribute("loginSession", dto);
+			System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
+			return "success";
+		} else {
+			return "fail";
+		}
+
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "/logout")
+	public String logout() {
+		session.removeAttribute("loginSession");
+		return "redirect: / ";
+	}
+
 	/* ************ 회원가입 ************ */
 
 	// 회원가입 페이지
@@ -78,6 +101,14 @@ public class MemberController {
 		System.out.println(dto.toString());
 		Mservice.signUp(dto);
 		return "redirect:/";
+	}
+
+	// 카카오 회원가입 페이지
+	@RequestMapping(value = "/toKakaoSignUp")
+	public String toKakaoSignUp(String email, Model model) {
+		System.out.println("도착");
+		model.addAttribute("email", email);
+		return "/member/signup-kakao";
 	}
 
 	// 이메일 중복 확인
@@ -101,6 +132,18 @@ public class MemberController {
 		else
 			return "unavailable";
 	}
+
+	// VerifyPhoneNumber _ 휴대폰 본인인증
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendSMS(String phone) { // 휴대폰 문자보내기
+		int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);// 난수 생성
+
+		Mservice.certifiedPhoneNumber(phone, randomNumber);
+
+		return Integer.toString(randomNumber);
+	}
+
 
 	/* ************ 아이디, 비밀번호 찾기 ************ */
 
@@ -129,6 +172,26 @@ public class MemberController {
 		}
 	}
 
+	/* ************ 정보 수정 ************ */
+	
+	// 정보 수정 페이지 요청
+	@RequestMapping(value = "/toChange")
+	public String toChange(Model model) throws Exception {
+		List<MemberDTO> list = Mservice.selectAll();
+		model.addAttribute("list", list);
+		return "/mypage/change-myinfo";
+	}
+
+	// 정보 수정 
+	@RequestMapping(value = "/toModify")
+	public String toModify(MemberDTO dto) throws Exception {
+		int rs = Mservice.modify(dto);
+		if (rs > 0) {
+			System.out.println("수정 완료");
+			System.out.println(dto.toString());
+		} else {
+			System.out.println("수정 실패");
+      
 	/* ************ 마이페이지 ************ */
 
 	// 마이페이지 페이지 요청
@@ -146,10 +209,6 @@ public class MemberController {
 		// 도서 리뷰
 		List<ReviewDTO> ReviewList = Rservice.selectLately(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("ReviewList", ReviewList);
-		
-		 for (ReviewDTO dto : ReviewList) { 
-				dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
-		 }
 						
 		// 찜 도서
 		List<LikeBookDTO> LikeBooklist = LBservice.likeBook(((MemberDTO)session.getAttribute("loginSession")).getEmail());
@@ -200,12 +259,13 @@ public class MemberController {
     	System.out.println("수정 완료");
 			System.out.println("암호화된 pw : " + password);
 			return "redirect:/member/toMyinfo";
+
 		}
 
 		return null;
 	}
 
-	// 회원 탈퇴 요청
+	/* ************ 회원 탈퇴 ************ */
 	@RequestMapping(value = "/toDelete")
 	@ResponseBody
 	public String toDelete(String email, String password) throws Exception{		
@@ -220,6 +280,7 @@ public class MemberController {
 			return "fail";
 		}
 	}
+
 
 	// 참여 독서 모임 페이지 요청
 	@RequestMapping(value = "/toMybookclub")
@@ -244,7 +305,7 @@ public class MemberController {
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagination", pagination);
-		
+	
 		return "/mypage/mybookclub";
 	}
 
@@ -263,24 +324,32 @@ public class MemberController {
 	    int pageSize = page * pagination.getPageSize();	    
 	    
 	    List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize, ((MemberDTO)session.getAttribute("loginSession")).getEmail());
-	    
-		for (ReviewDTO dto : list) { 
-			dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
-		}
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagination", pagination);
-
 		return "/mypage/myreview";
 	}
 
 	// 찜 도서 페이지 요청
 	@RequestMapping(value = "/toLikebook")
-	public String toLikebook(Model model) throws Exception{		
-		List<LikeBookDTO> list = LBservice.likeBook(((MemberDTO)session.getAttribute("loginSession")).getEmail());
-		model.addAttribute("list", list);
+	public String toLikebook() {
 		return "/mypage/likebook";
 	}
+
+	// 찜 독서모임 페이지 요청
+	@RequestMapping(value = "/toLikeclub")
+	public String toLikeclub(Model model) throws Exception{	
+		List<BookclubDTO> list = Bservice.likeClub(((MemberDTO)session.getAttribute("loginSession")).getEmail());
+		
+		for (BookclubDTO dto : list) { 
+			dto.setRecruit_end(Bservice.getDate(dto.getRecruit_end()));
+			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
+			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
+		}
+    model.addAttribute("list", list);
+		return "/mypage/likeclub";
+	}
+	
 	
 	// 찜 도서 삭제 요청
 	@RequestMapping(value = "/toDeleteLikeBook")
@@ -294,21 +363,7 @@ public class MemberController {
 		} 
 		return null;
 	}
-	
-	// 찜 독서모임 페이지 요청
-	@RequestMapping(value = "/toLikeclub")
-	public String toLikeclub(Model model) throws Exception{	
-		List<BookclubDTO> list = Bservice.likeClub(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		
-		for (BookclubDTO dto : list) { 
-			dto.setRecruit_end(Bservice.getDate(dto.getRecruit_end()));
-			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
-			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
-		}
-		
-		model.addAttribute("list", list);
-		return "/mypage/likeclub";
-	}
 	
 	// 찜 독서모임 삭제 요청
 	@RequestMapping(value = "/toDeleteLikeClub")
@@ -339,7 +394,7 @@ public class MemberController {
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagination", pagination);
-
+      
 		return "/mypage/letter";
 	}
 

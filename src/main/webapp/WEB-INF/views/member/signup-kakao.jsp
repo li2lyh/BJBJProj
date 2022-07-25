@@ -137,13 +137,9 @@ body {
 
 				<!-- 이메일 -->
 				<div class="row">
-					<div class="col-9 p-0">
+					<div class="col-12 p-0">
 						<input type="text" name="email" id="email" class="form-control"
-							placeholder="아이디 (aaa123@gmail.com)">
-					</div>
-					<div class="col-3">
-						<button type="button" id="confirmEmail"
-							class="btn btn-outline-secondary">중복확인</button>
+							value="${email}" readonly>
 					</div>
 				</div>
 				<%-- 빈칸 --%>
@@ -238,44 +234,18 @@ body {
 							class="btn btn-outline-secondary">인증하기</button>
 					</div>
 				</div>
-				<%-- 빈칸 --%>
-				<div class="row blankBox">
-					<div class="col-12 p-0">
-						<div id="blank6"></div>
-					</div>
-				</div>
-				<%-- 알림정보 --%>
-				<div class="row clsCheckInfo">
-					<div class="col-12 p-0">
-						<div id="checkPhone"></div>
-					</div>
-				</div>
-				<!-- End -->
 
 				<%-- 인증번호 발송 --%>
 				<div class="row verifyPhone d-none">
 					<div class="col-9 p-0">
 						<input type="text" class="form-control" id="verifyNum"
-							maxlength="4" placeholder="인증번호">
+							maxlength="4">
 					</div>
 					<div class="col-3 checkPhone p-0">
 						<button type="button" id="completeBtn"
 							class="btn btn-outline-secondary">확인</button>
 					</div>
 				</div>
-				<%-- 빈칸 --%>
-				<div class="row blankBox">
-					<div class="col-12 p-0">
-						<div id="blank7"></div>
-					</div>
-				</div>
-				<%-- 알림정보 --%>
-				<div class="row clsCheckInfo">
-					<div class="col-12 p-0">
-						<div id="checkNum"></div>
-					</div>
-				</div>
-				<!-- End -->
 
 				<!-- 제출 버튼 -->
 				<div class="submitBtn row">
@@ -426,20 +396,14 @@ body {
 
 
 	<script>
-		// 버튼 유효성검사
-		// 인증번호 일치 확인
-		// 빈값으로 중복확인 X 만들기
-	
 		/* *********** 중복확인 ************** */
-
+		
 		// 유효성 검사서 사용할 중복값 담기
 		let verifyEmail = "";
 		let verifyNickname = "";
-
+		
 		// 이메일 중복확인
 		$("#confirmEmail").on("click", function() {
-			// 이메일칸 비었을시 유효성검사
-			
 			$.ajax({
 				url : "/member/confirmEmail",
 				type : "get",
@@ -450,12 +414,10 @@ body {
 				success : function(data) {
 					if (data == "available") {
 						alert("사용 가능한 이메일입니다.");
-						console.log(data);
 						return verifyEmail = data;
-
+						
 					} else if (data == "unavailable") {
-						alert("사용 불가능한 이메일입니다.");
-						console.log(data);
+						alert("사용 불가능한 이메일입니다.")
 						return verifyEmail = data;
 					}
 				},
@@ -467,8 +429,6 @@ body {
 
 		// 닉네임 중복확인
 		$("#confirmNickname").on("click", function() {
-			// 닉네임칸 비었을시 유효성검사
-			
 			$.ajax({
 				url : "/member/confirmNickname",
 				type : "get",
@@ -479,13 +439,9 @@ body {
 				success : function(data) {
 					if (data == "available") {
 						alert("사용 가능한 닉네임입니다.");
-						console.log(data);
-
 						return verifyNickname = data;
 					} else if (data == "unavailable") {
 						alert("사용 불가능한 닉네임입니다.");
-						console.log(data);
-
 						return verifyNickname = data;
 					}
 				},
@@ -494,7 +450,6 @@ body {
 				}
 			})
 		})
-		
 
 		/* *********** 휴대폰 본인확인 ************** */
 
@@ -526,38 +481,38 @@ body {
 
 		})
 
-		/* *********** 유효성 검사 _ input창 아래 ************** */
-		
+		/* *********** 유효성 검사 ************** */
 		// 이름
+		
 		$("#name").focus(function() {
 			$("#blank1").css("display", "none");
-			$("#checkName").html("한글 및 영문으로 2~6자 이내로 작성해주세요");
+			$("#checkName").html("한글 및 영문으로 2~6자 이내로 작성해주세요.");
 			$("#checkName").css("color", "green");
 		});
 		$("#name").blur(function() {
 			$("#blank1").show();
 			$("#checkName").html("");
 		});
-
+		
+		
 		// 이메일
 		$("#email").focus(function() {
 			$("#blank2").css("display", "none");
-			$("#checkEmail").html("이메일 형식으로 아이디를 작성해주세요");
+			$("#checkEmail").html("이메일 형식으로 아이디를 작성해주세요.");
 			$("#checkEmail").css("color", "green");
-			
-			
 		});
 		$("#email").blur(function() {
 			$("#blank2").show();
 			$("#checkEmail").html("");
 		});
-
+		
+		
 		//비밀번호
 		$("#password").focus(
 				function() {
 					$("#blank3").css("display", "none");
 					$("#checkPw").html(
-							"대소문자, 숫자, 특수문자(~!@#$)를 이용해서 6~12자 이내로 작성해 주세요");
+							"대소문자, 숫자, 특수문자(~!@#$)를 이용해서 6~12자 이내로 작성해 주세요.");
 					$("#checkPw").css("color", "green");
 				});
 		$("#password").blur(function() {
@@ -566,156 +521,92 @@ body {
 		});
 
 		//비밀번호 확인
-		$("#confirmPw").focus(
-				function() {
-					$("#blank4").css("display", "none");
+		$("#confirmPw").focus(function() {
+			$("#blank4").css("display", "none");
 
-					// 입력 시 확인
-					$("#confirmPw").keyup(
-							function() {
-								if ($("#confirmPw").val() === ""
-										|| $("#password").val() !== $("#confirmPw").val()) {
-									$("#checkPw2").html("정확한 비밀번호를 입력해주세요");
-									$("#checkPw2").css("color", "red");
-								} else {
-									$("#checkPw2").html("일치합니다");
-									$("#checkPw2").css("color", "green");
-								}
-							});
+			if ($("#confirmPw").val() === "") {
+				$("#checkPw2").html("비밀번호를 입력해주세요");
+				$("#checkPw2").css("color", "red");
+			} else if ($("#password").val() !== $("#confirmPw").val()) {
+				$("#checkPw2").html("일치하지 않습니다");
+				$("#checkPw2").css("color", "red");
+			} else {
+				$("#checkPw2").html("일치합니다");
+				$("#checkPw2").css("color", "green");
+			}
+			
 
-					// 입력 후 확인
-					if ($("#confirmPw").val() === "") {
-						$("#checkPw2").html("비밀번호를 입력해주세요");
-						$("#checkPw2").css("color", "red");
-					} else if ($("#password").val() !== $("#confirmPw").val()) {
-						$("#checkPw2").html("일치하지 않습니다");
-						$("#checkPw2").css("color", "red");
-					} else {
-						$("#checkPw2").html("일치합니다");
-						$("#checkPw2").css("color", "green");
-					}
-
-				});
+		});
 
 		$("#confirmPw").blur(function() {
 			$("#blank4").show();
 			$("#checkPw2").html("");
 		});
-
+		
 		// 닉네임
 		$("#nickname").focus(function() {
 			$("#blank5").css("display", "none");
-			$("#checkNickname").html("한글 및 영문으로 2~10자 이내로 작성해주세요");
+			$("#checkNickname").html("한글 및 영문으로 2~6자 이내로 작성해주세요.");
 			$("#checkNickname").css("color", "green");
 		});
 		$("#nickname").blur(function() {
 			$("#blank5").show();
 			$("#checkNickname").html("");
 		});
-
-		// 휴대폰
-		$("#phone").focus(function() {
-			$("#blank6").css("display", "none");
-			$("#checkPhone").html("'-'없이 핸드폰 번호 11자리를 입력해주세요");
-			$("#checkPhone").css("color", "green");
-		})
-
-		$("#phone").blur(function() {
-			$("#blank6").show();
-			$("#checkPhone").html("");
-		});
-
-		// 휴대폰 인증번호
-		$("#verifyNum").focus(function() {
-			$("#blank7").css("display", "none");
-			$("#checkNum").html("인증번호를 입력해주세요");
-			$("#checkNum").css("color", "green");
-		})
-
-		$("#verifyNum").blur(function() {
-			$("#blank7").show();
-			$("#checkNum").html("");
-		});
-
-		/* *********** 유효성 검사2 _ 제출시 검사 ************** */
 		
-		 $("#signupBtn").on("click",function() {
-			
-		// regex
-		 let regexName = /^[a-zA-Z가-힣]{2,6}$/;
+		// 휴대폰
+		
+		// 휴대폰 인증번호
+
+	
+
+		/* *********** 유효성 검사2 ************** */
+		/*
+		 $("#signupBtn")
+		 .on(
+		 "click",
+		 function() { // 회원가입 제출 유효성 검사
+		 let regexName = /[a-zA-Z가-힣]{2,6}$/;
 		 let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
 		 let regexPw = /^[a-zA-Z0-9~!@#$]{6,12}$/;
 		 let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
-		 let regexPhone = /^[0-9]{11}$/;
-		 let regexNum = /^[0-9]{4}$/;
-		
-		// value 값
+
 		 let name = $("#name").val();
 		 let email = $("#email").val();
 		 let pw = $("#password").val();
 		 let nickname = $("#nickname").val();
 		 let phone = $("#phone").val();
-		 let verifyPhone = $("#verifyNum").val();
 
-		 
-		 /* 수정중
-		 if(!regexName.test(name) || name === "") { //이름
-			 alert("이름을 정확히 입력해주세요");
-			 $("#name").focus();
-			 return false;
-			 
-		 }else if(!regexEmail.test(email) || email === ""){ // 이메일 (아이디)
-		 	alert("아이디는 이메일 형식으로 정확히 작성해주세요");
-			 $("#email").focus();
-			 return false;
-		 
-		 }else if(verifyEmail === ""){ 
-			 alert("이메일이 중복확인을 해주세요");
-			 $("#email").focus();
-			 return false;
-			 
-		 }else if(verifyEmail === "unavailable"){
-			 alert("이메일이 중복되었습니다. 확인해주세요");
-			 $("#email").focus();
-			 return false;
-			 
-		 }else if(!regexPw.test(pw) || pw ===""){ // 비밀번호
-			 alert("비밀번호를 형식에 맞게 작성해주세요")
-			 $("#password").focus();
-			 return false;
-		 
-		 }else if($("#confirmPw").val() !== pw){ // 비밀번호 확인
+		 if (!regexName.test(name) || name === "") { //이름
+		 alert("이름을 정확히 입력해주세요");
+		 $("#name").focus();
+		 return false;
+		 }else if (!regexEmail.test(email) || email === ""){ // 이메일 (아이디)
+		 alert("아이디는 이메일 형식으로 정확히 작성해주세요.");
+		 $("#email").focul();
+		 return false;
+		 }else if (!regexPw.test(pw) || pw ===""){ // 비밀번호
+		 alert("비밀번호를 형식에 맞게 작성해주세요.")
+		 $("#password").focus();
+		 return false;
+		 }else if ($("#confirmPw").val() !== pw){ // 비밀번호 확인
 		 alert("비밀번호가 일치하지 않습니다.")
 		 $("#confirmPw").focus();
 		 return false;
-		 
-		 }else if(!regexNickname.test(nickname) || nickname === ""){ // 닉네임
-		 alert("닉네임을 형식에 맞게 작성해주세요");
+		 } else if (!regexNickname.test(nickname)
+		 || nickname === "") {
+		 alert("대소문자, 한글 또는 숫자를 이용하여 2 ~ 10자 이내로 작성해주세요.");
 		 $("#nickname").focus();
 		 return false;
-		 
-		 }else if(verifyNickname === ""){ 
-			 alert("닉네임 중복확인을 해주세요");
-			 $("#nickname").focus();
-			 return false;
-			 
-		 } else if(verifyNickname === "unavailable"){
-			 alert("닉네임이 중복되었습니다. 확인해주세요");
-			 $("#nickname").focus();
-			 return false;
-			 
-		 } else if (!regexPhone.test(phone) || phone === "") {// 핸드폰 번호
-			 alert("휴대폰 번호를 정확히 입력해주세요");
-			 $("#phone").focus();
-			 return false;
-		 } 
+		 } else if (phone === "") {
+		 alert("휴대폰 번호를 입력해주세요.");
+		 $("#phone").focus();
+		 return false;
+		 }
 
-		 */
-		 
 		 $("#signupForm").submit();
-		 
-		 });
-		
+		 })
+		 */
 	</script>
 </body>
 </html>
