@@ -194,6 +194,9 @@ public class BookclubController {
 		 
 		 int room_id = service.selectRole(id).getRoom_id();
 		 
+		 System.out.println("로그인 id : " + id);
+		 System.out.println("room_id : " + room_id);
+		 
 		// 해당 방 정보
 		BookclubDTO clubDto = service.selectOne(room_id);
 		clubDto.setOpen_date(service.getStrDate(clubDto.getOpen_date()));
@@ -212,6 +215,7 @@ public class BookclubController {
 		
 		// 해당 방의 게시판 정보
 		List<BoardDTO> boardList = service.selectAllBoardById(room_id);
+		
 		for (BoardDTO boardDTO : boardList) { // 날짜 형식 format
 			boardDTO.setBoard_date(service.getStrDate(boardDTO.getBoard_date()));
 		}

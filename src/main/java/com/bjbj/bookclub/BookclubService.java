@@ -172,7 +172,7 @@ public class BookclubService {
 		
 		// 클럽내 게시판 목록
 				public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
-				return dao.selectAllBoard();
+				return dao.selectAllBoardById(room_id);
 				}
 	
 	

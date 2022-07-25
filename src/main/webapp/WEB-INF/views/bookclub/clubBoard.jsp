@@ -295,7 +295,7 @@ a{
 					
 					
 						<c:choose>
-							<c:when test="${board.size() eq null}">
+							<c:when test="${board.size() == ''}">
 								<div class="col">
 								<p>등록된 글이 없습니다.</p>
 								</div>
