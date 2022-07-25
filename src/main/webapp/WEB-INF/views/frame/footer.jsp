@@ -11,7 +11,7 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <style>
     /* ******** 기준 ******** */
-    body{
+   	.foot-container{
       font-size: 20px;
     }
 
@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="foot-container">
     <!-- ********** 이용약관, 개인정보처리방침 ********** -->
     <div class="policyBox row">
       <div class="col-1 p-0">
