@@ -72,7 +72,7 @@ public class ReportBookroomDTO {
 	public void setReport_detail(String report_detail) {
 		this.report_detail = report_detail;
 	}
-
+  
 	public char getReport_action() {
 		return report_action;
 	}

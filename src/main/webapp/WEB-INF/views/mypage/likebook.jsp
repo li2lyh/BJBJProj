@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +49,7 @@ a:hover {
 
 /* 찜 목록 도서 */
 .card {
-	height: 200px;
+	height: 230px;
 }
 
 .card-img-top {
@@ -65,10 +65,10 @@ a:hover {
 }
 
 .likeImg{
-	width: 40px;
-	height: 40px;
+	width: 35px;
+	height: 35px;
 	border-radius: 50%;
-	background-color: rgb(177, 172, 172);
+	background-color: rgb(231, 231, 229);
 }
 </style>
 </head>
@@ -99,11 +99,8 @@ a:hover {
 				</div>
 				<div class="row p-2">
 					<div class="nav-item dropdown">
-						<a class="list nav-link dropdown-toggle p-0"
-							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDarkDropdownMenuLink">
+						<a class="list nav-link dropdown-toggle p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
 							<div>
 								<a class="dropdown-item" href="/member/toLikebook">도서</a>
 							</div>
@@ -121,48 +118,42 @@ a:hover {
 					<div class="d-flex justify-content-center p-2">
 						<h4>찜한 도서</h4>
 					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div style="position: absolute; top: 90px; left: 150px;">
-								<img class="likeImg" src="/resources/images/like.png">
-							</div>
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div style="position: absolute; top: 90px; left: 150px;">
-								<img class="likeImg" src="/resources/images/like.png">
-							</div>
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
+					<c:if test="${list.size() == 0}">
+						<p class="text-center border-top border-bottom p-3">찜한 도서가 없습니다.</p>
+					</c:if>
+					<c:if test="${list.size() > 0}">							
+						<c:forEach items="${list}" var="dto">
+							<div class="col-lg-4 col-md-6 col-sm-12 p-2">
+								<div class="card">
+									<c:choose>								
+										<c:when test="${empty dto.img_id}">							
+											<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+										</c:when>
+										<c:otherwise>									
+											<img class="card-img-top" src="/resources/images/noimage.gif">
+									<%-- 		<img src="/profile/${dto.img_id}" id="bookImg"> --%>
+										</c:otherwise>								
+									</c:choose>
+									<div class="card-body border-top">
+										<div class="row p-0">										
+											<div class="col-10 p-0">										
+												<p class="card-text">${dto.book_title} / ${dto.book_author}</p>
+											</div>		
+												<div class="col-2 p-0">
+												<a href="/member/toDeleteLikeBook?book_isbn=${dto.book_isbn}" onclick="return confirm('정말 삭제하시겠습니까?');">
+													<img class="likeImg" src="/resources/images/like.png">
+												</a>
+						 						
+											</div>																												
+										</div>
+									</div>
+								</div>
+							</div>						
+						</c:forEach>
+ 					</c:if>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 

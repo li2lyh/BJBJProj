@@ -48,6 +48,11 @@ a:hover {
 }
 
 /* 도서 리뷰 */
+#noImg {
+	width: 100%;
+	height: 100%;
+}
+
 #reviewImg {
 	width: 100%;
 	height: 100%;
@@ -92,11 +97,8 @@ a:hover {
 				</div>
 				<div class="row p-2">
 					<div class="nav-item dropdown">
-						<a class="list nav-link dropdown-toggle p-0"
-							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDarkDropdownMenuLink">
+						<a class="list nav-link dropdown-toggle p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
 							<div>
 								<a class="dropdown-item" href="/member/toLikebook">도서</a>
 							</div>
@@ -119,29 +121,40 @@ a:hover {
 				<c:if test="${list.size() == 0}">
 					<div class="review p-2">
 						<div class="row border-top p-3">
-							<div class="col-12 d-flex justify-content-center">
-								<p class="fw-bold">작성한 리뷰가 없습니다.</p>
+							<div class="col-12 d-flex justify-content-center">						
+								<p class="m-0">작성한 리뷰가 없습니다.</p>
 							</div>
 						</div>
 					</div>
 				</c:if>
 				<c:if test="${list.size() > 0}">
 					<c:forEach items="${list}" var="dto">
-						<div class="review p-2">
+						<div class="review p-0">
 							<div class="row border-top p-3">
 								<div class="col-3">
-									<img src="/resources/images/noimage.gif" id="reviewImg">
+									<c:choose>
+										<c:when test="${empty dto.img_id}">
+											<img src="/resources/images/noimage.gif" id="noImg">
+										</c:when>
+										<c:otherwise>
+											<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+											<%-- <img src="/profile/${dto.img_id}" id="reviewImg"> --%>
+										</c:otherwise>
+									</c:choose>
 								</div>
 								<div class="col-9">
 									<p>${dto.book_title}</p>
-									<p class="fw-bold">${dto.review_title}</p>
-									<span>${dto.writer_nickname}</span> <span>${dto.written_date}</span>
+									<p class="fw-bolder">${dto.review_title}</p>
+									<span>${dto.nickname}</span> <span>${dto.written_date}</span>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</c:if>
 				<div class="row border-top p-2">
+					
+				</div>
+				<div class="row p-0">
 					<div class="col d-flex justify-content-end p-0">
 						<button type="button" class="btn btn-secondary" id="writeBtn">작성하기</button>
 					</div>
@@ -149,39 +162,30 @@ a:hover {
 				<nav>
 					<ul class="pagination justify-content-center">
 						<c:choose>
-							<c:when test="${startPageNum ne 1}">
-								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${startPageNum - 1}"><<</a>
+							<c:when test="${pagination.startPage ne 1}">
+								<li class="page-item">
+									<a class="page-link" href="/member/toMyreview?page=${pagination.startPage - 1}"><<</a>
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item d-none"><a class="page-link"
-									href="javascript:"></a></li>
+								<li class="page-item d-none">
+									<a class="page-link" href="javascript_:"></a>
+								</li>
 							</c:otherwise>
 						</c:choose>
-						<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
-							<c:choose>
-								<c:when test="${i eq pageNum }">
-									<li class="page-item active"><a class="page-link"
-										href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${i}">${i}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${i}">${i}</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
+						<c:forEach var="page" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+							<li class="page-item">
+								<a class="page-link" href="/member/toMyreview?page=${page}" <c:if test="${pagination.page eq page}">style="background-color: black; color: white; font-weight: bolder;"</c:if> >${page}</a>
+							</li>
 						</c:forEach>
 						<c:choose>
-							<c:when test="${endPageNum lt totalPageCount}">
-								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath}/member/toMyreview?pageNum=${endPageNum + 1}">>></a>
-								</li>
+							<c:when test="${pagination.endPage lt pagination.totalPageCnt}">
+								<li class="page-item"><a class="page-link" href="/member/toMyreview?page=${pagination.endPage + 1}">>></a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item d-none"><a class="page-link"
-									href="javascript:"></a></li>
+								<li class="page-item d-none">
+									<a class="page-link" href="javascript_:"></a>
+								</li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -189,7 +193,13 @@ a:hover {
 			</div>
 		</div>
 	</div>
-	</div>
+	
+	<script>
+		// 작성하기 버튼 클릭시
+		$("#writeBtn").on("click",function(){
+			location.href = "";
+		})
+	</script>
 </body>
 
 </html>

@@ -1,21 +1,37 @@
 package com.bjbj.books;
 
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookService {
+private String ttbkey = "ttbstardust31042148001";
+
 	@Autowired
 	private LikeBookDAO dao;
+
+	/* 찜한 도서 조회 */
+	public List<LikeBookDTO> likeBook(String email) throws Exception {
+		return dao.likeBook(email);
+	}
 	
+	/* 찜한 도서 삭제 */
+	public int deleteLikeBook(String book_isbn) throws Exception {
+		return dao.deleteLikeBook(book_isbn);
+	}
 	
-	private String ttbkey = "ttbstardust31042148001";
 	
 	// 상품검색 API
 	public String searchBookByKeyword(String keyword, String searchType) throws Exception {
@@ -100,5 +116,5 @@ public class BookService {
 	public int removeLikeBook(String email, String book_isbn) throws Exception {
 		return dao.removeLikeBook(email, book_isbn);
 	}
-	
+
 }

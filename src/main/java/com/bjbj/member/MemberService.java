@@ -16,13 +16,13 @@ public class MemberService {
 	}
 
 	/* 계정 삭제 */
-	public int delete(String email, String pw) throws Exception{
-		return memberDAO.delete(email, pw);
+	public int delete(String email, String password) throws Exception{
+		return memberDAO.delete(email, password);
 	}
 	
 	/* 내 정보 수정*/
-	public int modify(MemberDTO dto) throws Exception{
-		return memberDAO.modify(dto);
+	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception {
+		return memberDAO.updateInfo(email, password, nickname, mydesc);
 	}
 
   /* *************** �α��� *************** */

@@ -5,7 +5,6 @@ public class LikeBookDTO {
 	private String book_title;
 	private String book_author;
 	private String email;
-	
 	private String img_id;
 	private String sys_name;
 	
