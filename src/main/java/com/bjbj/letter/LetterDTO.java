@@ -1,6 +1,7 @@
 package com.bjbj.letter;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class LetterDTO {
 	private int no;
@@ -10,7 +11,6 @@ public class LetterDTO {
 	private String written_date;
 	
 	public LetterDTO() {}
-
 	public LetterDTO(int no, String email, String title, String content, String written_date) {
 		super();
 		this.no = no;
@@ -19,7 +19,24 @@ public class LetterDTO {
 		this.content = content;
 		this.written_date = written_date;
 	}
-
+	public LetterDTO(int no, String email, String title, String content, Date written_date) {
+		super();
+		this.no = no;
+		this.email = email;
+		this.title = title;
+		this.content = content;
+		this.written_date = getStrDate(written_date);
+	}
+	public String getStrDate(Date date) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+			rs = sdf.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 
 	public int getNo() {
 		return no;
