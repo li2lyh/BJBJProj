@@ -65,12 +65,12 @@
 	
 	<!-- 모임 신고 -->
 	<insert id="insertReportBookroom" parameterType="com.bjbj.manager.ReportBookroomDTO">
-	insert into report_bookroom value(#{room_id}, #{room_title}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, default, sysdate, #{report_detail}, default, #{reporter_nickname})
 	</insert>
-	<!-- 회원 신고-->
+	<!-- 회원 신고
 	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
-	insert into report value(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
-	</insert>
+	insert into report values(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	</insert>-->
 	
 </mapper>
 

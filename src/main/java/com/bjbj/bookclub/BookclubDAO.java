@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bjbj.manager.ReportBookroomDTO;
 import com.bjbj.manager.ReportDTO;
+import com.bjbj.member.MemberDTO;
 
 @Repository
 public class BookclubDAO {
@@ -84,6 +85,14 @@ public class BookclubDAO {
 		session.insert("clubMapper.insertReport", dto);
 	}
 	
+	public BookclubDTO selectOne(String room_title) throws Exception {
+		return session.selectOne("clubMapper.selectOne", room_title);
+	}
+	
+	public MemberDTO selectNickname(String nickname) throws Exception {
+		return session.selectOne("clubMapper.selectNickname", nickname);
+	}
+	
 	// waiting 테이블에 데이터 삽입
 	public void insertWaiting(WaitingDTO dto) throws Exception {
 		session.insert("waitingMapper.insertWaiting", dto);
@@ -102,6 +111,10 @@ public class BookclubDAO {
 	// waiting 테이블에서 이메일로 해당 데이터 삭제
 	public void deleteByEmail(String email) throws Exception {
 		session.delete("waitingMapper.deleteByEmail", email);
+	}
+	
+	public BookclubDTO selectBookroom(int book_id) throws Exception {
+		return session.selectOne("clubMapper.selectOne", book_id);
 	}
 
 	// 현재인원 + 1

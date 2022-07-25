@@ -91,7 +91,18 @@ public class BookclubController {
 	// 모임 신고하기 요청
 	@RequestMapping(value = "/reportBookroom")
 	public String reportBookroom(ReportBookroomDTO dto) throws Exception {
+		System.out.println("room_title : " + dto.getRoom_title());
+		System.out.println("report_content : " + dto.getReport_content());
+		System.out.println("report_detail : " + dto.getReport_detail());
+		System.out.println("report_nickname : " + dto.getReporter_nickname());
+		
+		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
+		dto.setReporter_nickname(nickname);
+		
 		service.insertReportBookroom(dto);
+		
+		
+		
 		return "redirect:/club/toClub";
 	}
 	
