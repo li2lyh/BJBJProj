@@ -53,6 +53,11 @@ th, td{
 }
 
 /* 도서 리뷰 */
+#noImg {
+	width: 100%;
+	height: 100%;
+}
+
 #reviewImg {
 	width: 100%;
 	height: 100%;
@@ -60,7 +65,7 @@ th, td{
 
 /* 찜한 도서 */
 .card {
-	height: 200px;
+	height: 230px;
 }
 
 .card-img-top {
@@ -73,6 +78,13 @@ th, td{
 
 .card-text {
 	text-align: center;
+}
+
+.likeImg{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	background-color: rgb(231, 231, 229);
 }
 </style>
 </head>
@@ -121,7 +133,7 @@ th, td{
 				<!-- 참여 독서 모임 -->
 				<div class="row p-2" id="bookClub">
 					<div class="d-flex justify-content-center p-2">
-						<h4>참여 독서 모임</h4>
+						<h4 class="fw-bolder">참여 독서 모임</h4>
 					</div>
 					<div class="p-0">최근 참여한 독서모임 순으로 보여드립니다.</div>
 					<table class="table">
@@ -159,79 +171,91 @@ th, td{
 				<!-- 도서 리뷰-->
 				<div class="row p-2" id="bookReview">
 					<div class="d-flex justify-content-center p-2">
-						<h4>도서 리뷰</h4>
+						<h4 class="fw-bolder">도서 리뷰</h4>
 					</div>
 					<div class="p-2">최근 작성한 리뷰 순으로 보여드립니다.</div>
 					<c:if test="${ReviewList.size() == 0}">
-							<div class="review p-2">
-								<div class="row border-top p-3">
-									<div class="col-12 d-flex justify-content-center">
-										<p class="fw-bold">작성한 리뷰가 없습니다.</p>
-									</div>
-								</div>
+					<div class="review p-2">
+						<div class="row border-top p-3">
+							<div class="col-12 d-flex justify-content-center">						
+								<p class="m-0">작성한 리뷰가 없습니다.</p>
 							</div>
+						</div>
+						</div>
 					</c:if>
 					<c:if test="${ReviewList.size() > 0}">
-						<c:forEach items="${ReviewList}" var="dto" begin="0" end="2">
-							<div class="review p-2">
+						<c:forEach items="${ReviewList}" var="dto">
+							<div class="review p-0">
 								<div class="row border-top p-3">
 									<div class="col-3">
-										<img src="/resources/images/noimage.gif" id="reviewImg">
+										<c:choose>
+											<c:when test="${empty dto.img_id}">
+												<img src="/resources/images/noimage.gif" id="noImg">
+											</c:when>
+											<c:otherwise>
+												<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+												<%-- <img src="/profile/${dto.img_id}" id="reviewImg"> --%>
+											</c:otherwise>
+										</c:choose>
 									</div>
 									<div class="col-9">
 										<p>${dto.book_title}</p>
-										<p class="fw-bold">${dto.review_title}</p>
-										<span>${dto.writer_nickname}</span> <span>${dto.written_date}</span>
+										<p class="fw-bolder">${dto.review_title}</p>
+										<span>${dto.nickname}</span> <span>${dto.written_date}</span>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-					</c:if>
+					`</c:if>
+				</div>				
+				<div class="row border-top p-2">
+					
 				</div>
 
 				<!-- 찜한 도서 -->
-				<div class="row border-top p-2" id="likeBook">
+				<div class="row p-2" id="likeBook">
 					<div class="d-flex justify-content-center p-2">
-						<h4>찜한 도서</h4>
+						<h4 class="fw-bolder">찜한 도서</h4>
 					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 p-2">
-						<div class="card">
-							<img class="card-img-top" src="/resources/images/noimage.gif">
-							<div class="card-body border-top rounded">
-								<p class="card-text">제목 / 이름</p>
-							</div>
-						</div>
-					</div>
+					<c:if test="${LikeBooklist.size() == 0}">
+						<p class="text-center border-top border-bottom p-3">찜한 도서가 없습니다.</p>
+					</c:if>
+					<c:if test="${LikeBooklist.size() > 0}">							
+						<c:forEach items="${LikeBooklist}" var="dto" begin="0" end="2">
+							<div class="col-lg-4 col-md-6 col-sm-12 p-2">
+								<div class="card">
+									<c:choose>								
+										<c:when test="${empty dto.img_id}">							
+											<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+										</c:when>
+										<c:otherwise>									
+											<img class="card-img-top" src="/resources/images/noimage.gif">
+											<%-- <img src="/profile/${dto.img_id}" id="bookImg"> --%>
+										</c:otherwise>								
+									</c:choose>
+									<div class="card-body border-top">
+										<div class="row p-0">										
+											<div class="col-10 p-0">										
+												<p class="card-text">${dto.book_title} / ${dto.book_author}</p>
+											</div>		
+												<div class="col-2 p-0">
+												<a href="/member/toDeleteLikeBook?book_isbn=${dto.book_isbn}" onclick="return confirm('정말 삭제하시겠습니까?');">
+													<img class="likeImg" src="/resources/images/like.png">
+												</a>
+						 						
+											</div>																												
+										</div>
+									</div>
+								</div>
+							</div>						
+						</c:forEach>
+ 					</c:if>
 				</div>
 
 				<!-- 찜 독서 모임 -->
 				<div class="row p-2" id="likeClub">
 					<div class="d-flex justify-content-center p-2">
-						<h4>찜 독서 모임</h4>
+						<h4 class="fw-bolder">찜 독서 모임</h4>
 					</div>
 					<div class="p-0">신청을 원하시면 원하시는 모임의 이름을 누르면, 상세페이지로 넘어갑니다.</div>
 					<table class="table">
@@ -247,16 +271,16 @@ th, td{
 						<tbody>
 							<c:if test="${LikeclubList.size() == 0}">
 								<tr>
-								  <td colspan="5">찜한 독서모임이 없습니다.</td>
+								  <td colspan="5">찜한 독서 모임이 없습니다.</td>
 								</tr>
 							</c:if>
 							<c:if test="${LikeclubList.size() > 0}">							
-	  							<c:forEach items="${LikeclubList}" var="dto">
-	  								<c:set var="i" value="${i+1}"/>
+	  							<c:forEach items="${LikeclubList}" var="dto" begin="0" end="3">
+	  								<c:set var="j" value="${j+1}"/>
 	  								<tr>
-		  								<td>${i}</td>
+		  								<td>${j}</td>
 		  								<td>${dto.book_title}</td>
-		  								<td class="fw-bold"><a href="#">${dto.room_title}</a></td>
+		  								<td class="fw-bolder"><a href="#">${dto.room_title}</a></td>
 		  								<td>~ ${dto.recruit_end}</td>
 		  								<td>${dto.open_date} ~ ${dto.close_date}</td>
 	  								</tr>

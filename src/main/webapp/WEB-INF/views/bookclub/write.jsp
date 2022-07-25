@@ -1,15 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
@@ -66,6 +62,8 @@ h3 {
 #p1 {
 	margin-top: 15px;
 }
+
+
 </style>
 </head>
 <body>
@@ -79,19 +77,19 @@ h3 {
 				</div>
 			</div>
 
+
 			<div class="row">
 				<div class="col d-flex justify-content-left">
 					<h4>BookClub 모집</h4>
 				</div>
 			</div>
-
 			<div class="row">
+
 				<div class="col-3 writing">
 					<label for="title" class="form-label">모임 제목</label>
 				</div>
 				<div class="col">
-					<input type="text" class="form-control" id="room_title"
-						name="room_title" placeholder="제목을 입력하세요.">
+					<input type="text" class="form-control" id="room_title"	name="room_title" placeholder="제목을 입력하세요.">
 				</div>
 			</div>
 			<div class="row">
@@ -99,8 +97,7 @@ h3 {
 					<label for="file" class="form-label">도서 이름</label>
 				</div>
 				<div class="col">
-					<input type="file" class="form-control" id="files" name="files"
-						multiple>
+					<input type="file" class="form-control" id="files" name="files" multiple>
 				</div>
 			</div>
 			<div class="row">
@@ -133,7 +130,6 @@ h3 {
 					<label for="content" class="form-label">모집 인원</label>
 				</div>
 				<div class="col">
-
 					<select class="form-select" id="room_people" name="room_people"
 						aria-label="Default select example">
 						<option value="3">3</option>
@@ -147,7 +143,6 @@ h3 {
 					</select>
 				</div>
 			</div>
-
 			<div class="row">
 				<div class="col-3 writing">
 					<label for="content" class="form-label">모임 지역</label>
@@ -163,24 +158,20 @@ h3 {
 					</select>
 				</div>
 			</div>
-
 			<div class="row">
 				<div class="col-3 writing">
 					<label for="content" class="form-label">모임 기간</label>
 				</div>
 				<div class="col">
 					<input type="text" id="open_date" class="form-control"
-						name="open_date" value="202-07-11" />
+						name="open_date" value="" />
 				</div>
 
 				<div class="col">
 					<input type="text" id="close_date" class="form-control"
-						name="close_date" value="202-07-11" />
+						name="close_date" value="종료날짜 선택" />
 				</div>
 			</div>
-
-
-
 			<div class="row">
 				<div class="col-3 writing">
 					<label for="content" class="form-label">모집 상세</label>
@@ -201,6 +192,8 @@ h3 {
 		</div>
 	</form>
 	<script>
+		
+	
 		// 뒤로 가기 버튼
 		document.getElementById("toCancle").onclick = function() {
 			location.href = "/club/toClub";
@@ -229,6 +222,19 @@ h3 {
 			changeMonth : true
 		// 콤보박스에서 월 선택 가능
 		})
+		
+		let today = new Date();   
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		let date = today.getDate();  // 날짜
+		let day = today.getDay();  // 요일
+		let sysdate = year + '-' + month + '-' + date; // 현자 날짜 표기
+		
+		$("#open_date").val(sysdate);
+			
+		
+		
+		
 	</script>
 </body>
 </html>

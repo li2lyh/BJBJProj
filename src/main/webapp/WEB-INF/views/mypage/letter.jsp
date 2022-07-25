@@ -17,6 +17,16 @@ th, td {
 	text-align: center;
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	font-weight: bolder;
+}
+
 .page-link {
 	border: none;
 	color: black;
@@ -33,37 +43,36 @@ th, td {
 	<div class="container">
 		<div class="row">
 			<div class="col-9 col-lg-11 p-2">
-				<h1>
-					쪽지함
-					</h2>
+				<h2> 쪽지함 </h2>
 			</div>
 			<div class="col-3 col-lg-1 justify-content-end p-2">
-				<button type="button" class="btn btn-secondary w-100" id="deleteBtn">삭제</button>
+				<button type="button" class="btn btn-danger w-100" id="deleteBtn">삭제</button>
 			</div>
 		</div>
 		<div class="row">
 			<table class="table">
 				<thead class="table-secondary">
 					<tr>
-						<th class="col-2"></th>
-						<th class="col-2">No.</th>
+						<th class="col-3"><input type="checkbox" id="all"></th>
 						<th class="col-5">제목</th>
-						<th class="col-3">날짜</th>
+						<th class="col-4">날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${list.size() == 0}">
 						<tr>
-							<td colspan="4">받은 쪽지가 없습니다.</td>
+							<td colspan="3">받은 쪽지가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${list.size() > 0}">
 						<c:forEach items="${list}" var="dto">
 							<tr>
-								<td><input type="checkbox" class="deleteNo" name="no"
-									value="${dto.no}"></td>
-								<td>${dto.no}</td>
-								<td>${dto.title}</td>
+								<td>
+									<input type="checkbox" class="deleteNo" id="deleteNo" name="no" value="${dto.no}">
+								</td>
+								<td class="fw-bold title">
+									<a href="/member/toDetailLetter?no=${dto.no}">${dto.title}</a>
+								</td>
 								<td>${dto.written_date}</td>
 							</tr>
 						</c:forEach>
@@ -73,39 +82,32 @@ th, td {
 			<nav>
 				<ul class="pagination justify-content-center">
 					<c:choose>
-						<c:when test="${startPageNum ne 1}">
-							<li class="page-item"><a class="page-link"
-								href="${pageContext.request.contextPath}/member/toLetter?pageNum=${startPageNum - 1}"><<</a>
+						<c:when test="${pagination.startPage ne 1}">
+							<li class="page-item">
+								<a class="page-link" href="/member/toLetter?page=${pagination.startPage - 1}"><<</a>
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item d-none"><a class="page-link"
-								href="javascript:"></a></li>
+							<li class="page-item d-none">
+								<a class="page-link" href="javascript:"></a>
+							</li>
 						</c:otherwise>
 					</c:choose>
-					<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
-						<c:choose>
-							<c:when test="${i eq pageNum }">
-								<li class="page-item active"><a class="page-link"
-									href="${pageContext.request.contextPath}/member/toLetter?pageNum=${i}">${i}</a>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath}/member/toLetter?pageNum=${i}">${i}</a>
-								</li>
-							</c:otherwise>
-						</c:choose>
+					<c:forEach var="page" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+						<li class="page-item">
+							<a class="page-link" href="/member/toLetter?page=${page}" <c:if test="${pagination.page eq page}">style="background-color: black; color: white; font-weight: bolder;"</c:if> >${page}</a>
+						</li>
 					</c:forEach>
 					<c:choose>
-						<c:when test="${endPageNum lt totalPageCount}">
-							<li class="page-item"><a class="page-link"
-								href="${pageContext.request.contextPath}/member/toLetter?pageNum=${endPageNum + 1}">>></a>
+						<c:when test="${pagination.endPage lt pagination.totalPageCnt}">
+							<li class="page-item">
+								<a class="page-link" href="/member/toLetter?page=${pagination.endPage + 1}">>></a>
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item d-none"><a class="page-link"
-								href="javascript:"></a></li>
+							<li class="page-item d-none">
+								<a class="page-link" href="javascript:"></a>
+							</li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -114,8 +116,21 @@ th, td {
 	</div>
 
 	<script>
+	// 체크박스 전체 체크/ 해제
+	$("#all").on("click", function(){
+		if(this.checked){
+			$(".deleteNo").prop("checked", true);
+			$(".deleteNo").click(function(e){
+				e.preventDefault();				
+			});
+		}else{ 
+			$(".deleteNo").prop("checked", false);
+			$(".deleteNo").unbind();
+		}
+	})
+	
 	// 쪽지 삭제
-	$("#deleteBtn"). on("click",function(){
+	$("#deleteBtn").on("click",function(){
 		let deleteArr = []; 
 		
 		let noArr = $(".deleteNo:checked"); 
@@ -124,19 +139,24 @@ th, td {
 		}
 		console.log(deleteArr);
 		
-		if(deleteArr.length > 0) {
-			$.ajax({
-				url : "/member/toDeleteLetter"
-				,type : "post"
-				, data : {"no[]" : deleteArr}
-				, success : function(){
-					location.href = "/member/toLetter";
-				}, error : function(e){
-					console.log(e);
-				}
-			})	
-		} else {
-			alert("선택된 쪽지가 없습니다.");
+		if (confirm("정말 삭제하시겠습니까?") == true) { // 삭제 확인
+			if(deleteArr.length > 0) {
+				$.ajax({
+					url : "/member/toDeleteLetter"
+					,type : "post"
+					, data : {"no[]" : deleteArr}
+					, success : function(){
+						location.href = "/member/toLetter";
+					}, error : function(e){
+						console.log(e);
+					}
+				})	
+			} else {
+				alert("선택된 쪽지가 없습니다.");
+			}
+		} else { // 삭제 취소
+			$("input:checkbox[id='deleteNo']").prop("checked", false);
+			return false;
 		}
 	})
 	</script>

@@ -1,14 +1,20 @@
+
 package com.bjbj.bookclub;
 
-
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
 import com.bjbj.member.MemberDAO;
+import com.bjbj.member.MemberDTO;
+
 import com.bjbj.utils.PageDTO;
 
 @Service
@@ -17,72 +23,38 @@ public class BookclubService {
 	private BookclubDAO dao;
 	@Autowired
 	private MemberDAO memberDao;
-  
-  /* �쟾�젣 議고쉶 */
-	public List<BookclubDTO> selectAll() throws Exception{
+
+
+
+	/* 전제 조회 */
+	public List<BookclubDTO> selectAll() throws Exception {
 		return dao.selectAll();
 	}
-	
-	/* 理쒓렐�닚�쑝濡� 議고쉶 */
-	public List<BookclubDTO> selectLately() throws Exception {
-		return dao.selectLately();
+
+	/* 최근순으로 조회 */
+	public List<BookclubDTO> selectLately(String email) throws Exception {
+		return dao.selectLately(email);
+	}
+
+	/* 페이징 */
+	public int getCount(String email) throws Exception {
+		return dao.getCount(email);
+	}
+
+	public List<BookclubDTO> selectPage(int start, int end, String email) throws Exception {
+		return dao.selectPage(start, end, email);
 	}
 	
-	/* �럹�씠吏� */
-	public void getPage(HttpServletRequest request) throws Exception{
-      //�븳 �럹�씠吏��뿉 紐뉕컻�뵫 �몴�떆�븷 寃껋씤吏�
-      final int PAGE_ROW_COUNT=5;
-      //�븯�떒 �럹�씠吏�瑜� 紐뉕컻�뵫 �몴�떆�븷 寃껋씤吏�
-      final int PAGE_DISPLAY_COUNT=5;
-      
-      //蹂댁뿬以� �럹�씠吏��쓽 踰덊샇瑜� �씪�떒 1�씠�씪怨� 珥덇린媛� 吏��젙
-      int pageNum=1;
-      //�럹�씠吏� 踰덊샇媛� �뙆�씪誘명꽣濡� �쟾�떖�릺�뒗吏� �씫�뼱�� 蹂몃떎.
-      String strPageNum = request.getParameter("pageNum");
-      //留뚯씪 �럹�씠吏� 踰덊샇媛� �뙆�씪誘명꽣濡� �꽆�뼱 �삩�떎硫�
-      if(strPageNum != null){
-         //�닽�옄濡� 諛붽퓭�꽌 蹂댁뿬以� �럹�씠吏� 踰덊샇濡� 吏��젙�븳�떎.
-         pageNum=Integer.parseInt(strPageNum);
-      }
-      
-      //蹂댁뿬以� �럹�씠吏��쓽 �떆�옉 ROWNUM
-      int startRowNum = 1 + (pageNum-1) * PAGE_ROW_COUNT;
-      //蹂댁뿬以� �럹�씠吏��쓽 �걹 ROWNUM
-      int endRowNum = pageNum * PAGE_ROW_COUNT;
-      
-      //startRowNum 怨� endRowNum  �쓣 BookclubDTO 媛앹껜�뿉 �떞怨�
-      PageDTO dto = new PageDTO();
-      dto.setStartRowNum(startRowNum);
-      dto.setEndRowNum(endRowNum);
-      
-      // BookclubDTO 媛앹껜瑜� �씠�슜�빐�꽌 紐⑸줉�쓣 �뼸�뼱�삩�떎.
-      List<BookclubDTO> list = dao.selectPage(startRowNum, endRowNum);
-      
-      //�븯�떒 �떆�옉 �럹�씠吏� 踰덊샇 
-      int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
-      //�븯�떒 �걹 �럹�씠吏� 踰덊샇
-      int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
-      
-      //�쟾泥� row �쓽 媛��닔
-      int totalRow = dao.getCount();
-      //�쟾泥� �럹�씠吏��쓽 媛��닔 援ы븯湲�
-      int totalPageCount = (int)Math.ceil(totalRow / (double)PAGE_ROW_COUNT);
-      //�걹 �럹�씠吏� 踰덊샇媛� �씠誘� �쟾泥� �럹�씠吏� 媛��닔蹂대떎 �겕寃� 怨꾩궛�릺�뿀�떎硫� �옒紐삳맂 媛믪씠�떎.
-      if(endPageNum > totalPageCount){
-         endPageNum = totalPageCount; //蹂댁젙�빐 以��떎. 
-      }
-      
-      //request �쁺�뿭�뿉 �떞�븘二쇨린
-      request.setAttribute("list", list);   //Bookclub list
-      request.setAttribute("startPageNum", startPageNum);   //�떆�옉 �럹�씠吏� 踰덊샇
-      request.setAttribute("endPageNum", endPageNum);   //�걹 �럹�씠吏� 踰덊샇
-      request.setAttribute("pageNum", pageNum);   //�쁽�옱 �럹�씠吏� 踰덊샇
-      request.setAttribute("totalPageCount", totalPageCount);   //紐⑤뱺 �럹�씠吏� count	      
+
+	/* 찜한 모임 조회 */
+	public List<BookclubDTO> likeClub(String email) throws Exception {
+		return dao.likeClub(email);
 	}
 	
-	/* 李쒗븳 紐⑥엫 議고쉶 */
-	public List<BookclubDTO> likeClub() throws Exception {
-		return dao.likeClub();
+	/* 찜한 모임 삭제 */
+	public void deleteLikeClub(int[] no) throws Exception {
+		dao.deleteLikeClub(no);
+
 	}
 
 	public List<BookclubDTO> selectList() throws Exception {
@@ -95,7 +67,6 @@ public class BookclubService {
 		int room_id = dao.selectSeq();
 		dto.setRoom_id(room_id);
 		roleDto.setRoom_id(room_id);
-
 		dao.insert(dto);
 		dao.insertRole(roleDto);
 	}
@@ -111,12 +82,18 @@ public class BookclubService {
 
 	// email濡� �빐�떦 role �뜲�씠�꽣 媛��졇�삤湲�
 	public RoleDTO selectRole(String email) throws Exception {
+
 		return dao.selectRole(email);
 	}
 
 	// �궇吏쒗몴湲� format (String to String)
 	public String getStrDate(String string) throws Exception {
 		return dao.getStrDate(string);
+	}
+	
+	// 날짜 형식 변경 (yy.MM.dd)
+	public String getDate(String string) throws Exception {
+		return dao.getDate(string);
 	}
 
 	// �옄湲곗냼媛� �뜲�씠�꽣 �뾽�뜲�씠�듃
@@ -152,5 +129,50 @@ public class BookclubService {
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		return dao.updateStatus(room_status, room_id);
 	}
+
+	// 신고 부분 시작
+	public void insertReportBookroom(ReportBookroomDTO reportBookroomDTO) throws Exception {
+		dao.insertReportBookroom(reportBookroomDTO);
+	}
 	
+	public void insertReport(ReportDTO reportDTO) throws Exception{
+		dao.insertReport(reportDTO);
+	}
+
+	public BookclubDTO selectOne(String room_title) throws Exception {
+		return dao.selectOne(room_title);
+	}
+	
+	public MemberDTO selectNickname(String nickname) throws Exception{
+		return dao.selectNickname(nickname);
+	}
+	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
+		return dao.selectRoleByRoom(room_id);
+	}
+	
+	// 클럽내 게시판 글쓰기
+	public void insertBoard(BoardDTO dto) throws Exception{
+		dao.insertBoard(dto);
+	}
+	
+	// 클럽내 게시판 목록
+		public List<BoardDTO> selectAllBoard() throws Exception{
+		return dao.selectAllBoard();
+		}
+		
+		// 클럽내 게시판 목록
+				public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+				return dao.selectAllBoard();
+				}
+	
+	
+				// 클럽내 게시판 게시글 수정
+				public void updateBoard(BoardDTO dto) throws Exception{
+					dao.updateBoard(dto);
+				}
+			
+				// 게시글 삭제
+				public void deleteBoard(int board_seq) throws Exception{
+					dao.deleteBoard(board_seq);
+				}
 }

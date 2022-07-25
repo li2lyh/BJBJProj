@@ -4,14 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
 <meta charset="UTF-8">
 <title>리뷰 관리</title>
@@ -128,7 +122,7 @@ a{
                 </div>
             </div>
         </div> 
-        
+       </div> 
         <script>
         $("#allCheck").on("click", function(){ //전체 선택, 해제
             if(this.checked){ 
@@ -147,32 +141,30 @@ a{
         	location.href = "/manager/deleteReview?review_no="+this.value;
         })
         
-        //리뷰 전체선택 삭제
-// 		$(".deleteAllBtn").on("click",function(){
-// 			let deleteArr = [];
-// 			let noArr = $(".checkReview:checked");
+         //리뷰 전체선택 삭제
+ 		$(".deleteAllBtn").on("click",function(){
+ 			let deleteArr = [];
+ 			let noArr = $(".checkReview:checked");
 			
-// 			for(let review_no of noArr){
-// 				deleteArr.push(review_no.value);
-// 			}
-			
-// 			if(deleteArr.length > 0 ){
-// 				$.ajax({
-// 					url:"/manager/deleteAllReview"
-// 					, type : "post"
-// 					, data : ("review[]" : deleteArr)
-// 					, success : function(){
-// 						location.href="/manager/review";
-// 					}, error : function(e){
-// 						console.log(e);
-// 					}
-// 				})
-// 			}else{
-// 				alert("선택된 리뷰가 없습니다.")
-// 			}
-			
-			
-// 		})
+ 			for(let no of noArr){
+ 				deleteArr.push(no.value);
+ 			}
+ 			console.log(deleteArr);
+			if(deleteArr.length > 0){
+	 			$.ajax({
+	 				url: "/manager/deleteAllReview"
+	 				, type: "post"
+	 				, data: {"no[]" : deleteArr}
+	 				, success : function(){
+	 					location.href="/manager/toReview"
+	 				},error : function(e){
+	 					console.log(e);
+	 				}
+	 			})
+			}else{
+				alert("선택된 리뷰가 없습니다.");
+			}
+ 		})  
         
         
         //리뷰 검색
@@ -190,7 +182,7 @@ a{
         		},error : function(e){
         			console.log(e);
         		}
-        	})
+        	});
         })
         
         function makeDynamicEl(data){

@@ -1,18 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>BookClub 모집</title>
 
 <style>
@@ -60,6 +56,24 @@ textarea {
 #mydesc {
 	width: 100%;
 	border: none;
+}
+
+#reportForm{
+	width: 600px;
+}
+.modal-footer{
+    text-align: right;
+}
+#report_con{
+    padding-top: 15px;
+    padding-left: 30px;
+}
+#report_con2{
+    padding-right: 33px;
+}
+#report_detail{
+    width: 300px;
+    height: 200px;
 }
 </style>
 
@@ -138,6 +152,7 @@ textarea {
 					</c:when>
 					<c:otherwise>
 						<button type="button" id="btnRecruit" class="btn btn-warning">지원하기</button>
+						<button type="button" id="btnReport" class="btn btn-danger">신고</button>
 					</c:otherwise>
 
 				</c:choose>
@@ -146,7 +161,45 @@ textarea {
 		</div>
 
 	</div>
-
+	
+	<%-- 모임 신고하기 Modal --%>
+	<form id="reportBookroomForm" action="/club/reportBookroom" method="post">
+		<div class="modal" id="reportBookroomModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title">신고하기</h2>
+	                </div>
+					<div class="row">
+						<div class="modal-head col-4" id="report_con">
+							<h3>신고사유</h3>
+						</div>
+						<div class="modal-body col-8" id="report_con2">
+							<select class="form-select" name="report_content">
+								<option value="불건전 모임">불건전 모임</option>
+								<option value="모임장이 이상함">모임장이 이상함</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="modal-head col-4" id="report_con">
+							<h3>상세설명</h3>
+						</div>
+							<div class="modal-body col-8" id="report_con2">		
+								<textarea id="report_detail" name="report_detail" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
+							</div>
+					</div>
+	                <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportBookroomCancel">신고취소</button>
+	                    <button type="button" class="btn btn-primary" id="btnReportBookroomComplete">신고완료</button>
+	                    <input type="hidden" id="room_id" name="room_id" value="${dto.room_id}">
+	                    <input type="hidden" id="room_title" name="room_title" value="${dto.room_title}">
+	                </div>		
+				</div>
+			</div>
+		</div>
+	</form>
+	
 	<%-- Modal --%>
 	<form id="mydescForm" action="/club/recruit" method="post">
 		<div class="modal" tabindex="-1">
@@ -175,6 +228,20 @@ textarea {
 	</form>
 
 	<script>
+		<%-- --------- 모임 신고하기 Modal ---------- --%>
+		$("#btnReport").on("click", function() {
+			$("#reportBookroomModal").show();
+				//취소버튼
+				$("#btnReportBookroomCancel").on("click", function() {
+					$("#reportBookroomModal").hide();
+				})
+				//제출버튼
+				$("#btnReportBookroomComplete").on("click", function() {
+					alert("신고되었습니다.");
+					$("#reportBookroomForm").submit();
+				})
+		})
+	
 		//뒤로가기
 		$("#btnBack").on("click", function() {
 			location.href = "/club/toClub";
@@ -207,17 +274,6 @@ textarea {
 			location.href = "/club/myclub?room_id="+${dto.room_id};
 		})
 	</script>
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

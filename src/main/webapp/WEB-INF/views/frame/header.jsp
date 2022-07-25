@@ -26,9 +26,11 @@
 </head>
 <style>
 /* ******** 기준 ******** */
+
 .head-containe {
 	font-size: 20px;
 }
+
 
 /* ******** 로그인 영역 ******** */
 .loginBox {
@@ -271,7 +273,6 @@ input.underlineSearch:focus {
 				<div class="blankBox row">
 					<div class=" col-12"></div>
 				</div>
-
 				<ul class="nav justify-content-end menuBox">
 					<li class="nav-item">
 						<button class="dropbtn">Intro</button>
@@ -292,9 +293,6 @@ input.underlineSearch:focus {
 						<button class="dropbtn">Library</button>
 					</li>
 				</ul>
-
-
-
 
 			</div>
 		</div>

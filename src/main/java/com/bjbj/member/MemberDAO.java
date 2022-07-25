@@ -21,16 +21,22 @@ public class MemberDAO {
 	}
 
 	/* 계정 삭제 */
-	public int delete(String email, String pw) throws Exception {
+  public int delete(String email, String password) throws Exception{
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
-		map.put("pw", pw);
-		return session.delete("memberMapper.selectAll", map);
+		map.put("password", password);
+		return session.delete("memberMapper.delete" , map);
 	}
+	
+	/* 내 정보 수정*/
+	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception{
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("password", password);
+		map.put("nickname", nickname);
+		map.put("mydesc", mydesc);
+		return session.update("memberMapper.updateInfo" , map);
 
-	/* 내 정보 수정 */
-	public int modify(MemberDTO dto) throws Exception {
-		return session.update("memberMapper.modify", dto);
 	}
 
 	/* *************** Login *************** */
