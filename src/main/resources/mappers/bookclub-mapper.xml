@@ -10,25 +10,34 @@
 	
 	<!-- 최근순으로 조회 -->
 	<select id="selectLately" resultType="com.bjbj.bookclub.BookclubDTO">
-		select * from bookroom order by close_date desc
+		select * from role join bookroom using(room_id) join member using(email) 
+    	where email = #{email} order by close_date desc
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="getCount" resultType="int">
-		select count(*) from bookroom
+		select count(*) from role join bookroom using(room_id) join member using(email) where email = #{email}
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="selectPage" parameterType="map" resultType="com.bjbj.bookclub.BookclubDTO">
-		select * from (select bookroom.*, row_number() over(order by room_id desc) as num from bookroom)
-        where num between #{start} and #{end} 
+	select * from (select bookroom.*,  role.email, row_number() over(order by close_date desc) as num,
+   		row_number() over(order by close_date) as rank from bookroom join role  on( bookroom.room_id = role.room_id) 
+    where email = #{email}) join member using(email) where num between #{start} and #{end}
 	</select>
 	
 	<!-- 찜한 모임 조회 -->
 	<select id="likeClub" resultType="com.bjbj.bookclub.BookclubDTO">
-		select * from like_room join bookroom using(room_id)
+		select * from like_room join bookroom using(room_id) join member using(email) where email = #{email}
 	</select>
-
+	
+	<!-- 찜한 모임 삭제 -->
+	<delete id="deleteLikeClub" parameterType="int">
+		delete from like_room where room_id in
+			<foreach collection="deleteArr" item="num" open="(" close=")" separator=",">
+				#{num}
+			</foreach>
+	</delete>
 
 	<select id="selectList"
 		resultType="com.bjbj.bookclub.BookclubDTO">

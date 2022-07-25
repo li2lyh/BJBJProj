@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,11 +49,15 @@ a:hover {
 
 /* 정보 수정 */
 textarea {
-    resize: none;
+	resize: none;
 }
 
-#deleteBtn{
-	width: 50%;
+.modalBtn{
+	width: 150px;
+}
+
+#modifyBtn{
+	width: 150px;
 }
 </style>
 </head>
@@ -84,8 +88,11 @@ textarea {
 				</div>
 				<div class="row p-2">
 					<div class="nav-item dropdown">
-						<a class="list nav-link dropdown-toggle p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+						<a class="list nav-link dropdown-toggle p-0"
+							id="navbarDarkDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDarkDropdownMenuLink">
 							<div>
 								<a class="dropdown-item" href="/member/toLikebook">도서</a>
 							</div>
@@ -96,16 +103,16 @@ textarea {
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- 정보 수정 -->
 			<div class="col-8 p-4">
-				<form id="" action="" method="post">
-					<div class="row p-2">
+				<div class="row p-2">
 						<div class="col-4">
 							<label>아이디</label>
 						</div>
 						<div class="col-8">
-							<input type="text" class="form-control" id="email" name="email" value="${loginSession.email}" readonly>
+							<input type="text" class="form-control" id="email" name="email"
+								value="${dto.email}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
@@ -113,7 +120,7 @@ textarea {
 							<label>이름</label>
 						</div>
 						<div class="col-8">
-							<input type="text" class="form-control" id="name" name="name" value="${loginSession.name}" readonly>
+							<input type="text" class="form-control" id="name" name="name" value="${dto.name}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
@@ -121,7 +128,8 @@ textarea {
 							<label>닉네임</label>
 						</div>
 						<div class="col-8">
-							<input type="text" class="form-control" id="nickname" name="nickname" value="${loginSession.nickname}" readonly>
+							<input type="text" class="form-control" id="nickname" name="nickname" value="${dto.nickname}" readonly>
+							<div class="invalid-feedback">닉네임은 2~6자 이내로 입력해주세요. <br>(영어 대소문자, 한글, 숫자만 입력)</div>
 						</div>
 					</div>
 					<div class="row p-2">
@@ -129,15 +137,17 @@ textarea {
 							<label>비밀번호</label>
 						</div>
 						<div class="col-8">
-							<input type="password" class="form-control" id="pw" name="pw" value="${loginSession.pw}" readonly>
+							<input type="password" class="form-control" id="password" name="password" value="${dto.password}" readonly>
+							<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
 						</div>
+						
 					</div>
 					<div class="row p-2">
 						<div class="col-4">
 							<label>비밀번호확인</label>
 						</div>
 						<div class="col-8">
-							<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${loginSession.pw}" readonly>
+							<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
@@ -145,7 +155,8 @@ textarea {
 							<label>휴대폰번호</label>
 						</div>
 						<div class="col-8">
-							<input type="text" class="form-control" id="phone" name="phone" value="${loginSession.phone}" readonly>
+							<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone}" readonly>
+							<div class="form-text d-none" id="phonetxt">휴대폰번호 변경은 관리자에게 문의해주세요.</div>
 						</div>
 					</div>
 					<div class="row p-2">
@@ -153,56 +164,89 @@ textarea {
 							<label>자기소개</label>
 						</div>
 						<div class="col-8">
-							<textarea class="form-control" id="mydesc" name="mydesc" rows="5" readonly>${loginSession.mydesc}</textarea>
+							<textarea class="form-control" id="mydesc" name="mydesc" rows="5" readonly>${dto.mydesc}</textarea>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-8 col-sm-6">
-							<button type="button" class="btn btn-secondary" id="deleteBtn">회원탈퇴</button>
+						<div class="col-9 col-sm-7">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-danger modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal"> 회원탈퇴</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<div class="col-11 d-flex justify-content-center">
+												<h4 class="modal-title fw-semibold" id="exampleModalLabel">***회원탈퇴***</h4>
+											</div>
+											<div class="col-1 d-flex justify-content-center">
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+										</div>
+										<div class="modal-body">
+											<div class="row text-center">
+												<p>
+													탈퇴 시 계정 복구는 불가능합니다. 정말 탈퇴 하시겠습니까?<br> 
+													정말 탈퇴 하시려면 비밀번호를 입력해주세요.
+												</p>
+											</div>
+											<div class="row p-2">
+												<div class="col-4">
+													<label>비밀번호</label>
+												</div>
+												<div class="col-8">
+													<input type="password" class="form-control" id="deletePW">
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="noBtn">취소</button>
+											<button type="button" class="btn btn-danger" id="deleteBtn">탈퇴</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="col-2 col-sm-3 d-flex justify-content-end">
-							<button type="button" class="btn btn-secondary w-100 d-none" id="cancelBtn">취소</button>
-						</div>
-						<div class="col-2 col-sm-3 d-flex justify-content-start">
-							<button type="button" class="btn btn-secondary w-100" id="modifyBtn">수정</button>
-							<button type="button" class="btn btn-secondary w-100 d-none" id="completeBtn">완료</button>
+						<div class="col-3 col-sm-5 d-flex justify-content-end">
+							<button type="button" class="btn btn-secondary" id="modifyBtn">수정</button>
 						</div>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
-		// 탈퇴
-		$("#deleteBtn").click(function(){
-			location.href = "/member/toDelete";
+		// 탈퇴 버튼 클릭시
+		$("#deleteBtn").click(function() {
+			$.ajax({
+				url : "/member/toDelete",
+				type : "post",
+				data : {
+					email : $("#email").val(),
+					password : $("#deletePW").val()
+				},
+				success : function(data) {
+					if (data == "success") {
+						location.href = "/";
+					} else if (data == "fail") {
+						alert("비밀번호가 일치하지 않습니다.");
+						$("#deletePW").val("");
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
 		})
-		
-		// 취소 버튼 클릭시
-		$("#cancelBtn").click(function(){
-			$("#nickname").attr("readonly", true);
-			$("#pw").attr("readonly", true);
-			$("#pwCheck").attr("readonly", true);
-			$("#mydesc").attr("readonly", true);
-			$("#modifyBtn").removeClass("d-none");
-			$("#completeBtn").addClass("d-none");
-			$("#cancelBtn").addClass("d-none");
+
+		// 모달 취소 버튼 클릭시
+		$("#noBtn").click(function() {
+			$("#deletePW").val("");
 		})
-		
+
 		// 수정 버튼 클릭시
-		$("#modifyBtn").click(function(){
-			$("#nickname").attr("readonly", false);
-			$("#pw").attr("readonly", false);
-			$("#pwCheck").attr("readonly", false);
-			$("#mydesc").attr("readonly", false);
-			$("#modifyBtn").addClass("d-none");
-			$("#completeBtn").removeClass("d-none");
-			$("#cancelBtn").removeClass("d-none");
-		})
-		
-		// 완료 버튼 클릭시
-		$("#completeBtn").click(function(){
+		$("#modifyBtn").click(function() {
 			location.href = "/member/toModify";
 		})
 	</script>

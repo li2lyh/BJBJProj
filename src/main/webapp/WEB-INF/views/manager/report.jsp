@@ -4,14 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>신고</title>
 <style>
@@ -79,7 +73,7 @@ textarea{
                             <h3>회원 신고</h3>
                         </div>
                     </div>
-                    <table class="table table-hover report" id="memberReport">
+                    <table class="table table-hover MemberReport" id="memberReport">
                         <thead class="table-secondary">
                         <tr>
                             <th>신고일자</th>
@@ -90,19 +84,20 @@ textarea{
                         </tr>
                         </thead>
                         <tbody>
-                        	<c:if test="${list.size()== 0}">
+                        	<c:if test="${report_list.size()== 0}">
                         		<tr>
                         			<td colspan="6">등록된 회원 신고가 없습니다.</td>
                         		</tr>
                         	</c:if>
-                        	<c:if test="${list.size() > 0}">
-								<c:forEach items="${list}" var="dto">
+                        	<c:if test="${report_list.size() > 0}">
+								<c:forEach items="${report_list}" var="dto">
 									<tr>
-										<td>신고일자</td>
+										<td>${dto.report_date}</td>
 										<td>${dto.email}</td>
-										<td><a href=""></a></td>
-										<td>신고자</td>
-										<td>조치</td>
+										<td class="report_detail">${dto.report_detail}</td>
+										<td>${dto.reporter_nickname}</td>
+										<td>${dto.report_action}</td>
+										<td class="d-none report_content">${dto.report_content}</td>
 									</tr>
 								</c:forEach>
                         	</c:if>
@@ -114,29 +109,33 @@ textarea{
                             <h3>모임 신고</h3>
                         </div>
                     </div>
-                    <table class="table table-hover report" id="roomReport">
+                    <table class="table table-hover BookroomReport" id="roomReport">
                         <thead class="table-secondary">
                             <tr>
                                 <th>신고일자</th>
                                 <th>모임명</th>
-                                <th>신고사유</th>
+                                <th>신고 사유</th>
                                 <th>신고자</th>
                                 <th>조치</th>
                             </tr>
                         </thead>
 						<tbody>
-							<c:if test="${list.size() == 0}" >
+							<c:if test="${report_bookroom.size() == 0}" >
 								<tr>
 									<td colspan="6">등록된 모임 신고가 없습니다.</td>
 								</tr>
 							</c:if>
-							<c:if test="${list.size() > 0 }">
-								<c:forEach items="${list}" var="dto">
-									<td>신고일자</td>
-									<td>${dto.room_title}</td>
-									<td>신고사유</td>
-									<td>신고자</td>
-									<td>조치</td>
+							<c:if test="${report_bookroom.size() > 0 }">
+								<c:forEach items="${report_bookroom}" var="report_bookroom">
+									<tr>
+									<td>${report_bookroom.report_date}</td>
+									<td>${report_bookroom.room_title}</td>
+									<td class="d-none room_id">${report_bookroom.room_id}</td>
+									<td class="bookroom_detail">${report_bookroom.report_detail}</td>
+									<td>${report_bookroom.reporter_nickname}</td>
+									<td>${report_bookroom.report_action}</td>
+									<td class="d-none report_contentBR">${report_bookroom.report_content}</td>
+									</tr>
 								</c:forEach>
 							</c:if>
 						</tbody>
@@ -145,51 +144,124 @@ textarea{
             </div>
         </div> 
         
-                <!-- 신고 모달 -->
-        <form id="ReportForm" action="#" method="get">
-            <div class="modal" tabindex="-1">
+        <!-- 회원 신고 모달 -->
+            <div class="modal reportmodal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">신고</h5>
+                        <h5 class="modal-title">회원 신고</h5>
                         <button type="button" class="btn-close" id="closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <div class="row p-2">
                         <div class="col-3">신고 사유</div>
                         <div class="col-9">
-                            <input type="text" class="reasonTitle" readonly >
+                            <input type="text" name="report_detail" id="report_detail" class="reasonTitle" readonly>
                         </div>
                       </div>
                       <div class="row p-2">
                         <div class="col-3">상세 설명</div>
                         <div class="col-9 contentBox">
-                            <textarea readonly></textarea>
+                            <textarea id="report_content" name="report_content" readonly></textarea>
                         </div>
                       </div>
                     </div>
                     <div class="col-12 d-flex justify-content-center modal-footer">
-                      <button type="button" class="btn btn-secondary" id="deleteBtn" data-bs-dismiss="modal">신고삭제</button>
+                      <button type="button" class="btn btn-secondary deleteReport" id="deleteMemBtn" data-bs-dismiss="modal" >신고삭제</button>
                       <button type="button" class="btn btn-primary" id="addBtn">경고추가</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
+            
+        
+         <!-- 모임 신고 모달 -->
+            <div class="modal bookroomModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">모임 신고</h5>
+                        <button type="button" class="btn-close" id="closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row p-2">
+                        <div class="col-3">신고 사유</div>
+                        <div class="col-9">
+                            <input type="text" class="reasonTitle" id="report_detailBR"readonly>
+                        </div>
+                      </div>
+                      <div class="row p-2">
+                        <div class="col-3">상세 설명</div>
+                        <div class="col-9 contentBox">
+                            <textarea id="report_contentBR" readonly></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center modal-footer">
+                      <button type="button" class="btn btn-secondary" id="deleteBRBtn" data-bs-dismiss="modal">신고삭제</button>
+                      <button type="button" class="btn btn-primary" id="addBRBtn">경고추가</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         </div>  
         
         <script>
-        //회원 신고 모달
-        $(".report").on("click", "td", function () {
-            $(".modal").show();
-        })
+        //회원 신고 모달 열기
+        $(".report_detail").on("click", function(){
+        	let report_detail = $(this).html(); // 사유
+        	let report_content = $(this).nextAll(".report_content").html()//상세 설명
+        	let email = $(this).prev("td").html();
+        	$("#report_detail").val(report_detail);
+        	$("#report_content").val(report_content);
+        	$("#deleteMemBtn").val(email);
+        	$("#addBtn").val(email);
+        	$(".reportmodal").show();
+        	console.log(email);
+        })      
         //회원 신고 쪽지 모달 닫기
-        document.getElementById("closeBtn").onclick = function () {
-            $(".modal").hide();
-        }
-        //회원 신고 폼 전송 
-        $("#addBtn").on("click", function () {
-            $("#ReportForm").submit();
+        $(".btn-close").on("click", function(){
+        	$(".reportmodal").hide();
         })
+        
+        //모임 신고 모달 열기
+        $(".bookroom_detail").on("click", function(){
+        	let report_detailBR = $(this).html();
+        	let report_contentBR = $(this).nextAll(".report_contentBR").html();
+			let room_id = $(this).prevAll("td").html();
+        	$("#report_detailBR").val(report_detailBR);
+			$("#report_contentBR").val(report_contentBR);
+			$("#deleteBRBtn").val(room_id);
+			$("#addBRBtn").val(room_id);
+        	$(".bookroomModal").show();
+        	console.log(room_id);
+        	
+        })
+        //모임 신고 모달 닫기
+        $(".btn-close").on("click", function(){
+        	$(".bookroomModal").hide();
+        })
+        
+        //회원 신고 삭제 (모달창에서)
+        $("#deleteMemBtn").on("click", function(){
+        	location.href= "/manager/deleteReport?email="+this.value;
+        })
+        //모임 신고 삭제 (모달창에서)
+        $("#deleteBRBtn").on("click", function(){
+        	location.href = "/manager/deleteReportBR?room_id="+this.value;
+        })
+        
+        //회원 신고 - 경고 추가(모달창에서)
+		$("#addBtn").on("click", function(){
+			location.href="/manager/addReport?email="+this.value;
+		})
+        
+        
+        //모임 신고 - 경고 추가 (모달창에서)
+        $("#addBRBtn").on("click", function(){
+        	location.href="/manager/addReportBR?room_id="+this.value;
+        })
+        
         </script>
         
         
