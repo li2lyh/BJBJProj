@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
 import com.bjbj.member.MemberDAO;
+import com.bjbj.member.MemberDTO;
+
 import com.bjbj.utils.PageDTO;
 
 @Service
@@ -35,7 +39,6 @@ public class BookclubService {
 		return dao.getCount(email);
 	}
 
-	/* 페이징 */
 	public List<BookclubDTO> selectPage(int start, int end, String email) throws Exception {
 		return dao.selectPage(start, end, email);
 	}
@@ -61,7 +64,6 @@ public class BookclubService {
 		int room_id = dao.selectSeq();
 		dto.setRoom_id(room_id);
 		roleDto.setRoom_id(room_id);
-
 		dao.insert(dto);
 		dao.insertRole(roleDto);
 	}
@@ -77,6 +79,7 @@ public class BookclubService {
 
 	// email로 해당 role 데이터 가져오기
 	public RoleDTO selectRole(String email) throws Exception {
+
 		return dao.selectRole(email);
 	}
 
@@ -123,7 +126,23 @@ public class BookclubService {
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		return dao.updateStatus(room_status, room_id);
 	}
+
+	// 신고 부분 시작
+	public void insertReportBookroom(ReportBookroomDTO reportBookroomDTO) throws Exception {
+		dao.insertReportBookroom(reportBookroomDTO);
+	}
 	
+	public void insertReport(ReportDTO reportDTO) throws Exception{
+		dao.insertReport(reportDTO);
+	}
+
+	public BookclubDTO selectOne(String room_title) throws Exception {
+		return dao.selectOne(room_title);
+	}
+	
+	public MemberDTO selectNickname(String nickname) throws Exception{
+		return dao.selectNickname(nickname);
+	}
 	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
 		return dao.selectRoleByRoom(room_id);
 	}
@@ -153,5 +172,4 @@ public class BookclubService {
 				public void deleteBoard(int board_seq) throws Exception{
 					dao.deleteBoard(board_seq);
 				}
-
 }

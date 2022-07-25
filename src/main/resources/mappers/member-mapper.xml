@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
    <mapper namespace="memberMapper">
       <!-- 전체 조회 -->
       <select id="selectAll" resultType="com.bjbj.member.MemberDTO">
@@ -13,6 +12,7 @@
    		<select parameterType="map" id="login" resultType="com.bjbj.member.MemberDTO">
    			select * from member where email = #{email} and password = #{password}
    		</select>
+
 
    		<!-- 이메일 중복확인 -->
    		<select parameterType="string" id="confirmEmail" resultType="boolean">
@@ -63,4 +63,3 @@
       </delete>
  
    </mapper>
-

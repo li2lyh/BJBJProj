@@ -1,6 +1,5 @@
 package com.bjbj.bookclub;
 
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -10,6 +9,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
+import com.bjbj.member.MemberDTO;
 
 @Repository
 public class BookclubDAO {
@@ -74,6 +77,25 @@ public class BookclubDAO {
 		return rs;
 	}
 	
+	//모임 신고하기 데이터 삽입
+	public void insertReportBookroom(ReportBookroomDTO dto) throws Exception{
+		session.insert("clubMapper.insertReportBookroom", dto);
+	}
+	
+	//회원 신고하기
+	public void insertReport(ReportDTO dto) throws Exception{
+		session.insert("clubMapper.insertReport", dto);
+	}
+	
+	public BookclubDTO selectOne(String room_title) throws Exception {
+		return session.selectOne("clubMapper.selectOne", room_title);
+	}
+	
+	public MemberDTO selectNickname(String nickname) throws Exception {
+		return session.selectOne("clubMapper.selectNickname", nickname);
+	}
+	
+
 	// 날짜 형식 변경 (yy.MM.dd)
 	public String getDate(String string) {
 		String rs = null;
@@ -108,6 +130,10 @@ public class BookclubDAO {
 	// waiting 테이블에서 이메일로 해당 데이터 삭제
 	public void deleteByEmail(String email) throws Exception {
 		session.delete("waitingMapper.deleteByEmail", email);
+	}
+	
+	public BookclubDTO selectBookroom(int book_id) throws Exception {
+		return session.selectOne("clubMapper.selectOne", book_id);
 	}
 
 	// 현재인원 + 1
@@ -154,11 +180,7 @@ public class BookclubDAO {
 			session.delete("boardMapper.deleteBoard", board_seq);
 		}
 	
-	
-	
-	
-	
-	
+
 	/* 페이징 */
 	public int getCount(String email) throws Exception {
 		return session.selectOne("clubMapper.getCount", email);
@@ -184,28 +206,5 @@ public class BookclubDAO {
 		map.put("deleteArr", no);
 		session.delete("clubMapper.deleteLikeClub", map);
 	}
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

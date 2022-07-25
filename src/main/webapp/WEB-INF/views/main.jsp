@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
@@ -71,11 +70,9 @@ body {
 	width: 13rem;
 }
 </style>
-
 </head>
 
 <body>
-
 	<div class="container">
 
 		<%-- *************************** header *************************** --%>
@@ -454,6 +451,5 @@ body {
                         }
                     })
         </script>
-
 </body>
 </html>

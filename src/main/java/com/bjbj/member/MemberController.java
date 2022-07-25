@@ -128,7 +128,7 @@ public class MemberController {
 			return "";
 		}
 	}
-		
+
 	/* ************ 마이페이지 ************ */
 
 	// 마이페이지 페이지 요청

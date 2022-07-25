@@ -77,5 +77,5 @@ public class LetterDTO {
 	public void setWritten_date(String written_date) {
 		this.written_date = written_date;
 	}
-}
 
+}
