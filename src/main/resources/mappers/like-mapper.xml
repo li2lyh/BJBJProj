@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="likeMapper">
+
+	<!-- 찜한 도서 조회 -->
+	<select id="likeBook" resultType="com.bjbj.books.LikeBookDTO">
+		select * from like_book join member using(email) where email = #{email}
+	</select>
+	
+	<!-- 찜한 도서 삭제 -->
+	<delete id="deleteLikeBook" parameterType="string">
+		delete from like_book where book_isbn = #{book_isbn}
+	</delete>
+
+</mapper>   
