@@ -22,8 +22,8 @@ public class BookclubDAO {
 	}
 	
 	/* 최근순으로 조회 */
-	public List<BookclubDTO> selectLately() throws Exception {
-		return session.selectList("clubMapper.selectLately");
+	public List<BookclubDTO> selectLately(String email) throws Exception {
+		return session.selectList("clubMapper.selectLately", email);
    }
 
 	public List<BookclubDTO> selectList() throws Exception {
@@ -73,6 +73,22 @@ public class BookclubDAO {
 		}
 		return rs;
 	}
+	
+	// 날짜 형식 변경 (yy.MM.dd)
+	public String getDate(String string) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date(sdf.parse(string).getTime());
+			
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yy.MM.dd");
+			rs = sdf2.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 
 	// waiting 테이블에 데이터 삽입
 	public void insertWaiting(WaitingDTO dto) throws Exception {
@@ -144,21 +160,29 @@ public class BookclubDAO {
 	
 	
 	/* 페이징 */
-	public int getCount() throws Exception {
-		return session.selectOne("clubMapper.getCount");
+	public int getCount(String email) throws Exception {
+		return session.selectOne("clubMapper.getCount", email);
 	}
 	
 	/* 페이징 */
-	public List<BookclubDTO> selectPage(int start, int end) throws Exception {
+	public List<BookclubDTO> selectPage(int start, int end, String email) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("email", email);
 		return session.selectList("clubMapper.selectPage", map);
 	}
 	
 	/* 찜한 모임 조회 */
-	public List<BookclubDTO> likeClub() throws Exception {
-		return session.selectList("clubMapper.likeClub");
+	public List<BookclubDTO> likeClub(String email) throws Exception {
+		return session.selectList("clubMapper.likeClub", email);
+	}
+	
+	/* 찜한 모임 삭제 */
+	public void deleteLikeClub(int[] no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("deleteArr", no);
+		session.delete("clubMapper.deleteLikeClub", map);
 	}
 	
 	

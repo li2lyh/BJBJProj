@@ -78,3 +78,4 @@ public class LetterDTO {
 		this.written_date = written_date;
 	}
 }
+

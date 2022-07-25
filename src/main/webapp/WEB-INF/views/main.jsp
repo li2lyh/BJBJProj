@@ -79,7 +79,7 @@ body {
 	<div class="container">
 
 		<%-- *************************** header *************************** --%>
-		<div class=header>
+		<div class="header">
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 
@@ -331,6 +331,8 @@ body {
 						</a>
 					</div>
 				</div>
+			</div>
+		</div>
 
 				<!-- *************************** 베스트셀러 Book *************************** -->
 				<div class="contentBox reviewCon row d-flex ">
@@ -427,7 +429,7 @@ body {
 					</div>
 					<%-- *************************** footer *************************** --%>
 					 
-					<div class=footer>
+					<div class="footer">
 						<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 					</div> 
 				</div>

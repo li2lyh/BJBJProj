@@ -38,7 +38,6 @@ public class PageDTO {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-	
-	
 
 }
+
