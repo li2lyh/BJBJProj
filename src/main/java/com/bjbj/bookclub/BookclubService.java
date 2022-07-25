@@ -3,7 +3,6 @@ package com.bjbj.bookclub;
 
 import java.util.List;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bjbj.member.MemberDAO;
+import com.bjbj.utils.PageDTO;
 
 @Service
 public class BookclubService {
@@ -123,5 +123,35 @@ public class BookclubService {
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		return dao.updateStatus(room_status, room_id);
 	}
+	
+	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
+		return dao.selectRoleByRoom(room_id);
+	}
+	
+	// 클럽내 게시판 글쓰기
+	public void insertBoard(BoardDTO dto) throws Exception{
+		dao.insertBoard(dto);
+	}
+	
+	// 클럽내 게시판 목록
+		public List<BoardDTO> selectAllBoard() throws Exception{
+		return dao.selectAllBoard();
+		}
+		
+		// 클럽내 게시판 목록
+				public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+				return dao.selectAllBoard();
+				}
+	
+	
+				// 클럽내 게시판 게시글 수정
+				public void updateBoard(BoardDTO dto) throws Exception{
+					dao.updateBoard(dto);
+				}
+			
+				// 게시글 삭제
+				public void deleteBoard(int board_seq) throws Exception{
+					dao.deleteBoard(board_seq);
+				}
 
 }

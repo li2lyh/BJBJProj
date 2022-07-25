@@ -33,5 +33,20 @@
 		select * from (select letter.*, row_number() over(order by written_date desc) as num from letter where email = #{email}) join member using(email)
         where num between #{start} and #{end}
 	</select>
-
+	
+	
+	<!-- ************** -->
+	<!-- 개별 쪽지 전송 (관리자 기능) --> 
+	
+	<!-- 메세지 시퀀스 -->
+	<select id="messageSeq" resultType="int">
+		select seq_letter.nextval from dual
+	</select>
+	
+	<insert id="insertLetter" parameterType="com.bjbj.letter.LetterDTO">
+		insert into letter 
+			values(seq_letter.nextval ,#{email}, #{title},#{content},#{written_date})
+	</insert>
+	
+	
 </mapper>

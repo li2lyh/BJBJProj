@@ -48,7 +48,7 @@ public class LetterDAO {
 		map.put("email", email);
 		return session.selectList("letterMapper.selectPage", map);
 	}
-	
+
 	// 날짜 형식 변경 (yyyy-MM-dd)
 	public String getDate(String string) {
 		String rs = null;
@@ -63,4 +63,12 @@ public class LetterDAO {
 		}
 		return rs;
 	}
+
+	
+	/*----------------*/
+	// 쪽지 개별 전송 (관리자 기능)
+	public void insertLetter(LetterDTO dto)throws Exception{
+		session.insert("letterMapper.insertLetter" , dto);
+	}
+	
 }

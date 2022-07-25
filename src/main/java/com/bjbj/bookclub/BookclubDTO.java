@@ -11,6 +11,7 @@ public class BookclubDTO {
 	private String book_cover;
 	private int room_people;
 	private int room_current;
+
 	private String recruit_start; // sysdate
 	private String recruit_end; // 모집 종료날짜 (14일동안)
 	private String open_date; // 모임 시작일
@@ -230,3 +231,4 @@ public class BookclubDTO {
 	}
 
 }
+

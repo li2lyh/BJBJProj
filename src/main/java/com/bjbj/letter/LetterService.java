@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bjbj.utils.PageDTO;
+
 @Service
 public class LetterService {
 	@Autowired
@@ -43,4 +45,12 @@ public class LetterService {
 	public String getDate(String string) throws Exception {
 		return dao.getDate(string);
 	}
+
+	/*-----------------------*/
+	//개별 쪽지 전송 (관리자 기능)
+	public void insertLetter(LetterDTO dto) throws Exception{
+		dao.insertLetter(dto);
+	}
+	
+	
 }

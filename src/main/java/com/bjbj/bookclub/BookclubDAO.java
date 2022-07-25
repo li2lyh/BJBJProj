@@ -45,10 +45,12 @@ public class BookclubDAO {
 		return session.selectOne("clubMapper.selectSeq");
 	}
 
+	//room_id 로 해당 방 정보 얻기
 	public BookclubDTO selectOne(int room_id) throws Exception {
 		return session.selectOne("clubMapper.selectOne", room_id);
 	}
 
+	//email로 roleDTO 정보
 	public RoleDTO selectRole(String email) throws Exception {
 		return session.selectOne("roleMapper.selectRole", email);
 
@@ -112,7 +114,8 @@ public class BookclubDAO {
 	public void updateCurrent(int room_id) throws Exception {
 		session.update("clubMapper.updateCurrent", room_id);
 	}
-
+	
+	// 방 상태 변경 (모집중, 진행중)
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("room_status", room_status);
@@ -121,6 +124,41 @@ public class BookclubDAO {
 		return session.update("clubMapper.updateStatus", map);
 	}
 
+	//room_id 로 해당 방의 멤버 출력
+	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
+		return session.selectList("roleMapper.selectRoleByRoom", room_id);
+	}
+
+	// 클럽내 게시판 글쓰기
+	public void insertBoard(BoardDTO dto) throws Exception{
+		session.insert("boardMapper.insertBoard", dto);
+	}
+	
+	// 클럽내 게시판 목록
+	public List<BoardDTO> selectAllBoard() throws Exception{
+		return session.selectList("boardMapper.selectAllBoard");
+	}
+	
+	// 클럽내 게시판 목록 (room_id)
+		public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+			return session.selectList("boardMapper.selectAllBoardById", room_id);
+		}
+		
+	// 클럽내 게시판 게시글 수정
+		public void updateBoard(BoardDTO dto) throws Exception{
+			session.update("boardMapper.updateBoard", dto);
+		}
+
+		// 게시글 삭제
+		public void deleteBoard(int board_seq)throws Exception{
+			session.delete("boardMapper.deleteBoard", board_seq);
+		}
+	
+	
+	
+	
+	
+	
 	/* 페이징 */
 	public int getCount(String email) throws Exception {
 		return session.selectOne("clubMapper.getCount", email);
@@ -146,4 +184,28 @@ public class BookclubDAO {
 		map.put("deleteArr", no);
 		session.delete("clubMapper.deleteLikeClub", map);
 	}
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

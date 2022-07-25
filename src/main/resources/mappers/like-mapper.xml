@@ -4,7 +4,6 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="likeMapper">
-
 	<!-- 찜한 도서 조회 -->
 	<select id="likeBook" resultType="com.bjbj.books.LikeBookDTO">
 		select * from like_book join member using(email) where email = #{email}
@@ -13,6 +12,18 @@
 	<!-- 찜한 도서 삭제 -->
 	<delete id="deleteLikeBook" parameterType="string">
 		delete from like_book where book_isbn = #{book_isbn}
-	</delete>
+	</delete>  
 
-</mapper>   
+	<!-- 도서 찜 추가 -->
+	<insert id="insertLikeBook" parameterType="com.bjbj.books.LikeBookDTO">
+		INSERT INTO like_book 
+			VALUES( #{book_isbn}, #{book_title}, #{book_author}, #{email}, #{img_id})
+	</insert>
+	
+	<!-- 도서 찜 삭제 -->
+	<delete id="removeLikeBook" parameterType="String">
+		DELETE FROM like_book
+			WHERE email = #{email} AND book_isbn = #{book_isbn}
+	</delete>	
+
+</mapper>

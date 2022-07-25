@@ -1,7 +1,6 @@
 package com.bjbj.member;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class MemberService {
 	}
 	
 	/* 내 정보 수정*/
-	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception{
+	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception {
 		return memberDAO.updateInfo(email, password, nickname, mydesc);
 	}
 

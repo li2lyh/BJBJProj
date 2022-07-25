@@ -1,5 +1,6 @@
 package com.bjbj.books;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,16 @@ public class LikeBookDAO {
 		return session.delete("likeMapper.deleteLikeBook", book_isbn);
 	}
 
+	// 도서 찜하기
+	public int addLikeBook(LikeBookDTO dto) throws Exception {
+		int rs = session.insert("likeMapper.insertLikeBook", dto);
+		return rs;
+	}
+	
+	// 도서 찜 삭제하기
+	public int removeLikeBook(String email, String book_isbn) throws Exception {
+		int rs = session.insert("likeMapper.removeLikeBook", book_isbn);
+		return rs;
+	}
+  
 }

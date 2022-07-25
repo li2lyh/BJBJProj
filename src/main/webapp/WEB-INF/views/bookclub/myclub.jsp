@@ -152,11 +152,12 @@ td, th {
 			<div class="row">
 				<div class="col btnBox">
 					<button type="button" id="btnBack" class="btn btn-secondary">뒤로가기</button>
-
+				
+				<c:if test="${dto.room_status == '모집중'}">
 					<button type="button" id="btnModify" class="btn btn-primary">수정</button>
 					<button type="submit" class="btn btn-primary d-none" id="complete">완료</button>
 					<button type="button" class="btn btn-danger" id="delete">삭제</button>
-
+				</c:if>
 				</div>
 			</div>
 
@@ -424,7 +425,8 @@ td, th {
 									location.href = "/club/clubBoard?room_id="+'${dto.room_id}';
 
 									// 해당 방에 신청했던 선택받지 못한 인원들 지원취소처리
-
+									// 선택받지 못한 인원들에게 알림 (쪽지?)
+									
 								}
 
 							},
