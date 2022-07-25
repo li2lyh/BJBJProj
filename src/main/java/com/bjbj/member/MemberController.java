@@ -1,8 +1,6 @@
 package com.bjbj.member;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,7 +44,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/login")
 	public String login(String email, String password) throws Exception{
-		MemberDTO dto = service.login(email, password);
+		MemberDTO dto = Mservice.login(email, password);
 		if(dto != null) {
 			session.setAttribute("loginSession", dto);
 			System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
@@ -71,7 +69,7 @@ public class MemberController {
 	@RequestMapping(value = "/signUp")
 	public String signUp(MemberDTO dto) throws Exception{
 		System.out.println(dto.toString());
-		service.signUp(dto);
+		Mservice.signUp(dto);
 		return "redirect:/";
 	}
 	
@@ -80,7 +78,7 @@ public class MemberController {
 	@ResponseBody
 	public String confirmEmail(String email) throws Exception{
 		// checkEmail이 false를 반환하면 사용가능 email
-		if(!service.confirmEmail(email)) return "available";
+		if(!Mservice.confirmEmail(email)) return "available";
 		// checkEmail이 true를 반환하면 중복 email
 		else return "unavailable";
 	}
@@ -89,8 +87,9 @@ public class MemberController {
 	@RequestMapping(value = "/confirmNickname")
 	@ResponseBody
 	public String confirmNickname(String nickname) throws Exception{
-		if(!service.confirmNickname(nickname)) return "available";
+		if(!Mservice.confirmNickname(nickname)) return "available";
 		else return "unavailable";
+	}
 
 	/* ************ 아이디, 비밀번호 찾기 ************ */
   
@@ -107,7 +106,7 @@ public class MemberController {
 
 		System.out.println("이메일을 찾아볼까?");
 
-		MemberDTO dto = service.searchEmail(name, phone);
+		MemberDTO dto = Mservice.searchEmail(name, phone);
 
 		if (dto == null) { // 해당 이메일 없음 -> 이메일 없음 페이지 필요
 			System.out.println("해당 이메일이 없습니다!");
@@ -119,7 +118,7 @@ public class MemberController {
 		}
 	}
 		
-	}
+	
 	
 	// 마이페이지 페이지 요청
 	@RequestMapping(value = "/toMyinfo")

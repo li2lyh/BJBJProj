@@ -202,7 +202,7 @@ input.underlineSearch:focus {
 						<a href="">Book</a>
 					</div>
 					<div class="col-3 d-flex justify-content-end align-items-end p-0">
-						<a href="">BookClub</a>
+						<a href="/club/toClub">BookClub</a>
 					</div>
 					<div class="col-2 d-flex justify-content-end align-items-end p-0">
 						<a href="">Library</a>
