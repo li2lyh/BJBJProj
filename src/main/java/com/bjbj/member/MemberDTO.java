@@ -11,7 +11,7 @@ public class MemberDTO {
 	public MemberDTO() {
 	}
 
-	public MemberDTO(String email, String pw, String name, String nickname, String phone, String mydesc) {
+	public MemberDTO(String email, String password, String name, String nickname, String phone, String mydesc) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -29,12 +29,12 @@ public class MemberDTO {
 		this.email = email;
 	}
 
-	public String getPw() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPw(String pw) {
-		this.password = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getName() {
