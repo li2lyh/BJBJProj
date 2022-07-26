@@ -171,7 +171,5 @@ public class BookclubService {
 		return dao.selectOne(room_title);
 	}
 	
-	public MemberDTO selectNickname(String nickname) throws Exception{
-		return dao.selectNickname(nickname);
-	}
+	
 }

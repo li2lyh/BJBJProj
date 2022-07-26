@@ -24,7 +24,7 @@ public class MemberService {
 	/* 내 정보 수정*/
 	public int modify(MemberDTO dto) throws Exception{
 		return memberDAO.modify(dto);
-
+	}
   /* *************** �α��� *************** */
 	public MemberDTO login(String email, String password) throws Exception{
 		return memberDAO.login(email, password);

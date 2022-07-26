@@ -89,9 +89,7 @@ public class BookclubDAO {
 		return session.selectOne("clubMapper.selectOne", room_title);
 	}
 	
-	public MemberDTO selectNickname(String nickname) throws Exception {
-		return session.selectOne("clubMapper.selectNickname", nickname);
-	}
+	
 	
 	// waiting 테이블에 데이터 삽입
 	public void insertWaiting(WaitingDTO dto) throws Exception {

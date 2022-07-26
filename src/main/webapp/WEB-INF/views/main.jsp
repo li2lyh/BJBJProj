@@ -428,6 +428,7 @@ body {
 						<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 					</div> 
 				</div>
+				<button type="button" id="test">북클럽</button>
 				<script
 					src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 					integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
@@ -448,6 +449,10 @@ body {
                             next = next.nextElementSibling
                         }
                     })
+                    
+                    $("#test").on("click", function(){
+						location.href = "/club/toClub";
+					})
         </script>
 </body>
 </html>

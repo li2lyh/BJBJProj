@@ -137,57 +137,6 @@ h4 {
 			location.href = "/club/toWrite";
 		})
 	</script>
-        <div class="row">
-            <div class="col">
-                <h3 id="head">BookClub</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h4>모집 중 클럽</h4>
-            </div>
-        </div>
 
-        <div class="row">
-          
-          <c:if test="${list.size() == 0 }">
-       	<div> 등록된 클럽이 없습니다 </div>
-          </c:if>
-          
-          <c:if test="${list.size() > 0 }">
-          	<c:forEach items="${list}" var="dto">
-       
-      		 <div class="col-6 col-lg-3 d-flex justify-content-center cardBox">
-                <div class="card" style="width: 18rem;">
-                    <a href="/club/detailView?room_id=${dto.room_id}">
-                         <img src="" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-text">${dto.room_title}</h5>
-                        <p class="inform">${dto.open_date} 시작 / ${dto.room_people}명 / 주 ${dto.meet_week}회 / ${dto.place}지역</p>
-                    </div>
-                </div>
-           </div> 
-       
-    	   </c:forEach>
-          </c:if>
-          
-               
-        </div>
-
-        <div class="row">
-            <div class="col" id="btnBox">
-                <button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집 글 쓰기</button>
-            </div>
-        </div>
-
-    </div>
-	<script>
-	
-		$("#btnClass").on("click", function(){
-			location.href = "/club/toWrite";
-		})
-	
-	</script>
 </body>
 </html>

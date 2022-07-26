@@ -96,8 +96,7 @@ public class BookclubController {
 		System.out.println("report_detail : " + dto.getReport_detail());
 		System.out.println("report_nickname : " + dto.getReporter_nickname());
 		
-		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
-		dto.setReporter_nickname(nickname);
+		
 		
 		service.insertReportBookroom(dto);
 		

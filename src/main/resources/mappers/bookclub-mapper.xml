@@ -65,7 +65,7 @@
 	
 	<!-- 모임 신고 -->
 	<insert id="insertReportBookroom" parameterType="com.bjbj.manager.ReportBookroomDTO">
-	insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, default, sysdate, #{report_detail}, default, #{reporter_nickname})
+	insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, default, sysdate, #{report_detail}, default)
 	</insert>
 	<!-- 회원 신고
 	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
