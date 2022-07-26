@@ -34,6 +34,16 @@ public class MemberService {
 		return memberDAO.modify(dto);
 	}	
 
+	/* 계정 삭제 */
+	public int delete(String email, String password) throws Exception{
+		return memberDAO.delete(email, password);
+	}
+	
+	/* 내 정보 수정*/
+	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception {
+		return memberDAO.updateInfo(email, password, nickname, mydesc);
+	}
+
     /* *************** Login *************** */
 	// 일반 로그인
 	public MemberDTO login(String email, String password) throws Exception{
@@ -100,7 +110,6 @@ public class MemberService {
 	public void modifyPw(String email, String tempPw)throws Exception{
 		memberDAO.modifyPw(email, tempPw);
 	}
-	
 	
 	
 }

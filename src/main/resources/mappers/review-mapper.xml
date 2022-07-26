@@ -12,17 +12,17 @@
 	
 	<!-- 최근순으로 조회 -->
 	<select id="selectLately" resultType="com.bjbj.review.ReviewDTO">
-		select * from review order by written_date desc
+		select * from review join member using(email) where email = #{email} order by written_date desc
 	</select>
 
 	<!-- 페이징 -->
 	<select id="getCount" resultType="int">
-		select count(*) from review
+		select count(*) from review  join member using(email) where  email = #{email}
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="selectPage" parameterType="map" resultType="com.bjbj.review.ReviewDTO">
-		select * from (select review.*, row_number() over(order by written_date desc) as num from review)
-        where num between #{start} and #{end} 
+		select * from (select review.*, row_number() over(order by written_date desc) as num from review where email = #{email}) join member using(email)
+        where num between #{start} and #{end}
 	</select>
 </mapper>

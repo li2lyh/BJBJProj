@@ -7,7 +7,7 @@
 
 	<!-- 최근순으로 전체 조회 -->
 	<select id="selectLately" resultType="com.bjbj.letter.LetterDTO">
-		select * from letter order by written_date desc
+		select * from letter join member using(email) where email = #{email} order by written_date desc 
 	</select>
 	
 	<!-- 쪽지 삭제 -->
@@ -18,15 +18,35 @@
 			</foreach>
 	</delete>
 	
+	<!-- 쪽지 상세 보기 -->
+	<select id="detailLetter" parameterType="map" resultType="com.bjbj.letter.LetterDTO">
+		select * from letter join member using(email) where email = #{email} and no = #{no}
+	</select>
+	
 	<!-- 페이징 -->
 	<select id="getCount" resultType="int">
-		select count(*) from letter
+		select count(*) from letter join member using(email) where email = #{email}
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="selectPage" parameterType="map" resultType="com.bjbj.letter.LetterDTO">
-		select * from (select letter.*, row_number() over(order by written_date desc) as num from letter)
-        where num between #{start} and #{end} 
+		select * from (select letter.*, row_number() over(order by written_date desc) as num from letter where email = #{email}) join member using(email)
+        where num between #{start} and #{end}
 	</select>
-
+	
+	
+	<!-- ************** -->
+	<!-- 개별 쪽지 전송 (관리자 기능) --> 
+	
+	<!-- 메세지 시퀀스 -->
+	<select id="messageSeq" resultType="int">
+		select seq_letter.nextval from dual
+	</select>
+	
+	<insert id="insertLetter" parameterType="com.bjbj.letter.LetterDTO">
+		insert into letter 
+			values(seq_letter.nextval ,#{email}, #{title},#{content},#{written_date})
+	</insert>
+	
+	
 </mapper>

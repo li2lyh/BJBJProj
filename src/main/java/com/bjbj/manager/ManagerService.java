@@ -6,8 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bjbj.clubboard.ClubBoardDTO;
-import com.bjbj.letter.LetterDTO;
+import com.bjbj.bookclub.BookclubDAO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.review.ReviewDTO;
 
@@ -15,6 +14,8 @@ import com.bjbj.review.ReviewDTO;
 public class ManagerService {
 	@Autowired
 	private ManagerDAO dao;
+	@Autowired
+	private BookclubDAO clubdao;
 	
 	//블랙리스트 조회
 	 public List<Map<String, Object>> selectBlacklist() throws Exception{
@@ -26,9 +27,9 @@ public class ManagerService {
 		return dao.delete(email);
 	}
 	
-	//블랙리스트 추가
+	//블랙리스트 개별추가
 	public void insertBlacklist(BlacklistDTO dto) throws Exception{
-		 dao.insertBlacklist(dto);
+		dao.insertBlacklist(dto);
 	}
 	
 	//블랙리스트 검색
@@ -49,8 +50,12 @@ public class ManagerService {
 	
 	
 	//전체 모임 조회
-	public List<ClubBoardDTO> selectAllclub() throws Exception{
-		return dao.selectAllclub();
+	public List<Map<String, Object>> selectBookroomM() throws Exception{
+		return dao.selectBookroomM();
+	}
+	// 모임 개별 삭제 
+	public int deleteBookroomM(int room_id) throws Exception{
+		return dao.deleteBookroomM(room_id);
 	}
 	
 	
@@ -68,15 +73,39 @@ public class ManagerService {
 		dao.deleteReview(review_no);
 	}
 	//리뷰 전체 삭제
-	public void deleteAllReview(int[] review_no)throws Exception{
-		dao.deleteAllReview(review_no);
-	}
-	
-	//개별 쪽지 전송
-	public void insertLetter(LetterDTO dto)throws Exception{
-		dao.insertLetter(dto);
+	public void deleteAllReview(int[]no)throws Exception{
+		dao.deleteAllReview(no);
 	}
 	
 	
+	//회원 신고 조회 
+	public List<ReportDTO>selectAllreport()throws Exception{
+		return dao.selectAllreport();
+	}
+	
+	//회원 신고 - 신고삭제 
+	public void deleteReport(String email)throws Exception{
+		dao.deleteReport(email);
+	}
+	
+	//모임 신고 조회 
+	public List<ReportBookroomDTO>selectRoomreport() throws Exception{
+		return dao.selectRoomreport();
+	}
+	//모임신고 - 신고삭제
+	public void deleteReportBR(int room_id)throws Exception{
+		dao.deleteReportBR(room_id);
+	}
+	
+
+	
+	//모임신고 - 경고 추가
+	public void addReportBR(int room_id)throws Exception{
+		dao.addReportBR(room_id);
+	}
+	//모임신고 - 조치 상태 변경
+	public void modifyActionBR(int room_id)throws Exception{
+		dao.modifyActionBR(room_id);
+	}
 	
 }
