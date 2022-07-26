@@ -53,11 +53,6 @@ a:hover {
 	height: 100%;
 }
 
-#reviewImg {
-	width: 100%;
-	height: 100%;
-}
-
 .page-link {
 	border: none;
 	color: black;

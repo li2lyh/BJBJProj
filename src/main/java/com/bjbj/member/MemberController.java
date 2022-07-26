@@ -41,8 +41,8 @@ public class MemberController {
 	private HttpSession session;
 
 	/* ************ 로그인 ************ */
-
-	// 로그인 페이지 요청
+  
+  // 로그인 페이지 요청
 	@RequestMapping(value = "/toLogin")
 	public String toLogin() {
 		return "";
@@ -51,20 +51,21 @@ public class MemberController {
 	// 로그인 요청
 	@ResponseBody
 	@RequestMapping(value = "/login")
-	public String login(String email, String password) throws Exception {
+	public String login(String email, String password) throws Exception{
 		MemberDTO dto = Mservice.login(email, password);
-		if (dto != null) {
+		if(dto != null) {
 			session.setAttribute("loginSession", dto);
-			System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
+			System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
 			return "success";
 		} else {
 			return "fail";
 		}
-
+		
 	}
 
-	/* ************ 회원가입 ************ */
 
+	/* ************ 회원가입 ************ */
+  
 	// 회원가입 페이지
 	@RequestMapping(value = "/toSignUp")
 	public String toSignUp() {
@@ -74,36 +75,32 @@ public class MemberController {
 
 	// 회원가입 요청
 	@RequestMapping(value = "/signUp")
-	public String signUp(MemberDTO dto) throws Exception {
+	public String signUp(MemberDTO dto) throws Exception{
 		System.out.println(dto.toString());
 		Mservice.signUp(dto);
 		return "redirect:/";
 	}
-
+	
 	// 이메일 중복 확인
 	@RequestMapping(value = "/confirmEmail")
 	@ResponseBody
-	public String confirmEmail(String email) throws Exception {
+	public String confirmEmail(String email) throws Exception{
 		// checkEmail이 false를 반환하면 사용가능 email
-		if (!Mservice.confirmEmail(email))
-			return "available";
+		if(!Mservice.confirmEmail(email)) return "available";
 		// checkEmail이 true를 반환하면 중복 email
-		else
-			return "unavailable";
+		else return "unavailable";
 	}
-
+	
 	// 닉네임 중복 확인
 	@RequestMapping(value = "/confirmNickname")
 	@ResponseBody
-	public String confirmNickname(String nickname) throws Exception {
-		if (!Mservice.confirmNickname(nickname))
-			return "available";
-		else
-			return "unavailable";
+	public String confirmNickname(String nickname) throws Exception{
+		if(!Mservice.confirmNickname(nickname)) return "available";
+		else return "unavailable";
 	}
 
 	/* ************ 아이디, 비밀번호 찾기 ************ */
-
+  
 	// 아이디,비밀번호찾기 페이지 요청
 	@RequestMapping(value = "/toFindInfo")
 	public String toFindInfo() {
@@ -130,10 +127,10 @@ public class MemberController {
 	}
 		
 	/* ************ 마이페이지 ************ */
-
+	
 	// 마이페이지 페이지 요청
 	@RequestMapping(value = "/toMyinfo")
-	public String toMyinfo(Model model) throws Exception {
+	public String toMyinfo(Model model) throws Exception{	
 		// 참여 독서 모임
 		List<BookclubDTO> BookclubList = Bservice.selectLately(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("BookclubList", BookclubList);
@@ -146,10 +143,6 @@ public class MemberController {
 		// 도서 리뷰
 		List<ReviewDTO> ReviewList = Rservice.selectLately(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("ReviewList", ReviewList);
-		
-		 for (ReviewDTO dto : ReviewList) { 
-				dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
-		 }
 						
 		// 찜 도서
 		List<LikeBookDTO> LikeBooklist = LBservice.likeBook(((MemberDTO)session.getAttribute("loginSession")).getEmail());
@@ -164,9 +157,10 @@ public class MemberController {
 				dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
 				dto.setClose_date(Bservice.getDate(dto.getClose_date()));
 			}
-		return "/mypage/myinfo";
+		 
+		 return "/mypage/myinfo";
 	}
-
+	
 	// 내 정보 수정 페이지 요청
 	@RequestMapping(value = "/toChange")
 	public String toChange(Model model) throws Exception{		
@@ -197,14 +191,13 @@ public class MemberController {
 		
 		int rs = Mservice.updateInfo(email, password, nickname, mydesc);
 		if(rs > 0) {
-    	System.out.println("수정 완료");
+			System.out.println("수정 완료");
 			System.out.println("암호화된 pw : " + password);
 			return "redirect:/member/toMyinfo";
 		}
-
 		return null;
 	}
-
+	
 	// 회원 탈퇴 요청
 	@RequestMapping(value = "/toDelete")
 	@ResponseBody
@@ -220,11 +213,11 @@ public class MemberController {
 			return "fail";
 		}
 	}
-
+	
 	// 참여 독서 모임 페이지 요청
 	@RequestMapping(value = "/toMybookclub")
 	public String toMybookclub(Model model, @RequestParam(defaultValue = "1") int page) throws Exception {		
-		  // 총 게시물 수 
+		// 총 게시물 수 
 	    int totalListCnt = Bservice.getCount(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 	    
 	    // 생성인자로  총 게시물 수, 현재 페이지를 전달
@@ -247,7 +240,7 @@ public class MemberController {
 		
 		return "/mypage/mybookclub";
 	}
-
+	
 	// 도서 리뷰 페이지 요청
 	@RequestMapping(value = "/toMyreview")
 	public String toMyreview(Model model, @RequestParam(defaultValue = "1") int page) throws Exception {		
@@ -263,17 +256,13 @@ public class MemberController {
 	    int pageSize = page * pagination.getPageSize();	    
 	    
 	    List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize, ((MemberDTO)session.getAttribute("loginSession")).getEmail());
-	    
-		for (ReviewDTO dto : list) { 
-			dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
-		}
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagination", pagination);
-
+		
 		return "/mypage/myreview";
 	}
-
+	
 	// 찜 도서 페이지 요청
 	@RequestMapping(value = "/toLikebook")
 	public String toLikebook(Model model) throws Exception{		
@@ -339,14 +328,14 @@ public class MemberController {
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagination", pagination);
-
+		
 		return "/mypage/letter";
 	}
-
+	
 	// 쪽지 삭제 요청
 	@RequestMapping(value = "/toDeleteLetter")
 	@ResponseBody
-	public String toDeleteLetter(@RequestParam(value="no[]") int[] no) throws Exception {
+	public String toDeleteLetter(@RequestParam(value="no[]") int[] no) throws Exception{
 		Lservice.delete(no);
 		return "success";
 	}

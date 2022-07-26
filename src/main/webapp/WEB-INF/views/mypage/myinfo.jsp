@@ -58,11 +58,6 @@ th, td{
 	height: 100%;
 }
 
-#reviewImg {
-	width: 100%;
-	height: 100%;
-}
-
 /* 찜한 도서 */
 .card {
 	height: 230px;
@@ -176,7 +171,7 @@ th, td{
 					<div class="p-2">최근 작성한 리뷰 순으로 보여드립니다.</div>
 					<c:if test="${ReviewList.size() == 0}">
 					<div class="review p-2">
-						<div class="row border-top p-3">
+						<div class="row border-top border-bottom p-3">
 							<div class="col-12 d-flex justify-content-center">						
 								<p class="m-0">작성한 리뷰가 없습니다.</p>
 							</div>
@@ -184,9 +179,9 @@ th, td{
 						</div>
 					</c:if>
 					<c:if test="${ReviewList.size() > 0}">
-						<c:forEach items="${ReviewList}" var="dto">
+						<c:forEach items="${ReviewList}" var="dto" begin="0" end="2">
 							<div class="review p-0">
-								<div class="row border-top p-3">
+								<div class="row border-top border-bottom p-3">
 									<div class="col-3">
 										<c:choose>
 											<c:when test="${empty dto.img_id}">
@@ -207,10 +202,7 @@ th, td{
 							</div>
 						</c:forEach>
 					`</c:if>
-				</div>				
-				<div class="row border-top p-2">
-					
-				</div>
+				</div>		
 
 				<!-- 찜한 도서 -->
 				<div class="row p-2" id="likeBook">

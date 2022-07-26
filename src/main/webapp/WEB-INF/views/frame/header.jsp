@@ -19,7 +19,7 @@
 <style>
 /* ******** 기준 ******** */
 body {
-	font-size: 15px;
+	font-size: 20px;
 }
 
 /* ******** 로그인 영역 ******** */
@@ -199,13 +199,13 @@ input.underlineSearch:focus {
 						<a href="">Intro</a>
 					</div>
 					<div class="col-2 d-flex justify-content-end align-items-end p-0">
-						<a href="/books/bestseller">Book</a>
+						<a href="">Book</a>
 					</div>
 					<div class="col-3 d-flex justify-content-end align-items-end p-0">
-						<a href="/club/toClub">BookClub</a>
+						<a href="">BookClub</a>
 					</div>
 					<div class="col-2 d-flex justify-content-end align-items-end p-0">
-						<a href="/library/map">Library</a>
+						<a href="">Library</a>
 					</div>
 
 				</div>
