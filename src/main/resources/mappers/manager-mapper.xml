@@ -41,7 +41,8 @@
 
 <!-- 전체 모임 조회 --> 
 <select id="selectBookroomM" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-	select * from bookroom 
+	select * from bookroom join role using(room_id)
+		join report_bookroom using(room_id)
 </select>
 
 
@@ -99,6 +100,11 @@
 <select id="selectRoomreport" resultType="com.bjbj.manager.ReportBookroomDTO">
 	select * from report_bookroom
 </select>
+<!-- 회원신고 - 경고 횟수 추가 -->
+<update id="addReport" parameterType="com.bjbj.manager.ReportDTO">
+	update report set warning_count = warning_count +1 where email = #{email}
+</update>
+
 <!-- 모임신고 - 신고삭제 -->
 <delete id="deleteReportBR" parameterType="int">
 	delete from report_bookroom where room_id = #{room_id}

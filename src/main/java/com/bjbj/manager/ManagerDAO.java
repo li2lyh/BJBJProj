@@ -87,11 +87,12 @@ public class ManagerDAO {
 	}
 	public void deleteReportBR(int room_id)throws Exception{ //모임신고 - 신고 삭제
 		session.delete("managerMapper.deleteReportBR", room_id);
-	
-
-	
-		
 	}
+	
+	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
+		session.update("managerMapper.addReport", dto);
+	}
+	
 	public void addReportBR(int room_id)throws Exception{ //모임신고 - 경고 추가
 		session.update("managerMapper.addReportBR", room_id);
 	}

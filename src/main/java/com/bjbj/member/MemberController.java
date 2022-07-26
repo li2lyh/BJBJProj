@@ -147,9 +147,7 @@ public class MemberController {
 		List<ReviewDTO> ReviewList = Rservice.selectLately(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("ReviewList", ReviewList);
 		
-		 for (ReviewDTO dto : ReviewList) { 
-				dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
-		 }
+
 						
 		// 찜 도서
 		List<LikeBookDTO> LikeBooklist = LBservice.likeBook(((MemberDTO)session.getAttribute("loginSession")).getEmail());
@@ -264,9 +262,7 @@ public class MemberController {
 	    
 	    List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize, ((MemberDTO)session.getAttribute("loginSession")).getEmail());
 	    
-		for (ReviewDTO dto : list) { 
-			dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
-		}
+
 
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagination", pagination);

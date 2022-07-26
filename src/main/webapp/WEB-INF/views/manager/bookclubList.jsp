@@ -109,12 +109,12 @@ textarea {
 									<tr>
 										
 										<td>${dto.room_title}</td>
-										<td>모임장</td>
+										<td>${dto.email}</td>
 										<td><button type="button" class="messageBtn">쪽지</button></td>
 										<td>${dto.room_people}</td>
 										<td>${dto.open_date}~${dto.close_date}</td>
 										<td>${dto.room_status}</td>
-										<td>경고</td>
+										<td>${dto.warning_count}</td>
 										<td><button type="button" class="deleteBtn" value="${dto.room_id}">삭제</button></td>
 									</tr>
 								</c:forEach>

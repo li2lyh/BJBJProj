@@ -439,10 +439,10 @@ body {
 		
 		// 인증번호 발송 버튼 눌렀을 때
 		
-		$("#verifyPhoneBtn").on("click", function(){
-			alert("입력하신 번호로 인증번호가 발송되었습니다.");
-			$(".verifyPhone").removeClass("d-none");
-			console.log($("#phone").val());
+		//$("#verifyPhoneBtn").on("click", function(){
+			//alert("입력하신 번호로 인증번호가 발송되었습니다.");
+			//$(".verifyPhone").removeClass("d-none");
+			//console.log($("#phone").val());
 			
 			/*
 			$.ajax({

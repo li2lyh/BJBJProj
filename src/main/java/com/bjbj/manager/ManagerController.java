@@ -154,13 +154,14 @@ public class ManagerController {
 		return "redirect:/manager/toReport";
 	}
 	//회원 신고 - 경고 추가
-//	@RequestMapping(value="/addReport")
-//	public String addReport(String email)throws Exception{
-//		
-//		int rs = service.
-//		
-//		return "redirect:/manager/toReport";
-//	}
+	@RequestMapping(value="/addReport")
+	public String addReport(ReportDTO dto)throws Exception{
+		//경고 +1
+		service.addReport(dto);
+		return "redirect:/manager/toReport";
+		
+	}
+
 	
 	
 	//모임신고 - 경고 추가
@@ -170,6 +171,8 @@ public class ManagerController {
 		service.addReportBR(room_id);
 		
 		//조치 상태 변경
+		
+		
 		service.modifyActionBR(room_id);
 		return "redirect:/manager/toReport";
 	}

@@ -88,6 +88,13 @@ public class ManagerService {
 		dao.deleteReport(email);
 	}
 	
+
+	
+	//회원신고 - 경고 추가
+	public void addReport(ReportDTO dto)throws Exception{
+		dao.addReport(dto);
+	}
+	
 	//모임 신고 조회 
 	public List<ReportBookroomDTO>selectRoomreport() throws Exception{
 		return dao.selectRoomreport();

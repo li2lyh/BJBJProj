@@ -62,6 +62,11 @@ textarea {
 .letterTitle{
 	width: 300px;
 }
+#submitBtnCK{
+	margin: 2px;
+	width: 150px;
+	height: 30;
+}
 
 /*leftBox*/
 h6 {
@@ -155,7 +160,7 @@ a {
 										<td>${dto.nickname}</td>
 										<td>${dto.warning_count}</td>
 										<td>
-											<button type="button" class="eachAddBtn" value="${dto.email}">추가</button>
+											<button type="button" class="openAddBlacklist" value="${dto.email}">추가</button>
 										</td>
 										<td>
 											<button type="button" class="eachSubmitBtn" value="${dto.email}">전송</button>
@@ -173,6 +178,34 @@ a {
 			  </div> 
 			</div>
 		</div> 
+		
+		<!-- 블랙리스트 모달 (개별) -->
+	<form id="addBlacklistForm" action="/manager/addBlacklist" method="post">
+		<div class="modal blacklistModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">블랙리스트 추가</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row p-2">
+							<div class="col-3">사유</div>
+							<div class="col-9">
+								<input type="text" class="black_detail" name="black_detail">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="closeBlacklistBtn" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="submitBlacklist">추가</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+
 		<!-- 쪽지 모달 (개별) -->
 		<form id=sendLetterForm action="/manager/toSendLetter" method="post">
 			<div class="modal modalEach" tabindex="-1">
@@ -257,11 +290,11 @@ a {
 					</div>
 				</div>
 			</div>
-		</form>
-		
-		
+		</form>		
 </div>
 		<script>
+		
+		
 		
 			//전체 회원 검색
 			$(".searchBtn").on("click", function(){
@@ -364,14 +397,26 @@ a {
              })
              
              //개별 블랙리스트 추가
-             $(".eachAddBtn").on("click", function(){
-            	 location.href = "/manager/addBlacklist?email="+this.value;
+            // $(".eachAddBtn").on("click", function(){
+            //	 location.href = "/manager/addBlacklist?email="+this.value;
+            // })
+             
+             //개별 블랙리스트 모달 오픈 
+             $(".openAddBlacklist").on("click", function(){
+            	 $(".blacklistModal").show();
+            	 
              })
-             
-             
+             //개별 블랙리스트 모달 닫기
+             $("#closeBlacklistBtn").on("click", function(){
+            	 $(".blacklistModal").hide();
+             })
 
+             //개별 블랙리스트 form 전송
+             $("#submitBlacklist").on("click", function(){
+            	 $("#addBlacklistForm").submit();
+             })
 
-         
+        
 
              
 
