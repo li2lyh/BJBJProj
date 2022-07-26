@@ -1,6 +1,7 @@
 package com.bjbj.bookclub;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.member.MemberService;
 
@@ -46,6 +50,7 @@ public class BookclubController {
 		
 		return "/bookclub/findclub";
 	}
+
 
 	@RequestMapping(value = "/toWrite") // 모집글쓰기 요청
 	public String write() throws Exception {
@@ -88,7 +93,32 @@ public class BookclubController {
 
 		return "/bookclub/detailView";
 	}
-
+	
+	// 모임 신고하기 요청
+	@RequestMapping(value = "/reportBookroom")
+	public String reportBookroom(ReportBookroomDTO dto) throws Exception {
+		System.out.println("room_title : " + dto.getRoom_title());
+		System.out.println("report_content : " + dto.getReport_content());
+		System.out.println("report_detail : " + dto.getReport_detail());
+		System.out.println("report_nickname : " + dto.getReporter_nickname());
+		
+		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
+		dto.setReporter_nickname(nickname);
+		
+		service.insertReportBookroom(dto);
+		
+		
+		
+		return "redirect:/club/toClub";
+	}
+	
+	// 회원 신고하기 요청
+	@RequestMapping(value = "/report")
+	public String report(ReportDTO dto) throws Exception {
+		service.insertReport(dto);
+		return "redirect:/club/toClub";
+	}
+		
 	// 클럽에 지원하기 요청
 	@RequestMapping(value = "/recruit")
 	public String recruit(String mydesc, int room_id) throws Exception {

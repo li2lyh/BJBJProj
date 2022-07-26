@@ -21,7 +21,7 @@ public class MemberDAO {
 	}
 
 	/* 계정 삭제 */
-	public int delete(String email, String password) throws Exception {
+  public int delete(String email, String password) throws Exception{
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
 		map.put("password", password);
@@ -38,7 +38,8 @@ public class MemberDAO {
 		return session.update("memberMapper.updateInfo", map);
 	}
 
-	/* *************** �α��� *************** */
+	/* *************** Login *************** */
+	// 일반 로그인
 	public MemberDTO login(String email, String password) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
@@ -47,21 +48,29 @@ public class MemberDAO {
 	}
 
 	/* *************** ȸ���� *************** */
+	// 카카오 로그인 _ kakao Login
+	public MemberDTO kakaoLogin(String email) throws Exception {
+		return session.selectOne("memberMapper.kakaoLogin", email);
+	}
+
+	/* *************** SignUp *************** */
 	public int insert(MemberDTO dto) throws Exception {
 		return session.insert("memberMapper.insert", dto);
 	}
 
 	/* *************** �̸��� �ߺ�Ȯ�� *************** */
+	/* *************** Email_Confirm *************** */
 	public boolean confirmEmail(String email) throws Exception {
 		return session.selectOne("memberMapper.confirmEmail", email);
 	}
 
 	/* *************** �г��� �ߺ�Ȯ�� *************** */
+	/* *************** Nickname_Confirm *************** */
 	public boolean confirmNickname(String nickname) throws Exception {
 		return session.selectOne("memberMapper.confirmNickname", nickname);
 	}
 
-	/* *************** Email ã�� *************** */
+	/* *************** Email(ID) Search *************** */
 	public MemberDTO searchEmail(String name, String phone) throws Exception {
 
 		Map<String, String> map = new HashMap<>();
@@ -71,6 +80,7 @@ public class MemberDAO {
 	}
 
 	/* *************** ��й�ȣ ���� *************** */
+	/* *************** Password Modify *************** */
 	public void modifyPw(String email, String tempPw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);

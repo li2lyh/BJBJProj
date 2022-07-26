@@ -18,7 +18,7 @@
 		select * from Role
 		where email = #{email}
 	</select>
-	
+
 	<select id="selectRoleByRoom" parameterType="int" resultType="com.bjbj.bookclub.RoleDTO">
 		select * from Role
 		where room_id = #{room_id}
