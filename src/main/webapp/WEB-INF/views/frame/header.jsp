@@ -8,7 +8,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Header</title>
-<!-- CDN -->
+
+<%-- ----------------------- CDN ----------------------- --%>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -26,11 +27,9 @@
 </head>
 <style>
 /* ******** 기준 ******** */
-
 .head-containe {
 	font-size: 20px;
 }
-
 
 /* ******** 로그인 영역 ******** */
 .loginBox {
@@ -210,8 +209,8 @@ input.underlineSearch:focus {
 									<div class="etcBox">
 										<div class="row d-flex align-middle">
 											<div class="col-6 d-flex justify-content-start">
-												<input class="form-check-input" type="checkbox" value="">&nbsp아이디
-												기억하기
+												<input class="form-check-input" type="checkbox"
+													id="rememberId">&nbsp아이디 기억하기
 											</div>
 											<div class="col-4 d-flex justify-content-end p-0">
 												<a href="/member/toFindInfo">아이디/비밀번호 찾기</a>
@@ -229,6 +228,9 @@ input.underlineSearch:focus {
 											src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 											alt="카카오 로그인 버튼" />
 										</a>
+										<form action="/member/toKakaoSignUp" method="post">
+											<input type="hidden" id="emailForKakao" value="" name="email">
+										</form>
 									</div>
 
 								</div>
@@ -238,7 +240,15 @@ input.underlineSearch:focus {
 					</div>
 				</div>
 				<div class="col-1 d-flex justify-content-start p-0">
-					<a href="" id="myBookBtn">MyBook</a>
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#login" id="myBookBtn" data-bs-toggle="modal"
+								data-bs-target="#login">MyBook</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="col-1 d-flex justify-content-start p-0">
 					<c:choose>
@@ -300,9 +310,66 @@ input.underlineSearch:focus {
 	</div>
 
 	<script>
-		/* 검색 버튼 */
-
-		/* 로그인 */
+		/****************************************** 검색 버튼 *****************************************/
+		
+		/****************************************** 아이디 기억하기 ************************************/
+		// 아이디, 체크박스 영역 //
+		$(document).ready(function() {
+		
+	         let key = getCookie("key");
+	         $("#loginId").val(key);
+	         
+	         if($("#loginId").val() != "") { // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+	            $("#rememberId").attr("checked",true); //ID 저장하기를 체크상태로 두기
+	         }
+	         
+	         $("#rememberId").change(function(){ //체크박스에 변화가 있다면
+	            if($("#rememberId").is(":checked")){ //id저장하기 체크했을때
+	               setCookie("key",$("#loginId").val(),30); //30일동안 쿠키 저장
+	            }else{
+	               deleteCookie("key");
+	            }
+	
+	         })
+	         
+	         // ID 저장하기를 체크한 상태에서 id를 입력하는 경우 , 이럴때도 쿠키 저장.
+	         $("#loginId").keyup(function(){ //ID 입력칸에 ID를 입력할 때
+	            if($("#rememberId").is(":checked")){ //ID 저장하기를 체크한 상태라면
+	               setCookie("key", $("#loginId").val(),30); //30일동안 쿠기 보관
+	            }
+	         })
+		});
+		
+		// 쿠키 영영 //
+		// 쿠키 저장하기
+		// setCookie => saveid함수에서 넘겨준 시간이 현재시간과 비교해서 쿠키를 생성하고 지워주는 역할
+		function setCookie(cookieName, value, exdays){
+		    var exdate = new Date();
+		    exdate.setDate(exdate.getDate() + exdays);
+		    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+		    document.cookie = cookieName + "=" + cookieValue;
+		}
+		// 쿠키 삭제
+		function deleteCookie(cookieName){
+		    var expireDate = new Date();
+		    expireDate.setDate(expireDate.getDate() - 1);
+		    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+		}
+		// 쿠키 가져오기
+		function getCookie(cookieName) {
+		    cookieName = cookieName + '=';
+		    var cookieData = document.cookie;
+		    var start = cookieData.indexOf(cookieName);
+		    var cookieValue = '';
+		    if(start != -1){ // 쿠키가 존재한다면
+		        start += cookieName.length;
+		        var end = cookieData.indexOf(';', start);
+		        if(end == -1)end = cookieData.length; // if(end == -1) -> 쿠키 값의 마지막 위치 인덱스 번호 설정
+		        cookieValue = cookieData.substring(start, end);
+		    }
+		    return unescape(cookieValue);
+		}
+		/****************************************** 로그인 ******************************************/
 		$("#loginBtn").on("click", function() {
 
 			$.ajax({
@@ -314,7 +381,9 @@ input.underlineSearch:focus {
 				},
 				success : function(data) {
 					console.log(data);
-					if (data == "success") {
+					if (data == "blackList"){
+						alert("블랙리스트 회원입니다.");
+					} else if (data == "success") {
 						location.href = "/"
 					} else if (data == "fail") {
 						alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
@@ -327,51 +396,67 @@ input.underlineSearch:focus {
 
 		});
 		
-	/* 카카오 로그인 */
-	window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
-	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+		/****************************************** 카카오 로그인 ******************************************/
+		window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
+		console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
-	function kakaoLogin() {
-		window.Kakao.Auth.login({
-			scope:'account_email'
-			, success: function(authObj){
-				console.log(authObj);
-				window.Kakao.API.request({
-					url : '/v2/user/me'
-					, success : res => {
-						const kakao_account = res.kakao_account;
-						const email = kakao_account.email;
-						
-						console.log(kakao_account);
-						console.log(email)
-						
-						$.ajax({
-	                        	type: "post",
-	                       		url: '/member/kakaoLogin', // 로그인
-	                      		data: { "email" : email },
-	                      		dataType: "text",
-	                        	success: function (data) {
-	                            		console.log(data);
-	                            		if (data === "fail") {// 회원가입
-		                               		console.log("성공!");
-		                              		location.href = '/member/toKakaoSignUp?email=' + email;
-	                          			} else if (data === "success") {
-											console.log("success");
-											location.href="/"
-										}
-	                        }, error: function (request, status, error) {
-	                            console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
-	                        }
-	                    })
-	                    // ajax끝
-	                }
-					, fail: function (error) {
-						alert(error);
-					}
-	            })
-	        }
-	    })
-	};
+		function kakaoLogin() {
+			window.Kakao.Auth.login({
+				 success: function(authObj){
+					console.log(authObj);
+					window.Kakao.API.request({
+						url : '/v2/user/me'
+						, success : res => {
+
+							const kakao_token = res.id;
+							
+ 							$.ajax({
+		                        	type: "post",
+		                       		url: '/member/kakaoLogin', // 로그인
+		                      		data: { "email" : "kakao" + kakao_token },
+		                      		dataType: "text",
+		                        	success: function (data) {
+		                            		console.log(data);
+		  
+		                            		console.log(kakao_token);
+		                            		if (data === "fail") {// 회원가입
+			                               		console.log("성공!");
+			                               		createHiddenSignupForm(kakao_token);
+		                          			} else if (data === "success") {
+												console.log("success");
+												location.href="/";
+											}
+		                        }, error: function (request, status, error) {
+		                            console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
+		                        }
+		                    }) 
+		                    // ajax끝
+		                }
+						, fail: function (error) {
+							alert(error);
+						}
+		            })
+		        }
+		    })
+		};
+		
+		// post로 개인정보 안보이게 HiddenForm으로 넘기기
+		function createHiddenSignupForm(kakao_token) {
+	        var frm = document.createElement('form');
+	        frm.setAttribute('method', 'post');
+	        frm.setAttribute('action', '/member/toKakaoSignUp');
+	        var token = document.createElement('input');
+	        token.setAttribute('type', 'hidden');
+	        token.setAttribute('name', 'email');
+	        token.setAttribute('value', "kakao" + kakao_token);
+	        var phone = document.createElement('input');
+	        phone.setAttribute('type', 'hidden');
+	        phone.setAttribute('name', 'phone');
+	        phone.setAttribute('value', kakao_token);
+	        frm.append(token, phone);
+	        document.body.append(frm);
+	        frm.submit();
+	    }
 	</script>
 </body>
 
