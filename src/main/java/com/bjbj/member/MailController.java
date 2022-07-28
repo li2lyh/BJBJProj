@@ -24,7 +24,7 @@ public class MailController {
 		String addr = "bjbjcommunity@gmail.com";
 		String subject = "[북적북적커뮤니티] 비밀번호가 변경되었습니다. 확인해주세요.";
 		String tempPw = mailService.makePw();
-		String body = "Test : " + tempPw ;
+		String body = "임시 비밀번호 : " + tempPw ;
 		
 		mailService.sendEmail(email, addr, subject, body);
 		
