@@ -4,24 +4,19 @@ public class ReportBookroomDTO {
 	private int room_id;
 	private String room_title;
 	private String report_content;
-	private int warning_count;
 	private String report_date;
 	private String report_detail;
-	private char report_action;
 	private String reporter_nickname;
 	
 	public ReportBookroomDTO() {}
 
-	public ReportBookroomDTO(int room_id, String room_title, String report_content, int warning_count,
-			String report_date, String report_detail, char report_action, String reporter_nickname) {
+	public ReportBookroomDTO(int room_id, String room_title, String report_content,	String report_date, String report_detail, String reporter_nickname) {
 		super();
 		this.room_id = room_id;
 		this.room_title = room_title;
 		this.report_content = report_content;
-		this.warning_count = warning_count;
 		this.report_date = report_date;
 		this.report_detail = report_detail;
-		this.report_action = report_action;
 		this.reporter_nickname = reporter_nickname;
 	}
 
@@ -49,14 +44,6 @@ public class ReportBookroomDTO {
 		this.report_content = report_content;
 	}
 
-	public int getWarning_count() {
-		return warning_count;
-	}
-
-	public void setWarning_count(int warning_count) {
-		this.warning_count = warning_count;
-	}
-
 	public String getReport_date() {
 		return report_date;
 	}
@@ -73,14 +60,6 @@ public class ReportBookroomDTO {
 		this.report_detail = report_detail;
 	}
 
-	public char getReport_action() {
-		return report_action;
-	}
-
-	public void setReport_action(char report_action) {
-		this.report_action = report_action;
-	}
-
 	public String getReporter_nickname() {
 		return reporter_nickname;
 	}
@@ -92,8 +71,8 @@ public class ReportBookroomDTO {
 	@Override
 	public String toString() {
 		return "ReportBookroomDTO [room_id=" + room_id + ", room_title=" + room_title + ", report_content="
-				+ report_content + ", warning_count=" + warning_count + ", report_date=" + report_date
-				+ ", report_detail=" + report_detail + ", report_action=" + report_action + ", reporter_nickname="
+				+ report_content + ", warning_count=" + ", report_date=" + report_date
+				+ ", report_detail=" + report_detail + ", report_action=" + ", reporter_nickname="
 				+ reporter_nickname + "]";
 	}
 	
