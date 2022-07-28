@@ -4,14 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>전체회원 리스트</title>
 <style>
@@ -49,6 +43,11 @@
 	width: 150px;
 	height: 30;
 }
+#closeSelectBtn{
+	margin: 2px;
+	width: 150px;
+	height: 30;
+}
 
 /*모달창*/
 textarea {
@@ -58,6 +57,9 @@ textarea {
 }
 
 .sendTo {
+	width: 300px;
+}
+.letterTitle{
 	width: 300px;
 }
 
@@ -167,14 +169,13 @@ a {
 					<div class="col-12 p-2 d-flex justify-content-end">
 						<button type="button" class="blacklistBtn">(선택)블랙리스트</button>
 						<button type="button" class="sendBtn" id="selectBtn">선택 쪽지 보내기</button>
-						<button type="button" class="sendBtn" id="allBtn">전체 쪽지 보내기</button>
 					</div>
 			  </div> 
 			</div>
 		</div> 
-		<!-- 쪽지 모달 -->
-		<form id="messageForm" action="#" method="get">
-			<div class="modal" tabindex="-1">
+		<!-- 쪽지 모달 (개별) -->
+		<form id=sendLetterForm action="/manager/toSendLetter" method="post">
+			<div class="modal modalEach" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -182,27 +183,83 @@ a {
 						</div>
 						<div class="modal-body">
 							<div class="row p-2">
+								<div class="col-3">작성날짜</div>
+								<div class="col-9">
+									<input type="text" class="written_date" name="written_date">
+								</div>
+							</div>
+							<div class="row p-2">
 								<div class="col-3">받는이</div>
 								<div class="col-9">
-									<input type="text" class="sendTo">
+									<input type="text" class="sendTo" name="email" >
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-3">제목</div>
+								<div class="col-9">
+									<input type="text" class="letterTitle" name="title" >
 								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-3">내용</div>
 								<div class="col-9 contentBox">
-									<textarea></textarea>
+									<textarea id="letterContent" name="content" value="content"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" id="closeBtn"
-								data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal">닫기</button>	
 							<button type="button" class="btn btn-primary" id="submitBtn">전송</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
+		
+		<!-- 쪽지 모달 (체크박스 선택) -->
+		<form id="sendLetterFormCK" action="/manager/toSendLetterCK" method="post">
+			<div class="modal modalCheck" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">쪽지 보내기</h5>
+						</div>
+						<div class="modal-body">
+							<div class="row p-2">
+								<div class="col-3">작성날짜</div>
+								<div class="col-9">
+									<input type="text" class="written_date" name="written_date">
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-3">받는이</div>
+								<div class="col-9">
+									<input type="text" class="sendTo" name="email" >
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-3">제목</div>
+								<div class="col-9">
+									<input type="text" class="letterTitle" name="title" >
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-3">내용</div>
+								<div class="col-9 contentBox">
+									<textarea id="checkedText" name="letterContent" value="content"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" id="closeSelectBtn" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary" id="submitBtnCK">전송</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		
 </div>
 		<script>
 		
@@ -264,16 +321,34 @@ a {
 			}
 		
 		
-            //쪽지 모달
-            $(".sendBtn").on("click", function(){
-                $(".modal").show();
+            //쪽지 모달(개인)
+            $(".eachSubmitBtn").on("click", function(){
+                $(".modalEach").show();
             });	
             //쪽지 모달 닫기
             $("#closeBtn").on("click", function(){
-            	$(".modal").hide();
+            	$(".modalEach").hide();
             });
             
+            //개별 쪽지 form 전송
+			$("#submitBtn").on("click", function() {
+				$("#sendLetterForm").submit();
+			})
 
+            
+            //쪽지 모달(check)
+            $("#selectBtn").on("click", function(){
+            	$(".modalCheck").show();
+            })
+            //쪽지 모달 닫기 (check)
+            $("#closeSelectBtn").on("click", function(){
+            	$(".modalCheck").hide();
+            });
+            //선택된 쪽지 form 전송 (check)
+            $("#submitBtnCK").on("click", function(){
+            	$("#sendLetterFormCK").submit();
+            })
+            
             
             //전체 선택, 해제
             $("#allCheck").on("click", function () { 
@@ -290,23 +365,13 @@ a {
              
              //개별 블랙리스트 추가
              $(".eachAddBtn").on("click", function(){
-            	 location.href = "/manager/addBlacklist";
+            	 location.href = "/manager/addBlacklist?email="+this.value;
              })
              
-             //개별 쪽지 보내기
-             $(".eachSubmitBtn").on("click", function(){
-            	 location.href= "/manager/toSendmessage";
-             })
              
-//              선택 쪽지 보내기
-//              $("#submitBtn").on("click", function(){
-//             	 let selectArr = [];
-//             	 let checkArr = $(".checkMember:checked");
-//             	 console.log(checkArr);
-            	 
-//             	 location.href = "/manager/toSendmessage"
-//              })
-             
+
+
+         
 
              
 

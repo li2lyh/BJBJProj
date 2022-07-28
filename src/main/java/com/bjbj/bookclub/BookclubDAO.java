@@ -25,8 +25,8 @@ public class BookclubDAO {
 	}
 	
 	/* 최근순으로 조회 */
-	public List<BookclubDTO> selectLately() throws Exception {
-		return session.selectList("clubMapper.selectLately");
+	public List<BookclubDTO> selectLately(String email) throws Exception {
+		return session.selectList("clubMapper.selectLately", email);
    }
 
 	public List<BookclubDTO> selectList() throws Exception {
@@ -48,10 +48,12 @@ public class BookclubDAO {
 		return session.selectOne("clubMapper.selectSeq");
 	}
 
+	//room_id 로 해당 방 정보 얻기
 	public BookclubDTO selectOne(int room_id) throws Exception {
 		return session.selectOne("clubMapper.selectOne", room_id);
 	}
 
+	//email로 roleDTO 정보
 	public RoleDTO selectRole(String email) throws Exception {
 		return session.selectOne("roleMapper.selectRole", email);
 
@@ -75,22 +77,22 @@ public class BookclubDAO {
 		return rs;
 	}
 	
-	//모임 신고하기 데이터 삽입
-	public void insertReportBookroom(ReportBookroomDTO dto) throws Exception{
-		session.insert("clubMapper.insertReportBookroom", dto);
+	// 날짜 형식 변경 (yy.MM.dd)
+	public String getDate(String string) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date(sdf.parse(string).getTime());
+			
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yy.MM.dd");
+			rs = sdf2.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
-	//회원 신고하기
-	public void insertReport(ReportDTO dto) throws Exception{
-		session.insert("clubMapper.insertReport", dto);
-	}
-	
-	public BookclubDTO selectOne(String room_title) throws Exception {
-		return session.selectOne("clubMapper.selectOne", room_title);
-	}
-	
-	
-	
+
 	// waiting 테이블에 데이터 삽입
 	public void insertWaiting(WaitingDTO dto) throws Exception {
 		session.insert("waitingMapper.insertWaiting", dto);
@@ -110,16 +112,13 @@ public class BookclubDAO {
 	public void deleteByEmail(String email) throws Exception {
 		session.delete("waitingMapper.deleteByEmail", email);
 	}
-	
-	public BookclubDTO selectBookroom(int book_id) throws Exception {
-		return session.selectOne("clubMapper.selectOne", book_id);
-	}
 
 	// 현재인원 + 1
 	public void updateCurrent(int room_id) throws Exception {
 		session.update("clubMapper.updateCurrent", room_id);
 	}
-
+	
+	// 방 상태 변경 (모집중, 진행중)
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("room_status", room_status);
@@ -128,21 +127,85 @@ public class BookclubDAO {
 		return session.update("clubMapper.updateStatus", map);
 	}
 
+	//room_id 로 해당 방의 멤버 출력
+	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
+		return session.selectList("roleMapper.selectRoleByRoom", room_id);
+	}
+
+	// 클럽내 게시판 글쓰기
+	public void insertBoard(BoardDTO dto) throws Exception{
+		session.insert("boardMapper.insertBoard", dto);
+	}
+	
+	// 클럽내 게시판 목록
+	public List<BoardDTO> selectAllBoard() throws Exception{
+		return session.selectList("boardMapper.selectAllBoard");
+	}
+	
+	// 클럽내 게시판 목록 (room_id)
+		public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+			return session.selectList("boardMapper.selectAllBoardById", room_id);
+		}
+		
+	// 클럽내 게시판 게시글 수정
+		public void updateBoard(BoardDTO dto) throws Exception{
+			session.update("boardMapper.updateBoard", dto);
+		}
+
+		// 게시글 삭제
+		public void deleteBoard(int board_seq)throws Exception{
+			session.delete("boardMapper.deleteBoard", board_seq);
+		}
+	
 	/* 페이징 */
-	public int getCount() throws Exception {
-		return session.selectOne("clubMapper.getCount");
+	public int getCount(String email) throws Exception {
+		return session.selectOne("clubMapper.getCount", email);
 	}
 	
 	/* 페이징 */
-	public List<BookclubDTO> selectPage(int start, int end) throws Exception {
+	public List<BookclubDTO> selectPage(int start, int end, String email) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("email", email);
 		return session.selectList("clubMapper.selectPage", map);
 	}
 	
 	/* 찜한 모임 조회 */
-	public List<BookclubDTO> likeClub() throws Exception {
-		return session.selectList("clubMapper.likeClub");
+	public List<BookclubDTO> likeClub(String email) throws Exception {
+		return session.selectList("clubMapper.likeClub", email);
 	}
+	
+	/* 찜한 모임 삭제 */
+	public void deleteLikeClub(int[] no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("deleteArr", no);
+		session.delete("clubMapper.deleteLikeClub", map);
+	}
+	
+	//모임 신고하기 데이터 삽입
+	public void insertReportBookroom(ReportBookroomDTO dto) throws Exception{
+		session.insert("clubMapper.insertReportBookroom", dto);
+	}
+	
+	//회원 신고하기
+	public void insertReport(ReportDTO dto) throws Exception{
+		session.insert("clubMapper.insertReport", dto);
+	}
+	
+	// 신고자 닉네임 불러오기
+	public MemberDTO selectNickname(String nickname) throws Exception {
+		return session.selectOne("clubMapper.selectNickname", nickname);
+	}
+	
+	// 모임원 닉네임 불러오기
+	public List<MemberDTO> selectRoleMember() throws Exception {
+		return session.selectList("clubMapper.selectRoleMember");
+	}
+	
+	// 모임원 이메일 불러오기
+	public List<MemberDTO> selectMemberEmail() throws Exception {
+		return session.selectList("clubMapper.selectMemberEmail");
+	}
+		
 }

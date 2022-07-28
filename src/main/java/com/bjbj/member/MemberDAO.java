@@ -14,49 +14,61 @@ import org.springframework.stereotype.Repository;
 public class MemberDAO {
 	@Autowired
 	private SqlSession session;
-  
-  /* 전제 조회 */
-	public List<MemberDTO> selectAll() throws Exception{
+
+	/* 전제 조회 */
+	public List<MemberDTO> selectAll() throws Exception {
 		return session.selectList("memberMapper.selectAll");
 	}
-	
+
 	/* 계정 삭제 */
-	public int delete(String email, String pw) throws Exception{
+  public int delete(String email, String password) throws Exception{
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
-		map.put("pw", pw);
-		return session.delete("memberMapper.selectAll" , map);
+		map.put("password", password);
+		return session.delete("memberMapper.delete" , map);
 	}
 	
 	/* 내 정보 수정*/
-	public int modify(MemberDTO dto) throws Exception{
-		return session.update("memberMapper.modify" , dto);
+	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception{
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("password", password);
+		map.put("nickname", nickname);
+		map.put("mydesc", mydesc);
+		return session.update("memberMapper.updateInfo" , map);
+
 	}
-	
-	/* *************** �α��� *************** */
-	public MemberDTO login(String email, String password)throws Exception{
+
+	/* *************** Login *************** */
+	// 일반 로그인
+	public MemberDTO login(String email, String password) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
 		map.put("password", password);
 		return session.selectOne("memberMapper.login", map);
 	}
-	
-	/* *************** ȸ���� *************** */
-	public int insert(MemberDTO dto)throws Exception{
+
+	// 카카오 로그인 _ kakao Login
+	public MemberDTO kakaoLogin(String email) throws Exception {
+		return session.selectOne("memberMapper.kakaoLogin", email);
+	}
+
+	/* *************** SignUp *************** */
+	public int insert(MemberDTO dto) throws Exception {
 		return session.insert("memberMapper.insert", dto);
 	}
-	
-	/* *************** �̸��� �ߺ�Ȯ�� *************** */
-	public boolean confirmEmail(String email)throws Exception{
+
+	/* *************** Email_Confirm *************** */
+	public boolean confirmEmail(String email) throws Exception {
 		return session.selectOne("memberMapper.confirmEmail", email);
 	}
-	
-	/* *************** �г��� �ߺ�Ȯ�� *************** */
-	public boolean confirmNickname(String nickname)throws Exception{
+
+	/* *************** Nickname_Confirm *************** */
+	public boolean confirmNickname(String nickname) throws Exception {
 		return session.selectOne("memberMapper.confirmNickname", nickname);
 	}
 
-	/* *************** Email ã�� *************** */
+	/* *************** Email(ID) Search *************** */
 	public MemberDTO searchEmail(String name, String phone) throws Exception {
 
 		Map<String, String> map = new HashMap<>();
@@ -64,18 +76,18 @@ public class MemberDAO {
 		map.put("phone", phone);
 		return session.selectOne("memberMapper.searchEmail", map);
 	}
-	
-	/* *************** ��й�ȣ ���� *************** */
-	public void modifyPw(String email, String tempPw)throws Exception{
+
+	/* *************** Password Modify *************** */
+	public void modifyPw(String email, String tempPw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("email", email);
 		map.put("password", tempPw);
-		
+
 		System.out.println(email + " : " + tempPw);
 		System.out.println(map.toString());
-		
+
 		session.update("memberMapper.modifyPw", map);
-   }
+	}
 
 	// 자기소개 업데이트
 	public int updateMydesc(String email, String mydesc) throws Exception {
@@ -91,4 +103,3 @@ public class MemberDAO {
 		return session.selectOne("memberMapper.selectByEmail", email);
 	}
 }
-

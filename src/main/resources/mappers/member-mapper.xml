@@ -12,6 +12,12 @@
    		<select parameterType="map" id="login" resultType="com.bjbj.member.MemberDTO">
    			select * from member where email = #{email} and password = #{password}
    		</select>
+   		
+   		<!-- 카카오 로그인 -->
+   		<select parameterType="string" id="kakaoLogin" resultType="com.bjbj.member.MemberDTO">
+   			select * from member where email = #{email}
+   		</select>
+   		
 
 
    		<!-- 이메일 중복확인 -->
@@ -50,16 +56,16 @@
  		</select>
     
     	<!-- 내 정보 수정 -->
-      <update id="modify" parameterType="com.bjbj.member.MemberDTO">
+      <update id="updateInfo" parameterType="map">
         update member set 
-          nickname = #{nickname}, pw = #{pw}, mydesc = #{mydesc}
+          nickname = #{nickname}, password = #{password}, mydesc = #{mydesc}
         where email = #{email}
       </update>
     
     	<!-- 회원 탈퇴 -->
-      <delete id="delete" parameterType="map">
+      <delete id="delete" parameterType="map"> 
         delete from member where 
-          email = #{email} and pw = #{pw}
+          email = #{email} and password = #{password}
       </delete>
  
    </mapper>

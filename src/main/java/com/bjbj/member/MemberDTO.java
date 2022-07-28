@@ -33,8 +33,8 @@ public class MemberDTO {
 		return password;
 	}
 
-	public void setPassword(String Password) {
-		this.password = Password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getName() {

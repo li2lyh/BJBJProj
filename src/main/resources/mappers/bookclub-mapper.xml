@@ -10,25 +10,34 @@
 	
 	<!-- 최근순으로 조회 -->
 	<select id="selectLately" resultType="com.bjbj.bookclub.BookclubDTO">
-		select * from bookroom order by close_date desc
+		select * from role join bookroom using(room_id) join member using(email) 
+    	where email = #{email} order by close_date desc
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="getCount" resultType="int">
-		select count(*) from bookroom
+		select count(*) from role join bookroom using(room_id) join member using(email) where email = #{email}
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="selectPage" parameterType="map" resultType="com.bjbj.bookclub.BookclubDTO">
-		select * from (select bookroom.*, row_number() over(order by room_id desc) as num from bookroom)
-        where num between #{start} and #{end} 
+	select * from (select bookroom.*,  role.email, row_number() over(order by close_date desc) as num,
+   		row_number() over(order by close_date) as rank from bookroom join role  on( bookroom.room_id = role.room_id) 
+    where email = #{email}) join member using(email) where num between #{start} and #{end}
 	</select>
 	
 	<!-- 찜한 모임 조회 -->
 	<select id="likeClub" resultType="com.bjbj.bookclub.BookclubDTO">
-		select * from like_room join bookroom using(room_id)
+		select * from like_room join bookroom using(room_id) join member using(email) where email = #{email}
 	</select>
-
+	
+	<!-- 찜한 모임 삭제 -->
+	<delete id="deleteLikeClub" parameterType="int">
+		delete from like_room where room_id in
+			<foreach collection="deleteArr" item="num" open="(" close=")" separator=",">
+				#{num}
+			</foreach>
+	</delete>
 
 	<select id="selectList"
 		resultType="com.bjbj.bookclub.BookclubDTO">
@@ -65,12 +74,19 @@
 	
 	<!-- 모임 신고 -->
 	<insert id="insertReportBookroom" parameterType="com.bjbj.manager.ReportBookroomDTO">
-	insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, default, sysdate, #{report_detail}, default)
+	insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, sysdate, #{report_detail}, #{reporter_nickname})
 	</insert>
-	<!-- 회원 신고
+	<!-- 회원 신고 -->
 	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
-	insert into report values(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
-	</insert>-->
-	
-</mapper>
+	insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname})
+	</insert>
+	<!-- 회원 닉네임 받아오기 -->
+	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
+		select member.email, nickname from member inner join role on member.email = role.email
+	</select>
+	<!-- 회원 이메일 받아오기 -->
+	<select id="selectMemberEmail" parameterType="String" resultType="com.bjbj.member.MemberDTO">
+		select member.email, nickname from member inner join role on member.email = role.email
+	</select>
 
+</mapper>

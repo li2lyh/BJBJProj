@@ -91,11 +91,8 @@ th, td {
 				</div>
 				<div class="row p-2">
 					<div class="nav-item dropdown">
-						<a class="list nav-link dropdown-toggle p-0"
-							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDarkDropdownMenuLink">
+						<a class="list nav-link dropdown-toggle p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
 							<div>
 								<a class="dropdown-item" href="/member/toLikebook">도서</a>
 							</div>
@@ -106,7 +103,6 @@ th, td {
 					</div>
 				</div>
 			</div>
-
 			<!-- 참여 독서 모임 -->
 			<div class="col-8 p-4">
 				<div class="row">
@@ -127,18 +123,20 @@ th, td {
 						<tbody>
 							<c:if test="${list.size() == 0}">
 								<tr>
-									<td colspan="5">참여한 독서모임이 없습니다.</td>
+									<td colspan="5">
+										참여한 독서모임이 없습니다.
+									</td>
 								</tr>
-							</c:if>
-							<c:if test="${list.size() > 0}">
+							</c:if>							
+							<c:if test="${list.size() > 0}">				
 								<c:forEach items="${list}" var="dto">
 									<tr>
-										<td>${dto.room_id}</td>
+										<td>${dto.rank}</td>
 										<td>${dto.book_title}</td>
-										<td class="fw-bold"><a href="#">${dto.room_title}</a></td>
+										<td class="fw-bolder"><a href="#">${dto.room_title}</a></td>
 										<td>${dto.open_date} ~ ${dto.close_date}</td>
 										<td>${dto.room_status}</td>
-									</tr>
+									</tr>							
 								</c:forEach>
 							</c:if>
 						</tbody>
@@ -146,39 +144,32 @@ th, td {
 					<nav>
 						<ul class="pagination justify-content-center">
 							<c:choose>
-								<c:when test="${startPageNum ne 1}">
-									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${startPageNum - 1}"><<</a>
+								<c:when test="${pagination.startPage ne 1}">
+									<li class="page-item">
+										<a class="page-link" href="/member/toMybookclub?page=${pagination.startPage - 1}"><<</a>
 									</li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item d-none"><a class="page-link"
-										href="javascript:"></a></li>
+									<li class="page-item d-none">
+										<a class="page-link" href="javascript:"></a>
+									</li>
 								</c:otherwise>
 							</c:choose>
-							<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
-								<c:choose>
-									<c:when test="${i eq pageNum }">
-										<li class="page-item active"><a class="page-link"
-											href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${i}">${i}</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${i}">${i}</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
+							<c:forEach var="page" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+								<li class="page-item">
+									<a class="page-link" href="/member/toMybookclub?page=${page}" <c:if test="${pagination.page eq page}">style="background-color: black; color: white; font-weight: bolder;"</c:if> >${page}</a>
+								</li>
 							</c:forEach>
 							<c:choose>
-								<c:when test="${endPageNum lt totalPageCount}">
-									<li class="page-item"><a class="page-link"
-										href="${pageContext.request.contextPath}/member/toMybookclub?pageNum=${endPageNum + 1}">>></a>
+								<c:when test="${pagination.endPage lt pagination.totalPageCnt}">
+									<li class="page-item">
+										<a class="page-link" href="/member/toMybookclub?page=${pagination.endPage + 1}">>></a>
 									</li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item d-none"><a class="page-link"
-										href="javascript:"></a></li>
+									<li class="page-item d-none">
+										<a class="page-link" href="javascript:"></a>
+									</li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
@@ -186,7 +177,6 @@ th, td {
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 
