@@ -18,7 +18,10 @@
    			select * from member where email = #{email}
    		</select>
    		
-
+		<!-- 블랙리스트 -->
+		<select parameterType="string" id="checkBlack" resultType="com.bjbj.member.MemberDTO">
+			select * from blacklist where email = #{email}
+		</select>
 
    		<!-- 이메일 중복확인 -->
    		<select parameterType="string" id="confirmEmail" resultType="boolean">
@@ -32,7 +35,7 @@
 	   	
 	   	<!-- 회원가입 -->
 	   	<insert parameterType="com.bjbj.member.MemberDTO" id="insert">
-	   		insert into member values(#{email}, #{password}, #{name}, #{nickname}, #{phone}, '')
+	   		insert into member values(#{email}, #{password}, #{name}, #{nickname}, #{phone}, '', #{user_kakao})
 	   	</insert>
 	   	
 	   	<!-- 아이디 찾기 -->
