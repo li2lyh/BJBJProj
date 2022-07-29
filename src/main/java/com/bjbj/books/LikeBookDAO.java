@@ -20,8 +20,11 @@ public class LikeBookDAO {
 	}
 	
 	/* 찜한 도서 삭제 */
-	public int deleteLikeBook(String book_isbn) throws Exception {
-		return session.delete("likeMapper.deleteLikeBook", book_isbn);
+	public int deleteLikeBook(String book_isbn, String email) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("book_isbn", book_isbn);
+		map.put("email", email);
+		return session.delete("likeMapper.deleteLikeBook", map);
 	}
 
 	// 도서 찜하기

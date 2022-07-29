@@ -28,8 +28,8 @@ private String ttbkey = "ttbstardust31042148001";
 	}
 	
 	/* 찜한 도서 삭제 */
-	public int deleteLikeBook(String book_isbn) throws Exception {
-		return dao.deleteLikeBook(book_isbn);
+	public int deleteLikeBook(String book_isbn, String email) throws Exception {
+		return dao.deleteLikeBook(book_isbn, email);
 	}
 	
 	
