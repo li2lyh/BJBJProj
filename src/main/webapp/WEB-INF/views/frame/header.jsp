@@ -290,20 +290,23 @@ input.underlineSearch:focus {
 					<li class="nav-item dropdown">
 						<button class="dropbtn" id="">&nbspBook&nbsp</button>
 						<div class="dropdown-content">
-							<a href="#">신간도서</a> <a href="#">베스트셀러</a> <a href="#">도서리뷰</a>
+							<a href="/books/arrivals">신간도서</a>
+							<a href="/books/bestseller">베스트셀러</a>
+							<a href="/review/board">도서리뷰</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
 						<button class="dropbtn">BookClub</button>
 						<div class="dropdown-content">
-							<a href="#">BookClub</a> <a href="#">클럽만들기</a> <a href="#">MyBook</a>
+							<a href="/">BookClub</a>
+							<a href="#">클럽만들기</a>
+							<a href="#">MyBook</a>
 						</div>
 					</li>
 					<li class="nav-item">
-						<button class="dropbtn">Library</button>
+						<a href="/library/map"><button class="dropbtn">Library</button></a>
 					</li>
 				</ul>
-
 			</div>
 		</div>
 

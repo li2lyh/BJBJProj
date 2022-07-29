@@ -178,20 +178,17 @@ public class MemberController {
 
 		MemberDTO dto = Mservice.searchEmail(name, phone);
 		return dto;
-		}
-	
+	}
 	
 	// 비밀번호 찾기시 이메일 찾기
 	@ResponseBody
 	@RequestMapping(value = "/searchPw")
-	public MemberDTO searchPw(String email) throws Exception{
+	public MemberDTO searchPw(String email) throws Exception {
 		System.out.println(email);
 		MemberDTO dto = Mservice.selectByEmail(email);
 		System.out.println(dto);
 		return dto;
 	}
-	
-	
 
 	/* ************ 마이페이지 ************ */
 

@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
+
 	<bean id="bds" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="username" value="bjbj"/>
 		<property name="password" value="bjbj"/>
@@ -16,14 +17,13 @@
 	<!-- SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="bds"/>
+    <property name="configLocation" value="classpath:/mybatis-configuration.xml"/>
 		<property name="mapperLocations" value="classpath:mappers/*-mapper.xml"/>
 	</bean>
-	
+
 	<!--  SqlSession -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
-		
 
 </beans>
-

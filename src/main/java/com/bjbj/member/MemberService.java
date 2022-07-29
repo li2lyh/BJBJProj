@@ -1,4 +1,3 @@
-
 package com.bjbj.member;
 
 import java.util.HashMap;
@@ -12,38 +11,35 @@ import org.springframework.stereotype.Service;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
-
-
 @Service
-
 public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
-	
+
 	/* 회원 조회 */
-	public List<MemberDTO> selectAll() throws Exception{
+	public List<MemberDTO> selectAll() throws Exception {
 		return memberDAO.selectAll();
 	}
 
-
 	/* 계정 삭제 */
-	public int delete(String email, String password) throws Exception{
+	public int delete(String email, String password) throws Exception {
 		return memberDAO.delete(email, password);
 	}
-	
-	/* 내 정보 수정*/
+
+	/* 내 정보 수정 */
 	public int updateInfo(String email, String password, String nickname, String mydesc) throws Exception {
 		return memberDAO.updateInfo(email, password, nickname, mydesc);
 	}
 
-    /* *************** Login *************** */
+	/* *************** ȸ������ *************** */
+	/* *************** Login *************** */
 	// 일반 로그인
-	public MemberDTO login(String email, String password) throws Exception{
+	public MemberDTO login(String email, String password) throws Exception {
 		return memberDAO.login(email, password);
 	}
-	
-	//카카오 로그인
-	public MemberDTO kakaoLogin(String email)throws Exception{
+
+	// 카카오 로그인
+	public MemberDTO kakaoLogin(String email) throws Exception {
 		return memberDAO.kakaoLogin(email);
 	}
 	
@@ -51,6 +47,7 @@ public class MemberService {
 	public MemberDTO checkBlack(String email)throws Exception{
 		return memberDAO.checkBlack(email);
 	}
+
 	/* *************** SignUp *************** */
 	public int signUp(MemberDTO dto) throws Exception {
 		return memberDAO.insert(dto);
@@ -65,7 +62,7 @@ public class MemberService {
 	public boolean confirmNickname(String nickname) throws Exception {
 		return memberDAO.confirmNickname(nickname);
 	}
-	
+
 	/* VerifyPhone _ 휴대폰 본인인증 */
 	public void certifiedPhoneNumber(String phone, int randomNumber) {
 		String api_key = "NCSVC9WIIKEOQ2L1"; //NCSVC9WIIKEOQ2L1
@@ -86,12 +83,11 @@ public class MemberService {
 	      } catch (CoolsmsException e) {
 	        System.out.println(e.getMessage());
 	        System.out.println(e.getCode());
-	      }
-	    
+	      } 
 	}
 	
 	/* 카카오 회원가입시 난수 비밀번호 생성 */
-	public String makePw(String email)throws Exception{
+	public String makePw(String email) throws Exception{
 		UUID makeUUID = UUID.randomUUID();
 		String ranPw  = makeUUID.toString();
 		System.out.println(ranPw);
@@ -99,7 +95,6 @@ public class MemberService {
 		return ranPw;
 	}
 	
-
 	/* *************** Email(ID) 찾기 *************** */
 	/* 이메일 */
 	public MemberDTO searchEmail(String name, String phone) throws Exception {
@@ -110,11 +105,10 @@ public class MemberService {
 	public MemberDTO selectByEmail(String email) throws Exception {
 		return memberDAO.selectByEmail(email);
 	}
-  
+
 	/* 비밀번호 변경 */
-	public void modifyPw(String email, String tempPw)throws Exception{
+	public void modifyPw(String email, String tempPw) throws Exception {
 		memberDAO.modifyPw(email, tempPw);
 	}
-	
-	
+
 }
