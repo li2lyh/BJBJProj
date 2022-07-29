@@ -18,6 +18,11 @@
 </head>
 <body>
 	<div class="container-fluid container-xl">
+		<!------------------------------------- header ----------------------------------------->
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+		<!------------------------------------- main content ----------------------------------->
 		<div class="titleBox">
 			<h1>Write Review</h1>
 			<span>회원 여러분들의 소중한 리뷰를 남겨주세요!</span>
@@ -57,6 +62,10 @@
 				</div>
 			</div>
 		</form>
+		<!------------------------------------- footer ----------------------------------------->
+		<div class="footer">
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
 	</div>
 	<script>
 	
