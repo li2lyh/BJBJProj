@@ -1,15 +1,9 @@
 package com.bjbj.letter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.bjbj.utils.PageDTO;
 
 @Service
 public class LetterService {
@@ -52,9 +46,14 @@ public class LetterService {
 		dao.insertLetter(dto);
 	}
 	// 선택된 쪽지 전송 (관리자 기능)
-	/*public void submitSelectLetter()throws Exception{
-		dao.submitSelectLetter();
-	}*/
+	public void submitSelectLetter(String[]checkLetter, LetterDTO dto)throws Exception{
+		dao.submitSelectLetter(checkLetter, dto);
+	}
+	
+	//모임장 쪽지 전송 (관리자 기능)
+	public void insertRoomLetter(LetterDTO dto) throws Exception{
+		dao.insertRoomLetter(dto);
+	}
 	
 	//모임장 쪽지 전송 (관리자 기능)
 	public void insertRoomLetter(LetterDTO dto) throws Exception{

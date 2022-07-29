@@ -71,14 +71,13 @@ public class LetterDAO {
 		session.insert("letterMapper.insertLetter" , dto);
 	}
 	// 선택된 쪽지 전송 (관리자 기능)
-	/*public void submitSelectLetter()throws Exception{
+	public void submitSelectLetter(String[] checkLetter, LetterDTO dto)throws Exception{
 	 // map 이용해 쪽지 DTO, 이메일 스트링 배열 담아줌 
-		Map<> map = new HashMap<>();
-		map.put("letterDTO", );
-		map.put("emailList",  )
-		
-		session.insert("letterMapper.submitSelectLetter", map) 
-	}*/
+		Map<Object, Object> map = new HashMap<>();
+		map.put("checkLetter", checkLetter );
+		map.put("emailList",  dto);
+		session.insert("letterMapper.submitSelectLetter", map); 
+	}
 	
 	//쪽지 모임장 전송 (관리자 기능)
 	public void insertRoomLetter(LetterDTO dto)throws Exception{

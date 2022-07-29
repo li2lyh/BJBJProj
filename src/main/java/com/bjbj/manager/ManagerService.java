@@ -41,6 +41,11 @@ public class ManagerService {
 	public List<Map<String, Object>> selectAllmember() throws Exception{
 		return dao.selectAllmember();
 	}
+	//블랙리스트 여부 조회
+	public List<BlacklistDTO>selectBlackmember() throws Exception{
+		return dao.selectBlackmember();
+	}
+	
 	
 	//전체 회원 검색 
 	public List<MemberDTO>searchMember(String category, String keyword)throws Exception{
@@ -89,9 +94,9 @@ public class ManagerService {
 	}
 	
 	//모임 삭제 - 모임 바로 삭제
-	//public void deleteEachBookroom(int room_id) throws Exception{
-	//	dao.deleteEachBookroom(room_id);
-	//}
+	public void deleteEachBookroom(int room_id) throws Exception{
+		dao.deleteEachBookroom(room_id);
+	}
 	
 	//회원 신고 - 신고삭제 
 	public void deleteReport(String email)throws Exception{
@@ -134,11 +139,14 @@ public class ManagerService {
 		dao.deleteReportBookroom(room_id);
 	}
 	
-
-	
 	//모임신고 - 경고 추가
 	public void addReportBookroom(int room_id)throws Exception{
 		dao.addReportBookroom(room_id);
+	}
+	
+	// 날짜 형식 변경
+	public String getDate(String string) throws Exception {
+		return dao.getDate(string);
 	}
 
 	

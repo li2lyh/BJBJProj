@@ -4,8 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>전체회원 리스트</title>
 <style>
@@ -43,7 +49,8 @@
 	width: 150px;
 	height: 30;
 }
-#closeSelectBtn{
+
+#closeSelectBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
@@ -59,8 +66,15 @@ textarea {
 .sendTo {
 	width: 300px;
 }
-.letterTitle{
+
+.letterTitle {
 	width: 300px;
+}
+
+#submitBtnCK {
+	margin: 2px;
+	width: 150px;
+	height: 30;
 }
 
 /*leftBox*/
@@ -115,19 +129,20 @@ a {
 			<div class="col-9 rightPage">
 				<div class="reportContainer">
 					<form id="searchForm">
-					<div class="row">
-						<div class="col-5">
-							<h3>전체 회원</h3>
+						<div class="row">
+							<div class="col-5">
+								<h3>전체 회원</h3>
+							</div>
+							<div class="col-7 p-3 d-flex justify-content-end">
+								<select name="category" class="selectBox">
+									<option value="email" name="email">아이디</option>
+									<option value="name" name="name">이름</option>
+									<option value="nickname" name="nickname">닉네임</option>
+								</select> <input type="text" placeholder="내용을 입력해주세요"
+									class="inputContent" name="keyword">
+								<button type="button" class="searchBtn">검색</button>
+							</div>
 						</div>
-						<div class="col-7 p-3 d-flex justify-content-end">
-							<select name="category" class="selectBox">
-								<option value="email" name="email">아이디</option>
-								<option value="name" name="name">이름</option>
-								<option value="nickname" name="nickname">닉네임</option>
-							</select> <input type="text" placeholder="내용을 입력해주세요" class="inputContent" name="keyword">
-							<button type="button" class="searchBtn">검색</button>
-						</div>
-					</div>
 					</form>
 					<table class="table table-hover">
 						<thead class="table-secondary">
@@ -150,17 +165,30 @@ a {
 							<c:if test="${list.size() > 0}">
 								<c:forEach items="${list}" var="dto">
 									<tr>
-										<td>${dto.email}</td>
+										<td class="email">${dto.email}</td>
 										<td>${dto.name}</td>
 										<td>${dto.nickname}</td>
 										<td>${dto.warning_count}</td>
+
+										<c:set var="afterBlacklist" value="false" />
+										<c:forEach items="${blacklist}" var="blacklist">
+											<c:if test="${blacklist.email eq dto.email}">
+												<c:set var="afterBlacklist" value="true" />
+											</c:if>
+										</c:forEach>
+										<td><c:if test="${afterBlacklist}">
+												<button type="button" class="eachSubmitBtn"
+													value="${dto.email}" disabled="disabled">추가</button>
+											</c:if> <c:if test="${not afterBlacklist}">
+												<button type="button" class="eachAddBtn"
+													value="${dto.email}">추가</button>
+											</c:if></td>
 										<td>
-											<button type="button" class="eachAddBtn" value="${dto.email}">추가</button>
+											<button type="button" class="eachSubmitBtn"
+												value="${dto.email}">전송</button>
 										</td>
-										<td>
-											<button type="button" class="eachSubmitBtn" value="${dto.email}">전송</button>
-										</td>
-										<td><input type="checkbox" class="checkMember" id="selectCheck" value="${dto.email}"></td>
+										<td><input type="checkbox" class="checkMember"
+											id="selectCheck" value="${dto.email}"></td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -168,11 +196,16 @@ a {
 					</table>
 					<div class="col-12 p-2 d-flex justify-content-end">
 						<button type="button" class="blacklistBtn">(선택)블랙리스트</button>
-						<button type="button" class="sendBtn" id="selectBtn">선택 쪽지 보내기</button>
+						<button type="button" class="sendBtn" id="selectBtn">선택
+							쪽지 보내기</button>
 					</div>
-			  </div> 
+				</div>
 			</div>
-		</div> 
+		</div>
+
+
+
+
 		<!-- 쪽지 모달 (개별) -->
 		<form id=sendLetterForm action="/manager/toSendLetter" method="post">
 			<div class="modal modalEach" tabindex="-1">
@@ -183,21 +216,16 @@ a {
 						</div>
 						<div class="modal-body">
 							<div class="row p-2">
-								<div class="col-3">작성날짜</div>
-								<div class="col-9">
-									<input type="text" class="written_date" name="written_date">
-								</div>
-							</div>
-							<div class="row p-2">
 								<div class="col-3">받는이</div>
 								<div class="col-9">
-									<input type="text" class="sendTo" name="email" >
+									<input type="text" class="sendTo" name="email"
+										id="letter_email">
 								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-3">제목</div>
 								<div class="col-9">
-									<input type="text" class="letterTitle" name="title" >
+									<input type="text" class="letterTitle" name="title">
 								</div>
 							</div>
 							<div class="row p-2">
@@ -208,16 +236,17 @@ a {
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal">닫기</button>	
+							<button type="button" class="btn btn-secondary" id="closeBtn"
+								data-bs-dismiss="modal">닫기</button>
 							<button type="button" class="btn btn-primary" id="submitBtn">전송</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
-		
+
 		<!-- 쪽지 모달 (체크박스 선택) -->
-		<form id="sendLetterFormCK" action="/manager/toSendLetterCK" method="post">
+		<form id="sendLetterFormCK">
 			<div class="modal modalCheck" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -226,42 +255,47 @@ a {
 						</div>
 						<div class="modal-body">
 							<div class="row p-2">
-								<div class="col-3">작성날짜</div>
-								<div class="col-9">
-									<input type="text" class="written_date" name="written_date">
-								</div>
-							</div>
-							<div class="row p-2">
-								<div class="col-3">받는이</div>
-								<div class="col-9">
-									<input type="text" class="sendTo" name="email" >
-								</div>
-							</div>
-							<div class="row p-2">
 								<div class="col-3">제목</div>
 								<div class="col-9">
-									<input type="text" class="letterTitle" name="title" >
+									<input type="text" class="letterTitle" name="title">
 								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-3">내용</div>
 								<div class="col-9 contentBox">
-									<textarea id="checkedText" name="letterContent" value="content"></textarea>
+									<textarea id="checkedText" name="content"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" id="closeSelectBtn" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-secondary"
+								id="closeSelectBtn" data-bs-dismiss="modal">닫기</button>
 							<button type="button" class="btn btn-primary" id="submitBtnCK">전송</button>
+						</div>
+						<div class="d-none">
+							<input type="text" id="checkLetter" name="checkLetter[]">
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
+	</div>
+	<script>
 		
-		
-</div>
-		<script>
+    	//전체 선택, 해제
+   	 	$("#allCheck").on("click", function () { 
+        	 if (this.checked) {
+           	 	$(".checkMember").prop("checked", true);
+            	$(".checkMember").click(function (e) {
+                e.preventDefault();
+               	});
+         	} else {
+             	$(".checkMember").prop("checked", false);
+             	$(".checkMember").unbind();
+        		}
+     		})		
+	
+	
 		
 			//전체 회원 검색
 			$(".searchBtn").on("click", function(){
@@ -285,9 +319,9 @@ a {
 				$("tbody").empty();
 				if(data.length == 0){
 					let tr = $("<tr>");
-					let td = $("<td colspan=5>").append("검색 결과가 없습니다.");
+					let td = $("<td colspan=7>").append("검색 결과가 없습니다.");
 					tr.append(td);
-					tr.append("tbody");
+					tr.appendTo("tbody");
 				}else{
 					for(let dto of data){
 						let tr=$("<tr>");
@@ -323,7 +357,10 @@ a {
 		
             //쪽지 모달(개인)
             $(".eachSubmitBtn").on("click", function(){
+				let letter_email = $(this).parent("td").prevAll(".email").html();
+				$("#letter_email").val(letter_email);
                 $(".modalEach").show();
+                console.log(letter_email);
             });	
             //쪽지 모달 닫기
             $("#closeBtn").on("click", function(){
@@ -344,34 +381,47 @@ a {
             $("#closeSelectBtn").on("click", function(){
             	$(".modalCheck").hide();
             });
+            
             //선택된 쪽지 form 전송 (check)
             $("#submitBtnCK").on("click", function(){
-            	$("#sendLetterFormCK").submit();
+            	let submitArr = [];
+            	let noArr = $(".checkMember:checked");
+            	
+            	for (let no of noArr){
+            		submitArr.push(no.value);
+            	}
+            	$("#checkLetter").val(submitArr);
+            	console.log(submitArr);
+            	
+            	let data = $("#sendLetterFormCK").serialize();
+            	console.log(data);
+            	
+            	// 서버로 이메일 배열, 쪽지 DTO내용 넘겨줌 
+            	 if(submitArr.length > 0){
+            		$.ajax({
+            			url : "/manager/toSendCheckLetter"
+            			, type : "post"
+            			, data : data
+            			, success :function(){
+            				$("#sendLetterFormCK").submit();
+            			}, error : function(e){
+            				console.log(e);
+            			}
+            		})
+            	}          	
             })
             
             
-            //전체 선택, 해제
-            $("#allCheck").on("click", function () { 
-                 if (this.checked) {
-                    $(".checkMember").prop("checked", true);
-                    $(".checkMember").click(function (e) {
-                        e.preventDefault();
-                       });
-                 } else {
-                     $(".checkMember").prop("checked", false);
-                     $(".checkMember").unbind();
-                }
-             })
-             
              //개별 블랙리스트 추가
-             $(".eachAddBtn").on("click", function(){
-            	 location.href = "/manager/addBlacklist?email="+this.value;
+             $(".eachAddBtn").on("click", function(e){
+            	 
+            	 let ba = confirm("정말 추가하시겠습니까?");
+            	 if(ba){
+            		 location.href = "/manager/addBlacklist?email="+this.value;
+            	 }
              })
-             
-             
 
-
-         
+        
 
              
 

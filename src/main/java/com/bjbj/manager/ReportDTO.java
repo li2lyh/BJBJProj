@@ -1,5 +1,8 @@
 package com.bjbj.manager;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class ReportDTO {
 	private String email;
 	private String report_content;
@@ -11,7 +14,7 @@ public class ReportDTO {
 	public ReportDTO() {}
 
 	public ReportDTO(String email, String report_content, int warning_count, String report_date, String report_detail,
-			String reporter_nickname) {
+		 String reporter_nickname) {
 		super();
 		this.email = email;
 		this.report_content = report_content;
@@ -21,6 +24,28 @@ public class ReportDTO {
 		this.reporter_nickname = reporter_nickname;
 	}
 
+	public ReportDTO(String email, String report_content, int warning_count, Date report_date, String report_detail,
+			 String reporter_nickname) {
+		super();
+		this.email = email;
+		this.report_content = report_content;
+		this.warning_count = warning_count;
+		this.report_date = getStrDate(report_date);
+		this.report_detail = report_detail;
+		this.reporter_nickname = reporter_nickname;
+	}
+	
+	public String getStrDate(Date date) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+			rs = sdf.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

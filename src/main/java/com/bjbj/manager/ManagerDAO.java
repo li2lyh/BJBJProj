@@ -1,5 +1,7 @@
 package com.bjbj.manager;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,10 @@ public class ManagerDAO {
 	
 	public List<Map<String, Object>> selectAllmember() throws Exception{ //전체 회원 조회
 		return session.selectList("managerMapper.selectAllmember");
+	}
+	
+	public List<BlacklistDTO>selectBlackmember() throws Exception{ //블랙리스트 여부 조회
+		return session.selectList("managerMapper.selectBlackmember");
 	}
 	
 	public List<MemberDTO>searchMember(String category, String keyword) throws Exception{ //전체 회원 검색
@@ -85,6 +91,10 @@ public class ManagerDAO {
 	public List<ReportDTO>selectAllreport()throws Exception{ //회원 신고 조회
 		return session.selectList("managerMapper.selectAllreport");
 	}
+	public void deleteEachBookroom(int room_id)throws Exception{ //모임 신고 - 바로 삭제
+		session.delete("managerMapper.deleteEachBookroom", room_id);
+	}
+	
 	public void deleteReport(String email)throws Exception{ //회원 신고 - 신고 삭제
 		session.delete("managerMapper.deleteReport", email);
 	}
@@ -93,6 +103,33 @@ public class ManagerDAO {
 	}
 	public void deleteReportBookroom(int room_id)throws Exception{ //모임신고 - 신고 삭제
 		session.delete("managerMapper.deleteReportBookroom", room_id);
+	}
+	
+	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
+		session.update("managerMapper.addReport", dto);
+	}
+	public int selectMemberReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가 후 신고횟수 다시 선택하기
+		return session.selectOne("managerMapper.selectMemberReport", dto);
+	}
+	
+	
+	public void addReportBookroom(int room_id)throws Exception{ //모임신고 - 경고 추가
+		session.update("managerMapper.addReportBookroom", room_id);
+	}
+	
+	// 날짜 형식 변경 (yyyy-MM-dd)
+	public String getDate(String string) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date(sdf.parse(string).getTime());
+			
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+			rs = sdf2.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
