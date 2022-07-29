@@ -166,12 +166,8 @@ public class BookclubService {
 	}
 
 	// 모임원 닉네임 불러오기
-	public List<MemberDTO> selectRoleMember() throws Exception{
-		return dao.selectRoleMember();
+	public List<MemberDTO> selectRoleMember(String email) throws Exception{
+		return dao.selectRoleMember(email);
 	}
-	
-	// 모임원 닉네임 불러오기
-	public List<MemberDTO> selectMemberEmail() throws Exception{
-		return dao.selectRoleMember();
-	}
+
 }

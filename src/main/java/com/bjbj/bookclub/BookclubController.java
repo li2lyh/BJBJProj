@@ -233,15 +233,10 @@ public class BookclubController {
 		// 해당 방의 캘린더 정보
 		
 		// 해당 모임의 멤버 닉네임 나열하기
-		List<MemberDTO> list = service.selectRoleMember();
+		List<MemberDTO> list = service.selectRoleMember(id);
 		System.out.println("list : " + list);
 		model.addAttribute("list", list);
-		
-		// 해당 모임의 멤버 이메일 나열하기
-		List<MemberDTO> list_email = service.selectMemberEmail();
-		System.out.println("list : " + list_email);
-		model.addAttribute("list", list_email);
-		
+
 		return "/bookclub/clubBoard";
 	}
 

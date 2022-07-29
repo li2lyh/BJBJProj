@@ -82,11 +82,8 @@
 	</insert>
 	<!-- 회원 닉네임 받아오기 -->
 	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
-		select member.email, nickname from member inner join role on member.email = role.email
+		select member.email, nickname from member inner join role on member.email = role.email where member.email != #{email}
 	</select>
-	<!-- 회원 이메일 받아오기 -->
-	<select id="selectMemberEmail" parameterType="String" resultType="com.bjbj.member.MemberDTO">
-		select member.email, nickname from member inner join role on member.email = role.email
-	</select>
+
 
 </mapper>
