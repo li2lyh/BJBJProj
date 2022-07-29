@@ -90,6 +90,13 @@ input.underlineSearch:focus {
 	height: 2rem;
 }
 
+/* 쪽지함 */
+.letterImg{
+	width: 2rem;
+	height: 2rem;
+	padding: 2px;
+}
+
 /* ******** Nav 박스 ******** */
 /* navBox */
 .navBox {
@@ -170,6 +177,7 @@ input.underlineSearch:focus {
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
+							<img class="letterImg" src="/resources/images/letter.png">							
 							${loginSession.nickname}<span>님 환영합니다!</span>
 						</c:when>
 						<c:otherwise>
@@ -200,8 +208,8 @@ input.underlineSearch:focus {
 									<div class="inputBox">
 										<form method="post" id="loginForm">
 											<input type="text" class="form-control" name="email"
-												id="loginId" placeholder="아이디를 입력해주세요"> <input
-												type="password" class="form-control" name="password"
+												id="loginId" placeholder="아이디를 입력해주세요"> 
+											<input type="password" class="form-control" name="password"
 												id="loginPw" placeholder="비밀번호를 입력해주세요">
 										</form>
 									</div>
@@ -296,7 +304,14 @@ input.underlineSearch:focus {
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<button class="dropbtn">BookClub</button>
+						<!-- 로그인 안한 페이지 요청 -->
+						<c:if test="${empty loginSession}">
+							<button class="dropbtn"><a href="/club/toClub">BookClub</a></button>
+						</c:if>
+						<!-- 로그인 한 페이지 요청 -->
+						<c:if test="${not empty loginSession}">
+							<button class="dropbtn"><a href="/club/toClubList">BookClub</a></button>
+						</c:if>
 						<div class="dropdown-content">
 							<a href="/">BookClub</a>
 							<a href="#">클럽만들기</a>
@@ -313,6 +328,14 @@ input.underlineSearch:focus {
 	</div>
 
 	<script>
+     /* 쪽지함 */
+		$(".letterImg").on("click", function() {
+			let url = "/member//toLetter";
+			let name = "쪽지함";
+			let option = "width=700, height=600, left=600, top=100";
+			window.open(url, name, option);
+		})
+
 		/****************************************** 검색 버튼 *****************************************/
 		
 		/****************************************** 아이디 기억하기 ************************************/

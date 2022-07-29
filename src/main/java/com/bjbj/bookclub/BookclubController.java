@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bjbj.manager.ReportBookroomDTO;
-import com.bjbj.manager.ReportDTO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.member.MemberService;
 
@@ -30,7 +28,7 @@ public class BookclubController {
 	@RequestMapping(value = "/toClub") // 클럽리스트 요청
 	public String toClub(Model model) throws Exception {
 		List<BookclubDTO> list = service.selectList();
-
+		
 		for (BookclubDTO dto : list) { // 날짜 형식 format( MM월 dd일 )
 			// System.out.println("open_date : " + dto.getOpen_date());
 
@@ -285,6 +283,54 @@ public class BookclubController {
 		}
 				
 		return list;
+	}
+
+	
+	@RequestMapping(value = "/toClubList") // 로그인 된 클럽리스트 요청
+	public String toClubList(Model model) throws Exception {
+		List<BookclubDTO> list = service.selectList();
+		
+		for (BookclubDTO dto : list) { 
+			dto.setOpen_date(service.getStrDate(dto.getOpen_date()));
+			dto.setClose_date(service.getStrDate(dto.getClose_date()));
+		}
+
+		System.out.println("list : " + list.toString());
+		model.addAttribute("list", list);
+		
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		List<BookclubDTO> likeList = service.likeClub(email);
+		model.addAttribute("likeList", likeList);
+		
+		return "/bookclub/findclubList";
+	}
+	
+	@RequestMapping(value = "/insertLike") // 찜 추가
+	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
+		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
+		dto.setRoom_id(room_id);
+		dto.setEmail(loginSession.getEmail());		
+		System.out.println(dto.toString());
+		
+		int rs = service.insertLike(dto); 		
+		if (rs > 0) {
+			System.out.println("찜 완료 " +room_id); 
+			return "redirect:/club/toClubList";
+		}
+		return null;			
+	}
+	
+	@RequestMapping(value = "/deleteLike") // 찜 삭제
+	public String deleteLike(int room_id) throws Exception {
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		System.out.println("room_id : " + room_id);
+		int rs = service.deleteLike(room_id, email);
+		
+		if (rs > 0) {
+			System.out.println("삭제 완료 "  +email+ " : " +room_id);
+			return "redirect:/club/toClubList";
+		}
+		return null;
 	}
 	
 	// 모임 신고하기 요청

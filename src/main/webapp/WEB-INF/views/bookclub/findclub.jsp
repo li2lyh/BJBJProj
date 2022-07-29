@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%-- <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -69,6 +69,14 @@ h4 {
 #cardImg {
 	position: relative;
 }
+
+/* 빈 하트 */
+#emptyLike{
+	width: 30px;
+	height: 25px;
+}
+
+
 </style>
 
 </head>
@@ -121,17 +129,13 @@ h4 {
 					</c:if>
 				</c:forEach>
 			</c:if>
-
-
 		</div>
 
 		<div class="row">
-			<div class="col" id="btnBox">
-				<button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집
-					글 쓰기</button>
-			</div>
-		</div>
-
+      <div class="col" id="btnBox">
+          <button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집 글 쓰기</button>
+      </div>
+    </div>
 	</div>
 	<script>
 		$("#btnClass").on("click", function() {
@@ -143,6 +147,5 @@ h4 {
 		})
 		
 	</script>
-
 </body>
 </html>

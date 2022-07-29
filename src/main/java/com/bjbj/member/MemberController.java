@@ -206,18 +206,16 @@ public class MemberController {
 		}
 
 		// 도서 리뷰
-		List<ReviewDTO> ReviewList = Rservice
-				.selectLately(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<ReviewDTO> ReviewList = Rservice.selectLately(((MemberDTO) session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("ReviewList", ReviewList);
 
 		// 찜 도서
-		List<LikeBookDTO> LikeBooklist = LBservice
-				.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<LikeBookDTO> LikeBooklist = LBservice.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("LikeBooklist", LikeBooklist);
 
 		// 찜 독서 모임
-		List<BookclubDTO> LikeclubList = Bservice
-				.likeClub(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<BookclubDTO> LikeclubList = Bservice.likeClub(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+
 		model.addAttribute("LikeclubList", LikeclubList);
 
 		for (BookclubDTO dto : LikeclubList) {
@@ -227,8 +225,10 @@ public class MemberController {
 		}
 		return "/mypage/myinfo";
 	}
+	
+	/* ************ 내 정보 수정 ************ */
 
-	// 내 정보 수정 페이지 요청
+	// 내 정보 수정 페이지 요청1
 	@RequestMapping(value = "/toChange")
 	public String toChange(Model model) throws Exception {
 		String email = ((MemberDTO) session.getAttribute("loginSession")).getEmail();
@@ -238,7 +238,7 @@ public class MemberController {
 		return "/mypage/change-myinfo";
 	}
 
-	// 내 정보 수정 페이지 요청
+	// 내 정보 수정 페이지 요청2
 	@RequestMapping(value = "/toModify")
 	public String toModify(Model model) throws Exception {
 		String email = ((MemberDTO) session.getAttribute("loginSession")).getEmail();
@@ -261,13 +261,11 @@ public class MemberController {
 			System.out.println("수정 완료");
 			System.out.println("암호화된 pw : " + password);
 			return "redirect:/member/toMyinfo";
-
 		}
-
 		return null;
 	}
 
-	/* ************ 회원 탈퇴 ************ */
+	// 회원 탈퇴 요청
 	@RequestMapping(value = "/toDelete")
 	@ResponseBody
 	public String toDelete(String email, String password) throws Exception {
@@ -282,6 +280,8 @@ public class MemberController {
 			return "fail";
 		}
 	}
+	
+	/* ************ 참여 독서 모임 ************ */
 
 	// 참여 독서 모임 페이지 요청
 	@RequestMapping(value = "/toMybookclub")
@@ -310,6 +310,8 @@ public class MemberController {
 
 		return "/mypage/mybookclub";
 	}
+	
+	/* ************ 리뷰 ************ */
 
 	// 도서 리뷰 페이지 요청
 	@RequestMapping(value = "/toMyreview")
@@ -325,19 +327,55 @@ public class MemberController {
 		// 페이지 당 보여지는 게시글의 최대 개수
 		int pageSize = page * pagination.getPageSize();
 
-		List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize,
-				((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);
+
+
 		return "/mypage/myreview";
 	}
+	
+	/* ************ 찜 도서 ************ */
 
 	// 찜 도서 페이지 요청
 	@RequestMapping(value = "/toLikebook")
-	public String toLikebook() {
+	public String toLikebook(Model model) throws Exception {
+		List<LikeBookDTO> list = LBservice.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		model.addAttribute("list", list);
 		return "/mypage/likebook";
 	}
+
+	// 찜 도서 삭제 요청 -> 찜 도서 페이지
+	@RequestMapping(value = "/toDeleteLikeBook")
+	public String toDeleteLikeBook(String book_isbn) throws Exception {
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		System.out.println("삭제 :" +email +" : " + book_isbn);
+		
+		int rs = LBservice.deleteLikeBook(book_isbn, email);
+		if (rs > 0) {
+			System.out.println("삭제 완료");
+			return "redirect:/member/toLikebook";
+		}
+		return null;
+	}
+	
+	// 찜 도서 삭제 요청 -> 마이 페이지
+	@RequestMapping(value = "/toDeleteLikeBook2")
+	public String toDeleteLikeBook2(String book_isbn) throws Exception {
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		System.out.println("삭제 :" +email +" : " + book_isbn);
+		
+		int rs = LBservice.deleteLikeBook(book_isbn, email);
+		System.out.println("rs :" + rs);
+		if (rs > 0) {
+			System.out.println("삭제 완료");
+			return "redirect:/member/toMyinfo";
+		}
+		return null;
+	}
+	
+	/* ************ 찜 독서모임 ************ */
 
 	// 찜 독서모임 페이지 요청
 	@RequestMapping(value = "/toLikeclub")
@@ -349,30 +387,24 @@ public class MemberController {
 			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
 			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
 		}
+
 		model.addAttribute("list", list);
 		return "/mypage/likeclub";
 	}
 
-	// 찜 도서 삭제 요청
-	@RequestMapping(value = "/toDeleteLikeBook")
-	public String toDeleteLikeBook(String book_isbn) throws Exception {
-		System.out.println("book_isbn : " + book_isbn);
-		int rs = LBservice.deleteLikeBook(book_isbn);
-		System.out.println("rs :" + rs);
-		if (rs > 0) {
-			System.out.println("삭제 완료");
-			return "redirect:/member/toLikebook";
-		}
-		return null;
-	}
 
 	// 찜 독서모임 삭제 요청
 	@RequestMapping(value = "/toDeleteLikeClub")
 	@ResponseBody
 	public String toDeleteLikeClub(@RequestParam(value = "no[]") int[] no) throws Exception {
-		Bservice.deleteLikeClub(no);
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		System.out.println("삭제 :" +email +" : " + no);
+		Bservice.deleteLikeClub(no, email);
+
 		return "success";
 	}
+	
+	/* ************ 쪽지함 ************ */
 
 	// 쪽지함 페이지 요청
 	@RequestMapping(value = "/toLetter")
@@ -387,8 +419,7 @@ public class MemberController {
 		int startIndex = pagination.getStartIndex();
 		// 페이지 당 보여지는 게시글의 최대 개수
 		int pageSize = page * pagination.getPageSize();
-		List<LetterDTO> list = Lservice.selectPage(startIndex, pageSize,
-				((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<LetterDTO> list = Lservice.selectPage(startIndex, pageSize, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
 		for (LetterDTO dto : list) {
 			dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));

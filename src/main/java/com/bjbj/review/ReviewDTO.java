@@ -9,7 +9,6 @@ public class ReviewDTO {
 	private String email;
 	private String book_title;
 	private String nickname;
-  
 	private Date written_date;
 	private String content;
 	private int views;

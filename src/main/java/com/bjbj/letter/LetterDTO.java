@@ -7,29 +7,41 @@ public class LetterDTO {
 	private String email;
 	private String title;
 	private String content;
-	private Date written_date;
-	
-	private int startRowNum;
-	private int endRowNum;
-	private int prevNum; //이전글의 글번호
-	private int nextNum; //다음글의 글번호
+	private String written_date;
+	private String read;
 	
 	public LetterDTO() {}
-
-	public LetterDTO(int no, String email, String title, String content, Date written_date, int startRowNum,
-	         int endRowNum, int prevNum, int nextNum) {
+  
+	public LetterDTO(int no, String email, String title, String content, String written_date, String read) {
 		super();
 		this.no = no;
 		this.email = email;
 		this.title = title;
 		this.content = content;
 		this.written_date = written_date;
-	    this.startRowNum = startRowNum;
-	    this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
+		this.read = read;
 	}
-
+  
+	public LetterDTO(int no, String email, String title, String content, Date written_date, String read) {
+		super();
+		this.no = no;
+		this.email = email;
+		this.title = title;
+		this.content = content;
+		this.written_date = getStrDate(written_date);
+		this.read = read;
+	}
+  
+	public String getStrDate(Date date) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+			rs = sdf.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 
 	public int getNo() {
 		return no;
@@ -70,5 +82,13 @@ public class LetterDTO {
 	public void setWritten_date(Date written_date) {
 		this.written_date = written_date;
 	}
+	
+	public String getRead() {
+		return read;
+	}
 
+	public void setRead(String read) {
+		this.read = read;
+	}
 }
+

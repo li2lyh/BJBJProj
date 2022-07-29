@@ -107,63 +107,63 @@ textarea {
 			<!-- 정보 수정 -->
 			<div class="col-8 p-4">
 				<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>아이디</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="email" name="email"
 								value="${dto.email}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>이름</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="name" name="name" value="${dto.name}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>닉네임</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="nickname" name="nickname" value="${dto.nickname}" readonly>
 							<div class="invalid-feedback">닉네임은 2~6자 이내로 입력해주세요. <br>(영어 대소문자, 한글, 숫자만 입력)</div>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>비밀번호</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="password" class="form-control" id="password" name="password" value="${dto.password}" readonly>
 							<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
 						</div>
 						
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>비밀번호확인</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>휴대폰번호</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone}" readonly>
 							<div class="form-text d-none" id="phonetxt">휴대폰번호 변경은 관리자에게 문의해주세요.</div>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>자기소개</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<textarea class="form-control" id="mydesc" name="mydesc" rows="5" readonly>${dto.mydesc}</textarea>
 						</div>
 					</div>

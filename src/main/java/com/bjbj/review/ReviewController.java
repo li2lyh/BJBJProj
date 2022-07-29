@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+@RequestMapping(value = "/review")
 @Controller
 @RequestMapping(value = "/review")
 public class ReviewController {

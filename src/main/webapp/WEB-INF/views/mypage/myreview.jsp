@@ -53,11 +53,6 @@ a:hover {
 	height: 100%;
 }
 
-#reviewImg {
-	width: 100%;
-	height: 100%;
-}
-
 .page-link {
 	border: none;
 	color: black;
@@ -67,6 +62,11 @@ a:hover {
 	background-color: white;
 	color: black;
 	font-weight: bolder;
+}
+
+#reviewImg{
+	width: 200px;
+	height: 200px;
 }
 </style>
 </head>
@@ -131,20 +131,20 @@ a:hover {
 					<c:forEach items="${list}" var="dto">
 						<div class="review p-0">
 							<div class="row border-top p-3">
-								<div class="col-3">
+								<div class="col-12 col-md-4 col-lg-4">
 									<c:choose>
 										<c:when test="${empty dto.img_id}">
-											<img src="/resources/images/noimage.gif" id="noImg">
+											<img src="/resources/images/noImg.png" id="noImg">
 										</c:when>
 										<c:otherwise>
-											<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+											<img class="card-img-top" src="/resources/images/noImg.png" id="reviewImg">
 											<%-- <img src="/profile/${dto.img_id}" id="reviewImg"> --%>
 										</c:otherwise>
 									</c:choose>
 								</div>
-								<div class="col-9">
+								<div class="col-12 col-md-8 col-lg-8 p-5">
 									<p>${dto.book_title}</p>
-									<p class="fw-bolder">${dto.review_title}</p>
+									<p class="fw-bolder"><a href="/review/detail?review_no=${dto.review_no}">${dto.review_title}</a></p>
 									<span>${dto.nickname}</span> <span>${dto.written_date}</span>
 								</div>
 							</div>
@@ -197,7 +197,7 @@ a:hover {
 	<script>
 		// 작성하기 버튼 클릭시
 		$("#writeBtn").on("click",function(){
-			location.href = "";
+			location.href = "/review/toWrite";
 		})
 	</script>
 </body>
