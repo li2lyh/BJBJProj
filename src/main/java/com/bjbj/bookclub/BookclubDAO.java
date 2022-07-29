@@ -186,6 +186,18 @@ public class BookclubDAO {
 	}
 	
 	
+	/* 모임 찜 하기 */
+	public int insertLike(LikeClubDTO dto) throws Exception {
+		return session.insert("clubMapper.insertLike", dto);
+	}
+	
+	/* 찜한 모임 삭제 (일반) */
+	public int deleteLike(int room_id, String email) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("room_id", room_id);
+		map.put("email", email);
+		return session.delete("clubMapper.deleteLike", map);
+	}
 
 
 

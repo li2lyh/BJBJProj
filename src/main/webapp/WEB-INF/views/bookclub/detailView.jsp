@@ -61,6 +61,17 @@ textarea {
 	width: 100%;
 	border: none;
 }
+.imgBox img{
+	width:80%;
+	height:80%;
+}
+#book_titleDiv{
+margin-bottom: 20px;
+}
+#book_title_h{
+font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -82,11 +93,12 @@ textarea {
 		<div class="row">
 			<div class="col-4 imgBox">
 				<c:choose>
-					<c:when test="${dto.img_id eq null}">
+					<c:when test="${dto.book_cover eq null}">
 						<img src="/resources/images/noImg.png" class="card-img-top">
 					</c:when>
 					<c:otherwise>
-						<img src="" class="card-img-top">
+						<img src="${dto.book_cover}" class="card-img-top">
+						
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -96,7 +108,13 @@ textarea {
 				<div id="titleDiv">
 					<h3>${dto.room_title}</h3>
 				</div>
-
+	
+			
+				<div id="book_titleDiv">
+					<h5 id="book_title_h">${dto.book_title}</h5>
+				</div>
+			
+			
 				<div>
 					<h5>모집 인원 : ${dto.room_people} 명</h5>
 				</div>

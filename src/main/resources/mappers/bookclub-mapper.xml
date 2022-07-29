@@ -49,7 +49,7 @@
 		parameterType="com.bjbj.bookclub.BookclubDTO">
 		insert into bookroom
 		values( #{room_id}, #{room_title}, #{room_detail}
-		, null, null, #{room_people}, default, sysdate, sysdate+14
+		, #{book_title}, #{book_cover}, #{room_people}, default, sysdate, sysdate+14
 		, #{open_date}, #{close_date}, default, null, #{tag}, #{meet_week},
 		#{place} )
 	</insert>
@@ -72,6 +72,18 @@
 	<select id="selectSeq" resultType="int">
 		select seq_room.nextval from dual
 	</select>
+
+
+	<!-- 모임 찜 하기 -->
+	<insert id="insertLike" parameterType="com.bjbj.bookclub.BookclubDTO">
+		insert into like_room values(#{room_id}, #{email})
+	</insert>
+	
+	<!-- 찜한 모임 삭제 (일반) -->
+	<delete id="deleteLike" parameterType="map">
+		delete from like_room where room_id = #{room_id} and email = #{email}
+	</delete>
+
 
 
 </mapper>

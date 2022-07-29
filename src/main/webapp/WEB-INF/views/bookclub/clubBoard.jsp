@@ -129,6 +129,10 @@ display:none;
 #btnModifyComplete{
 display:none;
 }
+.imgBox img{
+	width:80%;
+	height:80%;
+}
 
 <%-- calendar --%>
 
@@ -178,11 +182,11 @@ a{
 		<div class="row">
 			<div class="col-4 imgBox">
 				<c:choose>
-					<c:when test="${dto.img_id eq null}">
+					<c:when test="${dto.book_cover eq null}">
 						<img src="/resources/images/noImg.png" class="card-img-top">
 					</c:when>
 					<c:otherwise>
-						<img src="" class="card-img-top">
+						<img src="${dto.book_cover}" class="card-img-top">
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -697,61 +701,6 @@ a{
 		
 		}
 		
-		
-		<%--
-		// Calendar
-
-		document.addEventListener('DOMContentLoaded', function() {
-	    var Calendar = FullCalendar.Calendar;
-	    var Draggable = FullCalendar.Draggable;
-
-	    var containerEl = document.getElementById('external-events');
-	    var calendarEl = document.getElementById('calendar');
-	    var checkbox = document.getElementById('drop-remove');
-
-	    // initialize the external events
-	    // -----------------------------------------------------------------
-
-	    new Draggable(containerEl, {
-	      itemSelector: '.fc-event',
-	      eventData: function(eventEl) {
-	        return {
-	          title: eventEl.innerText
-	        };
-	      }
-	    });
-
-	    // initialize the calendar
-	    // -----------------------------------------------------------------
-
-	    var calendar = new Calendar(calendarEl, {
-	      headerToolbar: {
-	        left: 'prev,next today',
-	        center: 'title',
-	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-	      },
-	      editable: true,
-	      droppable: true, // this allows things to be dropped onto the calendar
-	      drop: function(info) {
-	        // is the "remove after drop" checkbox checked?
-	        if (checkbox.checked) {
-	          // if so, remove the element from the "Draggable Events" list
-	          info.draggedEl.parentNode.removeChild(info.draggedEl);
-	        }
-	      }
-	    });
-
-	    calendar.render();
-	  });
-			
-		
-		--%>
-		
-		
-		
-		
-		
-		// 보류
 		// 로그인된 계정이 리더 일 때 (일정 조정 가능)
 		
 	if('${role}'=='L'){	 
@@ -767,14 +716,13 @@ a{
 				 
 				request.done(function (data) {
 					console.log(data);
-					
 					var calendarEl = document.getElementById('calendar');
 			        var calendar = new FullCalendar.Calendar(calendarEl, {
 			        	
 			        	headerToolbar: {
 			                left: 'prev,next today',
 			                center: 'title',
-			                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+			                right: 'dayGridMonth'
 			            },
 			          locale : "ko",
 			          timeZone:'local',
@@ -783,52 +731,94 @@ a{
 			          selectMirror: true,   
 			
 			          select: function(arg) {
-						
+						  
+			        	  
+			        	  
 			        	  var title = prompt('일정 추가');
 			              if (title) {
-			            	  console.log(arg);
+	            
 			            	  var insert = $.ajax({
 			  					url: "/calendar/insertPlan",
 			  					method:"post",
 			  					dataType:"json",
 			  					data:{"cal_title":title, "start_date": dateFormat(arg.start), "end_date":dateFormat(arg.end),"allday":arg.allDay}
-			  				});
-			            	  insert.done(function(data) {
-			            		  
-			            		  
-			            		  
+			  			
+			            	  });
+			            	  insert.done(function(data) { 
 			            	  })
-			            	  
-			            	  
+
 			            	  calendar.addEvent({              
 			            		  title: title,  
 			            		  start: arg.start,
 			            		  end: arg.end,
 			            		  allDay: arg.allDay 
 			            		  })
-
+						
+			            		  location.reload();
 			              }
-			              calendar.unselect()
+						  
+			             // calendar.unselect()
+			             
 			          },
 			          eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트 
 			        	  console.log(obj);       
 			         	  
-			         	
+			         	alert("일정이 설정되었습니다!");
 			         	  
 			          
 			          },
-			        	 
-			          eventClick: function(arg) {
+			          // 수정
+			          eventDrop: function (info){
+                          console.log(info);
+                          if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
+                                
+						 
+                          let id = info.event._def.publicId;
+                          let title = info.event._def.title;
+                          let start = info.event._instance.range.start;
+                          let end = info.event._instance.range.end;
+                          
+
+                          
+                          $(function updatePlan() {
+                              $.ajax({
+                                  url: "/calendar/updatePlan",
+                                  method: "post",
+                                  dataType: "json",
+                                  data: {"cal_id":id, "cal_title":title, "start_date":updateDateFormat(start), "end_date":updateDateFormat(end)}
+                                 
+                              })
+                          })
+                          }
+                        },
+			        	//삭제 
+			          eventClick: function(info) {
 			              if (confirm('해당 일정을 삭제하시겠습니까?')) {
-			                  arg.event.remove()
+							 
+			            	  let cal_id = info.event._def.publicId;
+			            	
+			            	  console.log("id : " + cal_id);
+			            	  console.log("title : " + info.event.title);
+			            	  console.log(info.event.start);
+			            	  
+			            	  
+			            	  var deletePlan = $.ajax({
+				  					url: "/calendar/deletePlan",
+				  					method:"post",
+				  					data:{"cal_id":cal_id}
+			              });
+			              deletePlan.done(function(data) {
+			            	  })
+			            	  info.event.remove()
 			              }
+			              
+			              
 			          },
 			          editable: true ,
 			          dayMaxEvents: true,
-			          events: data
+			          events: data	 
 			          
-			        	  
-			        });
+			          });
 			        calendar.render();
 			   	   }); 
 					
@@ -899,6 +889,23 @@ a{
 
         return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 }
+	
+	// 업데이트 시 default hour값이 달라지므로 조정 필요
+	function updateDateFormat(date){
+		let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
+
+        month = month >= 10 ? month : '0' + month;
+        day = day >= 10 ? day : '0' + day;
+        hour =  -9 + hour;
+        minute = minute >= 10 ? minute : '0' + minute;
+        second = second >= 10 ? second : '0' + second;
+
+        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+	}
 		
 		
 	</script>

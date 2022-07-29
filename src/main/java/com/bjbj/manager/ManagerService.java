@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bjbj.bookclub.BookclubDAO;
+import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.review.ReviewDTO;
 
@@ -14,8 +14,7 @@ import com.bjbj.review.ReviewDTO;
 public class ManagerService {
 	@Autowired
 	private ManagerDAO dao;
-	@Autowired
-	private BookclubDAO clubdao;
+	
 	
 	//블랙리스트 조회
 	 public List<Map<String, Object>> selectBlacklist() throws Exception{
@@ -50,12 +49,17 @@ public class ManagerService {
 	
 	
 	//전체 모임 조회
-	public List<Map<String, Object>> selectBookroomM() throws Exception{
-		return dao.selectBookroomM();
+	public List<Map<String, Object>> selectBookroom() throws Exception{
+		return dao.selectBookroom();
 	}
+	//모임 검색
+	public List<BookclubDTO>searchBookclub(String category, String keyword)throws Exception{
+		return dao.searchBookclub(category, keyword);
+	}
+	
 	// 모임 개별 삭제 
-	public int deleteBookroomM(int room_id) throws Exception{
-		return dao.deleteBookroomM(room_id);
+	public int deleteBookroom(int room_id) throws Exception{
+		return dao.deleteBookroom(room_id);
 	}
 	
 	
@@ -77,35 +81,65 @@ public class ManagerService {
 		dao.deleteAllReview(no);
 	}
 	
-	
+
+
 	//회원 신고 조회 
 	public List<ReportDTO>selectAllreport()throws Exception{
 		return dao.selectAllreport();
 	}
+	
+	//모임 삭제 - 모임 바로 삭제
+	//public void deleteEachBookroom(int room_id) throws Exception{
+	//	dao.deleteEachBookroom(room_id);
+	//}
 	
 	//회원 신고 - 신고삭제 
 	public void deleteReport(String email)throws Exception{
 		dao.deleteReport(email);
 	}
 	
+	//회원신고 - 경고 추가
+	public void addReport(ReportDTO dto)throws Exception{
+		dao.addReport(dto);
+		int warningCount = dao.selectMemberReport(dto);
+		
+		// 신고횟수가 +1 된 후 
+		// dto.getEmail()을 이용해서 dao-> select warning_count 
+		if(warningCount >= 3) {
+			
+			BlacklistDTO blackDTO = new BlacklistDTO(dto.getEmail(), "경고횟수 초과" , null, warningCount);
+			dao.insertBlacklist(blackDTO);
+			
+		}
+		
+		
+		/*report 횟수 조회 -> 만약 그게 3이상이라면 여기서 insertblacklist 
+		BlackDTO 를 넘겨줘야 하는데 여기에 필요한 값-> 블랙추가할 email, 사유, 날짜, 신고횟수
+		email -> reportDTO dto.getEmail()
+		사유 -> 윤선이 직접 적어주고
+		신고횟수 -> reportDTO dto.getReport_count....()
+		BlackDTO blackDTO = new BlackDTO(email, '...사유..',null, dto.Report_...*());
+		dao.insertblacklist(blackDTO) 
+		*
+		*/
+	}
+
+	
 	//모임 신고 조회 
 	public List<ReportBookroomDTO>selectRoomreport() throws Exception{
 		return dao.selectRoomreport();
 	}
 	//모임신고 - 신고삭제
-	public void deleteReportBR(int room_id)throws Exception{
-		dao.deleteReportBR(room_id);
+	public void deleteReportBookroom(int room_id)throws Exception{
+		dao.deleteReportBookroom(room_id);
 	}
 	
 
 	
 	//모임신고 - 경고 추가
-	public void addReportBR(int room_id)throws Exception{
-		dao.addReportBR(room_id);
+	public void addReportBookroom(int room_id)throws Exception{
+		dao.addReportBookroom(room_id);
 	}
-	//모임신고 - 조치 상태 변경
-	public void modifyActionBR(int room_id)throws Exception{
-		dao.modifyActionBR(room_id);
-	}
+
 	
 }
