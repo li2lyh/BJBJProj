@@ -130,19 +130,6 @@ public class ManagerDAO {
 			e.printStackTrace();
 		}
 		return rs;
-	}
-	
-	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
-		session.update("managerMapper.addReport", dto);
-	}
-	public int selectMemberReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가 후 신고횟수 다시 선택하기
-		return session.selectOne("managerMapper.selectMemberReport", dto);
-	}
-	
-	
-	public void addReportBookroom(int room_id)throws Exception{ //모임신고 - 경고 추가
-		session.update("managerMapper.addReportBookroom", room_id);
-	}
-
+	}	
 	
 }

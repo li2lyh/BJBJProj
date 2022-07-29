@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bjbj.letter.LetterDTO;
 import com.bjbj.letter.LetterService;
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.member.MemberService;
 
@@ -375,34 +377,6 @@ public class BookclubController {
 		return null;			
 	}
   
-	@RequestMapping(value = "/deleteLike") // 찜 삭제
-	public String deleteLike(int room_id) throws Exception {
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
-		System.out.println("room_id : " + room_id);
-		int rs = service.deleteLike(room_id, email);
-		
-		if (rs > 0) {
-			System.out.println("삭제 완료 "  +email+ " : " +room_id);
-			return "redirect:/club/toClubList";
-		}
-		return null;
-	}
-	
-	@RequestMapping(value = "/insertLike") // 찜 추가
-	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
-		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
-		dto.setRoom_id(room_id);
-		dto.setEmail(loginSession.getEmail());		
-		System.out.println(dto.toString());
-		
-		int rs = service.insertLike(dto); 		
-		if (rs > 0) {
-			System.out.println("찜 완료 " +room_id); 
-			return "redirect:/club/toClubList";
-		}
-		return null;			
-	}
-	
 	@RequestMapping(value = "/deleteLike") // 찜 삭제
 	public String deleteLike(int room_id) throws Exception {
 		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();

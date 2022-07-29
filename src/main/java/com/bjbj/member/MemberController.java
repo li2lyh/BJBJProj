@@ -366,22 +366,7 @@ public class MemberController {
 	@RequestMapping(value = "/toLikebook")
 	public String toLikebook() {
 		return "/mypage/likebook";
-	}
-
-	// 찜 독서모임 페이지 요청
-	@RequestMapping(value = "/toLikeclub")
-	public String toLikeclub(Model model) throws Exception{	
-		List<BookclubDTO> list = Bservice.likeClub(((MemberDTO)session.getAttribute("loginSession")).getEmail());
-		
-		for (BookclubDTO dto : list) { 
-			dto.setRecruit_end(Bservice.getDate(dto.getRecruit_end()));
-			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
-			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
-		}
-    model.addAttribute("list", list);
-		return "/mypage/likeclub";
-	}
-	
+	}	
 	
 	// 찜 도서 삭제 요청
   
@@ -469,7 +454,7 @@ public class MemberController {
 		List<LetterDTO> list = Lservice.selectPage(startIndex, pageSize, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
 		for (LetterDTO dto : list) {
-			dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
+			// dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 		}
 
 		model.addAttribute("list", list);
@@ -491,7 +476,7 @@ public class MemberController {
 	public String toDetailLetter(Model model, int no) throws Exception {
 		LetterDTO dto = Lservice.detailLetter(no, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
-		dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
+		// dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 
 		model.addAttribute("dto", dto);
 		

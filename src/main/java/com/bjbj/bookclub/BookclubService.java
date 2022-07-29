@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
 import com.bjbj.member.MemberDAO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.utils.PageDTO;
@@ -39,23 +41,22 @@ public class BookclubService {
 	public List<BookclubDTO> selectPage(int start, int end, String email) throws Exception {
 		return dao.selectPage(start, end, email);
 	}
-	
+
 	/* 모임 찜 하기 */
 	public int insertLike(LikeClubDTO dto) throws Exception {
 		return dao.insertLike(dto);
 	}
-	
+
 	/* 찜한 모임 삭제 (일반) */
 	public int deleteLike(int room_id, String email) throws Exception {
 		return dao.deleteLike(room_id, email);
 	}
-	
 
-	/* 찜한 모임 전체 조회  */
+	/* 찜한 모임 전체 조회 */
 	public List<BookclubDTO> likeClub(String email) throws Exception {
 		return dao.likeClub(email);
 	}
-	
+
 	/* 찜한 모임 삭제 */
 	public void deleteLikeClub(int[] no, String email) throws Exception {
 		dao.deleteLikeClub(no, email);
@@ -94,7 +95,7 @@ public class BookclubService {
 	public String getStrDate(String string) throws Exception {
 		return dao.getStrDate(string);
 	}
-	
+
 	// 날짜 형식 변경 (yy.MM.dd)
 	public String getDate(String string) throws Exception {
 		return dao.getDate(string);
@@ -133,33 +134,33 @@ public class BookclubService {
 	public int updateStatus(String room_status, int room_id) throws Exception {
 		return dao.updateStatus(room_status, room_id);
 	}
-	
-	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
+
+	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception {
 		return dao.selectRoleByRoom(room_id);
 	}
-	
+
 	// 클럽내 게시판 글쓰기
-	public void insertBoard(BoardDTO dto) throws Exception{
+	public void insertBoard(BoardDTO dto) throws Exception {
 		dao.insertBoard(dto);
 	}
-	
+
 	// 클럽내 게시판 목록
 	public List<BoardDTO> selectAllBoard() throws Exception {
 		return dao.selectAllBoard();
 	}
 
 	// 클럽내 게시판 목록
-	public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+	public List<BoardDTO> selectAllBoardById(int room_id) throws Exception {
 		return dao.selectAllBoardById(room_id);
 	}
-	
+
 	// 클럽내 게시판 게시글 수정
-	public void updateBoard(BoardDTO dto) throws Exception{
+	public void updateBoard(BoardDTO dto) throws Exception {
 		dao.updateBoard(dto);
 	}
-  
+
 	// 게시글 삭제
-	public void deleteBoard(int board_seq) throws Exception{
+	public void deleteBoard(int board_seq) throws Exception {
 		dao.deleteBoard(board_seq);
 	}
 
@@ -167,26 +168,15 @@ public class BookclubService {
 	public void insertReportBookroom(ReportBookroomDTO reportBookroomDTO) throws Exception {
 		dao.insertReportBookroom(reportBookroomDTO);
 	}
-	
+
 	// 회원 신고
-	public void insertReport(ReportDTO reportDTO) throws Exception{
+	public void insertReport(ReportDTO reportDTO) throws Exception {
 		dao.insertReport(reportDTO);
 	}
 
 	// 모임원 닉네임 불러오기
-	public List<MemberDTO> selectRoleMember(String email) throws Exception{
+	public List<MemberDTO> selectRoleMember(String email) throws Exception {
 		return dao.selectRoleMember(email);
 	}
 
-				/* 모임 찜 하기 */
-				public int insertLike(LikeClubDTO dto) throws Exception {
-					return dao.insertLike(dto);
-				}
-				
-				/* 찜한 모임 삭제 (일반) */
-				public int deleteLike(int room_id, String email) throws Exception {
-					return dao.deleteLike(room_id, email);
-				}
-
-	
 }

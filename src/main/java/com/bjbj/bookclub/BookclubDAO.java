@@ -11,6 +11,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bjbj.manager.ReportBookroomDTO;
+import com.bjbj.manager.ReportDTO;
+import com.bjbj.member.MemberDTO;
+
 @Repository
 public class BookclubDAO {
 	@Autowired

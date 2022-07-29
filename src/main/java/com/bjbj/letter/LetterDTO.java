@@ -1,6 +1,7 @@
 package com.bjbj.letter;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class LetterDTO {
 	private int no;
@@ -75,13 +76,13 @@ public class LetterDTO {
 		this.content = content;
 	}
 
-	public Date getWritten_date() {
-		return written_date;
-	}
-
-	public void setWritten_date(Date written_date) {
-		this.written_date = written_date;
-	}
+//	public Date getWritten_date() {
+//		return written_date;
+//	}
+//
+//	public void setWritten_date(Date written_date) {
+//		this.written_date = written_date;
+//	}
 	
 	public String getRead() {
 		return read;

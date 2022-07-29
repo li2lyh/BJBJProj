@@ -10,10 +10,11 @@ public class ReportBookroomDTO {
 	private String report_date;
 	private String report_detail;
 	private String reporter_nickname;
-	
+
 	public ReportBookroomDTO() {}
 
-	public ReportBookroomDTO(int room_id, String room_title, String report_content,	String report_date, String report_detail, String reporter_nickname) {
+	public ReportBookroomDTO(int room_id, String room_title, String report_content, String report_date,
+			String report_detail, String reporter_nickname) {
 		super();
 		this.room_id = room_id;
 		this.room_title = room_title;
@@ -22,19 +23,7 @@ public class ReportBookroomDTO {
 		this.report_detail = report_detail;
 		this.reporter_nickname = reporter_nickname;
 	}
-	
-	public ReportBookroomDTO(int room_id, String room_title, String report_content, int warning_count,
-			Date report_date, String report_detail, String reporter_nickname) {
-		super();
-		this.room_id = room_id;
-		this.room_title = room_title;
-		this.report_content = report_content;
-		this.warning_count = warning_count;
-		this.report_date = getStrDate(report_date);
-		this.report_detail = report_detail;
-		this.reporter_nickname = reporter_nickname;
-	}
-	
+
 	public String getStrDate(Date date) {
 		String rs = null;
 		try {
@@ -45,7 +34,7 @@ public class ReportBookroomDTO {
 		}
 		return rs;
 	}
-	
+
 	public int getRoom_id() {
 		return room_id;
 	}
@@ -97,13 +86,8 @@ public class ReportBookroomDTO {
 	@Override
 	public String toString() {
 		return "ReportBookroomDTO [room_id=" + room_id + ", room_title=" + room_title + ", report_content="
-				+ report_content + ", warning_count=" + warning_count + ", report_date=" + report_date
-				+ ", report_detail=" + report_detail  + ", reporter_nickname="
-				+ reporter_nickname + "]";
+				+ report_content + ", report_date=" + report_date + ", report_detail=" + report_detail
+				+ ", reporter_nickname=" + reporter_nickname + "]";
 	}
-	
-	
-	
-	
-	
+
 }
