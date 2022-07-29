@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+@RequestMapping(value = "/review")
 @Controller
 public class ReviewController {
 	// 리뷰 게시판과 관련된 요청 처리
