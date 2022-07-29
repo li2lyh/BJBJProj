@@ -51,6 +51,14 @@ public class LetterService {
 	public void insertLetter(LetterDTO dto) throws Exception{
 		dao.insertLetter(dto);
 	}
+	// 선택된 쪽지 전송 (관리자 기능)
+	public void submitSelectLetter(String[]checkLetter, LetterDTO dto)throws Exception{
+		dao.submitSelectLetter(checkLetter, dto);
+	}
 	
+	//모임장 쪽지 전송 (관리자 기능)
+	public void insertRoomLetter(LetterDTO dto) throws Exception{
+		dao.insertRoomLetter(dto);
+	}
 	
 }

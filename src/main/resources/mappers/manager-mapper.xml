@@ -28,27 +28,36 @@
 
 <!-- 전체 회원 조회 -->
 <select id="selectAllmember" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-	select * from member left outer join report using(email)
+	select * from member full outer join report using(email) 
+</select>
+
+<!-- 전체회원에서 블랙리스트 조회 (버튼 비활성화를 위해)-->
+<select id="selectBlackmember" resultType="com.bjbj.manager.BlacklistDTO">
+	select * from blacklist
 </select>
 
 <!-- 전체 회원 검색 -->
 <select id="searchMember" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap" >
 	select email, name, nickname, warning_count from member  
-		 full outer join report using(email)
+		  full outer join report using(email)
 			where ${category} like '%' || #{keyword} || '%'
 </select>
 
 
 <!-- 전체 모임 조회 --> 
-<select id="selectBookroomM" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-	select * from bookroom join role using(room_id)
-		join report_bookroom using(room_id)
+<select id="selectBookroom" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+	select * from bookroom join role using(room_id) where role='L'
 </select>
-
-
-
+<!-- 모임 검색 -->
+<select id="searchBookclub" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+	select * from bookroom join role using(room_id)
+		and ${category} like '%' || #{keyword} || '%'
+		
+		<!-- role 이 L 일때 -->
+		
+</select>
 <!-- 모임 개별 삭제 -->
-<delete id= "deleteBookroomM" parameterType="int">
+<delete id= "deleteBookroom" parameterType="int">
 	delete from bookroom 
 		where room_id=#{room_id}
 </delete>
@@ -98,25 +107,28 @@
 
 <!-- 모임 신고 조회 -->
 <select id="selectRoomreport" resultType="com.bjbj.manager.ReportBookroomDTO">
-	select * from report_bookroom
+	select * from report_bookroom 
 </select>
+<!-- 모임신고 - 바로 삭제 -->
+<delete id="deleteEachBookroom" parameterType="int">
+	delete from report_bookroom where room_id = #{room_id}
+</delete>
+
 <!-- 회원신고 - 경고 횟수 추가 -->
 <update id="addReport" parameterType="com.bjbj.manager.ReportDTO">
 	update report set warning_count = warning_count +1 where email = #{email}
 </update>
+<!-- 회원신고 - 경고 추가 후 신고횟수 다시 선택하기 -->
+<select id="selectMemberReport" resultType="int">
+	select warning_count from report where email = #{email}
+</select>
 
 <!-- 모임신고 - 신고삭제 -->
-<delete id="deleteReportBR" parameterType="int">
+<delete id="deleteReportBookroom" parameterType="int">
 	delete from report_bookroom where room_id = #{room_id}
 </delete>
 
-<!-- 모임신고 - 경고 횟수 추가 -->
-<update id="addReportBR" parameterType="int" >
-	update report_bookroom set warning_count = warning_count +1 where room_id = #{room_id}
-</update>
-<!--모임신고 - 조치 변경 -->
-<update id="modifyActionBR" parameterType="int">
-	update report_bookroom set report_action = report_action +1 where room_id = #{room_id}
-</update>
+
+
 	
 </mapper>

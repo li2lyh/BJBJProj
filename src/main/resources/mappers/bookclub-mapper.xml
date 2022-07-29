@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="clubMapper">
    <!-- 전체 조회 -->
 	<select id="selectAll" resultType="com.bjbj.bookclub.BookclubDTO">
@@ -72,6 +71,15 @@
 	<select id="selectSeq" resultType="int">
 		select seq_room.nextval from dual
 	</select>
-
-
+	
+	<!-- 모임 신고 -->
+	<insert id="insertReportBookroom" parameterType="com.bjbj.manager.ReportBookroomDTO">
+	insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, default, sysdate, #{report_detail}, default, #{reporter_nickname})
+	</insert>
+	<!-- 회원 신고
+	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
+	insert into report values(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	</insert>-->
+	
 </mapper>
+

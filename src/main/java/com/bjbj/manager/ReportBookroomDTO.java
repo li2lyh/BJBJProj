@@ -1,5 +1,8 @@
 package com.bjbj.manager;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class ReportBookroomDTO {
 	private int room_id;
 	private String room_title;
@@ -7,13 +10,12 @@ public class ReportBookroomDTO {
 	private int warning_count;
 	private String report_date;
 	private String report_detail;
-	private char report_action;
 	private String reporter_nickname;
 	
 	public ReportBookroomDTO() {}
 
 	public ReportBookroomDTO(int room_id, String room_title, String report_content, int warning_count,
-			String report_date, String report_detail, char report_action, String reporter_nickname) {
+			String report_date, String report_detail, String reporter_nickname) {
 		super();
 		this.room_id = room_id;
 		this.room_title = room_title;
@@ -21,10 +23,32 @@ public class ReportBookroomDTO {
 		this.warning_count = warning_count;
 		this.report_date = report_date;
 		this.report_detail = report_detail;
-		this.report_action = report_action;
 		this.reporter_nickname = reporter_nickname;
 	}
-
+	
+	public ReportBookroomDTO(int room_id, String room_title, String report_content, int warning_count,
+			Date report_date, String report_detail, String reporter_nickname) {
+		super();
+		this.room_id = room_id;
+		this.room_title = room_title;
+		this.report_content = report_content;
+		this.warning_count = warning_count;
+		this.report_date = getStrDate(report_date);
+		this.report_detail = report_detail;
+		this.reporter_nickname = reporter_nickname;
+	}
+	
+	public String getStrDate(Date date) {
+		String rs = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+			rs = sdf.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 	public int getRoom_id() {
 		return room_id;
 	}
@@ -73,13 +97,6 @@ public class ReportBookroomDTO {
 		this.report_detail = report_detail;
 	}
   
-	public char getReport_action() {
-		return report_action;
-	}
-
-	public void setReport_action(char report_action) {
-		this.report_action = report_action;
-	}
 
 	public String getReporter_nickname() {
 		return reporter_nickname;
@@ -93,7 +110,7 @@ public class ReportBookroomDTO {
 	public String toString() {
 		return "ReportBookroomDTO [room_id=" + room_id + ", room_title=" + room_title + ", report_content="
 				+ report_content + ", warning_count=" + warning_count + ", report_date=" + report_date
-				+ ", report_detail=" + report_detail + ", report_action=" + report_action + ", reporter_nickname="
+				+ ", report_detail=" + report_detail  + ", reporter_nickname="
 				+ reporter_nickname + "]";
 	}
 	

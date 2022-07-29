@@ -114,8 +114,10 @@ a {
 			</div>
 		</div>
 			<script>
+			
 		//블랙리스트 해제
 		$(".deleteBtn").on("click", function(){
+			alert("정말 해제하시겠습니까?");
 			location.href = "/manager/deleteBlacklist?email="+this.value
 		})
 
@@ -144,7 +146,7 @@ a {
 				let tr = $("<tr>");
 				let td = $("<td colspan=5>").append("검색 결과가 없습니다.");
 				tr.append(td);
-				tr.append("tbody");
+				tr.appendTo("tbody");
 			}else{
 				for(let dto of data){
 					let tr=$("<tr>");

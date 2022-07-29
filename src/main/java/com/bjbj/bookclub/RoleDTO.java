@@ -5,9 +5,7 @@ public class RoleDTO {
 	private int room_id;
 	private String role;
 
-	public RoleDTO() {
-	}
-
+	public RoleDTO() {	}
 	public RoleDTO(String email, int room_id, String role) {
 		super();
 		this.email = email;
@@ -39,9 +37,10 @@ public class RoleDTO {
 		this.role = role;
 	}
 
+
 	@Override
 	public String toString() {
 		return "RoleDTO [email=" + email + ", room_id=" + room_id + ", role=" + role + "]";
 	}
-
+	
 }

@@ -72,63 +72,60 @@ textarea {
 			</div>
 			<div class="col-9 rightPage">
 				<div class="reportContainer">
+					<form id="searchForm">
 					<div class="row">
 						<div class="col-5">
 							<h3>전체 모임</h3>
 						</div>
 						<div class="col-7 p-3 d-flex justify-content-end">
-							<select name="member" class="selectBox">
-								<option value="모임명">모임명</option>
-								<option value="모임장">모임장</option>
-							</select> <input type="text" placeholder="내용을 입력해주세요" class="inputContent">
+							<select name="category" class="selectBox">
+								<option name="room_title" value="room_title">모임명</option>
+								<option name="email" value="email">모임장</option>
+							</select> 
+							<input type="text" placeholder="내용을 입력해주세요" class="inputContent" name="keyword">
 							<button type="button" class="searchBtn">검색</button>
 						</div>
 					</div>
+					</form>
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>
-								
 								<th>모임명</th>
 								<th>모임장</th>
 								<th></th>
 								<th>인원수</th>
 								<th>모임기간</th>
 								<th>모임상태</th>
-								<th>경고</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:if test="${list.size() == 0}">
 								<tr>
-									<td colspan="8">등록된 모임이 없습니다.</td>
+									<td colspan="7">등록된 모임이 없습니다.</td>
 								</tr>
 							</c:if>
 							<c:if test ="${list.size() > 0 }">
 								<c:forEach items="${list}" var="dto">
 									<tr>
-										
 										<td>${dto.room_title}</td>
-										<td>${dto.email}</td>
+										<td class="email">${dto.email}</td>
 										<td><button type="button" class="messageBtn">쪽지</button></td>
 										<td>${dto.room_people}</td>
 										<td>${dto.open_date}~${dto.close_date}</td>
 										<td>${dto.room_status}</td>
-										<td>${dto.warning_count}</td>
 										<td><button type="button" class="deleteBtn" value="${dto.room_id}">삭제</button></td>
 									</tr>
 								</c:forEach>
 							</c:if>
-
 						</tbody>
 					</table>
-
 				</div>
 			</div>
-		</div>
+		</div>.
 
 		<!-- 쪽지 모달 -->
-		<form id="roomMessageForm" action="#" method="get">
+		<form id="roomMessageForm" action="/manager/insertRoomLetter" method="post">
 			<div class="modal" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -139,19 +136,19 @@ textarea {
 							<div class="row p-2">
 								<div class="col-3">받는이</div>
 								<div class="col-9">
-									<input type="text" class="sendTo" placeholder="받는 모임장">
+									<input type="text" class="sendTo" name="email" id="letter_email">
 								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-3">제목</div>
 								<div class="col-9">
-									<input type="text" class="titleBox">
+									<input type="text" class="titleBox" name="title">
 								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-3">내용</div>
 								<div class="col-9 contentBox">
-									<textarea></textarea>
+									<textarea name="content"></textarea>
 								</div>
 							</div>
 						</div>
@@ -166,9 +163,68 @@ textarea {
 		</form>
 	</div>
 		<script>
+			//모임 검색
+			$(".searchBtn").on("click", function(){
+				let data = $("#searchForm").serialize();
+				console.log(data);
+				
+				$.ajax({
+					url:"/manager/toSearchBookclub"
+					, type : "get"
+					, data : data
+					, success : function(data){
+						console.log(data)
+						makeDynamicEl(data);
+					}, error : function(e){
+						console.log(e);
+					}
+				});
+			})
+			
+			function makeDynamicEl(data){
+				$("tbody").empty();
+				if(data.length == 0){
+					let tr = $("<tr>");
+					let td = $("<td colspan=8>").append("검색결과가 없습니다.");
+					tr.append(td);
+					tr.appendTo("tbody")
+				}else{
+					for(let dto of data){
+						let tr = $("<tr>");
+						let td1 = $("<td>").append(dto.room_title);
+						let td2 = $("<td>").append(dto.email);
+						let messageBtn = $("<button>").attr({
+							type : "button"
+							, class : "messageBtn"
+							, value : dto.room_id
+						}).append("쪽지");
+						let td3 = $("<td>").append(messageBtn);
+						let td4 = $("<td>").append(dto.room_people);
+						let td5 = $("<td>").append(dto.open_date + '~' + dto.close_date );
+						let td6 = $("<td>").append(dto.room_status);
+						let deleteBtn = $("<button>").attr({
+							type : "button"
+							, class : "deleteBtn"
+							, value : dto.room_id
+						}).append("삭제");
+						let td7 = $("<td>").append(deleteBtn);
+						
+						tr.append(td1, td2, td3, td4, td5, td6, td7);
+						tr.appendTo("tbody");
+						
+					}
+					
+				}
+		
+			}
+
+			
 			//쪽지 모달
 			$(".messageBtn").on("click", function() {
+				let letter_email = $(this).parent("td").prev(".email").html();
+				$("#letter_email").val(letter_email);
 				$(".modal").show();
+				console.log(letter_email);
 			});
 			//쪽지 모달 닫기
 			document.getElementById("closeBtn").onclick = function() {
@@ -181,8 +237,11 @@ textarea {
 			
 			
 			//모임 삭제
-			$(".deleteBtn").on("click", function(){
-				location.href="/manager/deleteBookroom?room_id="+this.value;
+			$(".deleteBtn").on("click", function(e){
+				let yn = confirm("정말 삭제하시겠습니까?");
+				if(yn){
+					location.href="/manager/deleteBookroom?room_id="+this.value;
+				}
 			})
 			
 			

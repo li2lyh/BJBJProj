@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.bookclub.BookclubService;
 import com.bjbj.letter.LetterDTO;
 import com.bjbj.letter.LetterService;
@@ -25,6 +26,7 @@ public class ManagerController {
 	private ManagerService service;
 	@Autowired
 	private LetterService Lservice;
+
 	@Autowired
 	private HttpSession session;
 	
@@ -32,6 +34,9 @@ public class ManagerController {
 	public String toAllmember(Model model) throws Exception{
 		List<Map<String,Object>> list = service.selectAllmember();
 		model.addAttribute("list" , list);
+		
+		List<BlacklistDTO> blacklist = service.selectBlackmember();
+		model.addAttribute("blacklist" , blacklist);
 		return"manager/memberList";
 	}
 	
@@ -49,6 +54,21 @@ public class ManagerController {
 	public String toSendLetter(LetterDTO dto)throws Exception{
 		Lservice.insertLetter(dto);
 		return "redirect:/manager/toAllmember";
+	}
+		
+	
+	//선택된 쪽지 전송
+	@RequestMapping(value="/toSendCheckLetter") 
+	@ResponseBody
+	public String submitSelectLetter(@RequestParam(value="checkLetter[]") String[] checkLetter, LetterDTO dto)throws Exception{
+		System.out.println(dto.toString());
+		if(checkLetter.length != 0) {
+			for(String email : checkLetter) {
+				System.out.println(email);
+			}
+		}
+		Lservice.submitSelectLetter(checkLetter, dto);
+		return "success";
 	}
 	
 	
@@ -84,20 +104,43 @@ public class ManagerController {
 	
 	@RequestMapping(value="/toAllclub") //전체 모임페이지 요청
 	public String toAllclub(Model model) throws Exception{
-		List<Map<String, Object>> list = service.selectBookroomM();
+		List<Map<String, Object>> list = service.selectBookroom();
+		
 		model.addAttribute("list", list);
-		return "manager/bookclubList";
+		return "/manager/bookclubList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/toSearchBookclub") // 모임 검색
+	public List<BookclubDTO> searchBookclub(String category, String keyword)throws Exception{
+		System.out.println("category : " + category);
+		System.out.println("keyword : " + keyword );
+		
+		List<BookclubDTO>list = service.searchBookclub(category, keyword);
+		return list;
+				
 	}
 	
 	@RequestMapping(value="/deleteBookroom") // 모임 개별 삭제 
 	public String deleteBookroom(int room_id)throws Exception{
-		service.deleteBookroomM(room_id);
+		service.deleteBookroom(room_id);
+		return "redirect:/manager/toAllclub";
+	}
+	
+	
+	@RequestMapping(value="/insertRoomLetter") //모임장 쪽지 전송
+	public String insertRoomLetter(LetterDTO dto) throws Exception{
+		Lservice.insertRoomLetter(dto);
 		return "redirect:/manager/toAllclub";
 	}
 	
 	@RequestMapping(value="/toReview") //리뷰관리 페이지 요청
 	public String toReview(Model model) throws Exception{
 		List<ReviewDTO>list = service.selectAllreview();
+		
+		for(ReviewDTO dto : list) {
+			dto.setWritten_date(service.getDate(dto.getWritten_date()));
+		}
 		model.addAttribute("list" , list);
 		return "manager/review";
 	}
@@ -128,54 +171,59 @@ public class ManagerController {
 		service.deleteAllReview(no);
 		return "success";
 	}
- 	
-	
+ 		
 	@RequestMapping(value="/toReport") //신고 리스트 요청
 	public String toReport(Model model) throws Exception{
 		//회원 신고 리스트
 		List<ReportDTO> report_list = service.selectAllreport();
-		model.addAttribute("report_list", report_list);
+		for(ReportDTO dto : report_list) {
+			dto.setReport_date(service.getDate(dto.getReport_date()));
+		}
+
 		//모임 신고 리스트
 		List<ReportBookroomDTO>report_bookroom = service.selectRoomreport();
+		for(ReportBookroomDTO bookroomdto : report_bookroom) {
+			bookroomdto.setReport_date(service.getDate(bookroomdto.getReport_date()));
+		}
+		
+		model.addAttribute("report_list", report_list);
 		model.addAttribute("report_bookroom",report_bookroom);
+		
 		return "manager/report";
 	}
 	
-	//회원신고 - 신고삭제
+	//모임삭제 - 모임 바로 삭제
+	@RequestMapping(value="/deleteEachBookroom")
+	public String deleteEachBookroom(int room_id)throws Exception{
+		service.deleteEachBookroom(room_id);
+		return "redirect:/manager/toReport";
+	}
+	
+	//회원신고 - 모달 신고삭제
 	@RequestMapping(value="/deleteReport")
 	public String deleteReport(String email) throws Exception{
 		service.deleteReport(email);
 		return "redirect:/manager/toReport";
 	}
-	//모임신고 - 신고삭제
-	@RequestMapping(value="/deleteReportBR")
-	public String deleteReportBR(int room_id) throws Exception{
-		service.deleteReportBR(room_id);
+	//모임신고 - 모달 신고삭제
+	@RequestMapping(value="/deleteReportBookroom")
+	public String deleteReportBookroom(int room_id) throws Exception{
+		service.deleteReportBookroom(room_id);
 		return "redirect:/manager/toReport";
 	}
-	//회원 신고 - 경고 추가
+	
+	//회원 신고 - 모달 경고 추가
 	@RequestMapping(value="/addReport")
-	public String addReport(ReportDTO dto)throws Exception{
+	public String addReport(ReportDTO dto, Model model)throws Exception{
+		//List<BlacklistDTO> blacklist = service.selectBlackmember();
+		//model.addAttribute("blacklist" , blacklist);
+		
 		//경고 +1
 		service.addReport(dto);
 		return "redirect:/manager/toReport";
 		
 	}
 
-	
-	
-	//모임신고 - 경고 추가
-	@RequestMapping(value="/addReportBR")
-	public String reportBR(int room_id) throws Exception{
-		//경고 +1
-		service.addReportBR(room_id);
-		
-		//조치 상태 변경
-		
-		
-		service.modifyActionBR(room_id);
-		return "redirect:/manager/toReport";
-	}
 	
 	
 }
