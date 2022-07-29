@@ -6,20 +6,18 @@ public class ReportDTO {
 	private int warning_count;
 	private String report_date;
 	private String report_detail;
-	private char report_action;
 	private String reporter_nickname;
 	
 	public ReportDTO() {}
 
 	public ReportDTO(String email, String report_content, int warning_count, String report_date, String report_detail,
-			char report_action, String reporter_nickname) {
+			String reporter_nickname) {
 		super();
 		this.email = email;
 		this.report_content = report_content;
 		this.warning_count = warning_count;
 		this.report_date = report_date;
 		this.report_detail = report_detail;
-		this.report_action = report_action;
 		this.reporter_nickname = reporter_nickname;
 	}
 
@@ -63,14 +61,6 @@ public class ReportDTO {
 		this.report_detail = report_detail;
 	}
 
-	public char getReport_action() {
-		return report_action;
-	}
-
-	public void setReport_action(char report_action) {
-		this.report_action = report_action;
-	}
-
 	public String getReporter_nickname() {
 		return reporter_nickname;
 	}
@@ -81,7 +71,7 @@ public class ReportDTO {
 
 	@Override
 	public String toString() {
-		return  email +  report_content + warning_count+ report_date + report_detail + report_action + reporter_nickname;
+		return  email +  report_content + warning_count+ report_date + report_detail + reporter_nickname;
 	}
 	
 	

@@ -150,9 +150,12 @@ textarea {
 						<button type="button" id="btnStatus" class="btn btn-primary">모집현황
 							보기</button>
 					</c:when>
-					<c:otherwise>
+					<c:when test="${role.role == 'C' && role.room_id == dto.room_id}">
 						<button type="button" id="btnRecruit" class="btn btn-warning">지원하기</button>
 						<button type="button" id="btnReport" class="btn btn-danger">신고</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" id="btnlogin" class="btn btn-warning">지원하기</button>
 					</c:otherwise>
 
 				</c:choose>
@@ -241,7 +244,12 @@ textarea {
 					$("#reportBookroomForm").submit();
 				})
 		})
-	
+		
+		// 비로그인 상황에서 지원하기 로그인 하라는 알람뜨기
+		$("#btnlogin").on("click", function(){
+			alert("로그인을 해주세요");
+		})
+		
 		//뒤로가기
 		$("#btnBack").on("click", function() {
 			location.href = "/club/toClub";

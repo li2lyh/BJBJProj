@@ -25,12 +25,10 @@
 	margin-top: 8rem;
 	margin-bottom: 10rem;
 }
-
 /* ******** 공통 ******** */
 .contentBox {
 	margin-top: 4rem;
 }
-
 /* ******** 캐러셀 ******** */
 @media ( max-width : 767px) {
 	.carousel-book .carousel-inner .carousel-item>div {
@@ -40,12 +38,10 @@
 		display: block;
 	}
 }
-
 .carousel-book .carousel-inner .carousel-item.active, .carousel-book .carousel-inner .carousel-item-next,
 	.carousel-book .carousel-inner .carousel-item-prev {
 	display: flex;
 }
-
 /* medium and up screens */
 @media ( min-width : 768px) {
 	.carousel-book .carousel-inner .carousel-item-end.active, .carousel-book .carousel-inner .carousel-item-next
@@ -57,12 +53,10 @@
 		transform: translateX(-25%);
 	}
 }
-
 .carousel-book .carousel-inner .carousel-item-end, .carousel-book .carousel-inner .carousel-item-start
 	{
 	transform: translateX(0);
 }
-
 /* ******** 더보기 버튼 ******** */
 .moreBtnBox {
 	margin-top: 1.5rem;
@@ -397,7 +391,6 @@
 
 	<script>
                     let items = document.querySelectorAll('.carousel-book .carousel-item')
-
                     items.forEach((el) => {
                         const minPerSlide = 4
                         let next = el.nextElementSibling
@@ -411,7 +404,10 @@
                             next = next.nextElementSibling
                         }
                     })
-
+                    
+                     $("#test").on("click", function(){
+						location.href = "/club/toClub";
+					})
         </script>
 </body>
 
