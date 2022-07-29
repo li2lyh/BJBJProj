@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="clubMapper">
    <!-- 전체 조회 -->
 	<select id="selectAll" resultType="com.bjbj.bookclub.BookclubDTO">
@@ -27,26 +26,34 @@
     where email = #{email}) join member using(email) where num between #{start} and #{end}
 	</select>
 	
-	<!-- 찜한 모임 조회 -->
+	<!-- 모임 찜 하기 -->
+	<insert id="insertLike" parameterType="com.bjbj.bookclub.BookclubDTO">
+		insert into like_room values(#{room_id}, #{email})
+	</insert>
+	
+	<!-- 찜한 모임 삭제 (일반) -->
+	<delete id="deleteLike" parameterType="map">
+		delete from like_room where room_id = #{room_id} and email = #{email}
+	</delete>
+	
+	<!-- 찜한 모임 전체 조회 -->
 	<select id="likeClub" resultType="com.bjbj.bookclub.BookclubDTO">
 		select * from like_room join bookroom using(room_id) join member using(email) where email = #{email}
-	</select>
+	</select>	
 	
-	<!-- 찜한 모임 삭제 -->
-	<delete id="deleteLikeClub" parameterType="int">
-		delete from like_room where room_id in
+	<!-- 찜한 모임 삭제 (체크) -->
+	<delete id="deleteLikeClub" parameterType="map">
+		delete from like_room where email = #{email} and room_id in
 			<foreach collection="deleteArr" item="num" open="(" close=")" separator=",">
 				#{num}
 			</foreach>
 	</delete>
 
-	<select id="selectList"
-		resultType="com.bjbj.bookclub.BookclubDTO">
+	<select id="selectList" resultType="com.bjbj.bookclub.BookclubDTO">
 		select * from bookroom order by open_date
 	</select>
 
-	<insert id="insert"
-		parameterType="com.bjbj.bookclub.BookclubDTO">
+	<insert id="insert" parameterType="com.bjbj.bookclub.BookclubDTO">
 		insert into bookroom
 		values( #{room_id}, #{room_title}, #{room_detail}
 		, #{book_title}, #{book_cover}, #{room_people}, default, sysdate, sysdate+14
@@ -54,8 +61,7 @@
 		#{place} )
 	</insert>
 
-	<select id="selectOne" parameterType="int"
-		resultType="com.bjbj.bookclub.BookclubDTO">
+	<select id="selectOne" parameterType="int" resultType="com.bjbj.bookclub.BookclubDTO">
 		select * from bookroom where room_id=#{room_id}
 	</select>
 
@@ -72,7 +78,23 @@
 	<select id="selectSeq" resultType="int">
 		select seq_room.nextval from dual
 	</select>
-
+	
+	<!-- 모임 신고 -->
+	<insert id="insertReportBookroom" parameterType="com.bjbj.manager.ReportBookroomDTO">
+	  insert into report_bookroom values(#{room_id}, #{room_title}, #{report_content}, sysdate, #{report_detail}, #{reporter_nickname})
+	</insert>
+  
+	<!-- 회원 신고 -->
+	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
+	  insert into report values(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	</insert>
+  
+	<!-- insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname}) --!>
+  
+	<!-- 회원 닉네임 받아오기 -->
+	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
+		select member.email, nickname from member inner join role on member.email = role.email where member.email != #{email}
+	</select>
 
 	<!-- 모임 찜 하기 -->
 	<insert id="insertLike" parameterType="com.bjbj.bookclub.BookclubDTO">
@@ -83,7 +105,5 @@
 	<delete id="deleteLike" parameterType="map">
 		delete from like_room where room_id = #{room_id} and email = #{email}
 	</delete>
-
-
 
 </mapper>

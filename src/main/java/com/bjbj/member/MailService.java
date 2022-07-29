@@ -1,6 +1,8 @@
 package com.bjbj.member;
 
+import java.io.File;
 import java.util.UUID;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -25,11 +27,13 @@ public class MailService {
 		mailSender.send(smm);
 	}
 	
-	/* *************** ÀÓ½Ã ºñ¹Ð¹øÈ£ »ý¼º *************** */
+	/* *************** ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ *************** */
 	public String makePw() throws Exception{ 
 		UUID temp = UUID.randomUUID();
 		String strTemp = temp.toString();
 		strTemp = strTemp.substring(0,8);
 		return strTemp;
 	}
+	
+
 }

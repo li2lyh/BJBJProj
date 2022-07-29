@@ -161,6 +161,23 @@ a{
  text-decoration: none;
 }
 
+#reportForm{
+	width: 600px;
+}
+.modal-footer{
+    text-align: right;
+}
+#report_con{
+    padding-top: 15px;
+    padding-left: 30px;
+}
+#report_con2{
+    padding-right: 33px;
+}
+#report_detail{
+    width: 300px;
+    height: 200px;
+}
 </style>
 
 </head>
@@ -336,10 +353,70 @@ a{
 						 <button type="button" id="btnWrite" class="btn btn-secondary">글쓰기</button>
 					</div>
 				</div>
-			
+				<div>
+					<div class="row">
+						<div class="col-6">
+							<h5 class="titleB">모임원</h5>						
+						</div>
+					</div>
+				</div>
+				<div>
+					<table style="text-align: center;">
+					<thead>
+						<tr>
+							<th scope="col" class="thTitle">닉네임</th>
+							<th scope="col" class="thTitle">신고</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<td>${dto.nickname}</td>
+								<input type="hidden" id="hidden_email" value="${dto.email}">
+								<td><button type="button" class="btn btn-danger report" id="btnReport2">신고</button></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</div>
 			</div>
 		
 		</div>
+		<%-- 회원 신고하기 Modal --%>
+		<form id="reportForm" action="/club/report" method="post">
+			<div class="modal" id="reportModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2 class="modal-title">신고하기</h2>
+		                </div>
+						<div class="row">
+							<div class="modal-head col-4" id="report_con">
+								<h3>신고사유</h3>
+							</div>
+							<div class="modal-body col-8" id="report_con2">
+								<select class="form-select" name="report_content">
+									<option value="불건전 회원">불건전 회원</option>
+									<option value="회원이 이상함">회원이 이상함</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="modal-head col-4" id="report_con">
+								<h3>상세설명</h3>
+							</div>
+								<div class="modal-body col-8" id="report_con2">		
+									<textarea id="report_detail" name="report_detail" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
+								</div>
+						</div>
+		                <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportCancel">신고취소</button>
+		                    <button type="button" class="btn btn-primary" id="btnReportComplete">신고완료</button>
+		                	<input type="hidden" id="email" name="email" value="">
+		                </div>		
+					</div>
+				</div>
+			</div>
+		</form>
 	
 	<%-- Modal --%>
 	
@@ -389,6 +466,24 @@ a{
 
 
 	<script>
+	<%-- --------- 회원 신고하기 Modal ---------- --%>
+	$("#btnReport2").on("click", function() {
+		$("#reportModal").show();
+			//취소버튼
+			$("#btnReportCancel").on("click", function() {
+				$("#reportModal").hide();
+			})
+			//제출버튼
+			$("#btnReportComplete").on("click", function() {
+
+				$("#email").val($("#hidden_email").val());
+
+				alert("신고되었습니다.");
+				$("#reportForm").submit();
+			})
+	})
+	
+	
 		$("#btnWrite").on("click", function(){
 			// 모든 버튼, input 초기화
 			$("#board_title").val("");

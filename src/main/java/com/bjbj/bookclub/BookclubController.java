@@ -231,9 +231,7 @@ public class BookclubController {
 
 	@RequestMapping(value = "/clubBoard") // 내모임게시판
 	public String clubBoard(Model model) throws Exception {
-		
-		
-		
+	
 		// 로그인 된 유저 정보
 		 MemberDTO loginSession =(MemberDTO)session.getAttribute("loginSession");
 		 model.addAttribute("session", loginSession);
@@ -244,7 +242,6 @@ public class BookclubController {
 		 
 		 System.out.println("로그인 id : " + id);
 		 System.out.println("room_id : " + room_id);
-		 
 		 
 		// 현재 방에 지원했지만 선택받지 못한 인원들 탐색
 		List<String> waitingList = service.selectByRoom(room_id);
@@ -263,7 +260,6 @@ public class BookclubController {
 			
 		}
 		
-		 
 		// 해당 방 정보
 		BookclubDTO clubDto = service.selectOne(room_id);
 		clubDto.setOpen_date(service.getStrDate(clubDto.getOpen_date()));
@@ -290,6 +286,11 @@ public class BookclubController {
 		model.addAttribute("board", boardList);
 		// 해당 방의 캘린더 정보
 		
+		// 해당 모임의 멤버 닉네임 나열하기
+		List<MemberDTO> list = service.selectRoleMember(id);
+		System.out.println("list : " + list);
+		model.addAttribute("list", list);
+
 		return "/bookclub/clubBoard";
 	}
 
@@ -373,6 +374,34 @@ public class BookclubController {
 		}
 		return null;			
 	}
+  
+	@RequestMapping(value = "/deleteLike") // 찜 삭제
+	public String deleteLike(int room_id) throws Exception {
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		System.out.println("room_id : " + room_id);
+		int rs = service.deleteLike(room_id, email);
+		
+		if (rs > 0) {
+			System.out.println("삭제 완료 "  +email+ " : " +room_id);
+			return "redirect:/club/toClubList";
+		}
+		return null;
+	}
+	
+	@RequestMapping(value = "/insertLike") // 찜 추가
+	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
+		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
+		dto.setRoom_id(room_id);
+		dto.setEmail(loginSession.getEmail());		
+		System.out.println(dto.toString());
+		
+		int rs = service.insertLike(dto); 		
+		if (rs > 0) {
+			System.out.println("찜 완료 " +room_id); 
+			return "redirect:/club/toClubList";
+		}
+		return null;			
+	}
 	
 	@RequestMapping(value = "/deleteLike") // 찜 삭제
 	public String deleteLike(int room_id) throws Exception {
@@ -387,13 +416,35 @@ public class BookclubController {
 		return null;
 	}
 	
+	// 모임 신고하기 요청
+	@RequestMapping(value = "/reportBookroom")
+	public String reportBookroom(ReportBookroomDTO dto) throws Exception {
+		System.out.println("room_title : " + dto.getRoom_title());
+		System.out.println("report_content : " + dto.getReport_content());
+		System.out.println("report_detail : " + dto.getReport_detail());
+		
+		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
+		dto.setReporter_nickname(nickname);
 	
-	
-	
-	
-	
-	
-	
-	
-	
+		service.insertReportBookroom(dto);		
+		return "redirect:/club/toClub";
+	}
+
+	// 회원 신고하기 요청
+	@RequestMapping(value = "/report")
+	public String report(ReportDTO dto) throws Exception {
+		System.out.println("email : " + dto.getEmail());
+		System.out.println("reporter_nickname : " + dto.getReporter_nickname());
+		System.out.println("report_content : " + dto.getReport_content());
+		System.out.println("report_detail : " + dto.getReport_detail());
+		
+
+		
+		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
+		dto.setReporter_nickname(nickname);
+		
+		service.insertReport(dto);
+		return "redirect:/club/clubBoard";
+	}
+				
 }

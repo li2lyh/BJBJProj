@@ -51,7 +51,6 @@ body {
 }
 
 /* 휴대폰 인증 */
-
 .confirmPhone {
 	padding-right: 0;
 }
@@ -79,9 +78,8 @@ body {
 
 .enrollmentPolicy a {
 	text-decoration: none;
-	color : black;
+	color: black;
 }
-
 </style>
 </head>
 <body>
@@ -95,7 +93,7 @@ body {
 		<div class="registerBox">
 
 			<!-- 타이틀 -->
-			<form id="signupForm" action="/member/signUp" method="post">
+			<form id="signupForm" action="/member/kakaoSignUp" method="post">
 				<div class="row registerTitle">
 					<div class="col-12 d-flex justify-content-center">
 						<h2>회원가입</h2>
@@ -126,65 +124,19 @@ body {
 				<!-- 이메일 -->
 				<div class="row">
 					<div class="col-12 p-0">
-						<input type="text" name="email" id="email" class="form-control"
-							placeholder="아이디 (aaa123@gmail.com)">
+						<input type="hidden" name="email" id="email" class="form-control"
+							value="${email}" readonly>
 					</div>
 				</div>
-				<%-- 빈칸 --%>
-				<div class="row blankBox">
-					<div class="col-12 p-0">
-						<div class="blank" id="blank2"></div>
-					</div>
-				</div>
-				<%-- 알림정보 --%>
-				<div class="row clsCheckInfo">
-					<div class="col-12 p-0">
-						<div id="checkEmail"></div>
-					</div>
-				</div>
-				<!-- End -->
 
 				<!-- 비밀번호 -->
 				<div class="row">
 					<div class="col p-0">
-						<input type="password" name="password" id="password"
-							class="form-control" placeholder="비밀번호">
+						<input type="hidden" name="password" id="password"
+							class="form-control" value="">
 					</div>
 				</div>
-				<%-- 빈칸 --%>
-				<div class="row blankBox">
-					<div class="col-12 p-0">
-						<div class="blank" id="blank3"></div>
-					</div>
-				</div>
-				<%-- 알림정보 --%>
-				<div class="row clsCheckInfo">
-					<div class="col-12 p-0">
-						<div id="checkPw"></div>
-					</div>
-				</div>
-				<!-- End -->
 
-				<!-- 비밀번호 확인 -->
-				<div class="row">
-					<div class="col p-0">
-						<input type="password" id="confirmPw" class="form-control"
-							placeholder="비밀번호 확인">
-					</div>
-				</div>
-				<%-- 빈칸 --%>
-				<div class="row blankBox">
-					<div class="col-12 p-0">
-						<div class="blank" id="blank4"></div>
-					</div>
-				</div>
-				<%-- 알림정보 --%>
-				<div class="row clsCheckInfo">
-					<div class="col-12 p-0">
-						<div id="checkPw2"></div>
-					</div>
-				</div>
-				<!-- End -->
 
 				<!-- 닉네임 -->
 				<div class="row">
@@ -210,12 +162,8 @@ body {
 				<!-- 휴대폰 번호 -->
 				<div class="row">
 					<div class="col-9 p-0">
-						<input type="text" name="phone" id="phone" class="form-control"
-							placeholder="휴대번호">
-					</div>
-					<div class="col-3 confirmPhone p-0 d-flex justify-content-end">
-						<button type="button" id="verifyPhoneBtn"
-							class="btn btn-outline-secondary">인증하기</button>
+						<input type="hidden" name="phone" id="phone" class="form-control"
+							value="${phone}">
 					</div>
 				</div>
 				<%-- 빈칸 --%>
@@ -231,34 +179,14 @@ body {
 					</div>
 				</div>
 				<!-- End -->
-
-				<%-- 인증번호 발송 --%>
-				<div class="verifyPhone d-none">
-					<div class="row">
-						<div class="col-9 p-0 d-flex justify-content-end">
-							<input type="text" class="form-control" id="verifyNum"
-								maxlength="4" placeholder="인증번호">
-						</div>
-						<div class="col-3 checkPhone p-0">
-							<button type="button" id="completeBtn"
-								class="btn btn-outline-secondary">확인</button>
-						</div>
-					</div>
-					<%-- 빈칸 --%>
-					<div class="row blankBox">
-						<div class="col-12 p-0">
-							<div class="blank" id="blank7"></div>
-						</div>
-					</div>
-					<%-- 알림정보 --%>
-					<div class="row clsCheckInfo">
-						<div class="col-12 p-0">
-							<div id="checkNum"></div>
-						</div>
+				
+				<div class="row">
+					<div class="col-9 p-0">
+						<input type="hidden" name="user_kakao" id="user_kakao" class="form-control"
+							value="Y">
 					</div>
 				</div>
-				<!-- End -->
-
+				
 				<!-- 제출 버튼 -->
 				<div class="submitBtn row">
 					<button type="button" id="signupBtn"
@@ -408,161 +336,42 @@ body {
 
 
 	<script>
-		/* *********** 휴대폰 본인확인 ************** */
-		// 보안문자 4자리 받을 변수
-		let verifyNum = "";
-
-		// 인증번호 발송 버튼 눌렀을 때
-		$("#verifyPhoneBtn").on("click", function() {
-
-			let regexPhone = /^[0-9]{11}$/;
-			let phone = $("#phone").val();
-
-			if (!regexPhone.test(phone) || phone === "") {
-				alert("휴대폰 번호를 정확히 입력해주세요");
-				return false;
-
-			} else {
-				alert("입력하신 번호로 인증번호가 발송되었습니다.");
-				$(".verifyPhone").removeClass("d-none");
-				console.log($("#phone").val());
-				verifyNum = "2222";
-				console.log(verifyNum);
-				
-				
-				/* 핸드폰 본인인증		
-				$.ajax({
-					type : "post",
-					url : "/member/phoneCheck",
-					data : {
-						phone : $("#phone").val()
-					},
-					async : false,
-					cache : false,
-					success : function(data) {
-						console.log(data);
-						verifyNum = data;
-					},
-					error : function(e) {
-						console.log(e);
-					}
-				});
-				*/
-			}
-		});
-
-		// 인증번호 확인
-		let verifyNum2 = "";
-
-		$("#completeBtn").on("click", function() {
-
-			let regexNum = /^[0-9]{4}$/;
-			let verifyPhone = $("#verifyNum").val();
-
-			if (!regexNum.test(verifyPhone) || $("#verifyNum").val() === "") {
-				alert("정확한 번호를 입력해주세요");
-				return false;
-			} else if ($("#verifyNum").val() !== verifyNum) {
-				alert("정확한 번호를 입력해주세요");
-				return false;
-			} else { // 인증 완료
-				alert("확인되었습니다");
-
-				// 본인인증 css 변경
-				$(".verifyPhone").css("display", "none");
-				$("#phone").attr("readonly", true);
-				$("#verifyPhoneBtn").html("인증완료");
-				$("#verifyPhoneBtn").attr({
-					"type" : "input",
-					"disabled" : true
-				});
-
-				return verifyNum2 = "available";
-			}
-			;
-		});
-
 		/* *********** 유효성 검사 _ 제출시 검사 ************** */
 
-		$("#signupBtn")
-				.on(
-						"click",
-						function() {
+		$("#signupBtn").on("click", function() {
 
-							// regex
-							let regexName = /^[a-zA-Z가-힣]{2,6}$/;
-							let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
-							let regexPw = /^[a-zA-Z0-9~!@#$]{6,12}$/;
-							let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
-							let regexPhone = /^[0-9]{11}$/;
-							let regexNum = /^[0-9]{4}$/;
+			// regex
+			let regexName = /^[a-zA-Z가-힣]{2,6}$/;
+			let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
 
-							// value 값
-							let name = $("#name").val();
-							let email = $("#email").val();
-							let pw = $("#password").val();
-							let nickname = $("#nickname").val();
-							let phone = $("#phone").val();
-							let verifyPhone = $("#verifyNum").val();
+			// value 값
+			let name = $("#name").val();
+			let email = $("#email").val();
+			let pw = $("#password").val();
+			let nickname = $("#nickname").val();
+			let phone = $("#phone").val();
+			let verifyPhone = $("#verifyNum").val();
 
-							if (!regexName.test(name) || name === "") { //이름
-								alert("이름을 정확히 입력해주세요");
-								$("#name").focus();
-								return false;
+			if (!regexName.test(name) || name === "") { //이름
+				alert("이름을 정확히 입력해주세요");
+				$("#name").focus();
+				return false;
 
-							} else if (!regexEmail.test(email) || email === "") { // 이메일 (아이디)
-								alert("아이디는 이메일 형식으로 정확히 작성해주세요");
-								$("#email").focus();
-								return false;
+			} else if (!regexNickname.test(nickname) || nickname === "") { // 닉네임 유효성 검사
+				alert("닉네임을 형식에 맞게 작성해주세요");
+				$("#nickname").focus();
+				return false;
 
-							} else if ($("#checkEmail").html() === "사용불가능한 이메일입니다.") { // 이메일 중복체킹
-								alert("이메일이 중복되었습니다");
-								$("#email").focus();
-								return false;
+			} else if ($("#checkNickname").html() === "중복된 닉네임입니다.") {// 닉네임 중복확인
+				alert("닉네임이 중복되었습니다");
+				$("#nickname").focus();
+				return false;
 
-							} else if (!regexPw.test(pw) || pw === "") { // 비밀번호
-								alert("비밀번호를 형식에 맞게 작성해주세요")
-								$("#password").focus();
-								return false;
+			}
 
-							} else if ($("#confirmPw").val() !== pw) { // 비밀번호 확인
-								alert("비밀번호가 일치하지 않습니다.")
-								$("#confirmPw").focus();
-								return false;
+			$("#signupForm").submit();
 
-							} else if (!regexNickname.test(nickname)
-									|| nickname === "") { // 닉네임 유효성 검사
-								alert("닉네임을 형식에 맞게 작성해주세요");
-								$("#nickname").focus();
-								return false;
-
-							} else if ($("#checkNickname").html() === "중복된 닉네임입니다.") {// 닉네임 중복확인
-								alert("닉네임이 중복되었습니다");
-								$("#nickname").focus();
-								return false;
-
-							} else if (!regexPhone.test(phone) || phone === "") {// 핸드폰 번호
-								alert("휴대폰 번호를 정확히 입력해주세요");
-								$("#phone").focus();
-								return false;
-
-							} else if (!regexNum.test(verifyPhone)
-									|| verifyPhone === "") {//본인인증 창 
-								alert("인증번호를 입력해주세요");
-								$("#verifyNum").focus();
-								return false;
-
-							} else if (verifyNum2 !== "available") {
-								alert("인증번호를 정확히 입력해주세요");
-								console.log("a");
-								$("#verifyNum").focus();
-								return false;
-
-							}
-
-							$("#signupForm").submit();
-
-						});
+		});
 
 		/* *********** input창 아래 style ************** */
 
@@ -584,182 +393,6 @@ body {
 			$("#blank1").show();
 			$("#checkName").html("");
 			$("#checkName").css({
-				"padding-top" : "0rem",
-				"padding-bottom" : "0rem"
-			});
-		});
-
-		//  ------------ 이메일 ------------ 
-		// focusIn
-		$("#email").focus(function() {
-			$("#blank2").css("display", "none");
-			$("#checkEmail").html("이메일 형식으로 아이디를 작성해주세요");
-			$("#checkEmail").css({
-				"color" : "#6E6E6E",
-				"font-size" : "0.9rem",
-				"padding-top" : "0.29rem",
-				"padding-bottom" : "0.29rem",
-				"padding-left" : "1rem"
-			});
-
-		});
-
-		// focusOut
-		$("#email")
-				.blur(
-						function() {
-
-							let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
-							let email = $("#email").val();
-
-							if (!regexEmail.test(email) || email === "") {
-								$("#blank2").css("display", "none");
-								$("#checkEmail").html("이메일 형식으로 아이디를 작성해주세요");
-								$("#checkEmail").css({
-									"color" : "#6E6E6E",
-									"font-size" : "0.9rem",
-									"padding-top" : "0.29rem",
-									"padding-bottom" : "0.29rem",
-									"padding-left" : "1rem"
-								});
-							} else {
-								$
-										.ajax({
-											url : "/member/confirmEmail",
-											type : "get",
-											data : {
-												email : $("#email").val()
-											},
-											success : function(data) {
-												if (data == "available") {
-													$("#blank2").css("display",
-															"none");
-													$("#checkEmail").html(
-															"사용가능한 이메일입니다.");
-													$("#checkEmail")
-															.css(
-																	{
-																		"color" : "#548B5B",
-																		"font-size" : "0.9rem",
-																		"padding-top" : "0.29rem",
-																		"padding-bottom" : "0.29rem",
-																		"padding-left" : "1rem"
-																	});
-												} else if (data == "unavailable") {
-													$("#blank2").css("display",
-															"none");
-													$("#checkEmail").html(
-															"사용불가능한 이메일입니다.");
-													$("#checkEmail")
-															.css(
-																	{
-																		"color" : "#D33C31",
-																		"font-size" : "0.9rem",
-																		"padding-top" : "0.29rem",
-																		"padding-bottom" : "0.29rem",
-																		"padding-left" : "1rem"
-																	});
-												}
-											},
-											error : function(e) {
-												console.log(e);
-											}
-										})
-							}
-						});
-
-		// ------------ 비밀번호 ------------ 
-		// focusIn
-		$("#password").focus(function() {
-			$("#blank3").css("display", "none");
-			$("#checkPw").html("대소문자, 숫자, 특수문자(~!@#$)를 이용해 6~12자로 작성해주세요");
-			$("#checkPw").css({
-				"color" : "#6E6E6E",
-				"font-size" : "0.9rem",
-				"padding-top" : "0.29rem",
-				"padding-bottom" : "0.29rem",
-				"padding-left" : "1rem"
-			});
-		});
-		// focusOut
-		$("#password").blur(function() {
-			$("#blank3").show();
-			$("#checkPw").html("");
-			$("#checkPw").css({
-				"padding-top" : "0rem",
-				"padding-bottom" : "0rem"
-			});
-		});
-
-		// ------------ 비밀번호 확인 ------------ 
-		// focusIn
-		$("#confirmPw").focus(
-				function() {
-					$("#blank4").css("display", "none");
-
-					// 입력 시 확인 _ keyup
-					$("#confirmPw").keyup(
-							function() {
-								if ($("#confirmPw").val() === ""
-										|| $("#password").val() !== $(
-												"#confirmPw").val()) {
-									$("#checkPw2").html("정확한 비밀번호를 입력해주세요");
-									$("#checkPw2").css({
-										"color" : "#D33C31",
-										"font-size" : "0.9rem",
-										"padding-top" : "0.29rem",
-										"padding-bottom" : "0.29rem",
-										"padding-left" : "1rem"
-									});
-								} else {
-									$("#checkPw2").html("일치합니다");
-									$("#checkPw2").css({
-										"color" : "#548B5B",
-										"font-size" : "0.9rem",
-										"padding-top" : "0.29rem",
-										"padding-bottom" : "0.29rem",
-										"padding-left" : "1rem"
-									});
-								}
-							});
-
-					// 입력 후 확인
-					if ($("#confirmPw").val() === "") {
-						$("#checkPw2").html("비밀번호를 입력해주세요");
-						$("#checkPw2").css({
-							"color" : "#D33C31",
-							"font-size" : "0.9rem",
-							"padding-top" : "0.29rem",
-							"padding-bottom" : "0.29rem",
-							"padding-left" : "1rem"
-						});
-					} else if ($("#password").val() !== $("#confirmPw").val()) {
-						$("#checkPw2").html("일치하지 않습니다");
-						$("#checkPw2").css({
-							"color" : "#D33C31",
-							"font-size" : "0.9rem",
-							"padding-top" : "0.29rem",
-							"padding-bottom" : "0.29rem",
-							"padding-left" : "1rem"
-						});
-					} else {
-						$("#checkPw2").html("일치합니다");
-						$("#checkPw2").css({
-							"color" : "#548B5B",
-							"font-size" : "0.9rem",
-							"padding-top" : "0.29rem",
-							"padding-bottom" : "0.29rem",
-							"padding-left" : "1rem"
-						});
-					}
-
-				});
-
-		// focusOut
-		$("#confirmPw").blur(function() {
-			$("#blank4").show();
-			$("#checkPw2").html("");
-			$("#checkPw2").css({
 				"padding-top" : "0rem",
 				"padding-bottom" : "0rem"
 			});
@@ -832,52 +465,6 @@ body {
 				})
 			}
 			;
-		});
-
-		//  ------------ 휴대폰 ------------ 
-		// focusIn
-		$("#phone").focus(function() {
-			$("#blank6").css("display", "none");
-			$("#checkPhone").html("'-'없이 핸드폰 번호 11자리를 입력해주세요");
-			$("#checkPhone").css({
-				"color" : "#6E6E6E",
-				"font-size" : "0.9rem",
-				"padding-top" : "0.29rem",
-				"padding-bottom" : "0.29rem",
-				"padding-left" : "1rem"
-			});
-		})
-		// focusOut
-		$("#phone").blur(function() {
-			$("#blank6").show();
-			$("#checkPhone").html("");
-			$("#checkPhone").css({
-				"padding-top" : "0rem",
-				"padding-bottom" : "0rem"
-			});
-		});
-
-		//  ------------ 휴대폰 인증번호 ------------ 
-		// focusIn
-		$("#verifyNum").focus(function() {
-			$("#blank7").css("display", "none");
-			$("#checkNum").html("인증번호를 입력해주세요");
-			$("#checkNum").css({
-				"color" : "#6E6E6E",
-				"font-size" : "0.9rem",
-				"padding-top" : "0.29rem",
-				"padding-bottom" : "0.29rem",
-				"padding-left" : "1rem"
-			});
-		})
-		// foucusOut
-		$("#verifyNum").blur(function() {
-			$("#blank7").show();
-			$("#checkNum").html("");
-			$("#checkNum").css({
-				"padding-top" : "0rem",
-				"padding-bottom" : "0rem"
-			});
 		});
 	</script>
 </body>

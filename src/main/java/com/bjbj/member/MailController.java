@@ -16,22 +16,19 @@ public class MailController {
 	private MemberService memberService;
 	
 
-	//DBÀÛ¾÷ÀÌ ÇÊ¿äÇÑ ¸¸Å­ DAOµé ¼±¾ğÇØ¾ßÇÔ
-	
-	//¾ÆÀÌµğ¿Í ÀÌ¸ŞÀÏÀÌ °°À¸¸é Æ¯Á¤ÇÑ ¸ŞÀÏÀÌ °¡°Ô..
 	@RequestMapping("/noticeMail")
 	public ModelAndView sendEmail(String email) throws Exception {
-		// ¸ŞÀÏ º¸³»±â
+	
 		ModelAndView mv = new ModelAndView();
 		
 		String addr = "bjbjcommunity@gmail.com";
-		String subject = "Notice";
+		String subject = "[ë¶ì ë¶ì ì»¤ë®¤ë‹ˆí‹°] ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. í™•ì¸í•´ì£¼ì„¸ìš”.";
 		String tempPw = mailService.makePw();
-		String body = "Test : " + tempPw ;
+		String body = "ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ : " + tempPw ;
 		
 		mailService.sendEmail(email, addr, subject, body);
 		
-		// ºñ¹Ğ¹øÈ£ º¯°æ
+		// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½, ë©”ì¼ë§
 		memberService.modifyPw(email, tempPw);
 		
 		mv.setViewName("redirect:/");

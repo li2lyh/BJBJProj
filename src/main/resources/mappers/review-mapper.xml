@@ -5,6 +5,21 @@
    
 <mapper namespace="reviewMapper">
 
+	<!-- 리뷰 등록하기 -->
+	<insert id="insert" parameterType="com.bjbj.review.ReviewDTO">
+		INSERT INTO review VALUES (seq_review.nextval, #{review_title}, 'A@gmail.com', 'null', 'nicky', sysdate, #{content}, 0, #{img_no})
+	</insert>
+	
+	<!-- 리뷰 삭제하기 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM review WHERE review_no = #{review_no}
+	</delete>
+	
+	<!-- 게시글 번호로 조회 -->
+	<select id="selectByNo" resultType="com.bjbj.review.ReviewDTO">
+		SELECT * FROM review where review_no = #{review_no}	
+	</select>
+
 	<!-- 전체 조회 -->
 	<select id="selectAll" resultType="com.bjbj.review.ReviewDTO">
 		select * from review
@@ -24,5 +39,10 @@
 	<select id="selectPage" parameterType="map" resultType="com.bjbj.review.ReviewDTO">
 		select * from (select review.*, row_number() over(order by written_date desc) as num from review where email = #{email}) join member using(email)
         where num between #{start} and #{end}
+	</select>
+	
+	<!-- 게시글 번호로 조회 -->
+	<select id="selectByNo" resultType="com.bjbj.review.ReviewDTO">
+		SELECT * FROM review where review_no = #{review_no}	
 	</select>
 </mapper>

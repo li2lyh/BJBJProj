@@ -27,4 +27,3 @@ public class LikeClubDTO {
 		return room_id + " : " + email;
 	}	
 }
-
