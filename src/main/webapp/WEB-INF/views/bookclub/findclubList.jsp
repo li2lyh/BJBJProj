@@ -76,6 +76,11 @@ h4 {
 	height: 25px;
 }
 
+/* 빨간 하트 */
+#likeImg{
+	width: 30px;
+	height: 25px;
+}
 
 </style>
 
@@ -182,8 +187,33 @@ h4 {
                     			  <h5 class="card-text">${dto.room_title}</h5>
                     		</div>
                     		<div class="col-4">	
-                    			<img src="/resources/images/emptyLike.png" id="emptyLike" onclick="alert('로그인 후 이용해주세요.');">
-							</div>
+                				<!-- checkLike : 해당 모임을 찜한건지 아닌거지 여부를 담아줄 변수 -->
+								<c:set var="checkLike" value="false"/>
+								<!-- 찜 리스트를 반복문 돌리며 해당 모임이 찜한건지 아닌지 여부만 checkLike변수에 저장 -->
+								<c:forEach items="${likeList}" var="like">	
+									<!-- 만약 찜한 모임이라면 checkLike에 true 값을 담아 줌.-->
+									<c:if test="${like.room_id eq dto.room_id}">
+										<c:set var="checkLike" value="true"/>
+									</c:if>																								
+								</c:forEach>
+								<div class="likeClub">
+                    				<!-- 로그인 한 상태 -->
+									<c:if test="${not empty loginSession}">
+										<!-- 만약 checkLike가 트루라면 찜한 모임이니 빨간 하트 띄워주고 -->
+										<c:if test="${checkLike}">
+											<a href="/club/deleteLike?room_id=${dto.room_id}">
+												<img src="/resources/images/likee.png" id="likeImg" onclick="return confirm('찜한 모임을 삭제 하시겠습니까?')">
+											</a> 
+										</c:if>
+										<!-- 만약 checkLike가 펄스라면 찜한 모임이 아니니 빈 하트 띄워주고 -->
+										<c:if test="${not checkLike}">
+											<a href="/club/insertLike?room_id=${dto.room_id}">
+												<img src="/resources/images/emptyLike.png" id="emptyLike" onclick="return confirm('선택한 모임을 찜 하시겠습니까?')">
+											</a>
+										</c:if>	
+									</c:if>
+								</div>
+                    		</div>
                     		<div class="col-12 p-3">
                     			 <p class="inform">${dto.open_date} 시작 / ${dto.room_people}명 / 주 ${dto.meet_week}회 / ${dto.place}지역</p>
                     		</div>

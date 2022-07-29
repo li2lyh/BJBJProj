@@ -26,12 +26,8 @@
 </head>
 <style>
 /* ******** 기준 ******** */
-<<<<<<< HEAD
-body {
-=======
 
 .head-containe {
->>>>>>> 0866fd7d0d60a03c7f9e66f1d0e85813370e1fbf
 	font-size: 20px;
 }
 
@@ -93,6 +89,13 @@ input.underlineSearch:focus {
 #searchIcon {
 	width: 2rem;
 	height: 2rem;
+}
+
+/* 쪽지함 */
+.letterImg{
+	width: 2rem;
+	height: 2rem;
+	padding: 2px;
 }
 
 /* ******** Nav 박스 ******** */
@@ -175,6 +178,7 @@ input.underlineSearch:focus {
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
+							<img class="letterImg" src="/resources/images/letter.png">							
 							${loginSession.nickname}<span>님 환영합니다!</span>
 						</c:when>
 						<c:otherwise>
@@ -205,9 +209,9 @@ input.underlineSearch:focus {
 									<div class="inputBox">
 										<form method="post" id="loginForm">
 											<input type="text" class="form-control" name="email"
-												id="loginId" placeholder="아이디를 입력해주세요"> <input
-												type="password" class="form-control" name="password"
-												id="loginPw" placeholder="비밀번호를 입력해주세요">
+												id="loginId" placeholder="아이디를 입력해주세요" value="mimi123@naver.com"> 
+											<input type="password" class="form-control" name="password"
+												id="loginPw" placeholder="비밀번호를 입력해주세요" value="mimi123">
 										</form>
 									</div>
 									<!-- 기타 등등(기억하기, 찾기, 회원가입)-->
@@ -277,22 +281,6 @@ input.underlineSearch:focus {
 				<div class="blankBox row">
 					<div class=" col-12"></div>
 				</div>
-<<<<<<< HEAD
-				<div class="menuBox row">
-					<div class="col-3 d-flex"></div>
-					<div class="col-2 d-flex justify-content-end align-items-end p-0">
-						<a href="">Intro</a>
-					</div>
-					<div class="col-2 d-flex justify-content-end align-items-end p-0">
-						<a href="">Book</a>
-					</div>
-					<div class="col-3 d-flex justify-content-end align-items-end p-0">
-						<a href="">BookClub</a>
-					</div>
-					<div class="col-2 d-flex justify-content-end align-items-end p-0">
-						<a href="">Library</a>
-					</div>
-=======
 				<ul class="nav justify-content-end menuBox">
 					<li class="nav-item">
 						<button class="dropbtn">Intro</button>
@@ -304,7 +292,14 @@ input.underlineSearch:focus {
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<button class="dropbtn">BookClub</button>
+						<!-- 로그인 안한 페이지 요청 -->
+						<c:if test="${empty loginSession}">
+							<button class="dropbtn"><a href="/club/toClub">BookClub</a></button>
+						</c:if>
+						<!-- 로그인 한 페이지 요청 -->
+						<c:if test="${not empty loginSession}">
+							<button class="dropbtn"><a href="/club/toClubList">BookClub</a></button>
+						</c:if>
 						<div class="dropdown-content">
 							<a href="#">BookClub</a> <a href="#">클럽만들기</a> <a href="#">MyBook</a>
 						</div>
@@ -313,7 +308,6 @@ input.underlineSearch:focus {
 						<button class="dropbtn">Library</button>
 					</li>
 				</ul>
->>>>>>> 0866fd7d0d60a03c7f9e66f1d0e85813370e1fbf
 
 			</div>
 		</div>
@@ -321,6 +315,15 @@ input.underlineSearch:focus {
 	</div>
 
 	<script>
+		/* 쪽지함 */
+		$(".letterImg").on("click", function() {
+			let url = "/member//toLetter";
+			let name = "쪽지함";
+			let option = "width=700, height=600, left=600, top=100";
+			window.open(url, name, option);
+		})
+		
+		
 		/* 검색 버튼 */
 
 		/* 로그인 */

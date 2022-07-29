@@ -1,5 +1,6 @@
 package com.bjbj.bookclub;
 
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -9,10 +10,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.bjbj.manager.ReportBookroomDTO;
-import com.bjbj.manager.ReportDTO;
-import com.bjbj.member.MemberDTO;
 
 @Repository
 public class BookclubDAO {
@@ -77,25 +74,6 @@ public class BookclubDAO {
 		return rs;
 	}
 	
-	//모임 신고하기 데이터 삽입
-	public void insertReportBookroom(ReportBookroomDTO dto) throws Exception{
-		session.insert("clubMapper.insertReportBookroom", dto);
-	}
-	
-	//회원 신고하기
-	public void insertReport(ReportDTO dto) throws Exception{
-		session.insert("clubMapper.insertReport", dto);
-	}
-	
-	public BookclubDTO selectOne(String room_title) throws Exception {
-		return session.selectOne("clubMapper.selectOne", room_title);
-	}
-	
-	public MemberDTO selectNickname(String nickname) throws Exception {
-		return session.selectOne("clubMapper.selectNickname", nickname);
-	}
-	
-
 	// 날짜 형식 변경 (yy.MM.dd)
 	public String getDate(String string) {
 		String rs = null;
@@ -131,10 +109,6 @@ public class BookclubDAO {
 	public void deleteByEmail(String email) throws Exception {
 		session.delete("waitingMapper.deleteByEmail", email);
 	}
-	
-	public BookclubDTO selectBookroom(int book_id) throws Exception {
-		return session.selectOne("clubMapper.selectOne", book_id);
-	}
 
 	// 현재인원 + 1
 	public void updateCurrent(int room_id) throws Exception {
@@ -166,21 +140,25 @@ public class BookclubDAO {
 	}
 	
 	// 클럽내 게시판 목록 (room_id)
-		public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
-			return session.selectList("boardMapper.selectAllBoardById", room_id);
-		}
+	public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
+		return session.selectList("boardMapper.selectAllBoardById", room_id);
+	}
 		
 	// 클럽내 게시판 게시글 수정
-		public void updateBoard(BoardDTO dto) throws Exception{
-			session.update("boardMapper.updateBoard", dto);
-		}
+	public void updateBoard(BoardDTO dto) throws Exception{
+		session.update("boardMapper.updateBoard", dto);
+	}
 
-		// 게시글 삭제
-		public void deleteBoard(int board_seq)throws Exception{
-			session.delete("boardMapper.deleteBoard", board_seq);
-		}
+	// 게시글 삭제
+	public void deleteBoard(int board_seq)throws Exception{
+		session.delete("boardMapper.deleteBoard", board_seq);
+	}
 	
-
+	
+	
+	
+	
+	
 	/* 페이징 */
 	public int getCount(String email) throws Exception {
 		return session.selectOne("clubMapper.getCount", email);
@@ -195,16 +173,52 @@ public class BookclubDAO {
 		return session.selectList("clubMapper.selectPage", map);
 	}
 	
-	/* 찜한 모임 조회 */
+	/* 찜한 모임 전체 조회 */
 	public List<BookclubDTO> likeClub(String email) throws Exception {
 		return session.selectList("clubMapper.likeClub", email);
 	}
 	
-	/* 찜한 모임 삭제 */
-	public void deleteLikeClub(int[] no) throws Exception {
+	/* 찜한 모임 삭제 (체크) */
+	public void deleteLikeClub(int[] no, String email) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("deleteArr", no);
+		map.put("email", email);
 		session.delete("clubMapper.deleteLikeClub", map);
 	}
+	
+	/* 모임 찜 하기 */
+	public int insertLike(LikeClubDTO dto) throws Exception {
+		return session.insert("clubMapper.insertLike", dto);
+	}
+	
+	/* 찜한 모임 삭제 (일반) */
+	public int deleteLike(int room_id, String email) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("room_id", room_id);
+		map.put("email", email);
+		return session.delete("clubMapper.deleteLike", map);
+	}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
