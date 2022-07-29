@@ -100,66 +100,67 @@ textarea {
 			<div class="col-8 p-4">
 				<form id="modifyForm" action="/member/toModifyInfo" method="post">
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>아이디</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="email" name="email"
 								value="${dto.email}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>이름</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="name" name="name" value="${dto.name}" readonly>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>닉네임</label>
 						</div>
 						<div class="col-4 col-lg-6">
-							<input type="text" class="form-control" id="nickname" name="nickname" value="${dto.nickname}">
+							<input type="text" class="form-control" id="nickname" name="nickname" value="${dto.nickname}" readonly>
 							<div class="invalid-feedback">사용 불가능한 닉네임입니다.<br>2~10자 이내로 영문, 한글, 숫자만 입력</div>
 						</div>
-						<div class="col-4 col-lg-2">
-							<button type="button" class="btn btn-secondary w-100" id="checkBtn">중복확인</button>
+						<div class="col-4 col-lg-3">
+							<button type="button" class="btn btn-secondary w-100" id="changeBtn">변경하기</button>
+							<button type="button" class="btn btn-secondary w-100 d-none" id="checkBtn">중복확인</button>						
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>비밀번호</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="password" class="form-control" id="password" name="password">
 							<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
 						</div>
 						
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>비밀번호확인</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="password" class="form-control" id="pwCheck" name="pwCheck">					
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>휴대폰번호</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone}" readonly>
 							<div class="form-text" id="phonetxt">휴대폰번호 변경은 관리자에게 문의해주세요.</div>
 						</div>
 					</div>
 					<div class="row p-2">
-						<div class="col-4">
+						<div class="col-3">
 							<label>자기소개</label>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<textarea class="form-control" id="mydesc" name="mydesc" rows="5">${dto.mydesc}</textarea>
 						</div>
 					</div>
@@ -212,6 +213,16 @@ textarea {
 		//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
 		document.querySelector("#password").addEventListener("input", checkPwd);
 		document.querySelector("#pwCheck").addEventListener("input", checkPwd);
+		
+		
+		// 닉네임 변경하기 버튼 
+		$("#changeBtn").on("click", function(){
+			$("#changeBtn").addClass("d-none");
+			$("#checkBtn").removeClass("d-none");
+			$("#cancleNic").removeClass("d-none");
+			$("#nickname").attr("readonly", false);
+			$("#nickname").val("");
+		})
 
 		
 		// 중복 닉네임 체크

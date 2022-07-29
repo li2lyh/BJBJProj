@@ -127,7 +127,7 @@ th, td{
 	  								<tr>
 		  								<td><input type="checkbox" class="deleteNo" id="deleteNo" name="room_id" value="${dto.room_id}"></td>
 		  								<td>${dto.book_title}</td>
-		  								<td class="fw-bolder"><a href="#">${dto.room_title}</a></td>
+		  								<td class="fw-bolder"><a href="/club/detailView?room_id=${dto.room_id}">${dto.room_title}</a></td>
 		  								<td>~ ${dto.recruit_end}</td>
 		  								<td>${dto.open_date} ~ ${dto.close_date}</td>
 	  								</tr>

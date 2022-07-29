@@ -65,10 +65,8 @@ a:hover {
 }
 
 .likeImg{
-	width: 35px;
-	height: 35px;
-	border-radius: 50%;
-	background-color: rgb(231, 231, 229);
+	width: 25px;
+	height: 25px;
 }
 </style>
 </head>
@@ -127,10 +125,10 @@ a:hover {
 								<div class="card">
 									<c:choose>								
 										<c:when test="${empty dto.img_id}">							
-											<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+											<img class="card-img-top" src="/resources/images/noImg.png" id="noImg">
 										</c:when>
 										<c:otherwise>									
-											<img class="card-img-top" src="/resources/images/noimage.gif">
+											<img class="card-img-top" src="/resources/images/noImg.png" id="bookImg">
 									<%-- 		<img src="/profile/${dto.img_id}" id="bookImg"> --%>
 										</c:otherwise>								
 									</c:choose>

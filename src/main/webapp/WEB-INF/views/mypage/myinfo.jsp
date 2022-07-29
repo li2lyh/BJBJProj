@@ -58,6 +58,11 @@ th, td{
 	height: 100%;
 }
 
+#reviewImg{
+	width: 200px;
+	height: 200px;
+}
+
 /* 찜한 도서 */
 .card {
 	height: 230px;
@@ -76,10 +81,8 @@ th, td{
 }
 
 .likeImg{
-	width: 35px;
-	height: 35px;
-	border-radius: 50%;
-	background-color: rgb(231, 231, 229);
+	width: 25px;
+	height: 25px;
 }
 </style>
 </head>
@@ -182,18 +185,18 @@ th, td{
 						<c:forEach items="${ReviewList}" var="dto" begin="0" end="2">
 							<div class="review p-0">
 								<div class="row border-top border-bottom p-3">
-									<div class="col-3">
+									<div class="col-12 col-md-4 col-lg-4">
 										<c:choose>
 											<c:when test="${empty dto.img_id}">
-												<img src="/resources/images/noimage.gif" id="noImg">
+												<img src="/resources/images/noImg.png id="noImg">
 											</c:when>
 											<c:otherwise>
-												<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+												<img class="card-img-top" src="/resources/images/noImg.png" id="reviewImg">
 												<%-- <img src="/profile/${dto.img_id}" id="reviewImg"> --%>
 											</c:otherwise>
 										</c:choose>
 									</div>
-									<div class="col-9">
+									<div class="col-12 col-md-8 col-lg-8 p-5">
 										<p>${dto.book_title}</p>
 										<p class="fw-bolder">${dto.review_title}</p>
 										<span>${dto.nickname}</span> <span>${dto.written_date}</span>
@@ -218,10 +221,10 @@ th, td{
 								<div class="card">
 									<c:choose>								
 										<c:when test="${empty dto.img_id}">							
-											<img class="card-img-top" src="/resources/images/noimage.gif" id="noImg">
+											<img class="card-img-top" src="/resources/images/noImg.png" id="noImg">
 										</c:when>
 										<c:otherwise>									
-											<img class="card-img-top" src="/resources/images/noimage.gif">
+											<img class="card-img-top" src="/resources/images/noImg.png">
 											<%-- <img src="/profile/${dto.img_id}" id="bookImg"> --%>
 										</c:otherwise>								
 									</c:choose>
@@ -231,7 +234,7 @@ th, td{
 												<p class="card-text">${dto.book_title} / ${dto.book_author}</p>
 											</div>		
 												<div class="col-2 p-0">
-												<a href="/member/toDeleteLikeBook?book_isbn=${dto.book_isbn}" onclick="return confirm('정말 삭제하시겠습니까?');">
+												<a href="/member/toDeleteLikeBook2?book_isbn=${dto.book_isbn}" onclick="return confirm('정말 삭제하시겠습니까?');">
 													<img class="likeImg" src="/resources/images/like.png">
 												</a>
 						 						
