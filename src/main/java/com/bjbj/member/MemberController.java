@@ -172,25 +172,6 @@ public class MemberController {
 		}
 	}
 
-	/* ************ 정보 수정 ************ */
-	
-	// 정보 수정 페이지 요청
-	@RequestMapping(value = "/toChange")
-	public String toChange(Model model) throws Exception {
-		List<MemberDTO> list = Mservice.selectAll();
-		model.addAttribute("list", list);
-		return "/mypage/change-myinfo";
-	}
-
-	// 정보 수정 
-	@RequestMapping(value = "/toModify")
-	public String toModify(MemberDTO dto) throws Exception {
-		int rs = Mservice.modify(dto);
-		if (rs > 0) {
-			System.out.println("수정 완료");
-			System.out.println(dto.toString());
-		} else {
-			System.out.println("수정 실패");
       
 	/* ************ 마이페이지 ************ */
 
@@ -389,7 +370,7 @@ public class MemberController {
 	    List<LetterDTO> list = Lservice.selectPage(startIndex, pageSize, ((MemberDTO)session.getAttribute("loginSession")).getEmail());
 	    
 		for (LetterDTO dto : list) { 
-			dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
+	//		dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 		}
 
 	    model.addAttribute("list", list);
@@ -411,7 +392,7 @@ public class MemberController {
 	public String toDetailLetter(Model model, int no) throws Exception{
 		LetterDTO dto = Lservice.detailLetter(no, ((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		
-		dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
+	//	dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 		
 		model.addAttribute("dto", dto);
 		return "/mypage/detailLetter";

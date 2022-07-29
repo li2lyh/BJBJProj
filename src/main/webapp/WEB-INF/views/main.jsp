@@ -420,7 +420,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<%-- *************************** footer *************************** --%>
 		<div class=footer>
 			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
@@ -442,10 +442,6 @@
                             next = next.nextElementSibling
                         }
                     })
-                    
-                     $("#test").on("click", function(){
-						location.href = "/club/toClub";
-					})
         </script>
 </body>
 
