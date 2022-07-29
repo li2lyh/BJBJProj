@@ -55,6 +55,7 @@ public class BookController {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> map = mapper.readValue(newBooksList, Map.class);
 		model.addAttribute("newBooks", map.get("item"));
+		
 		return "/books/arrivals";
 	}
 	

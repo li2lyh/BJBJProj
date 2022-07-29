@@ -892,7 +892,7 @@ div {
 		</div>
 	</div>
 	<script>
-		$(".likeBtn").on("click", function(){
+		$(".likeBtn").on("click", function() {
 			let con = confirm("선택한 책을 찜할까요?");
 			if(con){
 				console.log($(".book_isbn").val());

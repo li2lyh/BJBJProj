@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
@@ -245,192 +246,153 @@
 					</div>
 				</div>
 				<!-- 캐러셀 -->
+
+
 				<div class="bookBox">
 					<div class="row mx-auto my-auto justify-content-center">
-						<div id="recipeCarousel" class="carousel slide carousel-book"
-							data-bs-ride="carousel">
-							<div class="carousel-inner" id="newBook" role="listbox">
-								<div class="carousel-item active">
-									<!-- 카드 -->
-									<div class="col-lg-3">
-										<div class="card" style="width: 18rem;">
-											<img src="/media/4.jpg" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h4 class="card-title">책 제목</h4>
-												<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="col-lg-3">
-										<div class="card" style="width: 18rem;">
-											<img src="/media/4.jpg" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h4 class="card-title">책 제목</h4>
-												<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="col-lg-3">
-										<div class="card" style="width: 18rem;">
-											<img src="/media/4.jpg" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h4 class="card-title">책 제목</h4>
-												<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="col-lg-3">
-										<div class="card" style="width: 18rem;">
-											<img src="/media/4.jpg" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h4 class="card-title">책 제목</h4>
-												<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="col-lg-3">
-										<div class="card" style="width: 18rem;">
-											<img src="/media/4.jpg" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h4 class="card-title">책 제목</h4>
-												<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="col-lg-3">
-										<div class="card" style="width: 18rem;">
-											<img src="/media/4.jpg" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h4 class="card-title">책 제목</h4>
-												<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-											</div>
-										</div>
-									</div>
+						
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 								</div>
 							</div>
-							<!-- 버튼-->
-							<a class="carousel-control-prev bg-transparent w-aut"
-								href="#recipeCarousel" role="button" data-bs-slide="prev"> <span
-								class="carousel-control-prev-icon" aria-hidden="true"></span>
-							</a> <a class="carousel-control-next bg-transparent w-aut"
-								href="#recipeCarousel" role="button" data-bs-slide="next"> <span
-								class="carousel-control-next-icon" aria-hidden="true"></span>
-							</a>
+						</div>
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- *************************** 베스트셀러 Book *************************** -->
+				<div class="contentBox reviewCon row d-flex ">
+					<!-- 타이틀 -->
+					<div class="bestBook row">
+						<div class="col-12">
+							<h1>베스트셀러</h1>
 						</div>
 					</div>
 
-					<!-- *************************** 베스트셀러 Book *************************** -->
-					<div class="contentBox reviewCon row d-flex ">
-						<!-- 타이틀 -->
-						<div class="bestBook row">
-							<div class="col-12">
-								<h1>베스트셀러</h1>
-							</div>
-						</div>
-
-						<div class="bookBox">
-							<div class="row mx-auto my-auto justify-content-center">
-								<div id="recipeCarousel2" class="carousel slide carousel-book"
-									data-bs-ride="carousel">
-									<div class="carousel-inner" role="listbox">
-										<div class="carousel-item active">
-											<!-- 카드 -->
-											<div class="col-lg-3">
-												<div class="card" style="width: 18rem;">
-													<img src="/media/4.jpg" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h4 class="card-title">책 제목</h4>
-														<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="carousel-item">
-											<div class="col-lg-3">
-												<div class="card" style="width: 18rem;">
-													<img src="/media/4.jpg" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h4 class="card-title">책 제목</h4>
-														<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="carousel-item">
-											<div class="col-lg-3">
-												<div class="card" style="width: 18rem;">
-													<img src="/media/4.jpg" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h4 class="card-title">책 제목</h4>
-														<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="carousel-item">
-											<div class="col-lg-3">
-												<div class="card" style="width: 18rem;">
-													<img src="/media/4.jpg" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h4 class="card-title">책 제목</h4>
-														<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="carousel-item">
-											<div class="col-lg-3">
-												<div class="card" style="width: 18rem;">
-													<img src="/media/4.jpg" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h4 class="card-title">책 제목</h4>
-														<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="carousel-item">
-											<div class="col-lg-3">
-												<div class="card" style="width: 18rem;">
-													<img src="/media/4.jpg" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h4 class="card-title">책 제목</h4>
-														<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-													</div>
+					<div class="bookBox">
+						<div class="row mx-auto my-auto justify-content-center">
+							<div id="recipeCarousel2" class="carousel slide carousel-book"
+								data-bs-ride="carousel">
+								<div class="carousel-inner" role="listbox">
+									<div class="carousel-item active">
+										<!-- 카드 -->
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									<!-- 버튼-->
-									<a class="carousel-control-prev bg-transparent w-aut"
-										href="#recipeCarousel2" role="button" data-bs-slide="prev">
-										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									</a> <a class="carousel-control-next bg-transparent w-aut"
-										href="#recipeCarousel2" role="button" data-bs-slide="next">
-										<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									</a>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+								<!-- 버튼-->
+								<a class="carousel-control-prev bg-transparent w-aut"
+									href="#recipeCarousel2" role="button" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								</a> <a class="carousel-control-next bg-transparent w-aut"
+									href="#recipeCarousel2" role="button" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<%-- *************************** footer *************************** --%>
-		<div class=footer>
-			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
-		</div>
+	<%-- *************************** footer *************************** --%>
+	<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	</div>
 	</div>
 
 	<script>
