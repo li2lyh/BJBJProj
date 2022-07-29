@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -69,16 +70,40 @@ public class MemberController {
 		if (dto != null) {
 			session.setAttribute("loginSession", dto);
 			System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
+			
 			return "success";
 		} else {
 			return "fail";
 		}
 
 	}
-
+	
+	// 쪽지 판별
+	@RequestMapping(value="/readYn")
+	@ResponseBody
+	public String readYn(String email) throws Exception{
+		
+			//읽지 않은 쪽지가 있는지 판별 
+			List<LetterDTO> letterList = Lservice.selectLately(email);
+			String readYn = "";
+			for(LetterDTO lt : letterList) {
+				if(lt.getRead().equals("N")) { // 읽지 않은 쪽지가 있을 떄
+					readYn = "N";
+					break;
+				}else if(lt.getRead().equals("Y")) {
+					readYn = "Y";
+				}else { // 쪽지 자체가 없을 때
+					readYn = "Y";
+				}
+			}
+			return readYn;
+		
+	}
+		
 	
 	/* ************ 로그아웃 ************ */
 	
+
 	// 로그아웃
 	@RequestMapping(value = "/logout")
 	public String logout() {
@@ -86,7 +111,6 @@ public class MemberController {
 		return "redirect: / ";
 	}
 
-	
 	/* ************ 회원가입 ************ */
 
 	// 회원가입 페이지
@@ -103,7 +127,6 @@ public class MemberController {
 		Mservice.signUp(dto);
 		return "redirect:/";
 	}
-
 
 	// 카카오 회원가입 페이지
 	@RequestMapping(value = "/toKakaoSignUp")
@@ -126,7 +149,6 @@ public class MemberController {
 		Mservice.signUp(dto);
 		return "redirect:/";
 	}
-
 
 	// 이메일 중복 확인
 	@RequestMapping(value = "/confirmEmail")
@@ -151,7 +173,8 @@ public class MemberController {
 	}
 
 	// VerifyPhoneNumber _ 휴대폰 본인인증
-	@RequestMapping(value = "/phoneCheck")
+	@ResponseBody
+  @RequestMapping(value = "/phoneCheck", method = RequestMethod.POST)
 	public String sendSMS(String phone) { // 휴대폰 문자보내기
 		int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);// 난수 생성
 
@@ -261,11 +284,12 @@ public class MemberController {
 			System.out.println("수정 완료");
 			System.out.println("암호화된 pw : " + password);
 			return "redirect:/member/toMyinfo";
+
 		}
 		return null;
 	}
 
-	// 회원 탈퇴 요청
+	/* ************ 회원 탈퇴 ************ */
 	@RequestMapping(value = "/toDelete")
 	@ResponseBody
 	public String toDelete(String email, String password) throws Exception {
@@ -282,6 +306,7 @@ public class MemberController {
 	}
 	
 	/* ************ 참여 독서 모임 ************ */
+
 
 	// 참여 독서 모임 페이지 요청
 	@RequestMapping(value = "/toMybookclub")
@@ -332,7 +357,6 @@ public class MemberController {
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);
 
-
 		return "/mypage/myreview";
 	}
 	
@@ -340,13 +364,35 @@ public class MemberController {
 
 	// 찜 도서 페이지 요청
 	@RequestMapping(value = "/toLikebook")
-	public String toLikebook(Model model) throws Exception {
-		List<LikeBookDTO> list = LBservice.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
-		model.addAttribute("list", list);
+	public String toLikebook() {
 		return "/mypage/likebook";
 	}
 
+	// 찜 독서모임 페이지 요청
+	@RequestMapping(value = "/toLikeclub")
+	public String toLikeclub(Model model) throws Exception{	
+		List<BookclubDTO> list = Bservice.likeClub(((MemberDTO)session.getAttribute("loginSession")).getEmail());
+		
+		for (BookclubDTO dto : list) { 
+			dto.setRecruit_end(Bservice.getDate(dto.getRecruit_end()));
+			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
+			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
+		}
+    model.addAttribute("list", list);
+		return "/mypage/likeclub";
+	}
+	
+	
+	// 찜 도서 삭제 요청
+  
+	/** public String toLikebook(Model model) throws Exception {
+		List<LikeBookDTO> list = LBservice.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		model.addAttribute("list", list);
+		return "/mypage/likebook";
+	} **/
+
 	// 찜 도서 삭제 요청 -> 찜 도서 페이지
+
 	@RequestMapping(value = "/toDeleteLikeBook")
 	public String toDeleteLikeBook(String book_isbn) throws Exception {
 		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
@@ -359,7 +405,7 @@ public class MemberController {
 		}
 		return null;
 	}
-	
+
 	// 찜 도서 삭제 요청 -> 마이 페이지
 	@RequestMapping(value = "/toDeleteLikeBook2")
 	public String toDeleteLikeBook2(String book_isbn) throws Exception {
@@ -392,7 +438,6 @@ public class MemberController {
 		return "/mypage/likeclub";
 	}
 
-
 	// 찜 독서모임 삭제 요청
 	@RequestMapping(value = "/toDeleteLikeClub")
 	@ResponseBody
@@ -404,6 +449,8 @@ public class MemberController {
 		return "success";
 	}
 	
+	/* ************ 쪽지함 ************ */
+
 	/* ************ 쪽지함 ************ */
 
 	// 쪽지함 페이지 요청
@@ -447,6 +494,10 @@ public class MemberController {
 		dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 
 		model.addAttribute("dto", dto);
+		
+		// 해당 쪽지 읽음 처리
+		Lservice.updateRead(no);
+		
 		return "/mypage/detailLetter";
 	}
 

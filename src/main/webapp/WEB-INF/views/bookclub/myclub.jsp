@@ -130,6 +130,10 @@ td, th {
 #slashBox {
 	width: 20px;
 }
+.imgBox img{
+	width:80%;
+	height:80%;
+}
 </style>
 
 </head>
@@ -166,11 +170,11 @@ td, th {
 			<div class="row">
 				<div class="col-4 imgBox">
 					<c:choose>
-						<c:when test="${dto.img_id eq null}">
+						<c:when test="${dto.book_cover eq null}">
 							<img src="/resources/images/noImg.png" class="card-img-top">
 						</c:when>
 						<c:otherwise>
-							<img src="" class="card-img-top">
+							<img src="${dto.book_cover}" class="card-img-top">
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -313,6 +317,8 @@ td, th {
 						</tr>
 					</thead>
 					<tbody>
+						
+						
 						<c:choose>
 							<c:when test="${list.size() == 0}">
 								<tr>
@@ -344,6 +350,8 @@ td, th {
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
+					
+					
 					</tbody>
 				</table>
 			</div>
@@ -376,6 +384,9 @@ td, th {
 
 	<script>
 		
+
+	
+	
 	<%-- $("input:radio[name:'tag'][value='${dto.tag}']").prop("checked",true);--%>
 		
 	<%-- 신청목록 시작 --%>
@@ -420,13 +431,13 @@ td, th {
 								} else if (data == "false") {
 									alert("오류발생");
 								} else { // 인원 다 모았을 때
-
+									
+							// 해당 방에 신청했던 선택받지 못한 인원들 지원취소처리
+							// 선택받지 못한 인원들에게 알림 (쪽지)
+									
 									alert("모든 인원이 모였습니다!");
 									location.href = "/club/clubBoard?room_id="+'${dto.room_id}';
-
-									// 해당 방에 신청했던 선택받지 못한 인원들 지원취소처리
-									// 선택받지 못한 인원들에게 알림 (쪽지?)
-									
+					
 								}
 
 							},
@@ -450,10 +461,12 @@ td, th {
 					url : "/club/approve",
 					data : {
 						'email' : email,
-						'approve' : 'N'
+						'approve' : 'N',
+						'room_id' : '${dto.room_id}'
 					},
 					success : function(data) {
-
+						alert(nickname + " 님을 거절하였습니다.");
+						location.href="/club/myclub?room_id="+'${dto.room_id}';
 					},
 					error : function(e) {
 						console.log(e);

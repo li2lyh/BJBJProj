@@ -57,7 +57,7 @@ public class MemberDAO {
 		public MemberDTO checkBlack(String email)throws Exception {
 			return session.selectOne("memberMapper.checkBlack", email);
 		}
-	
+
 	/* *************** SignUp *************** */
 	public int insert(MemberDTO dto) throws Exception {
 		return session.insert("memberMapper.insert", dto);

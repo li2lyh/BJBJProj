@@ -91,10 +91,16 @@ input.underlineSearch:focus {
 }
 
 /* 쪽지함 */
-.letterImg{
+
+.letterImg {
 	width: 2rem;
 	height: 2rem;
 	padding: 2px;
+}
+
+
+.letterImg:hover {
+	cursor: pointer;
 }
 
 /* ******** Nav 박스 ******** */
@@ -168,6 +174,7 @@ input.underlineSearch:focus {
 }
 </style>
 
+
 <body>
 	<div class="head-container">
 		<!-- ************ 로그인 영역 ************ -->
@@ -177,8 +184,10 @@ input.underlineSearch:focus {
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
-							<img class="letterImg" src="/resources/images/letter.png">							
-							${loginSession.nickname}<span>님 환영합니다!</span>
+							<div class="welcomeBox">
+								<img class="letterImg" src="/resources/images/letter.png">
+								${loginSession.nickname}<span>님 환영합니다!</span>
+							</div>
 						</c:when>
 						<c:otherwise>
 							<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
@@ -275,7 +284,6 @@ input.underlineSearch:focus {
 				</div>
 			</div>
 		</div>
-
 		<!-- ************ Logo, nav 영역 ************ -->
 
 		<div class="navBox row">
@@ -285,6 +293,7 @@ input.underlineSearch:focus {
 					<div class="logo">Logo</div>
 				</div>
 			</div>
+
 
 			<!-- ***** Blank ***** -->
 			<div class="col-8">
@@ -298,6 +307,7 @@ input.underlineSearch:focus {
 					<li class="nav-item dropdown">
 						<button class="dropbtn" id="">&nbspBook&nbsp</button>
 						<div class="dropdown-content">
+
 							<a href="/books/arrivals">신간도서</a>
 							<a href="/books/bestseller">베스트셀러</a>
 							<a href="/review/board">도서리뷰</a>
@@ -313,12 +323,31 @@ input.underlineSearch:focus {
 							<button class="dropbtn"><a href="/club/toClubList">BookClub</a></button>
 						</c:if>
 						<div class="dropdown-content">
-							<a href="/">BookClub</a>
-							<a href="#">클럽만들기</a>
-							<a href="#">MyBook</a>
-						</div>
+							<a href="/club/toClub">모집 중인 클럽</a>
+
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
+										data-bs-target="#login">내 클럽</a>
+								</c:otherwise>
+							</c:choose>
+
+
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/club/myClub" id="btnMyclub">클럽 관리</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
+										data-bs-target="#login">클럽 관리</a>
+								</c:otherwise>
+							</c:choose>
+            </div>         
 					</li>
-					<li class="nav-item">
+						<li class="nav-item">
 						<a href="/library/map"><button class="dropbtn">Library</button></a>
 					</li>
 				</ul>
@@ -328,14 +357,47 @@ input.underlineSearch:focus {
 	</div>
 
 	<script>
-     /* 쪽지함 */
-		$(".letterImg").on("click", function() {
-			let url = "/member//toLetter";
-			let name = "쪽지함";
-			let option = "width=700, height=600, left=600, top=100";
-			window.open(url, name, option);
-		})
+	
+// 주기적인 수신 쪽지 확인
+$(document).ready(function(){
+		
+	console.log("로그인세션 : " + "${loginSession.email}");
+	let loginSession = "${loginSession.email}";	
+	
+		setInterval(function(){
+		if(loginSession != ""){
+			
+			$.ajax({
+				url:"/member/readYn",
+				type:"post",
+				data:{"email":"${loginSession.email}"},
+				success: function(data){
+					
+					if(data == 'Y'){// 쪽지를 다 읽은 상태 혹은 쪽지가 없을 때
+						$(".letterImg").attr("src","/resources/images/letter.png");
+					}else if(data == 'N'){//안읽은 쪽지가 있을 때
+						console.log(data);
+						$(".letterImg").attr("src","/resources/images/letter3.png");
+					}
+				},
+				error: function(e){
+					console.log(e);
+				}	
+			})
+		}			
+		},5000); // 5000 : 5초
+	});
 
+	/* 쪽지함 */
+	$(".letterImg").on("click", function() {
+		let url = "/member//toLetter";
+		let name = "쪽지함";
+		let option = "width=700, height=600, left=600, top=100";
+		window.open(url, name, option);
+	})
+	
+
+   
 		/****************************************** 검색 버튼 *****************************************/
 		
 		/****************************************** 아이디 기억하기 ************************************/
@@ -399,6 +461,7 @@ input.underlineSearch:focus {
 		$("#loginBtn").on("click", function() {
 
 			$.ajax({
+
 				url : "/member/login",
 				type : "post",
 				data : {

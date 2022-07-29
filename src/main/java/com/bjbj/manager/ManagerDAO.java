@@ -8,8 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bjbj.clubboard.ClubBoardDTO;
-import com.bjbj.letter.LetterDTO;
+import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.review.ReviewDTO;
 
@@ -49,12 +48,18 @@ public class ManagerDAO {
 	}
 	
 	
-	public List<Map<String, Object>> selectBookroomM() throws Exception{ //전체 모임 조회
-		return session.selectList("managerMapper.selectBookroomM");
+	public List<Map<String, Object>> selectBookroom() throws Exception{ //전체 모임 조회
+		return session.selectList("managerMapper.selectBookroom");
+	}
+	public List<BookclubDTO>searchBookclub(String category, String keyword)throws Exception{
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+		return session.selectList("managerMapper.searchBookclub", map);
 	}
 	
-	public int deleteBookroomM(int room_id) throws Exception{ //모임 개별 삭제
-		return session.delete("managerMapper.deleteBookroomM" , room_id);
+	public int deleteBookroom(int room_id) throws Exception{ //모임 개별 삭제
+		return session.delete("managerMapper.deleteBookroom" , room_id);
 	}
 	
 	public List<ReviewDTO> selectAllreview() throws Exception{ //전체 리뷰 조회
@@ -76,6 +81,7 @@ public class ManagerDAO {
 		session.delete("managerMapper.deleteAllReview" , no);
 	}
 	
+	
 	public List<ReportDTO>selectAllreport()throws Exception{ //회원 신고 조회
 		return session.selectList("managerMapper.selectAllreport");
 	}
@@ -85,18 +91,21 @@ public class ManagerDAO {
 	public List<ReportBookroomDTO>selectRoomreport()throws Exception{ //모임 신고 조회
 		return session.selectList("managerMapper.selectRoomreport");
 	}
-	public void deleteReportBR(int room_id)throws Exception{ //모임신고 - 신고 삭제
-		session.delete("managerMapper.deleteReportBR", room_id);
+	public void deleteReportBookroom(int room_id)throws Exception{ //모임신고 - 신고 삭제
+		session.delete("managerMapper.deleteReportBookroom", room_id);
+	}
 	
+	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
+		session.update("managerMapper.addReport", dto);
+	}
+	public int selectMemberReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가 후 신고횟수 다시 선택하기
+		return session.selectOne("managerMapper.selectMemberReport", dto);
+	}
+	
+	
+	public void addReportBookroom(int room_id)throws Exception{ //모임신고 - 경고 추가
+		session.update("managerMapper.addReportBookroom", room_id);
+	}
 
-	
-		
-	}
-	public void addReportBR(int room_id)throws Exception{ //모임신고 - 경고 추가
-		session.update("managerMapper.addReportBR", room_id);
-	}
-	public void modifyActionBR(int room_id)throws Exception{ //모임신고 - 조치 변경
-		session.update("managerMapper.modifyActionBR", room_id);
-	}
 	
 }

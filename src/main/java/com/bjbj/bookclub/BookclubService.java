@@ -147,7 +147,7 @@ public class BookclubService {
 	public List<BoardDTO> selectAllBoard() throws Exception {
 		return dao.selectAllBoard();
 	}
-  
+
 	// 클럽내 게시판 목록
 	public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
 		return dao.selectAllBoardById(room_id);
@@ -178,4 +178,15 @@ public class BookclubService {
 		return dao.selectRoleMember(email);
 	}
 
+				/* 모임 찜 하기 */
+				public int insertLike(LikeClubDTO dto) throws Exception {
+					return dao.insertLike(dto);
+				}
+				
+				/* 찜한 모임 삭제 (일반) */
+				public int deleteLike(int room_id, String email) throws Exception {
+					return dao.deleteLike(room_id, email);
+				}
+
+	
 }

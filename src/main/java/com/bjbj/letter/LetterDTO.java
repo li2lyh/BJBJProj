@@ -11,7 +11,7 @@ public class LetterDTO {
 	private String read;
 	
 	public LetterDTO() {}
-  
+
 	public LetterDTO(int no, String email, String title, String content, String written_date, String read) {
 		super();
 		this.no = no;
@@ -21,7 +21,7 @@ public class LetterDTO {
 		this.written_date = written_date;
 		this.read = read;
 	}
-  
+
 	public LetterDTO(int no, String email, String title, String content, Date written_date, String read) {
 		super();
 		this.no = no;

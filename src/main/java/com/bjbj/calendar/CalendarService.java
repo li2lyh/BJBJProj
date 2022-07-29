@@ -21,9 +21,16 @@ public void insertPlan(CalendarDTO dto) throws Exception{
 	dao.insertPlan(dto);
 }
 
-public String setDateFormat(String string) {
-	return dao.setDateFormat(string);
+public void deletePlan(int cal_id) throws Exception{
+	
+	dao.deletePlan(cal_id);
 }
+
+public void updatePlan(CalendarDTO dto)throws Exception{
+	
+	dao.updatePlan(dto);
+}
+
 
 
 

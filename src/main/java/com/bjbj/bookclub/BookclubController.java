@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bjbj.letter.LetterDTO;
+import com.bjbj.letter.LetterService;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.member.MemberService;
 
@@ -21,6 +23,8 @@ public class BookclubController {
 	private BookclubService service;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private LetterService letterService;
 
 	@Autowired
 	private HttpSession session;
@@ -28,6 +32,7 @@ public class BookclubController {
 	@RequestMapping(value = "/toClub") // 클럽리스트 요청
 	public String toClub(Model model) throws Exception {
 		List<BookclubDTO> list = service.selectList();
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
 		
 		for (BookclubDTO dto : list) { // 날짜 형식 format( MM월 dd일 )
 			// System.out.println("open_date : " + dto.getOpen_date());
@@ -39,10 +44,15 @@ public class BookclubController {
 		System.out.println("list : " + list.toString());
 		model.addAttribute("list", list);
 
-		//String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
-		// 현재 본인이 참여중인 클럽 room_id 포함 정보 구하기 (by email)
-		//RoleDTO roleDTO = service.selectRole(email);
-		//model.addAttribute("role", roleDTO);
+		// 본인이 참여중인 클럽 room_id 포함 정보 구하기 (by email)
+		RoleDTO roleDTO = service.selectRole(email);
+		System.out.println("roleDTO : " + roleDTO);
+		model.addAttribute("role", roleDTO);
+		
+		// 본인이 지원한 클럽이 있는지 판별 (waiting table)
+		WaitingDTO waitingDTO = service.selectByEmail(email);
+		System.out.println("waitingDTO : " + waitingDTO);
+		model.addAttribute("waiting", waitingDTO);
 		
 		return "/bookclub/findclub";
 	}
@@ -150,7 +160,7 @@ public class BookclubController {
 
 		if (approve.equals("Y")) { // 승인 시
 
-			System.out.println("email : " + email);
+			System.out.println("target email : " + email);
 
 			// 해당 room에 정원 여유가 있는지 여부 (없으면 return false)
 			int current = service.selectOne(room_id).getRoom_current(); // 현재 인원
@@ -161,6 +171,12 @@ public class BookclubController {
 			if (current >= people) {
 				return "false";
 			} else {
+				
+				// 승인된 인원에게 쪽지 보내기
+				String letter_title = "[클럽] 신청한 클럽의 승인이 완료되었습니다!";
+				String letter_content = "클럽이 시작되면 다시 알려드릴게요!";
+				
+				letterService.insertLetter(new LetterDTO(0, email, letter_title, letter_content,"", null));
 
 				// role 테이블에 해당 유저 일반모임원 직급으로 등록
 				RoleDTO role = new RoleDTO(email, room_id, "C"); // C : 일반 모임원
@@ -177,14 +193,36 @@ public class BookclubController {
 				System.out.println("현재인원(후) : " + current);
 				System.out.println("최대인원(후) : " + people);
 
-				if (current == people) {
+				if (current == people) { // 인원이 딱 맞을 경우 (인원이 다 찼을 때)
 					service.updateStatus("진행중", room_id);
+					
+					// 현재 방의 모임원 탐색 후 모임이 시작됐다는 쪽지 전송
+					List<RoleDTO> list = service.selectRoleByRoom(room_id);
+					for(int i = 0; i < list.size(); i++) {
+						 email = list.get(i).getEmail();
+						letter_title = "[클럽] 당신의 클럽이 시작되었습니다!";
+						letter_content = "즐독!";
+							
+							letterService.insertLetter(new LetterDTO(0, email, letter_title, letter_content,"", null));
+					}
+					
+					
 					return "go";
 				}
 			}
 			return "true";
 
 		} else if (approve.equals("N")) { // 거절 시
+			
+			// 거절된 인원에게 쪽지 보내기
+			String letter_title = "[클럽] 안타깝지만 지원하신 클럽에 참여 할 수 없게 되었습니다.";
+			String letter_content = "다음에 함께 해요ㅋㅋ";
+			
+			letterService.insertLetter(new LetterDTO(0, email, letter_title, letter_content,"", null));
+			
+			// waiting테이블에서 해당 email에 해당하는 데이터 삭제
+			service.deleteByEmail(email);
+			
 
 			return "true";
 		}
@@ -193,6 +231,7 @@ public class BookclubController {
 
 	@RequestMapping(value = "/clubBoard") // 내모임게시판
 	public String clubBoard(Model model) throws Exception {
+	
 		// 로그인 된 유저 정보
 		 MemberDTO loginSession =(MemberDTO)session.getAttribute("loginSession");
 		 model.addAttribute("session", loginSession);
@@ -204,6 +243,23 @@ public class BookclubController {
 		 System.out.println("로그인 id : " + id);
 		 System.out.println("room_id : " + room_id);
 		 
+		// 현재 방에 지원했지만 선택받지 못한 인원들 탐색
+		List<String> waitingList = service.selectByRoom(room_id);
+		
+		if(waitingList.size() != 0) { // 있으면
+			
+			String title = "[클럽]안타깝지만 신청한 클럽에 선택되지 못하셨습니다.";
+			String content = "어필이 부족했나봐요 ㅋㅋ";
+			
+			// 해당 인원들 쪽지 전송 및 승인대기상태(waiting) 삭제
+			for(int i = 0; i < waitingList.size(); i++) {
+				String email = waitingList.get(i);
+				letterService.insertLetter(new LetterDTO(0, email, title, content, "" , null)); 
+				service.deleteByEmail(email);
+			 }
+			
+		}
+		
 		// 해당 방 정보
 		BookclubDTO clubDto = service.selectOne(room_id);
 		clubDto.setOpen_date(service.getStrDate(clubDto.getOpen_date()));
@@ -285,7 +341,6 @@ public class BookclubController {
 		return list;
 	}
 
-	
 	@RequestMapping(value = "/toClubList") // 로그인 된 클럽리스트 요청
 	public String toClubList(Model model) throws Exception {
 		List<BookclubDTO> list = service.selectList();
@@ -303,6 +358,34 @@ public class BookclubController {
 		model.addAttribute("likeList", likeList);
 		
 		return "/bookclub/findclubList";
+	}
+	
+	@RequestMapping(value = "/insertLike") // 찜 추가
+	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
+		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
+		dto.setRoom_id(room_id);
+		dto.setEmail(loginSession.getEmail());		
+		System.out.println(dto.toString());
+		
+		int rs = service.insertLike(dto); 		
+		if (rs > 0) {
+			System.out.println("찜 완료 " +room_id); 
+			return "redirect:/club/toClubList";
+		}
+		return null;			
+	}
+  
+	@RequestMapping(value = "/deleteLike") // 찜 삭제
+	public String deleteLike(int room_id) throws Exception {
+		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
+		System.out.println("room_id : " + room_id);
+		int rs = service.deleteLike(room_id, email);
+		
+		if (rs > 0) {
+			System.out.println("삭제 완료 "  +email+ " : " +room_id);
+			return "redirect:/club/toClubList";
+		}
+		return null;
 	}
 	
 	@RequestMapping(value = "/insertLike") // 찜 추가

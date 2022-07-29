@@ -70,9 +70,21 @@ a:hover {
 								<td>
 									<input type="checkbox" class="deleteNo" id="deleteNo" name="no" value="${dto.no}">
 								</td>
+								<!-- 읽은 쪽지 제목 font-weight 조정 -->
+								<c:choose>
+								<c:when test="${dto.read == 'Y'}">
+								<td class="title">
+									<a href="/member/toDetailLetter?no=${dto.no}">${dto.title}</a>
+								</td>	
+								</c:when>
+								<c:otherwise>>
 								<td class="fw-bold title">
 									<a href="/member/toDetailLetter?no=${dto.no}">${dto.title}</a>
 								</td>
+								</c:otherwise>
+								</c:choose>
+								<!-- 읽은 쪽지 제목 font-weight 조정 끝 -->
+								
 								<td>${dto.written_date}</td>
 							</tr>
 						</c:forEach>

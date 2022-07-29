@@ -1,5 +1,8 @@
 package com.bjbj.books;
 
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,10 +84,36 @@ public class BookController {
 		return "/books/bestseller";
 	}
 	
+	// 도서 검색 ( 모집글 쓰기 - 책검색기능 )
+	@RequestMapping(value = "searchBook")
+	@ResponseBody
+	public Object searchBook(String keyword, Model model) throws Exception{
+		System.out.println(keyword);
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		String list = service.searchBookByKeyword(keyword,"keyword").toString();
+		   
+		// ObjectMapper를 통해 가져온 String을 Map형식으로 데이터 변환 (databind)
+				ObjectMapper mapper = new ObjectMapper();
+				Map<String, Object> map = mapper.readValue(list, Map.class);
+				System.out.println(map.get("item"));
+				 
+				model.addAttribute("search", map.get("item"));
+				
+		return map.get("item");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@ExceptionHandler
 	public String errorHandler(Exception e) {
 		e.printStackTrace();
 		return "redirect:/toError";
 	}
+	
 	
 }

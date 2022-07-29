@@ -1,10 +1,10 @@
+
 package com.bjbj.member;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,7 @@ public class MemberService {
 		return memberDAO.selectAll();
 	}
 
+
 	/* 계정 삭제 */
 	public int delete(String email, String password) throws Exception {
 		return memberDAO.delete(email, password);
@@ -33,10 +34,10 @@ public class MemberService {
 		return memberDAO.updateInfo(email, password, nickname, mydesc);
 	}
 
-	/* *************** ȸ������ *************** */
-	/* *************** Login *************** */
+
+    /* *************** Login *************** */
 	// 일반 로그인
-	public MemberDTO login(String email, String password) throws Exception {
+	public MemberDTO login(String email, String password) throws Exception{
 		return memberDAO.login(email, password);
 	}
 
@@ -64,7 +65,7 @@ public class MemberService {
 	public boolean confirmNickname(String nickname) throws Exception {
 		return memberDAO.confirmNickname(nickname);
 	}
-
+	
 	/* VerifyPhone _ 휴대폰 본인인증 */
 	public void certifiedPhoneNumber(String phone, int randomNumber) {
 		String api_key = "NCSVC9WIIKEOQ2L1"; //NCSVC9WIIKEOQ2L1
@@ -85,10 +86,22 @@ public class MemberService {
 	      } catch (CoolsmsException e) {
 	        System.out.println(e.getMessage());
 	        System.out.println(e.getCode());
-	      } 
+	      }
 	}
 	
-	/* 카카오 회원가입시 난수 비밀번호 생성 */
+  
+	/* *************** Email(ID) 찾기 *************** */
+	/* 이메일  */
+  public MemberDTO searchEmail(String name, String phone) throws Exception {
+		return memberDAO.searchEmail(name, phone);
+	}
+  
+  /*  */
+	public MemberDTO selectByEmail(String email) throws Exception {
+		return memberDAO.selectByEmail(email);
+	}
+  
+  /* 카카오 회원가입시 난수 비밀번호 생성 */
 	public String makePw(String email) throws Exception{
 		UUID makeUUID = UUID.randomUUID();
 		String ranPw  = makeUUID.toString();
@@ -96,21 +109,10 @@ public class MemberService {
 		ranPw = ranPw.substring(0,8);
 		return ranPw;
 	}
-	
-	/* *************** Email(ID) 찾기 *************** */
-	/* 이메일 */
-	public MemberDTO searchEmail(String name, String phone) throws Exception {
-		return memberDAO.searchEmail(name, phone);
-	}
-
-	/*  */
-	public MemberDTO selectByEmail(String email) throws Exception {
-		return memberDAO.selectByEmail(email);
-	}
 
 	/* 비밀번호 변경 */
 	public void modifyPw(String email, String tempPw) throws Exception {
 		memberDAO.modifyPw(email, tempPw);
 	}
-
+  
 }

@@ -51,6 +51,32 @@ public class LetterService {
 	public void insertLetter(LetterDTO dto) throws Exception{
 		dao.insertLetter(dto);
 	}
+	// 선택된 쪽지 전송 (관리자 기능)
+	/*public void submitSelectLetter()throws Exception{
+		dao.submitSelectLetter();
+	}*/
 	
+	//모임장 쪽지 전송 (관리자 기능)
+	public void insertRoomLetter(LetterDTO dto) throws Exception{
+		dao.insertRoomLetter(dto);
+	}
+	
+	// 쪽지 읽음처리
+		public void updateRead(int no) throws Exception{
+			dao.updateRead(no);
+		}
+		
+		// 쪽지 읽음 유무 (이메일)
+		public int readYn(String email) throws Exception{
+			return dao.readYn(email);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 	
 }
