@@ -381,7 +381,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<%-- *************************** footer *************************** --%>
 	<div class=footer>
@@ -390,6 +389,7 @@
 	</div>
 
 	<script>
+	
                     let items = document.querySelectorAll('.carousel-book .carousel-item')
                     items.forEach((el) => {
                         const minPerSlide = 4
