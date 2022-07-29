@@ -11,8 +11,6 @@
 		(#{email}, #{room_id}, #{role})
 	</insert>
 
-
-
 	<select id="selectRole" parameterType="String"
 		resultType="com.bjbj.bookclub.RoleDTO">
 		select * from Role

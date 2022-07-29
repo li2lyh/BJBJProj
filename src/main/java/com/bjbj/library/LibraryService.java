@@ -13,6 +13,7 @@ public class LibraryService {
 	
 	private String serviceKey = "Ly5i4UOb2ovLXliG3aY51YEMRtW%2BkvnnSTQLnyNQ2wNRshOOh%2FqVxAlFy8UCOD23iU%2FrSbj69rgVSiC7hxuEsw%3D%3D";
 
+	// 현재 지역명을 통해 주변 도서관 주소들을 조회
 	public String getAllLibrary(String ctprvn, String sigungu) throws Exception {
 		StringBuilder baseURI = new StringBuilder("http://api.data.go.kr/openapi/tn_pubr_public_lbrry_api"); /*URL*/
 		baseURI.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + serviceKey); /*Service Key*/
