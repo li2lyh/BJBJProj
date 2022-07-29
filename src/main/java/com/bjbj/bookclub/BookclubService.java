@@ -1,4 +1,3 @@
-
 package com.bjbj.bookclub;
 
 import java.util.List;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bjbj.member.MemberDAO;
+import com.bjbj.member.MemberDTO;
 import com.bjbj.utils.PageDTO;
 
 @Service
@@ -144,24 +144,38 @@ public class BookclubService {
 	}
 	
 	// 클럽내 게시판 목록
-	public List<BoardDTO> selectAllBoard() throws Exception{
-	return dao.selectAllBoard();
+	public List<BoardDTO> selectAllBoard() throws Exception {
+		return dao.selectAllBoard();
 	}
-	
+  
 	// 클럽내 게시판 목록
 	public List<BoardDTO> selectAllBoardById(int room_id) throws Exception{
 		return dao.selectAllBoardById(room_id);
 	}
 	
-	
 	// 클럽내 게시판 게시글 수정
 	public void updateBoard(BoardDTO dto) throws Exception{
 		dao.updateBoard(dto);
 	}
-
+  
 	// 게시글 삭제
 	public void deleteBoard(int board_seq) throws Exception{
 		dao.deleteBoard(board_seq);
+	}
+
+	// 모임 신고
+	public void insertReportBookroom(ReportBookroomDTO reportBookroomDTO) throws Exception {
+		dao.insertReportBookroom(reportBookroomDTO);
+	}
+	
+	// 회원 신고
+	public void insertReport(ReportDTO reportDTO) throws Exception{
+		dao.insertReport(reportDTO);
+	}
+
+	// 모임원 닉네임 불러오기
+	public List<MemberDTO> selectRoleMember(String email) throws Exception{
+		return dao.selectRoleMember(email);
 	}
 
 }

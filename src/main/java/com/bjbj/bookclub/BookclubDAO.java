@@ -198,27 +198,26 @@ public class BookclubDAO {
 		map.put("email", email);
 		return session.delete("clubMapper.deleteLike", map);
 	}
+
+	//모임 신고하기 데이터 삽입
+	public void insertReportBookroom(ReportBookroomDTO dto) throws Exception{
+		session.insert("clubMapper.insertReportBookroom", dto);
+	}
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//회원 신고하기
+	public void insertReport(ReportDTO dto) throws Exception{
+		session.insert("clubMapper.insertReport", dto);
+	}
+	
+	// 신고자 닉네임 불러오기
+	public MemberDTO selectNickname(String nickname) throws Exception {
+		return session.selectOne("clubMapper.selectNickname", nickname);
+	}
+	
+	// 모임원 닉네임 불러오기
+	public List<MemberDTO> selectRoleMember(String email) throws Exception {
+		return session.selectList("clubMapper.selectRoleMember", email);
+	}
+	
 }
+

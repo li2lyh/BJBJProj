@@ -38,7 +38,7 @@ public class BookclubController {
 
 		System.out.println("list : " + list.toString());
 		model.addAttribute("list", list);
-		
+
 		//String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
 		// 현재 본인이 참여중인 클럽 room_id 포함 정보 구하기 (by email)
 		//RoleDTO roleDTO = service.selectRole(email);
@@ -230,6 +230,11 @@ public class BookclubController {
 		model.addAttribute("board", boardList);
 		// 해당 방의 캘린더 정보
 		
+		// 해당 모임의 멤버 닉네임 나열하기
+		List<MemberDTO> list = service.selectRoleMember(id);
+		System.out.println("list : " + list);
+		model.addAttribute("list", list);
+
 		return "/bookclub/clubBoard";
 	}
 
@@ -279,6 +284,7 @@ public class BookclubController {
 				
 		return list;
 	}
+
 	
 	@RequestMapping(value = "/toClubList") // 로그인 된 클럽리스트 요청
 	public String toClubList(Model model) throws Exception {
@@ -326,4 +332,36 @@ public class BookclubController {
 		}
 		return null;
 	}
+	
+	// 모임 신고하기 요청
+	@RequestMapping(value = "/reportBookroom")
+	public String reportBookroom(ReportBookroomDTO dto) throws Exception {
+		System.out.println("room_title : " + dto.getRoom_title());
+		System.out.println("report_content : " + dto.getReport_content());
+		System.out.println("report_detail : " + dto.getReport_detail());
+		
+		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
+		dto.setReporter_nickname(nickname);
+	
+		service.insertReportBookroom(dto);		
+		return "redirect:/club/toClub";
+	}
+
+	// 회원 신고하기 요청
+	@RequestMapping(value = "/report")
+	public String report(ReportDTO dto) throws Exception {
+		System.out.println("email : " + dto.getEmail());
+		System.out.println("reporter_nickname : " + dto.getReporter_nickname());
+		System.out.println("report_content : " + dto.getReport_content());
+		System.out.println("report_detail : " + dto.getReport_detail());
+		
+
+		
+		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
+		dto.setReporter_nickname(nickname);
+		
+		service.insertReport(dto);
+		return "redirect:/club/clubBoard";
+	}
+				
 }

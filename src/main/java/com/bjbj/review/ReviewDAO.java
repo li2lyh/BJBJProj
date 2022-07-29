@@ -36,7 +36,7 @@ public class ReviewDAO {
 	
 	// 게시글 삭제
 	public int deleteReview(int review_no) throws Exception {
-		int rs = session.delete("reviewMapper.deletePost", review_no);
+		int rs = session.delete("reviewMapper.delete", review_no);
 		return rs; 
 	}
 	

@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping(value = "/review")
 @Controller
+@RequestMapping(value = "/review")
 public class ReviewController {
 	// 리뷰 게시판과 관련된 요청 처리
-
 	@Autowired
 	private ReviewService service;
 	@Autowired
@@ -49,7 +49,7 @@ public class ReviewController {
 	public String insertReview(ReviewDTO dto, MultipartFile file) throws Exception {
 		System.out.println(dto.toString());
 		String path = session.getServletContext().getRealPath("photo");
-		// service.insertReview(dto, path, file);
+		service.insertReview(dto, path, file);
 		
 		return "redirect:/review/board";
 	}

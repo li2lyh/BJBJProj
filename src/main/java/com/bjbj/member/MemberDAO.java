@@ -47,24 +47,27 @@ public class MemberDAO {
 		return session.selectOne("memberMapper.login", map);
 	}
 
-	/* *************** ȸ���� *************** */
 	// 카카오 로그인 _ kakao Login
 	public MemberDTO kakaoLogin(String email) throws Exception {
 		return session.selectOne("memberMapper.kakaoLogin", email);
 	}
-
+	
+	/* *************** 블랙리스트 *************** */
+	// 블랙리스트
+		public MemberDTO checkBlack(String email)throws Exception {
+			return session.selectOne("memberMapper.checkBlack", email);
+		}
+	
 	/* *************** SignUp *************** */
 	public int insert(MemberDTO dto) throws Exception {
 		return session.insert("memberMapper.insert", dto);
 	}
 
-	/* *************** �̸��� �ߺ�Ȯ�� *************** */
 	/* *************** Email_Confirm *************** */
 	public boolean confirmEmail(String email) throws Exception {
 		return session.selectOne("memberMapper.confirmEmail", email);
 	}
 
-	/* *************** �г��� �ߺ�Ȯ�� *************** */
 	/* *************** Nickname_Confirm *************** */
 	public boolean confirmNickname(String nickname) throws Exception {
 		return session.selectOne("memberMapper.confirmNickname", nickname);
@@ -79,7 +82,6 @@ public class MemberDAO {
 		return session.selectOne("memberMapper.searchEmail", map);
 	}
 
-	/* *************** ��й�ȣ ���� *************** */
 	/* *************** Password Modify *************** */
 	public void modifyPw(String email, String tempPw) throws Exception {
 		Map<String, String> map = new HashMap<>();

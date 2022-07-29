@@ -83,12 +83,16 @@ div {
 
 <body>
 	<div class="container-fluid container-xl">
+		<!------------------------------------- header ----------------------------------------->
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+		<!------------------------------------- main content ----------------------------------->
 		<div class="titleBox">
 			<h1>Library</h1>
 			<span>주변 도서관 정보를 보여줍니다. 모임을 할 장소를 찾아보세요!</span>
 		</div>
-		<button type="button" id="myLocation">내위치</button>
-		<button type="button" id="nearLoc">주변도서관</button>
+		
 		<div class="row">
 			<div class="col-8">
 				<div class="map_wrap">
@@ -99,6 +103,7 @@ div {
 				</div>
 			</div>
 			<div class="col-4">
+				<button type="button" id="myLocation">내위치</button>
 				<div class="selectLocRange">
 					선택지역
 					<select class="form-select area1" style="width: auto; display:inline;" aria-label="Default select example">
@@ -108,11 +113,6 @@ div {
 					<select class="form-select area2" style="width: auto; display:inline;" aria-label="Default select example">
 						<option selected>시군구명</option>
 					</select>
-				</div>
-				<div class="searchLibrary">
-					도서관이름
-					<input class="form-control" style="width: 200px; display:inline;">
-					<button type="button" class="btn btn-primary" id="searchLibrary">검색</button>
 				</div>
 				<div class="loc_list">
 					<div class="loc_item">
@@ -124,13 +124,13 @@ div {
 				</div>
 			</div>
 		</div>
+		<!------------------------------------- footer ----------------------------------------->
+		<div class="footer">
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
 	</div>
 
 	<script>
-	
-		$("#searchLibrary").on("click", function(){
-			
-		})
 	
 		// select 박스 - 자역권별 검색
 		let area = {
@@ -203,7 +203,7 @@ div {
 			});
 		})
 	
-	
+		// 내 위치로 이동
 		document.getElementById('myLocation').onclick = function() {
 			if(navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {
@@ -217,9 +217,6 @@ div {
 			}
 		}
 		
-		document.getElementById('nearLoc').onclick = function() {
-			searchAddrFromCoords(map.getCenter(), getNearLibrary)
-		}
 	
 		// 1. 지도 생성하기
 		let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -341,6 +338,7 @@ div {
 					, success: function(data) {
 						let addrList = data.response.body.items
 						makeMarkers(addrList)
+						makeLibraryList(addrList)
 					}, error: function(e) {
 						console.log(e);
 					}
@@ -348,7 +346,26 @@ div {
 			}
 		}
 		
+		// 주변 도서관 정보를 옆애 뿌리기
+		function makeLibraryList(addrList) {
+			console.log(addrList)
+			
+			$(".loc_list").empty();
+			
+			for (let item of addrList){
+				let div = $("<div>").attr("class","loc_item");
+				let span1 = $("<span>").append(item.lbrryNm)
+				let span2 = $("<span>").append(item.weekdayOperOpenHhmm + " ~ " + item.weekdayOperColseHhmm)
+				let span3 = $("<span>").append(item.rdnmadr)
+				let span4 = $("<span>").append(item.phoneNumber)
+				
+				div.append(span1, span2, span3, span4)
+				$(".loc_list").append(div)
+				
+			}
+		}
 		
+		// 주변 도서관 정보로 마커 만들기
 		let markers = [];
 		function makeMarkers(addrList) {
 			if (markers.length > 0) {
@@ -357,7 +374,6 @@ div {
 				}
 			}
 			for (let addr of addrList) {
-				console.log(addr);
 				// 마커가 표시될 위치입니다
 				var markerPosition  = new kakao.maps.LatLng(addr.latitude, addr.longitude); 
 				// 마커를 생성합니다
