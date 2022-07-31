@@ -162,14 +162,6 @@ public class BookclubDAO {
 	public void deleteBoard(int board_seq)throws Exception{
 		session.delete("boardMapper.deleteBoard", board_seq);
 	}
-<<<<<<< HEAD
-=======
-	
-	
-	
-	
-	
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
 	/* 페이징 */
 	public int getCount(String email) throws Exception {
@@ -222,7 +214,6 @@ public class BookclubDAO {
 	}
 	
 	// 신고자 닉네임 불러오기
-<<<<<<< HEAD
 	//public MemberDTO selectNickname(String nickname) throws Exception {
 	//	return session.selectOne("clubMapper.selectNickname", nickname);
 	//}
@@ -232,16 +223,6 @@ public class BookclubDAO {
 	//	return session.selectList("clubMapper.selectRoleMember", email);
 	//}
 	
-=======
-	public MemberDTO selectNickname(String nickname) throws Exception {
-		return session.selectOne("clubMapper.selectNickname", nickname);
-	}
-	
-	// 모임원 닉네임 불러오기
-	public List<MemberDTO> selectRoleMember(String email) throws Exception {
-		return session.selectList("clubMapper.selectRoleMember", email);
-	}
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
 }
 

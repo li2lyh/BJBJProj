@@ -35,10 +35,6 @@ public class BookclubController {
 	@RequestMapping(value = "/toClub") // 클럽리스트 요청
 	public String toClub(Model model) throws Exception {
 		List<BookclubDTO> list = service.selectList();
-<<<<<<< HEAD
-=======
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		
 		for (BookclubDTO dto : list) { // 날짜 형식 format( MM월 dd일 )
 			// System.out.println("open_date : " + dto.getOpen_date());
@@ -50,19 +46,6 @@ public class BookclubController {
 		System.out.println("list : " + list.toString());
 		model.addAttribute("list", list);
 
-<<<<<<< HEAD
-=======
-		// 본인이 참여중인 클럽 room_id 포함 정보 구하기 (by email)
-		RoleDTO roleDTO = service.selectRole(email);
-		System.out.println("roleDTO : " + roleDTO);
-		model.addAttribute("role", roleDTO);
-		
-		// 본인이 지원한 클럽이 있는지 판별 (waiting table)
-		WaitingDTO waitingDTO = service.selectByEmail(email);
-		System.out.println("waitingDTO : " + waitingDTO);
-		model.addAttribute("waiting", waitingDTO);
-		
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		return "/bookclub/findclub";
 	}
 
@@ -84,11 +67,6 @@ public class BookclubController {
 		System.out.println("book cover : " + dto.getBook_cover());
 		// (알라딘API) itemId 로 해당 책의 img 검색
 		
-<<<<<<< HEAD
-=======
-		
-		
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		
 		String email = ((MemberDTO)session.getAttribute("loginSession")).getEmail();
 		RoleDTO roleDto = new RoleDTO(email, 0, "L");
@@ -305,17 +283,10 @@ public class BookclubController {
 		model.addAttribute("board", boardList);
 		// 해당 방의 캘린더 정보
 		
-<<<<<<< HEAD
 		// 해당 모임의 멤버 닉네임 나열하기 (승윤님)
 		//List<MemberDTO> list = service.selectRoleMember(id);
 		//System.out.println("list : " + list);
 		//model.addAttribute("list", list);
-=======
-		// 해당 모임의 멤버 닉네임 나열하기
-		List<MemberDTO> list = service.selectRoleMember(id);
-		System.out.println("list : " + list);
-		model.addAttribute("list", list);
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 		return "/bookclub/clubBoard";
 	}
@@ -385,7 +356,6 @@ public class BookclubController {
 		
 		return "/bookclub/findclubList";
 	}
-<<<<<<< HEAD
 	
 	@RequestMapping(value = "/insertLike") // 찜 추가 -> 로그인 한 클럽리스트 페이지
 	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
@@ -467,71 +437,7 @@ public class BookclubController {
 		service.insertReport(dto);
 		return "redirect:/club/clubBoard";
 	}
-=======
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
-	@RequestMapping(value = "/insertLike") // 찜 추가
-	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
-		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
-		dto.setRoom_id(room_id);
-		dto.setEmail(loginSession.getEmail());		
-		System.out.println(dto.toString());
-		
-		int rs = service.insertLike(dto); 		
-		if (rs > 0) {
-			System.out.println("찜 완료 " +room_id); 
-			return "redirect:/club/toClubList";
-		}
-		return null;			
-	}
-  
-	@RequestMapping(value = "/deleteLike") // 찜 삭제
-	public String deleteLike(int room_id) throws Exception {
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
-		System.out.println("room_id : " + room_id);
-		int rs = service.deleteLike(room_id, email);
-		
-		if (rs > 0) {
-			System.out.println("삭제 완료 "  +email+ " : " +room_id);
-			return "redirect:/club/toClubList";
-		}
-		return null;
-	}
 	
-<<<<<<< HEAD
 				
 }
-=======
-	// 모임 신고하기 요청
-	@RequestMapping(value = "/reportBookroom")
-	public String reportBookroom(ReportBookroomDTO dto) throws Exception {
-		System.out.println("room_title : " + dto.getRoom_title());
-		System.out.println("report_content : " + dto.getReport_content());
-		System.out.println("report_detail : " + dto.getReport_detail());
-		
-		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
-		dto.setReporter_nickname(nickname);
-	
-		service.insertReportBookroom(dto);		
-		return "redirect:/club/toClub";
-	}
-
-	// 회원 신고하기 요청
-	@RequestMapping(value = "/report")
-	public String report(ReportDTO dto) throws Exception {
-		System.out.println("email : " + dto.getEmail());
-		System.out.println("reporter_nickname : " + dto.getReporter_nickname());
-		System.out.println("report_content : " + dto.getReport_content());
-		System.out.println("report_detail : " + dto.getReport_detail());
-		
-
-		
-		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
-		dto.setReporter_nickname(nickname);
-		
-		service.insertReport(dto);
-		return "redirect:/club/clubBoard";
-	}
-				
-}
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f

@@ -86,32 +86,8 @@
   
 	<!-- 회원 신고 -->
 	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
-<<<<<<< HEAD
 	  insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname}, default)
 	</insert>
   
 
 </mapper>
-=======
-	  insert into report values(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
-	</insert>
-  
-	<!-- insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname}) -->
-  
-	<!-- 회원 닉네임 받아오기 -->
-	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
-		select member.email, nickname from member inner join role on member.email = role.email where member.email != #{email}
-	</select>
-
-	<!-- 모임 찜 하기 -->
-	<insert id="insertLike" parameterType="com.bjbj.bookclub.BookclubDTO">
-		insert into like_room values(#{room_id}, #{email})
-	</insert>
-	
-	<!-- 찜한 모임 삭제 (일반) -->
-	<delete id="deleteLike" parameterType="map">
-		delete from like_room where room_id = #{room_id} and email = #{email}
-	</delete>
-
-</mapper>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f

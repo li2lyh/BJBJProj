@@ -48,15 +48,10 @@ textarea {
 	width: 100%;
 	border: none;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .imgBox img{
 	width:80%;
 	height:80%;
 }
-<<<<<<< HEAD
 #book_titleDiv{
 margin-bottom: 20px;
 }
@@ -69,48 +64,17 @@ font-weight:bold;
 .modal-footer{
     text-align: right;
 }
-=======
-
-#book_titleDiv{
-margin-bottom: 20px;
-}
-
-#book_title_h{
-font-weight:bold;
-}
-
-#reportForm{
-	width: 600px;
-}
-
-.modal-footer{
-    text-align: right;
-}
-
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 #report_con{
     padding-top: 15px;
     padding-left: 30px;
 }
-<<<<<<< HEAD
 #report_con2{
     padding-right: 33px;
 }
-=======
-
-#report_con2{
-    padding-right: 33px;
-}
-
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 #report_detail{
     width: 300px;
     height: 200px;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </style>
 
 </head>
