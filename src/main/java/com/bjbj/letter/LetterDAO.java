@@ -83,7 +83,10 @@ public class LetterDAO {
 	public void insertRoomLetter(LetterDTO dto)throws Exception{
 		session.insert("letterMapper.insertRoomLetter", dto);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	// 쪽지 읽음처리
 	public void updateRead(int no) throws Exception{
 		session.update("letterMapper.updateRead", no);
@@ -94,9 +97,24 @@ public class LetterDAO {
 		return session.selectOne("letterMapper.readYn", email);
 	}
 	
+<<<<<<< HEAD
 
 	
 
+=======
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
 	
 }

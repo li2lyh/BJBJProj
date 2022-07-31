@@ -45,6 +45,10 @@
 	width: 150px;
 	height: 30;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 #closeSelectBtn {
 	margin: 2px;
 	width: 150px;
@@ -59,14 +63,26 @@ textarea {
 .sendTo {
 	width: 300px;
 }
+<<<<<<< HEAD
 .letterTitle {
 	width: 300px;
 }
+=======
+
+.letterTitle {
+	width: 300px;
+}
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 #submitBtnCK {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 /*leftBox*/
 h6 {
 	margin: 10px;
@@ -160,6 +176,7 @@ td{
 							</c:if>
 							<c:if test="${list.size() > 0}">
 								<c:forEach items="${list}" var="dto">
+<<<<<<< HEAD
 									<c:set var ="checkblacklist" value ="false"/>
 										<c:forEach items="${blacklist}" var = "black">
 											<c:if test="${black.email eq dto.email}">
@@ -183,14 +200,48 @@ td{
 												</td>
 											</tr>
 										</c:if>		
+=======
+									<tr>
+										<td class="email">${dto.email}</td>
+										<td>${dto.name}</td>
+										<td>${dto.nickname}</td>
+										<td>${dto.warning_count}</td>
+
+										<c:set var="afterBlacklist" value="false" />
+										<c:forEach items="${blacklist}" var="blacklist">
+											<c:if test="${blacklist.email eq dto.email}">
+												<c:set var="afterBlacklist" value="true" />
+											</c:if>
+										</c:forEach>
+										<td><c:if test="${afterBlacklist}">
+												<button type="button" class="eachSubmitBtn"
+													value="${dto.email}" disabled="disabled">추가</button>
+											</c:if> <c:if test="${not afterBlacklist}">
+												<button type="button" class="eachAddBtn"
+													value="${dto.email}">추가</button>
+											</c:if></td>
+										<td>
+											<button type="button" class="eachSubmitBtn"
+												value="${dto.email}">전송</button>
+										</td>
+										<td><input type="checkbox" class="checkMember"
+											id="selectCheck" value="${dto.email}"></td>
+									</tr>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 								</c:forEach>
 							</c:if>
 						</tbody>
 					</table>
 					</div>	
 					<div class="col-12 p-2 d-flex justify-content-end">
+<<<<<<< HEAD
 						<button type="button" class="blacklistBtn" id="checkBlack" name="checkBlack[]">(선택)블랙리스트</button>
 						<button type="button" class="sendBtn" id="selectBtn">선택 쪽지 보내기</button>
+=======
+						<button type="button" class="blacklistBtn">(선택)블랙리스트</button>
+						<button type="button" class="sendBtn" id="selectBtn">선택
+							쪽지 보내기</button>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					</div>
 				</div>
 			</div>
@@ -400,8 +451,11 @@ td{
             				console.log(e);
             			}
             		})
+<<<<<<< HEAD
             	}else{
             		alert("선택된 쪽지가 없습니다.")
+=======
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
             	}          	
             })
             
@@ -413,6 +467,7 @@ td{
             	 if(ba){
             		 location.href = "/manager/addBlacklist?email="+this.value;
             	 }
+<<<<<<< HEAD
              })
         
              //선택 블랙리스트 추가
@@ -444,6 +499,14 @@ td{
             	
              })
              
+=======
+             })
+
+        
+
+             
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
         </script>
 </body>
 </html>

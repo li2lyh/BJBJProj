@@ -133,7 +133,7 @@ th, td {
 									<tr>
 										<td>${dto.rank}</td>
 										<td>${dto.book_title}</td>
-										<td class="fw-bolder"><a href="#">${dto.room_title}</a></td>
+										<td class="fw-bolder">${dto.room_title}</td>
 										<td>${dto.open_date} ~ ${dto.close_date}</td>
 										<td>${dto.room_status}</td>
 									</tr>							

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%-- <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> --%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+=======
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 <!DOCTYPE html>
 <html>
@@ -69,6 +73,14 @@ h4 {
 #cardImg {
 	position: relative;
 }
+
+/* 빈 하트 */
+#emptyLike{
+	width: 30px;
+	height: 25px;
+}
+
+
 </style>
 
 </head>
@@ -83,7 +95,6 @@ h4 {
 		<div class="row">
 			<div class="col">
 				<h4>모집 중 클럽</h4>
-				<button type="button" id="clubBoard">임시 참여중인 클럽버튼(main에서 BookClub헤더 네비바 내리면 보이게)</button>
 			</div>
 		</div>
 
@@ -100,49 +111,69 @@ h4 {
 							<div class="card" style="width: 18rem;">
 								<a id="cardImg" href="/club/detailView?room_id=${dto.room_id}"
 									name="${dto.room_id}"> <c:choose>
-										<c:when test="${dto.img_id eq null}">
+										<c:when test="${dto.book_cover eq null}">
 											<img src="/resources/images/noImg.png" class="card-img-top">
 										</c:when>
 										<c:otherwise>
-											<img src="" class="card-img-top">
+											<img src="${dto.book_cover}" class="card-img-top">
 										</c:otherwise>
 									</c:choose>
 									<div id="tagBox">${dto.tag}</div>
 								</a>
 								<div class="card-body">
+									
+									
 									<h5 class="card-text">${dto.room_title}</h5>
 									<p class="inform">
 										시작일 : ${dto.open_date} <br> ${dto.room_current} /
 										${dto.room_people} 명 | 주 ${dto.meet_week}회 | ${dto.place}지역
 									</p>
+							
+							
 								</div>
 							</div>
 						</div>
 					</c:if>
 				</c:forEach>
 			</c:if>
-
-
 		</div>
 
 		<div class="row">
-			<div class="col" id="btnBox">
-				<button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집
-					글 쓰기</button>
-			</div>
-		</div>
-
+      <div class="col" id="btnBox">
+          <button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집 글 쓰기</button>
+      </div>
+    </div>
 	</div>
 	<script>
 		$("#btnClass").on("click", function() {
-			location.href = "/club/toWrite";
+			let loginSession = '${loginSession}';
+			let role = '${role}';
+			let waiting = '${waiting}';
+			
+			// 비로그인 상태 일 때
+			if(loginSession == ""){
+				alert("로그인이 필요합니다.");
+				return false;
+			}
+			// 이미 모임을 가지고 있을 때(role)
+			if(role != ""){
+				alert("이미 참여 중인 모임이 있습니다.");
+				return false;
+			}
+
+			// 모임을 신청한 상태 일 때 (waiting)
+			if(waiting != ""){
+				alert("지원 중인 모임이 있습니다. 지원한 모임의 리더 혹은 관리자에게 문의하세요");
+				return false;
+			}
+
+		location.href = "/club/toWrite";
+			
 		})
 		
-		$("#clubBoard").on("click", function(){
-			location.href = "/club/clubBoard?room_id="+'${role.room_id}';
-		})
 		
 	</script>
+<<<<<<< HEAD
         <div class="row">
             <div class="col">
                 <h3 id="head">BookClub</h3>
@@ -195,5 +226,7 @@ h4 {
 		})
 	
 	</script>
+=======
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </body>
 </html>

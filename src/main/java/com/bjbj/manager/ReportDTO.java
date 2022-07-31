@@ -15,8 +15,13 @@ public class ReportDTO {
 	
 	public ReportDTO() {}
 
+<<<<<<< HEAD
 	public ReportDTO(String email, String report_content, int warning_count, Date report_date, String report_detail,
 			 String reporter_nickname, int report_action) {
+=======
+	public ReportDTO(String email, String report_content, int warning_count, String report_date, String report_detail,
+		 String reporter_nickname) {
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		super();
 		this.email = email;
 		this.report_content = report_content;
@@ -26,6 +31,20 @@ public class ReportDTO {
 		this.reporter_nickname = reporter_nickname;
 		this.report_action = report_action;
 	}
+<<<<<<< HEAD
+=======
+
+	public ReportDTO(String email, String report_content, int warning_count, Date report_date, String report_detail,
+			 String reporter_nickname) {
+		super();
+		this.email = email;
+		this.report_content = report_content;
+		this.warning_count = warning_count;
+		this.report_date = getStrDate(report_date);
+		this.report_detail = report_detail;
+		this.reporter_nickname = reporter_nickname;
+	}
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
 	public String getStrDate(Date date) {
 		String rs = null;
@@ -101,7 +120,11 @@ public class ReportDTO {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return  email +  report_content + warning_count+ report_date + report_detail + reporter_nickname + report_action;
+=======
+		return  email +  report_content + warning_count+ report_date + report_detail + reporter_nickname;
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	}
 	
 	

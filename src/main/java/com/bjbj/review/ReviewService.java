@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bjbj.file.FileDAO;
+import com.bjbj.file.FileDTO;
 
 
 @Service
@@ -22,8 +23,9 @@ public class ReviewService {
 	// 게시글 등록
 	public void insertReview(ReviewDTO dto, String path, MultipartFile file) throws Exception {
 		
-		// int img_no = fileDao.selectImgNo();
-		// dto.setImg_id(img_id);
+		int img_no = fileDao.selectImgNo();
+		System.out.println(img_no);
+		dto.setImg_no(img_no);
 		dao.insertReview(dto);
 		
 		// 파일 업로드 - 서버 root에 폴더가 있는지 확인
@@ -35,7 +37,7 @@ public class ReviewService {
 			String sys_name = UUID.randomUUID() + "_" + ori_name;
 			
 			file.transferTo(new File(path + File.separator + sys_name));
-			// fileDao.uploadPhoto(new FileDTO(img_no, ori_name, sys_name));
+			fileDao.uploadPhoto(new FileDTO(img_no, ori_name, sys_name));
 		}
 	}
 	

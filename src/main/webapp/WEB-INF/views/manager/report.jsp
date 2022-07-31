@@ -170,6 +170,7 @@ textarea{
                     
                     <div class="col-12 d-flex justify-content-center modal-footer">
                       <button type="button" class="btn btn-secondary deleteReport" id="deleteMemBtn" data-bs-dismiss="modal" >신고삭제</button>
+<<<<<<< HEAD
 							<c:set var ="checkreport" value="false" />
 							<c:forEach items = "${report_list}" var="reportlist">
 								<c:if test="${reportlist.report_action == 0}">
@@ -182,6 +183,22 @@ textarea{
 							<c:if test="${not checkreport}">
 								<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}" disabled="disabled">경고추가</button>
 							</c:if>
+=======
+                    	  
+                    	  <c:set var = "afterBlacklist" value="false" />
+                    	  <c:forEach items="${blacklist}" var = "blacklist">
+                      			<c:if test="${blacklist.email eq dto.email}">
+                      				<c:set var="afterBlacklist" value="true"/>
+                      			</c:if>
+                      	  </c:forEach>
+                      	  <c:if test="${afterBlacklist}">
+                      	  		<button type="button" class="btn btn-primary" id="addBtn" disabled="disabled" value="${dto.email}">경고추가</button>
+                      	  </c:if>
+                      	 <c:if test="${not afterBlacklist}">
+                      	 		<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}">경고추가</button>
+                      	 </c:if>
+                      	 
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
                     </div>
                   </div>
                 </div>

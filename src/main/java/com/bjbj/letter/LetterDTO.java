@@ -12,6 +12,10 @@ public class LetterDTO {
 	private String read;
 	
 	public LetterDTO() {}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	public LetterDTO(int no, String email, String title, String content, String written_date, String read) {
 		super();
 		this.no = no;
@@ -21,6 +25,10 @@ public class LetterDTO {
 		this.written_date = written_date;
 		this.read = read;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	public LetterDTO(int no, String email, String title, String content, Date written_date, String read) {
 		super();
 		this.no = no;
@@ -30,6 +38,7 @@ public class LetterDTO {
 		this.written_date = getStrDate(written_date);
 		this.read = read;
 	}
+  
 	public String getStrDate(Date date) {
 		String rs = null;
 		try {
@@ -73,12 +82,20 @@ public class LetterDTO {
 		this.content = content;
 	}
 
-	public String getWritten_date() {
-		return written_date;
+//	public Date getWritten_date() {
+//		return written_date;
+//	}
+//
+//	public void setWritten_date(Date written_date) {
+//		this.written_date = written_date;
+//	}
+	
+	public String getRead() {
+		return read;
 	}
 
-	public void setWritten_date(String written_date) {
-		this.written_date = written_date;
+	public void setRead(String read) {
+		this.read = read;
 	}
 	
 	public String getRead() {

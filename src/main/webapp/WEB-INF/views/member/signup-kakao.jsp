@@ -6,7 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<<<<<<< HEAD
 <%-- CDN --%>
+=======
+<%-- ----------------------- CDN ----------------------- --%>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -46,6 +50,7 @@ body {
 	padding-left: 1.5rem;
 }
 
+<<<<<<< HEAD
 #blank1 {
 	height: 1.88rem;
 }
@@ -70,17 +75,33 @@ body {
 	margin-bottom: 1.88rem;
 }
 
+=======
+.blank {
+	height: 1.7rem;
+}
+
+/* 휴대폰 인증 */
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .confirmPhone {
 	padding-right: 0;
 }
 
+<<<<<<< HEAD
 .registerBox button {
 	width: 100%;
+=======
+.registerBox .row button {
+	width: 85%;
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	height: 3rem;
 }
 
 /* ******** 가입 버튼 ******** */
+<<<<<<< HEAD
 .submitBtn button {
+=======
+#signupBtn {
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	width: 100%;;
 	height: 3rem;
 	margin-bottom: 0.5rem;
@@ -94,6 +115,14 @@ body {
 .enrollmentPolicy p {
 	margin-bottom: 0;
 }
+<<<<<<< HEAD
+=======
+
+.enrollmentPolicy a {
+	text-decoration: none;
+	color: black;
+}
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </style>
 </head>
 <body>
@@ -107,7 +136,11 @@ body {
 		<div class="registerBox">
 
 			<!-- 타이틀 -->
+<<<<<<< HEAD
 			<form id="signupForm" action="/member/signUp" method="post">
+=======
+			<form id="signupForm" action="/member/kakaoSignUp" method="post">
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				<div class="row registerTitle">
 					<div class="col-12 d-flex justify-content-center">
 						<h2>회원가입</h2>
@@ -124,7 +157,11 @@ body {
 				<%-- 빈칸 --%>
 				<div class="row blankBox">
 					<div class="col p-0">
+<<<<<<< HEAD
 						<div id="blank1"></div>
+=======
+						<div class="blank" id="blank1"></div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					</div>
 				</div>
 				<%-- 알림정보 --%>
@@ -138,6 +175,7 @@ body {
 				<!-- 이메일 -->
 				<div class="row">
 					<div class="col-12 p-0">
+<<<<<<< HEAD
 						<input type="text" name="email" id="email" class="form-control"
 							value="${email}" readonly>
 					</div>
@@ -155,10 +193,17 @@ body {
 					</div>
 				</div>
 				<!-- End -->
+=======
+						<input type="hidden" name="email" id="email" class="form-control"
+							value="${email}" readonly>
+					</div>
+				</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 				<!-- 비밀번호 -->
 				<div class="row">
 					<div class="col p-0">
+<<<<<<< HEAD
 						<input type="password" name="password" id="password"
 							class="form-control" placeholder="비밀번호">
 					</div>
@@ -208,11 +253,29 @@ body {
 						<button type="button" id="confirmNickname"
 							class="btn btn-outline-secondary">중복확인</button>
 					</div>
+=======
+						<input type="hidden" name="password" id="password"
+							class="form-control" value="">
+					</div>
+				</div>
+
+
+				<!-- 닉네임 -->
+				<div class="row">
+					<div class="col-12 p-0">
+						<input type="text" name="nickname" id="nickname"
+							class="form-control" placeholder="닉네임">
+					</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				</div>
 				<%-- 빈칸 --%>
 				<div class="row blankBox">
 					<div class="col-12 p-0">
+<<<<<<< HEAD
 						<div id="blank5"></div>
+=======
+						<div class="blank" id="blank5"></div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					</div>
 				</div>
 				<%-- 알림정보 --%>
@@ -226,6 +289,7 @@ body {
 				<!-- 휴대폰 번호 -->
 				<div class="row">
 					<div class="col-9 p-0">
+<<<<<<< HEAD
 						<input type="text" name="phone" id="phone" class="form-control"
 							placeholder="휴대번호">
 					</div>
@@ -247,6 +311,33 @@ body {
 					</div>
 				</div>
 
+=======
+						<input type="hidden" name="phone" id="phone" class="form-control"
+							value="${phone}">
+					</div>
+				</div>
+				<%-- 빈칸 --%>
+				<div class="row blankBox">
+					<div class="col-12 p-0">
+						<div class="blank" id="blank6"></div>
+					</div>
+				</div>
+				<%-- 알림정보 --%>
+				<div class="row clsCheckInfo">
+					<div class="col-12 p-0">
+						<div id="checkPhone"></div>
+					</div>
+				</div>
+				<!-- End -->
+				
+				<div class="row">
+					<div class="col-9 p-0">
+						<input type="hidden" name="user_kakao" id="user_kakao" class="form-control"
+							value="Y">
+					</div>
+				</div>
+				
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				<!-- 제출 버튼 -->
 				<div class="submitBtn row">
 					<button type="button" id="signupBtn"
@@ -396,6 +487,7 @@ body {
 
 
 	<script>
+<<<<<<< HEAD
 		/* *********** 중복확인 ************** */
 		
 		// 유효성 검사서 사용할 중복값 담기
@@ -607,6 +699,138 @@ body {
 		 $("#signupForm").submit();
 		 })
 		 */
+=======
+		/* *********** 유효성 검사 _ 제출시 검사 ************** */
+
+		$("#signupBtn").on("click", function() {
+
+			// regex
+			let regexName = /^[a-zA-Z가-힣]{2,6}$/;
+			let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
+
+			// value 값
+			let name = $("#name").val();
+			let email = $("#email").val();
+			let pw = $("#password").val();
+			let nickname = $("#nickname").val();
+			let phone = $("#phone").val();
+			let verifyPhone = $("#verifyNum").val();
+
+			if (!regexName.test(name) || name === "") { //이름
+				alert("이름을 정확히 입력해주세요");
+				$("#name").focus();
+				return false;
+
+			} else if (!regexNickname.test(nickname) || nickname === "") { // 닉네임 유효성 검사
+				alert("닉네임을 형식에 맞게 작성해주세요");
+				$("#nickname").focus();
+				return false;
+
+			} else if ($("#checkNickname").html() === "중복된 닉네임입니다.") {// 닉네임 중복확인
+				alert("닉네임이 중복되었습니다");
+				$("#nickname").focus();
+				return false;
+
+			}
+
+			$("#signupForm").submit();
+
+		});
+
+		/* *********** input창 아래 style ************** */
+
+		// ------------ 이름 ------------ 
+		// focusIn
+		$("#name").focus(function() {
+			$("#blank1").css("display", "none");
+			$("#checkName").html("한글 및 영문으로 2~6자 이내로 작성해주세요");
+			$("#checkName").css({
+				"color" : "#6E6E6E",
+				"font-size" : "0.9rem",
+				"padding-top" : "0.29rem",
+				"padding-bottom" : "0.29rem",
+				"padding-left" : "1rem"
+			});
+		});
+		// focusOut
+		$("#name").blur(function() {
+			$("#blank1").show();
+			$("#checkName").html("");
+			$("#checkName").css({
+				"padding-top" : "0rem",
+				"padding-bottom" : "0rem"
+			});
+		});
+
+		//  ------------ 닉네임 ------------ 
+		// focusIn
+		$("#nickname").focus(function() {
+			$("#blank5").css("display", "none");
+			$("#checkNickname").html("한글 및 영문으로 2~10자 이내로 작성해주세요");
+			$("#checkNickname").css({
+				"color" : "#6E6E6E",
+				"font-size" : "0.9rem",
+				"padding-top" : "0.29rem",
+				"padding-bottom" : "0.29rem",
+				"padding-left" : "1rem"
+			});
+		});
+
+		// focusOut
+		$("#nickname").blur(function() {
+
+			let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
+			let nickname = $("#nickname").val();
+
+			if (!regexNickname.test(nickname) || nickname === "") {
+				$("#blank5").css("display", "none");
+				$("#checkNickname").html("한글 및 영문으로 2~10자 이내로 작성해주세요");
+				$("#checkNickname").css({
+					"color" : "#6E6E6E",
+					"font-size" : "0.9rem",
+					"padding-top" : "0.29rem",
+					"padding-bottom" : "0.29rem",
+					"padding-left" : "1rem"
+				});
+			} else {
+				$.ajax({
+					url : "/member/confirmNickname",
+					type : "get",
+					data : {
+						nickname : $("#nickname").val()
+					},
+					success : function(data) {
+						if (data == "available") {
+							$("#blank5").css("display", "none");
+							$("#checkNickname").html("사용가능한 닉네임입니다.");
+							$("#checkNickname").css({
+								"color" : "#548B5B",
+								"font-size" : "0.9rem",
+								"padding-top" : "0.29rem",
+								"padding-bottom" : "0.29rem",
+								"padding-left" : "1rem"
+							});
+						} else if (data == "unavailable") {
+							$("#blank5").css("display", "none");
+							$("#checkNickname").html("중복된 닉네임입니다.");
+							$("#checkNickname").css({
+								"color" : "#D33C31",
+								"font-size" : "0.9rem",
+								"padding-top" : "0.29rem",
+								"padding-bottom" : "0.29rem",
+								"padding-left" : "1rem"
+							});
+
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+			}
+			;
+		});
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	</script>
 </body>
 </html>

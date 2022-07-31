@@ -30,6 +30,7 @@ div {
 }
 .contentBox {
 	padding-left: 40px;
+	height: 100vh;
 }
 
 
@@ -78,7 +79,7 @@ div {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		<!------------------------------- main content ------------------------------->
-		<div class="titleBox">
+		<div class="row titleBox">
 			<h1>신간도서 New Arrivals</h1>
 			<span>새로 나온 책들을 읽어보세요!</span>
 		</div>
@@ -90,10 +91,22 @@ div {
 						<div class="bookTitle">
 							<a href="${item.link}">${item.title}</a>
 						</div>
-						<div class="bookAuthor">${item.author }</div>
+						<div class="bookAuthor">${item.author}</div>
 					</div>
 				</div>
 			</c:forEach>
+		</div>
+		<div class="row navBox d-flex justify-content-center">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination d-flex justify-content-center">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
 		</div>
 		<!---------------------------------- footer ---------------------------------->
 		<div class="footer">

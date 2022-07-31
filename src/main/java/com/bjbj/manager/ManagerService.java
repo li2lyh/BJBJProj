@@ -151,10 +151,15 @@ public class ManagerService {
 	//모임신고 - 경고 추가
 	public void addReportBookroom(int room_id)throws Exception{
 		dao.addReportBookroom(room_id);
+<<<<<<< HEAD
 
 	}
 	
 	
+=======
+	}
+	
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	// 날짜 형식 변경
 	public String getDate(String string) throws Exception {
 		return dao.getDate(string);

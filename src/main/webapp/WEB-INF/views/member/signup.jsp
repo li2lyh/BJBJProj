@@ -43,6 +43,7 @@ body {
 	height: 3rem;
 	padding-left: 1.5rem;
 }
+<<<<<<< HEAD
 .blank {
 	height: 1.7rem;
 }
@@ -50,6 +51,19 @@ body {
 .confirmPhone {
 	padding-right: 0;
 }
+=======
+
+.blank {
+	height: 1.7rem;
+}
+
+/* 휴대폰 인증 */
+
+.confirmPhone {
+	padding-right: 0;
+}
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .registerBox .row button {
 	width: 85%;
 	height: 3rem;
@@ -67,10 +81,18 @@ body {
 .enrollmentPolicy p {
 	margin-bottom: 0;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .enrollmentPolicy a {
 	text-decoration: none;
 	color : black;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </style>
 </head>
 <body>
@@ -400,6 +422,7 @@ body {
 		/* *********** 휴대폰 본인확인 ************** */
 		// 보안문자 4자리 받을 변수
 		let verifyNum = "";
+<<<<<<< HEAD
 		// 인증번호 발송 버튼 눌렀을 때
 		$("#verifyPhoneBtn").on("click", function() {
 			let regexPhone = /^[0-9]{11}$/;
@@ -407,6 +430,19 @@ body {
 			if (!regexPhone.test(phone) || phone === "") {
 				alert("휴대폰 번호를 정확히 입력해주세요");
 				return false;
+=======
+
+		// 인증번호 발송 버튼 눌렀을 때
+		$("#verifyPhoneBtn").on("click", function() {
+
+			let regexPhone = /^[0-9]{11}$/;
+			let phone = $("#phone").val();
+
+			if (!regexPhone.test(phone) || phone === "") {
+				alert("휴대폰 번호를 정확히 입력해주세요");
+				return false;
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 			} else {
 				alert("입력하신 번호로 인증번호가 발송되었습니다.");
 				$(".verifyPhone").removeClass("d-none");
@@ -435,11 +471,23 @@ body {
 				*/
 			}
 		});
+<<<<<<< HEAD
 		// 인증번호 확인
 		let verifyNum2 = "";
 		$("#completeBtn").on("click", function() {
 			let regexNum = /^[0-9]{4}$/;
 			let verifyPhone = $("#verifyNum").val();
+=======
+
+		// 인증번호 확인
+		let verifyNum2 = "";
+
+		$("#completeBtn").on("click", function() {
+
+			let regexNum = /^[0-9]{4}$/;
+			let verifyPhone = $("#verifyNum").val();
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 			if (!regexNum.test(verifyPhone) || $("#verifyNum").val() === "") {
 				alert("정확한 번호를 입력해주세요");
 				return false;
@@ -448,6 +496,10 @@ body {
 				return false;
 			} else { // 인증 완료
 				alert("확인되었습니다");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				// 본인인증 css 변경
 				$(".verifyPhone").css("display", "none");
 				$("#phone").attr("readonly", true);
@@ -456,15 +508,29 @@ body {
 					"type" : "input",
 					"disabled" : true
 				});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				return verifyNum2 = "available";
 			}
 			;
 		});
+<<<<<<< HEAD
 		/* *********** 유효성 검사 _ 제출시 검사 ************** */
+=======
+
+		/* *********** 유효성 검사 _ 제출시 검사 ************** */
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		$("#signupBtn")
 				.on(
 						"click",
 						function() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							// regex
 							let regexName = /^[a-zA-Z가-힣]{2,6}$/;
 							let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
@@ -472,6 +538,10 @@ body {
 							let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
 							let regexPhone = /^[0-9]{11}$/;
 							let regexNum = /^[0-9]{4}$/;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							// value 값
 							let name = $("#name").val();
 							let email = $("#email").val();
@@ -479,53 +549,105 @@ body {
 							let nickname = $("#nickname").val();
 							let phone = $("#phone").val();
 							let verifyPhone = $("#verifyNum").val();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							if (!regexName.test(name) || name === "") { //이름
 								alert("이름을 정확히 입력해주세요");
 								$("#name").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if (!regexEmail.test(email) || email === "") { // 이메일 (아이디)
 								alert("아이디는 이메일 형식으로 정확히 작성해주세요");
 								$("#email").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if ($("#checkEmail").html() === "사용불가능한 이메일입니다.") { // 이메일 중복체킹
 								alert("이메일이 중복되었습니다");
 								$("#email").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if (!regexPw.test(pw) || pw === "") { // 비밀번호
 								alert("비밀번호를 형식에 맞게 작성해주세요")
 								$("#password").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if ($("#confirmPw").val() !== pw) { // 비밀번호 확인
 								alert("비밀번호가 일치하지 않습니다.")
 								$("#confirmPw").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if (!regexNickname.test(nickname)
 									|| nickname === "") { // 닉네임 유효성 검사
 								alert("닉네임을 형식에 맞게 작성해주세요");
 								$("#nickname").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if ($("#checkNickname").html() === "중복된 닉네임입니다.") {// 닉네임 중복확인
 								alert("닉네임이 중복되었습니다");
 								$("#nickname").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if (!regexPhone.test(phone) || phone === "") {// 핸드폰 번호
 								alert("휴대폰 번호를 정확히 입력해주세요");
 								$("#phone").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if (!regexNum.test(verifyPhone)
 									|| verifyPhone === "") {//본인인증 창 
 								alert("인증번호를 입력해주세요");
 								$("#verifyNum").focus();
 								return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							} else if (verifyNum2 !== "available") {
 								alert("인증번호를 정확히 입력해주세요");
 								console.log("a");
 								$("#verifyNum").focus();
 								return false;
+<<<<<<< HEAD
 							}
 							$("#signupForm").submit();
 						});
 		/* *********** input창 아래 style ************** */
+=======
+
+							}
+
+							$("#signupForm").submit();
+
+						});
+
+		/* *********** input창 아래 style ************** */
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		// ------------ 이름 ------------ 
 		// focusIn
 		$("#name").focus(function() {
@@ -548,6 +670,10 @@ body {
 				"padding-bottom" : "0rem"
 			});
 		});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		//  ------------ 이메일 ------------ 
 		// focusIn
 		$("#email").focus(function() {
@@ -560,13 +686,26 @@ body {
 				"padding-bottom" : "0.29rem",
 				"padding-left" : "1rem"
 			});
+<<<<<<< HEAD
 		});
+=======
+
+		});
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		// focusOut
 		$("#email")
 				.blur(
 						function() {
+<<<<<<< HEAD
 							let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
 							let email = $("#email").val();
+=======
+
+							let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
+							let email = $("#email").val();
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 							if (!regexEmail.test(email) || email === "") {
 								$("#blank2").css("display", "none");
 								$("#checkEmail").html("이메일 형식으로 아이디를 작성해주세요");
@@ -622,6 +761,10 @@ body {
 										})
 							}
 						});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		// ------------ 비밀번호 ------------ 
 		// focusIn
 		$("#password").focus(function() {
@@ -644,11 +787,19 @@ body {
 				"padding-bottom" : "0rem"
 			});
 		});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		// ------------ 비밀번호 확인 ------------ 
 		// focusIn
 		$("#confirmPw").focus(
 				function() {
 					$("#blank4").css("display", "none");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					// 입력 시 확인 _ keyup
 					$("#confirmPw").keyup(
 							function() {
@@ -674,6 +825,10 @@ body {
 									});
 								}
 							});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					// 입력 후 확인
 					if ($("#confirmPw").val() === "") {
 						$("#checkPw2").html("비밀번호를 입력해주세요");
@@ -703,7 +858,13 @@ body {
 							"padding-left" : "1rem"
 						});
 					}
+<<<<<<< HEAD
 				});
+=======
+
+				});
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		// focusOut
 		$("#confirmPw").blur(function() {
 			$("#blank4").show();
@@ -713,6 +874,10 @@ body {
 				"padding-bottom" : "0rem"
 			});
 		});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		//  ------------ 닉네임 ------------ 
 		// focusIn
 		$("#nickname").focus(function() {
@@ -726,10 +891,20 @@ body {
 				"padding-left" : "1rem"
 			});
 		});
+<<<<<<< HEAD
 		// focusOut
 		$("#nickname").blur(function() {
 			let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
 			let nickname = $("#nickname").val();
+=======
+
+		// focusOut
+		$("#nickname").blur(function() {
+
+			let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
+			let nickname = $("#nickname").val();
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 			if (!regexNickname.test(nickname) || nickname === "") {
 				$("#blank5").css("display", "none");
 				$("#checkNickname").html("한글 및 영문으로 2~10자 이내로 작성해주세요");
@@ -768,6 +943,10 @@ body {
 								"padding-bottom" : "0.29rem",
 								"padding-left" : "1rem"
 							});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 						}
 					},
 					error : function(e) {
@@ -777,6 +956,10 @@ body {
 			}
 			;
 		});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		//  ------------ 휴대폰 ------------ 
 		// focusIn
 		$("#phone").focus(function() {
@@ -799,6 +982,10 @@ body {
 				"padding-bottom" : "0rem"
 			});
 		});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		//  ------------ 휴대폰 인증번호 ------------ 
 		// focusIn
 		$("#verifyNum").focus(function() {

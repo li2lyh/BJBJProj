@@ -35,6 +35,7 @@ public class MailService {
 		return strTemp;
 	}
 	
+<<<<<<< HEAD
 	/*
 	public void ex(String[] args) throws Exception{
 		String fileName = "JsoupEx.jsp";
@@ -50,4 +51,7 @@ public class MailService {
 		}
 	}
 	*/
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 }

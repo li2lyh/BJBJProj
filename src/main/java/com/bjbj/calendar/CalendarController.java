@@ -54,6 +54,7 @@ public List<Map<String, Object>> plan() throws Exception{
      HashMap<String, Object> map = new HashMap<>();
      
      for( int i = 0; i < list.size(); i++) {
+    	 map.put("id",list.get(i).getCal_id());
     	 map.put("start", list.get(i).getStart_date());
     	 map.put("end", list.get(i).getEnd_date());
     	 map.put("title", list.get(i).getCal_title()); 
@@ -89,17 +90,33 @@ public String insertPlan(CalendarDTO dto) throws Exception{
 	
 	service.insertPlan(dto);
 	
+	return "redirect:/calendar/selectAll";
+}
+
+@RequestMapping(value = "/deletePlan")
+@ResponseBody
+public String deletePlan(int cal_id) throws Exception{
+
+		System.out.println("target Id : " + cal_id);
 	
-	
-	
-	
-	
+		service.deletePlan(cal_id);
 	
 	return "redirect:/calendar/selectAll";
 }
 
 
-
+@RequestMapping(value = "/updatePlan")
+@ResponseBody
+public String updatePlan(CalendarDTO dto)throws Exception{
+	System.out.println(dto.getCal_id());
+	System.out.println(dto.getCal_title());
+	System.out.println(dto.getStart_date());
+	System.out.println(dto.getEnd_date());
+	
+	service.updatePlan(dto);
+	
+	return "redirect:/calendar/selectAll";
+}
 
 
 

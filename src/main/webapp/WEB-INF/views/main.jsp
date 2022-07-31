@@ -24,12 +24,10 @@
 	margin-top: 8rem;
 	margin-bottom: 10rem;
 }
-
 /* ******** 공통 ******** */
 .contentBox {
 	margin-top: 4rem;
 }
-
 /* ******** 캐러셀 ******** */
 @media ( max-width : 767px) {
 	.carousel-book .carousel-inner .carousel-item>div {
@@ -39,12 +37,14 @@
 		display: block;
 	}
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .carousel-book .carousel-inner .carousel-item.active, .carousel-book .carousel-inner .carousel-item-next,
 	.carousel-book .carousel-inner .carousel-item-prev {
 	display: flex;
 }
-
 /* medium and up screens */
 @media ( min-width : 768px) {
 	.carousel-book .carousel-inner .carousel-item-end.active, .carousel-book .carousel-inner .carousel-item-next
@@ -56,12 +56,14 @@
 		transform: translateX(-25%);
 	}
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .carousel-book .carousel-inner .carousel-item-end, .carousel-book .carousel-inner .carousel-item-start
 	{
 	transform: translateX(0);
 }
-
 /* ******** 더보기 버튼 ******** */
 .moreBtnBox {
 	margin-top: 1.5rem;
@@ -122,6 +124,7 @@
 				<div class="clubTitle row">
 					<div class="col-12">
 						<h1>BookClub</h1>
+<<<<<<< HEAD
 					</div>
 				</div>
 
@@ -191,10 +194,18 @@
 
 				<!-- 북클럽 모집 컨텐츠 -->
 				<div class="reviewCon row d-flex ">
+=======
+					</div>
+				</div>
+
+				<!-- 북클럽 모집 컨텐츠 -->
+				<div class="clubCon row d-flex ">
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					<div class="col-3 p-0 d-flex justify-content-center">
 						<div class="card" style="width: 18rem;">
 							<img src="/media/4.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
+<<<<<<< HEAD
 								<h4 class="card-title">책 제목</h4>
 								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 							</div>
@@ -422,10 +433,166 @@
 								</div>
 							</div>
 						</div>
+=======
+								<h4 class="card-title">[위치] Title</h4>
+								<p class="card-text">
+									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">[위치] Title</h4>
+								<p class="card-text">
+									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">[위치] Title</h4>
+								<p class="card-text">
+									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">[위치] Title</h4>
+								<p class="card-text">
+									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
+
+				<!-- 더보기 버튼 -->
+				<div class="moreBtnBox row">
+					<button type="button" class="btn btn-secondary moreBtn" id="">더
+						보 기</button>
+				</div>
 			</div>
-		</div>
+
+			<!-- *************************** Review *************************** -->
+			<div class="contentBox reviewBox row d-flex justify-content-center">
+				<!-- 타이틀 -->
+				<div class="reviewTitle row">
+					<div class="col-12">
+						<h1>Review</h1>
+					</div>
+				</div>
+
+				<!-- 북클럽 모집 컨텐츠 -->
+				<div class="reviewCon row d-flex ">
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">책 제목</h4>
+								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">책 제목</h4>
+								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">책 제목</h4>
+								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3 p-0 d-flex justify-content-center">
+						<div class="card" style="width: 18rem;">
+							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h4 class="card-title">책 제목</h4>
+								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 더보기 버튼 -->
+				<div class="moreBtnBox row">
+					<button type="button" class="btn btn-secondary moreBtn" id="">더
+						보 기</button>
+				</div>
+			</div>
+
+			<!-- *************************** 신간도서 Book *************************** -->
+			<div class="contentBox reviewCon row d-flex justify-content-center ">
+				<!-- 타이틀 -->
+				<div class="newBook row">
+					<div class="col-12">
+						<h1>신간도서</h1>
+					</div>
+				</div>
+				<!-- 캐러셀 -->
+
+
+				<div class="bookBox">
+					<div class="row mx-auto my-auto justify-content-center">
+						
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="card" style="width: 18rem;">
+								<img src="/media/4.jpg" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h4 class="card-title">책 제목</h4>
+									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								</div>
+							</div>
+						</div>
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
+					</div>
+				</div>
 
 		<%-- *************************** footer *************************** --%>
 		<div class=footer>
@@ -433,9 +600,108 @@
 		</div>
 	</div>
 
+<<<<<<< HEAD
 	<script>
                     let items = document.querySelectorAll('.carousel-book .carousel-item')
+=======
+					<div class="bookBox">
+						<div class="row mx-auto my-auto justify-content-center">
+							<div id="recipeCarousel2" class="carousel slide carousel-book"
+								data-bs-ride="carousel">
+								<div class="carousel-inner" role="listbox">
+									<div class="carousel-item active">
+										<!-- 카드 -->
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="col-lg-3">
+											<div class="card" style="width: 18rem;">
+												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<div class="card-body">
+													<h4 class="card-title">책 제목</h4>
+													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- 버튼-->
+								<a class="carousel-control-prev bg-transparent w-aut"
+									href="#recipeCarousel2" role="button" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								</a> <a class="carousel-control-next bg-transparent w-aut"
+									href="#recipeCarousel2" role="button" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
+	<%-- *************************** footer *************************** --%>
+	<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	</div>
+	</div>
+
+	<script>
+	
+                    let items = document.querySelectorAll('.carousel-book .carousel-item')
                     items.forEach((el) => {
                         const minPerSlide = 4
                         let next = el.nextElementSibling
@@ -449,7 +715,14 @@
                             next = next.nextElementSibling
                         }
                     })
+<<<<<<< HEAD
 
+=======
+                    
+                     $("#test").on("click", function(){
+						location.href = "/club/toClub";
+					})
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
         </script>
 </body>
 

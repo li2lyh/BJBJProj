@@ -63,6 +63,28 @@ h3 {
 	margin-top: 15px;
 }
 
+#modal-body p{
+  display:block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 20px;
+  margin-bottom: 10px;
+}
+#modal-body p:hover{
+cursor:pointer;
+font-weight:bold;
+}
+#etc{
+font-weight:bold;
+}
+#keyword{
+width:70%;
+}
+#room_detail{
+resize:none;
+}
+
 
 </style>
 </head>
@@ -97,7 +119,20 @@ h3 {
 					<label for="file" class="form-label">도서 이름</label>
 				</div>
 				<div class="col">
+<<<<<<< HEAD
 					<input type="file" class="form-control" id="files" name="files" multiple>
+=======
+					<div class="row m-0">
+            <div class="col-3 p-0">
+            <input type="text" id="book_title" name="book_title" class="form-control" readonly>
+            <input type="hidden" id="itemId" name="itemId" value="">
+            <input type="hidden" id="book_cover" name="book_cover" value="">
+            </div>		
+            <div class="col-9">
+            <button type="button" id="btnSearch" class="btn btn-warning">검색</button>
+            </div>	
+					</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				</div>
 			</div>
 			<div class="row">
@@ -169,7 +204,7 @@ h3 {
 
 				<div class="col">
 					<input type="text" id="close_date" class="form-control"
-						name="close_date" value="종료날짜 선택" />
+						name="close_date" value="" />
 				</div>
 			</div>
 			<div class="row">
@@ -191,8 +226,35 @@ h3 {
 			</div>
 		</div>
 	</form>
+	
+	
+	
+	<%-- Modal --%>
+	<form action="" method="">
+	
+	<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       <input type="text" id="keyword" name="keyword" class="form-control">
+        <button type="button" id="btnKeyword"  class="btn btn-warning" >검색</button>
+        <button type="button" id="searchCancel"  class="btn btn-secondary" >닫기</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <p>모임에서 활용할 도서를 검색해보세요!</p>
+      </div>
+   	 </div>
+  	</div>
+	</div>
+	
+	</form>
+	
+	
+	
+	
 	<script>
 		
+	
 	
 		// 뒤로 가기 버튼
 		document.getElementById("toCancle").onclick = function() {
@@ -201,6 +263,57 @@ h3 {
 
 		// 등록 버튼 클릭
 		$("#write").on("click", function() {
+			
+			// 현재 날짜
+			let today = new Date();   
+
+			let year = today.getFullYear(); // 년도
+			let month = today.getMonth() + 1;  // 월
+			let date = today.getDate();  // 날짜
+			let day = today.getDay();  // 요일
+
+			let sysdate = year + '-' + month + '-' + date;
+			console.log("현재날짜 : " + sysdate);
+			
+			
+			
+			
+			// 날짜 차이 유효성 검사 (모임기간 최소 7일)
+			let open = $("#open_date").val();
+			let close = $("#close_date").val();
+			
+			let open_date = new Date(open);
+			let close_date = new Date(close);
+
+			let date_gap = diffDate(open_date, close_date);
+
+			let sysdate_date = new Date(sysdate);
+			
+			
+			
+			let initial_date = diffDate(sysdate_date, open_date);
+			
+			console.log("date_gap : " + date_gap);
+			console.log("initial_date : " + initial_date);
+			
+			// 종료 날짜가 시작 날짜보다 빠를 때
+			if(close_date < open_date){
+				alert("종료 날짜는 시작날짜보다 과거 일 수 없습니다.");
+				return false;
+			}
+			// 모임 기간이 7일 미만일 때
+			if(date_gap < 7){
+				alert("모임 최소 기간은 일주일 입니다.");
+				return false;
+			}
+			// 현재 날짜보다 시작 날짜가 빠를 때
+			if(initial_date < 0){
+				alert("모임 시작일은 현재날짜보다 과거 일 수 없습니다.");
+				return false;
+			}
+			  
+			
+			
 			var con = confirm("모집 기간은 등록일로부터 2주입니다. 등록하시겠습니까?");
 			if (con) {
 				$("#submitForm").submit();
@@ -231,7 +344,113 @@ h3 {
 		let sysdate = year + '-' + month + '-' + date; // 현자 날짜 표기
 		
 		$("#open_date").val(sysdate);
+		$("#close_date").val(sysdate);	
+		
+		// 도서 검색
+		$("#btnSearch").on("click",function(){
 			
+			$(".modal").show();
+			$("#keyword").focus();
+				
+		})
+		
+		
+		$("#btnKeyword").on("click", function(){
+			let keyword = $("#keyword").val();
+	
+			$.ajax({
+				url: "/books/searchBook",
+				type:"post",	
+				data:{'keyword':keyword},
+				success: function(data){	
+					
+					$("#modal-body").empty();
+					
+					for(let dto of data){
+						console.log(dto.title);	
+					
+					let a = $("<p>").attr({"class":"bookSelected"}).html(textLengthOverCut(dto.title, 30, '. . .'));
+					let hiddenId = $("<input>").attr({"class":"itemId"}).css({"display":"none"}).val(dto.itemId); 
+					let bookCover = $("<input>").attr({"class":"book_cover"}).css({"display":"none"}).val(dto.cover); 
+					$("#modal-body").append(a, hiddenId, bookCover);
+					
+					}
+					let etc = $("<p>").attr({"id":"etc"}).html("[기타]찾는 도서가 없을 시 선택");
+					$("#modal-body").append(etc);	
+					
+					
+					$(".bookSelected").on("click", function(){
+						
+						$("#book_title").val($(this).html());
+						$(".modal").hide();	
+						$("#itemId").val($(this).next().val());
+						$("#book_cover").val($(this).next().next().val());
+						
+						initialize();
+							
+					})
+					// 찾는 도서가 없을 때 
+					$("#etc").on("click", function(){
+						$("#book_title").val("[기타]");
+						$("#itemId").val(0);
+						
+						initialize();
+					
+					})		
+					
+				},
+				error: function(e){
+					console.log(e);
+				}		
+			})
+		})
+		
+		$("#searchCancel").on("click", function(){
+		
+			initialize();
+		})		
+		
+		
+		
+		// 글자 수 처리 function
+		function textLengthOverCut(txt, len, lastTxt) {
+        if (len == "" || len == null) { // 기본값
+            len = 20;
+        }
+        if (lastTxt == "" || lastTxt == null) { // 기본값
+            lastTxt = "...";
+        }
+        if (txt.length > len) {
+            txt = txt.substr(0, len) + lastTxt;
+        }
+        return txt;
+    }
+
+		// 검색창 초기화 function
+		function initialize(){
+			
+			$(".modal").hide();
+			$("#keyword").val("");
+			$("#modal-body").empty();
+		
+			let noP = $("<p>").html("모임에서 활용할 도서를 검색해보세요!");
+			$("#modal-body").append(noP);
+			
+		}
+		
+		
+		// 날짜 차이 계산 function
+		function diffDate(date1, date2){
+			let diffDate = date2.getTime() - date1.getTime();
+			
+			return diffDate / (1000 * 60 * 60 * 24);
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 		

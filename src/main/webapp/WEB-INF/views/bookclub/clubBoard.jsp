@@ -119,6 +119,10 @@ display:none;
 	width:80%;
 	height:80%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 <%-- calendar --%>
 #calendar-container{
 margin-bottom:100px;
@@ -169,6 +173,23 @@ a{
 
 
 
+#reportForm{
+	width: 600px;
+}
+.modal-footer{
+    text-align: right;
+}
+#report_con{
+    padding-top: 15px;
+    padding-left: 30px;
+}
+#report_con2{
+    padding-right: 33px;
+}
+#report_detail{
+    width: 300px;
+    height: 200px;
+}
 </style>
 
 </head>
@@ -349,6 +370,7 @@ a{
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 
 					<%-- 승윤님 신고하기 화면 부분--%>
 					<table>
@@ -381,6 +403,29 @@ a{
 				</div>
 		</div>
 
+=======
+				<div>
+					<table style="text-align: center;">
+					<thead>
+						<tr>
+							<th scope="col" class="thTitle">닉네임</th>
+							<th scope="col" class="thTitle">신고</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<td>${dto.nickname}</td>
+								<input type="hidden" id="hidden_email" value="${dto.email}">
+								<td><button type="button" class="btn btn-danger report" id="btnReport2">신고</button></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</div>
+			</div>
+		
+		</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		<%-- 회원 신고하기 Modal --%>
 		<form id="reportForm" action="/club/report" method="post">
 			<div class="modal" id="reportModal">
@@ -394,7 +439,11 @@ a{
 								<h3>신고사유</h3>
 							</div>
 							<div class="modal-body col-8" id="report_con2">
+<<<<<<< HEAD
 								<select class="form-select" name="report_detail">
+=======
+								<select class="form-select" name="report_content">
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 									<option value="불건전 회원">불건전 회원</option>
 									<option value="회원이 이상함">회원이 이상함</option>
 								</select>
@@ -405,6 +454,7 @@ a{
 								<h3>상세설명</h3>
 							</div>
 								<div class="modal-body col-8" id="report_con2">		
+<<<<<<< HEAD
 									<textarea id="report_content" name="report_content" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
 								</div>
 						</div>
@@ -412,6 +462,15 @@ a{
 		                <div class="modal-footer">
 			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportCancel">신고취소</button>
 		                    <button type="button" class="btn btn-primary" id="btnReportComplete">신고완료</button>
+=======
+									<textarea id="report_detail" name="report_detail" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
+								</div>
+						</div>
+		                <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportCancel">신고취소</button>
+		                    <button type="button" class="btn btn-primary" id="btnReportComplete">신고완료</button>
+		                	<input type="hidden" id="email" name="email" value="">
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		                </div>		
 					</div>
 				</div>
@@ -467,6 +526,7 @@ a{
 
 	<script>
 	<%-- --------- 회원 신고하기 Modal ---------- --%>
+<<<<<<< HEAD
    $(".memberReportBtn").on("click", function() {
       $("#reportModal").show();
       	
@@ -490,6 +550,23 @@ a{
             
          })
    })
+=======
+	$("#btnReport2").on("click", function() {
+		$("#reportModal").show();
+			//취소버튼
+			$("#btnReportCancel").on("click", function() {
+				$("#reportModal").hide();
+			})
+			//제출버튼
+			$("#btnReportComplete").on("click", function() {
+
+				$("#email").val($("#hidden_email").val());
+
+				alert("신고되었습니다.");
+				$("#reportForm").submit();
+			})
+	})
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
 	
 		$("#btnWrite").on("click", function(){
@@ -836,6 +913,10 @@ a{
 			            	  });
 			            	  insert.done(function(data) { 
 			            	  })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 			            	  calendar.addEvent({              
 			            		  title: title,  
 			            		  start: arg.start,
@@ -867,6 +948,10 @@ a{
                           let start = info.event._instance.range.start;
                           let end = info.event._instance.range.end;
                           
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
                           
                           $(function updatePlan() {
                               $.ajax({
@@ -983,14 +1068,25 @@ a{
         let hour = date.getHours();
         let minute = date.getMinutes();
         let second = date.getSeconds();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
         hour =  -9 + hour;
         minute = minute >= 10 ? minute : '0' + minute;
         second = second >= 10 ? second : '0' + second;
+<<<<<<< HEAD
         return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 	}
 
+=======
+
+        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+	}
+		
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		
 	</script>
 </body>
