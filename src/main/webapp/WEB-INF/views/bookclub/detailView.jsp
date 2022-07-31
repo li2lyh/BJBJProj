@@ -16,48 +16,48 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
-
 h4 {
 	text-align: left;
 }
-
 .btnBox {
 	text-align: right;
 	padding: 30px;
 }
-
 .imgBox {
 	padding: 30px;
 }
-
 .contentBox {
 	padding: 30px;
 	padding-left: 0;
 }
-
 #titleDiv {
 	margin-bottom: 50px;
 }
-
 #meetDiv {
 	margin-bottom: 30px;
 }
-
 #detail {
 	width: 100%;
 	height: 140px;
 	border: none;
 }
-
 textarea {
 	resize: none;
 }
-
 #mydesc {
 	width: 100%;
 	border: none;
 }
-
+.imgBox img{
+	width:80%;
+	height:80%;
+}
+#book_titleDiv{
+margin-bottom: 20px;
+}
+#book_title_h{
+font-weight:bold;
+}
 #reportForm{
 	width: 600px;
 }
@@ -96,11 +96,12 @@ textarea {
 		<div class="row">
 			<div class="col-4 imgBox">
 				<c:choose>
-					<c:when test="${dto.img_id eq null}">
+					<c:when test="${dto.book_cover eq null}">
 						<img src="/resources/images/noImg.png" class="card-img-top">
 					</c:when>
 					<c:otherwise>
-						<img src="" class="card-img-top">
+						<img src="${dto.book_cover}" class="card-img-top">
+						
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -110,7 +111,13 @@ textarea {
 				<div id="titleDiv">
 					<h3>${dto.room_title}</h3>
 				</div>
-
+	
+			
+				<div id="book_titleDiv">
+					<h5 id="book_title_h">${dto.book_title}</h5>
+				</div>
+			
+			
 				<div>
 					<h5>모집 인원 : ${dto.room_people} 명</h5>
 				</div>
@@ -150,9 +157,12 @@ textarea {
 						<button type="button" id="btnStatus" class="btn btn-primary">모집현황
 							보기</button>
 					</c:when>
-					<c:otherwise>
+					<c:when test="${role.role == 'C' && role.room_id == dto.room_id}">
 						<button type="button" id="btnRecruit" class="btn btn-warning">지원하기</button>
 						<button type="button" id="btnReport" class="btn btn-danger">신고</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" id="btnlogin" class="btn btn-warning">지원하기</button>
 					</c:otherwise>
 
 				</c:choose>
@@ -241,12 +251,16 @@ textarea {
 					$("#reportBookroomForm").submit();
 				})
 		})
-	
+		
+		// 비로그인 상황에서 지원하기 로그인 하라는 알람뜨기
+		$("#btnlogin").on("click", function(){
+			alert("로그인을 해주세요");
+		})
+		
 		//뒤로가기
 		$("#btnBack").on("click", function() {
 			location.href = "/club/toClub";
 		})
-
 		//신청하기
 		$("#btnRecruit").on("click", function() {
 			var con = confirm("해당 모임을 지원하시겠습니까?");
@@ -261,14 +275,12 @@ textarea {
 				//제출버튼
 				$("#btnComplete").on("click", function() {
 					// 글자 크기 제한 정규식 (10자 이상 XX자 이하)
-
 					//자기소개 제출
 					alert("해당 모임에 지원했습니다. 리더가 승인 할 때까지 기다려주세요!");
 					$("#mydescForm").submit();
 				})
 			}
 		})
-
 		// 리더가 모집현황 보기 버튼 클릭 시
 		$("#btnStatus").on("click", function() {
 			location.href = "/club/myclub?room_id="+${dto.room_id};
