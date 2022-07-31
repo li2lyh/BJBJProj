@@ -46,7 +46,6 @@
 	
 	<insert id="insertLetter" parameterType="com.bjbj.letter.LetterDTO">
 		insert into letter 
-<<<<<<< HEAD
 			values(seq_letter.nextval ,#{email}, #{title},#{content}, sysdate , default )
 
 	</insert>
@@ -61,22 +60,6 @@
 	 			from dual
 	 </insert>
 	 
-=======
-			values(seq_letter.nextval ,#{email}, #{title},#{content}, sysdate, default)
-	</insert>
-	
-	<!-- 
-	letter 테이블에 데이터를 넣는데
-	<insert id="insertLetter" parameterType="map">
-		INSERT ALL
-		for문 시작
-		  INTO letter values(seq_letter.nextval ,#{mail}, #{dto.title//혹은 getter},#{content},#{written_date})
-		for문 닫기 
-		SELECT *
-		FROM DUAL;
-	</insert>
-	 -->
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	
 	<!-- 모임장 쪽지 전송 (관리자 기능) -->
 	<insert id="insertRoomLetter" parameterType="com.bjbj.letter.LetterDTO" >
@@ -104,8 +87,5 @@
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </mapper>
