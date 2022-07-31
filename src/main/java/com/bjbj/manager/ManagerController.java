@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bjbj.bookclub.BoardDTO;
 import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.bookclub.BookclubService;
 import com.bjbj.letter.LetterDTO;
@@ -26,17 +27,20 @@ public class ManagerController {
 	private ManagerService service;
 	@Autowired
 	private LetterService Lservice;
+	@Autowired
+	private BookclubService Bservice;
 
 	@Autowired
 	private HttpSession session;
 	
 	@RequestMapping(value="/toAllmember") //전체 회원페이지 요청
 	public String toAllmember(Model model) throws Exception{
-		List<Map<String,Object>> list = service.selectAllmember();
-		model.addAttribute("list" , list);
-		
+		List<Map<String,Object>> list = service.selectAllmember(); 
 		List<BlacklistDTO> blacklist = service.selectBlackmember();
-		model.addAttribute("blacklist" , blacklist);
+		System.out.println(blacklist);
+			model.addAttribute("blacklist" , blacklist);
+			model.addAttribute("list" , list);
+		
 		return"manager/memberList";
 	}
 	
@@ -92,6 +96,19 @@ public class ManagerController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/submitSelectBlack") //선택 블랙리스트 추가
+	public String submitSelectBlack(@RequestParam(value="checkBlack[]") String[] checkBlack, BlacklistDTO dto) throws Exception{
+		System.out.println(dto.toString());
+		if(checkBlack.length != 0) {
+			for(String email : checkBlack) {
+				System.out.println(email);
+			}
+		}
+		service.submitSelectBlack(checkBlack, dto);
+		return "success";
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/searchBlacklist") //블랙리스트 검색
 	public List<MemberDTO>searchBlacklist(String category, String keyword) throws Exception{
 		System.out.println("category : " + category);
@@ -105,8 +122,9 @@ public class ManagerController {
 	@RequestMapping(value="/toAllclub") //전체 모임페이지 요청
 	public String toAllclub(Model model) throws Exception{
 		List<Map<String, Object>> list = service.selectBookroom();
-		
+
 		model.addAttribute("list", list);
+		
 		return "/manager/bookclubList";
 	}
 	
@@ -127,7 +145,7 @@ public class ManagerController {
 		return "redirect:/manager/toAllclub";
 	}
 	
-	
+
 	@RequestMapping(value="/insertRoomLetter") //모임장 쪽지 전송
 	public String insertRoomLetter(LetterDTO dto) throws Exception{
 		Lservice.insertRoomLetter(dto);
@@ -152,6 +170,11 @@ public class ManagerController {
 		System.out.println("keyword : " + keyword);
 		
 		List<ReviewDTO> list = service.searchReview(category, keyword);
+		
+		for(ReviewDTO dto : list) {
+			dto.setWritten_date(service.getDate(dto.getWritten_date()));
+		}
+		
 		return list;
 	}
 	
@@ -214,14 +237,13 @@ public class ManagerController {
 	
 	//회원 신고 - 모달 경고 추가
 	@RequestMapping(value="/addReport")
-	public String addReport(ReportDTO dto, Model model)throws Exception{
-		//List<BlacklistDTO> blacklist = service.selectBlackmember();
-		//model.addAttribute("blacklist" , blacklist);
+	public String addReport(ReportDTO dto)throws Exception{
 		
 		//경고 +1
 		service.addReport(dto);
 		return "redirect:/manager/toReport";
 		
+
 	}
 
 	

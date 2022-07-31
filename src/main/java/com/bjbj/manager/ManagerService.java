@@ -31,6 +31,11 @@ public class ManagerService {
 		dao.insertBlacklist(dto);
 	}
 	
+	//블랙리스트 선택 추가
+	public void submitSelectBlack(String[]checkBlack, BlacklistDTO dto)throws Exception{
+		dao.submitSelectBlack(checkBlack, dto);
+	}
+	
 	//블랙리스트 검색
 	public List<MemberDTO>searchBlacklist(String category , String keyword)throws Exception{
 		return dao.searchBlacklist(category, keyword);
@@ -52,6 +57,10 @@ public class ManagerService {
 		return dao.searchMember(category, keyword);
 	}
 	
+	//블랙리스트 검사 (전체 회원에서 제외시켜주기)
+	//public List<BlacklistDTO>compareBlacklist(String email)throws Exception{
+	//	return dao.compareBlacklist();
+	//}
 	
 	//전체 모임 조회
 	public List<Map<String, Object>> selectBookroom() throws Exception{
@@ -142,11 +151,14 @@ public class ManagerService {
 	//모임신고 - 경고 추가
 	public void addReportBookroom(int room_id)throws Exception{
 		dao.addReportBookroom(room_id);
+
 	}
+	
 	
 	// 날짜 형식 변경
 	public String getDate(String string) throws Exception {
 		return dao.getDate(string);
 	}
+
 	
 }

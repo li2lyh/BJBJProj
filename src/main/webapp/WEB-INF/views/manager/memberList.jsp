@@ -4,8 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>전체회원 리스트</title>
 <style>
@@ -19,74 +25,69 @@
 	width: 150px;
 	height: 30;
 }
-
 .sendBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 .searchBtn {
 	margin: 2px;
 	width: 80px;
 	height: 30;
 }
-
 #submitBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 #closeBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 #closeSelectBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 /*모달창*/
 textarea {
 	width: 300px;
 	height: 250px;
 	resize: none;
 }
-
 .sendTo {
 	width: 300px;
 }
-
 .letterTitle {
 	width: 300px;
 }
-
 #submitBtnCK {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 /*leftBox*/
 h6 {
 	margin: 10px;
 	padding: 2px;
 }
-
 a {
 	text-decoration: none;
 	color: black;
 }
-
 /*rightBox*/
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
+}
+
 .selectBox {
 	margin: 1px;
 }
-
 .inputContent {
 	margin: 1px;
 }
@@ -138,6 +139,7 @@ a {
 							</div>
 						</div>
 					</form>
+					<div style="width:100%; height:500px; overflow:auto">
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>
@@ -158,39 +160,36 @@ a {
 							</c:if>
 							<c:if test="${list.size() > 0}">
 								<c:forEach items="${list}" var="dto">
-									<tr>
-										<td class="email">${dto.email}</td>
-										<td>${dto.name}</td>
-										<td>${dto.nickname}</td>
-										<td>${dto.warning_count}</td>
-											
-											<c:set var = "afterBlacklist" value="false"/>
-											<c:forEach items="${blacklist}" var = "blacklist">
-												<c:if test="${blacklist.email eq dto.email}">
-													<c:set var ="afterBlacklist" value="true"/>
-												</c:if>
-											</c:forEach>
-										<td>	
-											<c:if test="${afterBlacklist}">
-												<button type="button" class="eachSubmitBtn" value="${dto.email}" disabled="disabled">추가</button>
+									<c:set var ="checkblacklist" value ="false"/>
+										<c:forEach items="${blacklist}" var = "black">
+											<c:if test="${black.email eq dto.email}">
+												<c:set var ="checkblacklist" value="true"/>
 											</c:if>
-											<c:if test="${not afterBlacklist}">
-												<button type="button" class="eachAddBtn" value="${dto.email}">추가</button>
-											</c:if>
-										</td>
-										<td>
-											<button type="button" class="eachSubmitBtn" value="${dto.email}">전송</button>
-										</td>
-										<td>
-										<input type="checkbox" class="checkMember" id="selectCheck" value="${dto.email}">
-										</td>
-									</tr>
+										</c:forEach>			
+										<c:if test="${not checkblacklist}">
+											<tr>
+												<td class="email">${dto.email}</td>
+												<td>${dto.name}</td>
+												<td>${dto.nickname}</td>
+												<td>${dto.warning_count}</td>
+												<td>
+													<button type="button" class="eachAddBtn" value="${dto.email}">추가</button>
+												</td>
+												<td>
+													<button type="button" class="eachSubmitBtn" value="${dto.email}">전송</button>
+												</td>
+												<td>
+													<input type="checkbox" class="checkMember" id="selectCheck" value="${dto.email}">
+												</td>
+											</tr>
+										</c:if>		
 								</c:forEach>
 							</c:if>
 						</tbody>
 					</table>
+					</div>	
 					<div class="col-12 p-2 d-flex justify-content-end">
-						<button type="button" class="blacklistBtn">(선택)블랙리스트</button>
+						<button type="button" class="blacklistBtn" id="checkBlack" name="checkBlack[]">(선택)블랙리스트</button>
 						<button type="button" class="sendBtn" id="selectBtn">선택 쪽지 보내기</button>
 					</div>
 				</div>
@@ -212,7 +211,8 @@ a {
 							<div class="row p-2">
 								<div class="col-3">받는이</div>
 								<div class="col-9">
-									<input type="text" class="sendTo" name="email" id="letter_email">
+									<input type="text" class="sendTo" name="email"
+										id="letter_email">
 								</div>
 							</div>
 							<div class="row p-2">
@@ -224,7 +224,7 @@ a {
 							<div class="row p-2">
 								<div class="col-3">내용</div>
 								<div class="col-9 contentBox">
-									<textarea id="letterContent" name="content" value="content"></textarea>
+									<textarea id="letterContent" name="content"></textarea>
 								</div>
 							</div>
 						</div>
@@ -239,7 +239,7 @@ a {
 		</form>
 
 		<!-- 쪽지 모달 (체크박스 선택) -->
-		<form id="sendLetterFormCK" >
+		<form id="sendLetterFormCK">
 			<div class="modal modalCheck" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -265,7 +265,9 @@ a {
 								id="closeSelectBtn" data-bs-dismiss="modal">닫기</button>
 							<button type="button" class="btn btn-primary" id="submitBtnCK">전송</button>
 						</div>
-						<div class="d-none"><input type="text" id="checkLetter" name="checkLetter[]"></div>
+						<div class="d-none">
+							<input type="text" id="checkLetter" name="checkLetter[]">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -362,7 +364,6 @@ a {
 			$("#submitBtn").on("click", function() {
 				$("#sendLetterForm").submit();
 			})
-
             
             //쪽지 모달(check)
             $("#selectBtn").on("click", function(){
@@ -399,22 +400,50 @@ a {
             				console.log(e);
             			}
             		})
+            	}else{
+            		alert("선택된 쪽지가 없습니다.")
             	}          	
             })
             
             
              //개별 블랙리스트 추가
-             $(".eachAddBtn").on("click", function(e){s
+             $(".eachAddBtn").on("click", function(e){
+            	 
             	 let ba = confirm("정말 추가하시겠습니까?");
             	 if(ba){
             		 location.href = "/manager/addBlacklist?email="+this.value;
             	 }
              })
-
         
-
+             //선택 블랙리스트 추가
              
-
+             $(".blacklistBtn").on("click", function(){
+             	let submitArr = [];
+            	let noArr = $(".checkMember:checked");
+            	
+            	for(let no of noArr){
+            		submitArr.push(no.value);
+            	}
+            	$("#checkblack").val(submitArr);
+            	console.log(submitArr);
+            	if(submitArr.length > 0){
+            		$.ajax({
+            			url: "/manager/submitSelectBlack"
+            			, type:"post"
+            			, data: {"no[]" : submitArr}
+            			, success : function(){
+            				alert("정말 추가하시겠습니까?");
+            				location.href = "/manager/memberList"
+            			},error : function(e){
+            				console.log(e);
+            			}
+            		})
+            	}else{
+            		alert("선택된 정보가 없습니다.")
+            	}
+            	
+             })
+             
         </script>
 </body>
 </html>
