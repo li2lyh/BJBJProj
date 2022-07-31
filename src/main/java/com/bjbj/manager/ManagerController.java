@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-<<<<<<< HEAD
 import com.bjbj.bookclub.BoardDTO;
 import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.bookclub.BookclubService;
-=======
-import com.bjbj.bookclub.BookclubDTO;
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 import com.bjbj.letter.LetterDTO;
 import com.bjbj.letter.LetterService;
 import com.bjbj.member.MemberDTO;
@@ -31,7 +27,6 @@ public class ManagerController {
 	private ManagerService service;
 	@Autowired
 	private LetterService Lservice;
-	
 	@Autowired
 	private BookclubService Bservice;
 
@@ -40,19 +35,12 @@ public class ManagerController {
 	
 	@RequestMapping(value="/toAllmember") //전체 회원페이지 요청
 	public String toAllmember(Model model) throws Exception{
-<<<<<<< HEAD
 		List<Map<String,Object>> list = service.selectAllmember(); 
 		List<BlacklistDTO> blacklist = service.selectBlackmember();
 		System.out.println(blacklist);
 			model.addAttribute("blacklist" , blacklist);
 			model.addAttribute("list" , list);
 		
-=======
-		List<Map<String,Object>> list = service.selectAllmember();
-		model.addAttribute("list" , list);
-		List<BlacklistDTO> blacklist = service.selectBlackmember();
-		model.addAttribute("blacklist" , blacklist);
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		return"manager/memberList";
 	}
 	
@@ -134,13 +122,9 @@ public class ManagerController {
 	@RequestMapping(value="/toAllclub") //전체 모임페이지 요청
 	public String toAllclub(Model model) throws Exception{
 		List<Map<String, Object>> list = service.selectBookroom();
-<<<<<<< HEAD
 
 		model.addAttribute("list", list);
 		
-=======
-		model.addAttribute("list", list);
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		return "/manager/bookclubList";
 	}
 	
@@ -161,10 +145,7 @@ public class ManagerController {
 		return "redirect:/manager/toAllclub";
 	}
 	
-<<<<<<< HEAD
 
-=======
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	@RequestMapping(value="/insertRoomLetter") //모임장 쪽지 전송
 	public String insertRoomLetter(LetterDTO dto) throws Exception{
 		Lservice.insertRoomLetter(dto);
@@ -218,16 +199,10 @@ public class ManagerController {
 	public String toReport(Model model) throws Exception{
 		//회원 신고 리스트
 		List<ReportDTO> report_list = service.selectAllreport();
-<<<<<<< HEAD
 		for(ReportDTO dto : report_list) {
 			dto.setReport_date(service.getDate(dto.getReport_date()));
 		}
 
-=======
-		model.addAttribute("report_list", report_list);
-
-		
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		//모임 신고 리스트
 		List<ReportBookroomDTO>report_bookroom = service.selectRoomreport();
 		for(ReportBookroomDTO bookroomdto : report_bookroom) {
@@ -262,7 +237,6 @@ public class ManagerController {
 	
 	//회원 신고 - 모달 경고 추가
 	@RequestMapping(value="/addReport")
-<<<<<<< HEAD
 	public String addReport(ReportDTO dto)throws Exception{
 		
 		//경고 +1
@@ -270,16 +244,6 @@ public class ManagerController {
 		return "redirect:/manager/toReport";
 		
 
-=======
-	public String addReport(ReportDTO dto, Model model)throws Exception{
-		List<BlacklistDTO> blacklist = service.selectBlackmember();
-		model.addAttribute("blacklist" , blacklist);
-		
-		//경고 +1
-		service.addReport(dto);
-		return "/manager/toReport";
-		
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	}
 
 	

@@ -114,7 +114,6 @@ public class ManagerDAO {
 	public void deleteReportBookroom(int room_id)throws Exception{ //모임신고 - 신고 삭제
 		session.delete("managerMapper.deleteReportBookroom", room_id);
 	}
-<<<<<<< HEAD
 
 	
 	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
@@ -129,21 +128,6 @@ public class ManagerDAO {
 		session.update("managerMapper.addReportBookroom", room_id);
 	}
 	
-=======
-	
-	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
-		session.update("managerMapper.addReport", dto);
-	}
-	public int selectMemberReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가 후 신고횟수 다시 선택하기
-		return session.selectOne("managerMapper.selectMemberReport", dto);
-	}
-	
-	
-	public void addReportBookroom(int room_id)throws Exception{ //모임신고 - 경고 추가
-		session.update("managerMapper.addReportBookroom", room_id);
-	}
-	
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	// 날짜 형식 변경 (yyyy-MM-dd)
 	public String getDate(String string) {
 		String rs = null;
@@ -157,12 +141,7 @@ public class ManagerDAO {
 			e.printStackTrace();
 		}
 		return rs;
-<<<<<<< HEAD
 	}
 	
 
-=======
-	}	
-	
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 }

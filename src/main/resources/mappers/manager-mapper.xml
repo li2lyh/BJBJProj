@@ -38,7 +38,6 @@
 
 <!-- 전체 회원 조회 -->
 <select id="selectAllmember" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-<<<<<<< HEAD
 	select * from member 
 		full outer join report using(email) 
 </select>
@@ -46,14 +45,6 @@
 <!-- 블랙리스트 검사 -->
 <select id="selectBlackmember" resultType="com.bjbj.manager.BlacklistDTO">
 	select email from blacklist
-=======
-	select * from member full outer join report using(email) 
-</select>
-
-<!-- 전체회원에서 블랙리스트 조회 (버튼 비활성화를 위해)-->
-<select id="selectBlackmember" resultType="com.bjbj.manager.BlacklistDTO">
-	select * from blacklist
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </select>
 
 <!-- 전체 회원 검색 -->
@@ -71,11 +62,7 @@
 </select>
 <!-- 모임 검색 -->
 <select id="searchBookclub" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-<<<<<<< HEAD
 	select * from bookroom join role using(room_id) where role='L'
-=======
-	select * from bookroom join role using(room_id)
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 		and ${category} like '%' || #{keyword} || '%'
 		
 		<!-- role 이 L 일때 -->
@@ -136,14 +123,10 @@
 
 <!-- 회원신고 - 경고 횟수 추가 -->
 <update id="addReport" parameterType="com.bjbj.manager.ReportDTO">
-<<<<<<< HEAD
 	update report 
 	set warning_count = warning_count +1 
 	,report_action = 1
 		where email = #{email}
-=======
-	update report set warning_count = warning_count +1 where email = #{email}
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </update>
 <!-- 회원신고 - 경고 추가 후 신고횟수 다시 선택하기 -->
 <select id="selectMemberReport" resultType="int">
