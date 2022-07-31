@@ -35,12 +35,7 @@ public class MemberDAO {
 		map.put("password", password);
 		map.put("nickname", nickname);
 		map.put("mydesc", mydesc);
-<<<<<<< HEAD
-		return session.update("memberMapper.updateInfo" , map);
-
-=======
 		return session.update("memberMapper.updateInfo", map);
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	}
 
 	/* *************** Login *************** */
@@ -56,15 +51,12 @@ public class MemberDAO {
 	public MemberDTO kakaoLogin(String email) throws Exception {
 		return session.selectOne("memberMapper.kakaoLogin", email);
 	}
-<<<<<<< HEAD
-=======
 	
 	/* *************** 블랙리스트 *************** */
 	// 블랙리스트
 		public MemberDTO checkBlack(String email)throws Exception {
 			return session.selectOne("memberMapper.checkBlack", email);
 		}
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 	/* *************** SignUp *************** */
 	public int insert(MemberDTO dto) throws Exception {

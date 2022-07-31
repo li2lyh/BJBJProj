@@ -35,23 +35,5 @@ public class MailService {
 		return strTemp;
 	}
 	
-<<<<<<< HEAD
-	/*
-	public void ex(String[] args) throws Exception{
-		String fileName = "JsoupEx.jsp";
-		File file = new File(fileName);
-		Document document = null;
-		
-		document = Jsoup.parse(file, "UTF-8");
-		
-		Elements links1 = document.getElementsByTag("h1");
-		for (Element link : links1) {
-			System.out.println(link.text());
-			
-		}
-	}
-	*/
-=======
 
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 }

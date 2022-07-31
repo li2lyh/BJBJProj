@@ -27,98 +27,75 @@
 </head>
 <style>
 /* ******** 기준 ******** */
-<<<<<<< HEAD
-
-=======
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .head-containe {
 	font-size: 20px;
 }
-
-
 /* ******** 로그인 영역 ******** */
 .loginBox {
 	margin-top: 1rem;
 }
-
 .loginBox a {
 	color: black;
 	text-decoration: none;
 }
-
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
 	height: 25rem;
 }
-
 /* 모달 body */
 .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
-
 .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
-
 .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
-
 /* 로그인 버튼 */
 .btnBox {
 	height: 2.5rem;
 	margin-top: 1.7rem;
 }
-
 .btnBox button {
 	margin-left: 0.8rem;
 	margin-right: 0.8rem;
 	width: 12rem;
 }
-
 /* Search 창 */
 input.underlineSearch {
 	width: 11rem;
 	border: 0;
 	border-bottom: 1px solid #2e2e2e;
 }
-
 input.underlineSearch:focus {
 	outline: none;
 }
-
 #searchIcon {
 	width: 2rem;
 	height: 2rem;
 }
-
 /* 쪽지함 */
-
 .letterImg {
 	width: 2rem;
 	height: 2rem;
 	padding: 2px;
 }
-
-
 .letterImg:hover {
 	cursor: pointer;
 }
-
 /* ******** Nav 박스 ******** */
 /* navBox */
 .navBox {
 	height: 100px;
 }
-
 /* blankBox */
 .blankBox {
 	height: 50%;
 }
-
 /* drop down */
 .dropbtn {
 	background-color: #ffffff;
@@ -131,12 +108,10 @@ input.underlineSearch:focus {
 	border: none;
 	text-align: center;
 }
-
 .dropdown {
 	position: relative;
 	display: inline-block;
 }
-
 .dropdown-content {
 	display: none;
 	position: absolute;
@@ -145,7 +120,6 @@ input.underlineSearch:focus {
 	font-size: 0.5rem;
 	text-align: end;
 }
-
 .dropdown-content a {
 	color: black;
 	width: inherit;
@@ -154,24 +128,19 @@ input.underlineSearch:focus {
 	text-decoration: none;
 	display: block;
 }
-
 .dropdown-content a:hover {
 	background-color: #ddd;
 }
-
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-
 .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
-
 /* menuBox */
 .menuBox div {
 	height: 50%;
 }
-
 .menuBox a {
 	font: 1.8em sans-serif;
 	color: black;
@@ -189,14 +158,10 @@ input.underlineSearch:focus {
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
-<<<<<<< HEAD
-							${loginSession.nickname}<span>님 환영합니다!</span>
-=======
 							<div class="welcomeBox">
 								<img class="letterImg" src="/resources/images/letter.png">
 								${loginSession.nickname}<span>님 환영합니다!</span>
 							</div>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 						</c:when>
 						<c:otherwise>
 							<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
@@ -226,13 +191,8 @@ input.underlineSearch:focus {
 									<div class="inputBox">
 										<form method="post" id="loginForm">
 											<input type="text" class="form-control" name="email"
-<<<<<<< HEAD
-												id="loginId" placeholder="아이디를 입력해주세요"> <input
-												type="password" class="form-control" name="password"
-=======
 												id="loginId" placeholder="아이디를 입력해주세요"> 
 											<input type="password" class="form-control" name="password"
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 												id="loginPw" placeholder="비밀번호를 입력해주세요">
 										</form>
 									</div>
@@ -259,12 +219,9 @@ input.underlineSearch:focus {
 											src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 											alt="카카오 로그인 버튼" />
 										</a>
-<<<<<<< HEAD
-=======
 										<form action="/member/toKakaoSignUp" method="post">
 											<input type="hidden" id="emailForKakao" value="" name="email">
 										</form>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 									</div>
 
 								</div>
@@ -324,22 +281,6 @@ input.underlineSearch:focus {
 					<li class="nav-item dropdown">
 						<button class="dropbtn" id="">&nbspBook&nbsp</button>
 						<div class="dropdown-content">
-<<<<<<< HEAD
-							<a href="#">신간도서</a> <a href="#">베스트셀러</a> <a href="#">도서리뷰</a>
-						</div>
-					</li>
-					<li class="nav-item dropdown">
-						<button class="dropbtn">BookClub</button>
-						<div class="dropdown-content">
-							<a href="#">BookClub</a> <a href="#">클럽만들기</a> <a href="#">MyBook</a>
-						</div>
-					</li>
-					<li class="nav-item">
-						<button class="dropbtn">Library</button>
-					</li>
-				</ul>
-
-=======
 
 							<a href="/books/arrivals">신간도서</a>
 							<a href="/books/bestseller">베스트셀러</a>
@@ -384,21 +325,12 @@ input.underlineSearch:focus {
 						<a href="/library/map"><button class="dropbtn">Library</button></a>
 					</li>
 				</ul>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 			</div>
 		</div>
 
 	</div>
 
 	<script>
-<<<<<<< HEAD
-		/* 검색 버튼 */
-
-		/* 로그인 */
-		$("#loginBtn").on("click", function() {
-
-			$.ajax({
-=======
 	
 // 주기적인 수신 쪽지 확인
 $(document).ready(function(){
@@ -429,7 +361,6 @@ $(document).ready(function(){
 		}			
 		},5000); // 5000 : 5초
 	});
-
 	/* 쪽지함 */
 	$(".letterImg").on("click", function() {
 		let url = "/member//toLetter";
@@ -438,7 +369,6 @@ $(document).ready(function(){
 		window.open(url, name, option);
 	})
 	
-
    
 		/****************************************** 검색 버튼 *****************************************/
 		
@@ -501,10 +431,7 @@ $(document).ready(function(){
 		}
 		/****************************************** 로그인 ******************************************/
 		$("#loginBtn").on("click", function() {
-
 			$.ajax({
-
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				url : "/member/login",
 				type : "post",
 				data : {
@@ -513,13 +440,9 @@ $(document).ready(function(){
 				},
 				success : function(data) {
 					console.log(data);
-<<<<<<< HEAD
-					if (data == "success") {
-=======
 					if (data == "blackList"){
 						alert("블랙리스트 회원입니다.");
 					} else if (data == "success") {
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 						location.href = "/"
 					} else if (data == "fail") {
 						alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
@@ -529,60 +452,11 @@ $(document).ready(function(){
 					console.log(e);
 				}
 			})
-
 		});
 		
-<<<<<<< HEAD
-	/* 카카오 로그인 */
-	window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
-	console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
-	function kakaoLogin() {
-		window.Kakao.Auth.login({
-			scope:'account_email'
-			, success: function(authObj){
-				console.log(authObj);
-				window.Kakao.API.request({
-					url : '/v2/user/me'
-					, success : res => {
-						const kakao_account = res.kakao_account;
-						const email = kakao_account.email;
-						
-						console.log(kakao_account);
-						console.log(email)
-						
-						$.ajax({
-	                        	type: "post",
-	                       		url: '/member/kakaoLogin', // 로그인
-	                      		data: { "email" : email },
-	                      		dataType: "text",
-	                        	success: function (data) {
-	                            		console.log(data);
-	                            		if (data === "fail") {// 회원가입
-		                               		console.log("성공!");
-		                              		location.href = '/member/toKakaoSignUp?email=' + email;
-	                          			} else if (data === "success") {
-											console.log("success");
-											location.href="/"
-										}
-	                        }, error: function (request, status, error) {
-	                            console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
-	                        }
-	                    })
-	                    // ajax끝
-	                }
-					, fail: function (error) {
-						alert(error);
-					}
-	            })
-	        }
-	    })
-	};
-=======
 		/****************************************** 카카오 로그인 ******************************************/
 		window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
 		console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
 		function kakaoLogin() {
 			window.Kakao.Auth.login({
 				 success: function(authObj){
@@ -590,7 +464,6 @@ $(document).ready(function(){
 					window.Kakao.API.request({
 						url : '/v2/user/me'
 						, success : res => {
-
 							const kakao_token = res.id;
 							
  							$.ajax({
@@ -640,7 +513,6 @@ $(document).ready(function(){
 	        document.body.append(frm);
 	        frm.submit();
 	    }
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	</script>
 </body>
 

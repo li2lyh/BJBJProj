@@ -4,18 +4,6 @@
 <html>
 
 <head>
-<<<<<<< HEAD
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <style>
-    /* ******** 기준 ******** */
-   	.foot-container {
-      font-size: 20px;
-    }
-=======
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Footer</title>
@@ -29,7 +17,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 		crossorigin="anonymous"></script>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 	
 
@@ -38,22 +25,18 @@
 .foot-container {
 	font-size: 20px;
 }
-
 /* ******** policyBox ******** */
 .policyBox {
 	margin-top: 3.5rem;
 }
-
 .policyBox a {
 	text-decoration: none;
 	color: black;
 }
-
 /* ******** Foot Information ******** */
 .infoBox {
 	margin-top: 1.5rem;
 }
-
 .infoBox p {
 	margin-bottom: 0.3rem;
 }
@@ -61,41 +44,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-  <div class="foot-container">
-    <!-- ********** 이용약관, 개인정보처리방침 ********** -->
-    <div class="policyBox row">
-      <div class="col-1 p-0">
-        <p class="m-0" id="termsOfService" onclick="showPopup1();">
-          이용약관
-        </p>
-      </div>
-      <div class="col-2 p-0" >
-        <p class="m-0" id="" onclick="showPopup2();">개인정보처리방침</p>
-      </div>
-    </div>
-    <!-- ********** Foot Information ********** -->
-    <div class="infoBox row">
-      <div class="p-0">
-        <h4>북적북적커뮤니티</h4>
-        <p>대표 : 김당산</p>
-        <p>사업자 등록번호 : 000 - 00 - 00000</p>
-        <p>통신판매번호 : 제2022 - 서울 영등포 - 00000</p>
-        <p>호스팅 제공자 : (주)KH정보교육원</p>
-        <p>주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩(구관) 19F, 20F</p>
-      </div>
-    </div>
-  </div>
-  
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-    crossorigin="anonymous"></script>
-  
-  
-  <script>
-    /* 이용약관 */
-=======
 	<div class="foot-container">
 		<!-- ********** 이용약관 ********** -->
 		<div class="policyBox row">
@@ -219,7 +167,6 @@
 								없는 불가항력적 사유로 인한 회원의 손해에 대하여 책임지지 않습니다.<br> <br> 부칙<br>
 								<br> 이 약관은 2022년 8월 5일 부터 시행합니다.<br>
 							</div>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 						</div>
 					</div>
