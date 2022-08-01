@@ -67,7 +67,6 @@ public class BookController {
 	@RequestMapping(value = "/likes")
 	public String likeBook(LikeBookDTO dto) throws Exception {
 		System.out.println(dto.toString());
-		dto.setImg_id("sample");
 		int rs = service.addLikeBook(dto);
 		if (rs > 0) {
 			return "success";
