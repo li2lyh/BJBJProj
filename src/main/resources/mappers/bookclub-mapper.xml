@@ -86,12 +86,12 @@
   
 	<!-- 회원 신고 -->
 	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
-	  insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname}, default)
+	  insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname})
 	</insert>
-  
+
 	<!-- 회원 닉네임 받아오기 -->
 	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
-		select member.email, nickname from member inner join role on member.email = role.email where member.email != #{email}
+		select role.email, nickname from role inner join member on role.email = member.email where role.email != #{email}
 	</select>
 	
 </mapper>

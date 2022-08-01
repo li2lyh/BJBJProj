@@ -89,7 +89,6 @@ public class ReportDTO {
 	public void setReporter_nickname(String reporter_nickname) {
 		this.reporter_nickname = reporter_nickname;
 	}
-
 	
 	public int getReport_action() {
 		return report_action;
@@ -101,9 +100,9 @@ public class ReportDTO {
 
 	@Override
 	public String toString() {
-		return  email +  report_content + warning_count+ report_date + report_detail + reporter_nickname + report_action;
+		return "ReportDTO [email=" + email + ", report_content=" + report_content + ", warning_count=" + warning_count
+				+ ", report_date=" + report_date + ", report_detail=" + report_detail + ", reporter_nickname="
+				+ reporter_nickname + ", report_action=" + report_action + "]";
 	}
-	
-	
-	
+
 }

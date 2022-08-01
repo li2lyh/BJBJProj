@@ -283,11 +283,10 @@ public class BookclubController {
 		model.addAttribute("board", boardList);
 		// 해당 방의 캘린더 정보
 		
-		// 해당 모임의 멤버 닉네임 나열하기 (승윤님)
-		//List<MemberDTO> list = service.selectRoleMember(id);
-		//System.out.println("list : " + list);
-		//model.addAttribute("list", list);
-
+		// 해당 방의 멤버 닉네임 리스트
+		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
+		model.addAttribute("nickList" , nickList);
+				
 		return "/bookclub/clubBoard";
 	}
 
@@ -429,7 +428,7 @@ public class BookclubController {
 
 	//회원 신고하기 요청 
 	@RequestMapping (value="/report")
-	public String insertReport(ReportDTO dto) throws Exception{
+	public String insertReport(ReportDTO dto) throws Exception {
 
 		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
 		dto.setReporter_nickname(nickname);
@@ -437,7 +436,5 @@ public class BookclubController {
 		service.insertReport(dto);
 		return "redirect:/club/clubBoard";
 	}
-	
-	
 				
 }

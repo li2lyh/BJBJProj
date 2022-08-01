@@ -469,7 +469,6 @@ a{
 	<%-- --------- 회원 신고하기 Modal ---------- --%>
    $(".memberReportBtn").on("click", function() {
       $("#reportModal").show();
-      	
       $("#hiddenemail").val($(this).prev().val());
       console.log(email);
          //취소버튼

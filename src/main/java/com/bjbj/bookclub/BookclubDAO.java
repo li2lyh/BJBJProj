@@ -218,11 +218,10 @@ public class BookclubDAO {
 	//	return session.selectOne("clubMapper.selectNickname", nickname);
 	//}
 	
-	// 모임원 닉네임 불러오기
-	//public List<MemberDTO> selectRoleMember(String email) throws Exception {
-	//	return session.selectList("clubMapper.selectRoleMember", email);
-	//}
-	
-	
+	// room_id 로 해당 멤버 닉네임 출력
+	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
+		return session.selectList("roleMapper.selectNickByRoom" , room_id);
+	}
+
 }
 

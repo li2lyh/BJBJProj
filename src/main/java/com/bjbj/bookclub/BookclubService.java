@@ -179,10 +179,9 @@ public class BookclubService {
 		dao.insertReport(reportDTO);
 	}
 
-	// 모임원 닉네임 불러오기
-	//public List<MemberDTO> selectRoleMember(String email) throws Exception {
-	//	return dao.selectRoleMember(email);
-	//}
-	
+	// room_id 에 따른 닉네임 리스트
+	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
+		return dao.selectNickByRoom(room_id);
+	}
 
 }
