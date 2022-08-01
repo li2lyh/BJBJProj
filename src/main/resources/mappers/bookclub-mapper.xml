@@ -96,14 +96,6 @@
 		select member.email, nickname from member inner join role on member.email = role.email where member.email != #{email}
 	</select>
 
-	<!-- 모임 찜 하기 -->
-	<insert id="insertLike" parameterType="com.bjbj.bookclub.BookclubDTO">
-		insert into like_room values(#{room_id}, #{email})
-	</insert>
 	
-	<!-- 찜한 모임 삭제 (일반) -->
-	<delete id="deleteLike" parameterType="map">
-		delete from like_room where room_id = #{room_id} and email = #{email}
-	</delete>
 
 </mapper>

@@ -34,7 +34,6 @@ public class BookclubController {
 	@RequestMapping(value = "/toClub") // 클럽리스트 요청
 	public String toClub(Model model) throws Exception {
 		List<BookclubDTO> list = service.selectList();
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
 		
 		for (BookclubDTO dto : list) { // 날짜 형식 format( MM월 dd일 )
 			// System.out.println("open_date : " + dto.getOpen_date());
@@ -46,16 +45,6 @@ public class BookclubController {
 		System.out.println("list : " + list.toString());
 		model.addAttribute("list", list);
 
-		// 본인이 참여중인 클럽 room_id 포함 정보 구하기 (by email)
-		RoleDTO roleDTO = service.selectRole(email);
-		System.out.println("roleDTO : " + roleDTO);
-		model.addAttribute("role", roleDTO);
-		
-		// 본인이 지원한 클럽이 있는지 판별 (waiting table)
-		WaitingDTO waitingDTO = service.selectByEmail(email);
-		System.out.println("waitingDTO : " + waitingDTO);
-		model.addAttribute("waiting", waitingDTO);
-		
 		return "/bookclub/findclub";
 	}
 
@@ -78,8 +67,6 @@ public class BookclubController {
 		// (알라딘API) itemId 로 해당 책의 img 검색
 		
 		
-		
-		
 		String email = ((MemberDTO)session.getAttribute("loginSession")).getEmail();
 		RoleDTO roleDto = new RoleDTO(email, 0, "L");
 		service.insert(dto, roleDto);
@@ -98,12 +85,15 @@ public class BookclubController {
 
 		model.addAttribute("dto", dto);
 
-		String email = ((MemberDTO)session.getAttribute("loginSession")).getEmail();
+		String email = ((MemberDTO)session.getAttribute("loginSession")).getEmail();		
 
 		// 모집글은 계정당 한개의 모집글만 올릴 수 있음
 		// 해당 계정의 role테이블 데이터, loginSession, bookroom 테이블 데이터 필요
 		RoleDTO role = service.selectRole(email);
 		model.addAttribute("role", role);
+		
+		List<BookclubDTO> likeList = service.likeClub(email);
+		model.addAttribute("likeList", likeList);
 
 		return "/bookclub/detailView";
 	}
@@ -363,6 +353,7 @@ public class BookclubController {
 	}
 	
 	@RequestMapping(value = "/insertLike") // 찜 추가
+	@ResponseBody
 	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
 		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
 		dto.setRoom_id(room_id);
@@ -372,12 +363,14 @@ public class BookclubController {
 		int rs = service.insertLike(dto); 		
 		if (rs > 0) {
 			System.out.println("찜 완료 " +room_id); 
-			return "redirect:/club/toClubList";
-		}
-		return null;			
+			return "success";
+		} else {
+			return "fail";		
+		}	
 	}
   
 	@RequestMapping(value = "/deleteLike") // 찜 삭제
+	@ResponseBody
 	public String deleteLike(int room_id) throws Exception {
 		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
 		System.out.println("room_id : " + room_id);
@@ -385,10 +378,12 @@ public class BookclubController {
 		
 		if (rs > 0) {
 			System.out.println("삭제 완료 "  +email+ " : " +room_id);
-			return "redirect:/club/toClubList";
-		}
-		return null;
+			return "success";
+		}else {
+			return "fail";		
+		}	
 	}
+
 	
 	// 모임 신고하기 요청
 	@RequestMapping(value = "/reportBookroom")
