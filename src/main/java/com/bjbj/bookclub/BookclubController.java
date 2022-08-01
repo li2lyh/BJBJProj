@@ -264,7 +264,7 @@ public class BookclubController {
 		System.out.println("방 멤버 : " + roleList.toString());
 		model.addAttribute("member",roleList);
 		
-		// 해당 방의 멤버 닉네임 리스트 (윤선)
+		// 해당 방의 멤버 닉네임 리스트
 		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
 		model.addAttribute("nickList" , nickList);
 		
