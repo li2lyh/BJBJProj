@@ -77,7 +77,7 @@ a:hover {
 									<a href="/member/toDetailLetter?no=${dto.no}">${dto.title}</a>
 								</td>	
 								</c:when>
-								<c:otherwise>>
+								<c:otherwise>
 								<td class="fw-bold title">
 									<a href="/member/toDetailLetter?no=${dto.no}">${dto.title}</a>
 								</td>
