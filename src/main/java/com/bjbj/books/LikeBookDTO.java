@@ -5,28 +5,17 @@ public class LikeBookDTO {
 	private String book_title;
 	private String book_author;
 	private String email;
-	private String img_id;
-	private String sys_name;
+	private String book_cover;
 	
 	public LikeBookDTO() {}
 
-	public LikeBookDTO(String book_isbn, String book_title, String book_author, String email) {
+	public LikeBookDTO(String book_isbn, String book_title, String book_author, String email, String book_cover) {
 		super();
 		this.book_isbn = book_isbn;
 		this.book_title = book_title;
 		this.book_author = book_author;
 		this.email = email;
-	}
-
-	public LikeBookDTO(String book_isbn, String book_title, String book_author, String email, String img_id,
-			String sys_name) {
-		super();
-		this.book_isbn = book_isbn;
-		this.book_title = book_title;
-		this.book_author = book_author;
-		this.email = email;
-		this.img_id = img_id;
-		this.sys_name = sys_name;
+		this.book_cover = book_cover;
 	}
 
 	public String getBook_isbn() {
@@ -61,26 +50,18 @@ public class LikeBookDTO {
 		this.email = email;
 	}
 
-	public String getImg_id() {
-		return img_id;
+	public String getBook_cover() {
+		return book_cover;
 	}
 
-	public void setImg_id(String img_id) {
-		this.img_id = img_id;
-	}
-
-	public String getSys_name() {
-		return sys_name;
-	}
-
-	public void setSys_name(String sys_name) {
-		this.sys_name = sys_name;
+	public void setBook_cover(String book_cover) {
+		this.book_cover = book_cover;
 	}
 
 	@Override
 	public String toString() {
 		return "LikeBookDTO [book_isbn=" + book_isbn + ", book_title=" + book_title + ", book_author=" + book_author
-				+ ", email=" + email + ", img_id=" + img_id + ", sys_name=" + sys_name + "]";
+				+ ", email=" + email + ", book_cover=" + book_cover + "]";
 	}
 	
 }

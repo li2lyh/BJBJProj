@@ -29,51 +29,41 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
-
 .titleB {
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 	margin-bottom: 30px;
 	height: 40px;
 }
-
 h4 {
 	text-align: left;
 }
-
 .btnBox {
 	text-align: right;
 	padding: 30px;
 }
-
 .imgBox {
 	padding: 30px;
 }
-
 .contentBox {
 	padding: 30px;
 	padding-left: 0;
 }
-
 #titleDiv {
 	margin-bottom: 50px;
 }
-
 #meetDiv {
 	margin-bottom: 30px;
 }
-
 #detail {
 	width: 100%;
 	height: 140px;
 	border: none;
 }
-
 textarea {
 	resize: none;
 	height: 250px;
 }
-
 #mydesc {
 	width: 100%;
 	border: none;
@@ -82,18 +72,15 @@ textarea {
 	margin-top:30px;
 	text-align:right;
 }
-
 #board_content{
 width:90%;
 }
 #board_title{
 width:90%;
 }
-
 .modalTitleBox{
 margin-bottom: 20px;
 }
-
 .modal-body{
 padding:0px;
 }
@@ -107,7 +94,6 @@ padding-bottom: 10px;
 .T1{
 margin-bottom:3px;
 }
-
 .boardBox p{
 margin-bottom:0px;
 }
@@ -133,13 +119,10 @@ display:none;
 	width:80%;
 	height:80%;
 }
-
 <%-- calendar --%>
-
 #calendar-container{
 margin-bottom:100px;
 }
-
  /*요일*/
   .fc-col-header-cell-cushion {
 	color: #000;
@@ -156,11 +139,9 @@ margin-bottom:100px;
   .fc-daygrid-day-number:hover{
   	font-weight: 600;
   }
-
 a{
  text-decoration: none;
 }
-
 #reportForm{
 	width: 600px;
 }
@@ -174,10 +155,20 @@ a{
 #report_con2{
     padding-right: 33px;
 }
-#report_detail{
+#report_content{
     width: 300px;
     height: 200px;
 }
+
+/* 모임원 신고 */
+#reportTextarea{
+	width: 300px;
+	height: 200px;
+}
+
+
+
+
 </style>
 
 </head>
@@ -261,7 +252,6 @@ a{
     <p>
       <strong>Draggable Events</strong>
     </p>
-
     <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
       <div class='fc-event-main'>My Event 1</div>
     </div>
@@ -277,7 +267,6 @@ a{
     <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
       <div class='fc-event-main'>My Event 5</div>
     </div>
-
     <p>
       <input type='checkbox' id='drop-remove' />
       <label for='drop-remove'>remove after drop</label>
@@ -360,27 +349,38 @@ a{
 						</div>
 					</div>
 				</div>
-				<div>
-					<table style="text-align: center;">
-					<thead>
-						<tr>
-							<th scope="col" class="thTitle">닉네임</th>
-							<th scope="col" class="thTitle">신고</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list}" var="dto">
-							<tr>
-								<td>${dto.nickname}</td>
-								<input type="hidden" id="hidden_email" value="${dto.email}">
-								<td><button type="button" class="btn btn-danger report" id="btnReport2">신고</button></td>
-							</tr>
-						</c:forEach>
-					</tbody>
+
+					<%-- 승윤님 신고하기 화면 부분--%>
+					<table>
+                  <thead>
+                     <tr>
+                        <th>닉네임</th>                        
+                        <th></th>
+                        <th>신고</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <c:forEach items = "${nickList}" var = "nick">
+                     <tr>
+                        <td>${nick.nickname}</td> <!-- 신고당하는 사람 -->
+                        <td>
+                           <c:choose>
+                              <c:when test= "${session.nickname ne nick.nickname}">
+                                 <input type="text" class="d-none" id="email" value="${nick.email}"> <!-- 신고당하는 사람 이메일 숨겨놓기-->
+                                 <button type="button" class="btn btn-danger memberReportBtn">신고</button>
+                              </c:when>
+                              <c:otherwise>
+                                 <button type="button" class="btn btn-danger" disabled="disabled">신고</button>
+                              </c:otherwise>
+                           </c:choose>
+                        </td>
+                     </tr>
+                     </c:forEach>
+                  </tbody>
+               </table>
 				</div>
-			</div>
-		
 		</div>
+
 		<%-- 회원 신고하기 Modal --%>
 		<form id="reportForm" action="/club/report" method="post">
 			<div class="modal" id="reportModal">
@@ -394,7 +394,7 @@ a{
 								<h3>신고사유</h3>
 							</div>
 							<div class="modal-body col-8" id="report_con2">
-								<select class="form-select" name="report_content">
+								<select class="form-select" name="report_detail">
 									<option value="불건전 회원">불건전 회원</option>
 									<option value="회원이 이상함">회원이 이상함</option>
 								</select>
@@ -405,13 +405,13 @@ a{
 								<h3>상세설명</h3>
 							</div>
 								<div class="modal-body col-8" id="report_con2">		
-									<textarea id="report_detail" name="report_detail" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
+									<textarea id="report_content" name="report_content" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
 								</div>
 						</div>
+						<input type="text" class="d-none" id="hiddenemail" name="email" value="email">
 		                <div class="modal-footer">
 			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportCancel">신고취소</button>
 		                    <button type="button" class="btn btn-primary" id="btnReportComplete">신고완료</button>
-		                	<input type="hidden" id="email" name="email" value="">
 		                </div>		
 					</div>
 				</div>
@@ -420,7 +420,7 @@ a{
 	
 	<%-- Modal --%>
 	
-<form id="modalForm" action="" method="post">	
+<form id="modalForm" action="/club/insertReport" method="post">	
 	<div class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -467,21 +467,28 @@ a{
 
 	<script>
 	<%-- --------- 회원 신고하기 Modal ---------- --%>
-	$("#btnReport2").on("click", function() {
-		$("#reportModal").show();
-			//취소버튼
-			$("#btnReportCancel").on("click", function() {
-				$("#reportModal").hide();
-			})
-			//제출버튼
-			$("#btnReportComplete").on("click", function() {
-
-				$("#email").val($("#hidden_email").val());
-
-				alert("신고되었습니다.");
-				$("#reportForm").submit();
-			})
-	})
+   $(".memberReportBtn").on("click", function() {
+      $("#reportModal").show();
+      $("#hiddenemail").val($(this).prev().val());
+      console.log(email);
+         //취소버튼
+         $("#btnReportCancel").on("click", function() {
+            $("#reportModal").hide();
+         })
+         
+         //제출버튼
+         $("#btnReportComplete").on("click", function() {
+            if($("#report_content").val() == ""){
+               alert("상세설명을 입력하세요");
+               $("#report_content").focus();
+               return false;
+            }
+            
+            alert("신고되었습니다.");
+            $("#reportForm").submit();
+            
+         })
+   })
 	
 	
 		$("#btnWrite").on("click", function(){
@@ -519,10 +526,8 @@ a{
 			,	success: function(data){
 				
 				ajaxReload(data);
-
 				// 비동기통신 후 게시글 제목 클릭 시 (모달)
 				$(".title").on("click", function(){
-
 					let board_seq = $(this).parent().prev().val(); // board_seq
 					let content = $(this).parent().next().next().next().children().html(); // 내용
 					<%-- $("#board_content").html($(this).parents(".boardBox").children().eq(4).html()); 이거 왜 안됨? --%>
@@ -561,7 +566,6 @@ a{
 							$("#btnDelete").hide();
 						})
 					}
-
 					$(".modal").show();
 	
 					// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
@@ -581,7 +585,6 @@ a{
 		
 		// 게시글 제목 클릭 시 (모달)
 		$(".title").on("click", function(){
-
 			let board_seq = $(this).parent().prev().val(); // board_seq
 			let content = $(this).parent().next().next().next().children().html(); // 내용 // 내용
 			let nickname = $(this).parent().next().children().html(); // 닉네임
@@ -614,9 +617,7 @@ a{
 					$("#btnDelete").hide();
 				})
 			}
-
 			$(".modal").show();
-
 			
 			// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 			$("#btnCancel").on("click", function(){
@@ -680,12 +681,9 @@ a{
 				,	type:"post"		
 				,	data:{'board_seq':$(this).val()}
 				,	success: function(data){
-
 					ajaxReload(data);
-
 					// 비동기통신 후 게시글 제목 클릭 시 (모달)
 					$(".title").on("click", function(){
-
 						let board_seq = $(this).parent().prev().val(); // board_seq
 						let content = $(this).parent().next().next().next().children().html(); // 내용
 						
@@ -726,9 +724,7 @@ a{
 								$("#btnDelete").hide();
 							})
 						}
-
 						$(".modal").show();
-
 						
 						// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 						$("#btnCancel").on("click", function(){
@@ -788,7 +784,6 @@ a{
 				
 				$("#board_title").val("");	
 				$(".board_content").html(""); 				
-
 				$("#board_title").attr({"readonly":false}).css({"border":""});
 				$(".board_content").attr({"readonly":false}).css({"border":""});
 				
@@ -799,7 +794,6 @@ a{
 		// 로그인된 계정이 리더 일 때 (일정 조정 가능)
 		
 	if('${role}'=='L'){	 
-
 		 document.addEventListener('DOMContentLoaded', function() {
 		
 			 $(function() {
@@ -841,7 +835,6 @@ a{
 			            	  });
 			            	  insert.done(function(data) { 
 			            	  })
-
 			            	  calendar.addEvent({              
 			            		  title: title,  
 			            		  start: arg.start,
@@ -873,7 +866,6 @@ a{
                           let start = info.event._instance.range.start;
                           let end = info.event._instance.range.end;
                           
-
                           
                           $(function updatePlan() {
                               $.ajax({
@@ -933,7 +925,7 @@ a{
 					});
 					 
 					request.done(function (data) {
-						console.log(data);
+						//console.log(data);
 						
 						var calendarEl = document.getElementById('calendar');
 				        var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -975,13 +967,11 @@ a{
         let hour = date.getHours();
         let minute = date.getMinutes();
         let second = date.getSeconds();
-
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
         hour = hour >= 10 ? hour : '0' + hour;
         minute = minute >= 10 ? minute : '0' + minute;
         second = second >= 10 ? second : '0' + second;
-
         return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 }
 	
@@ -992,18 +982,15 @@ a{
         let hour = date.getHours();
         let minute = date.getMinutes();
         let second = date.getSeconds();
-
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
         hour =  -9 + hour;
         minute = minute >= 10 ? minute : '0' + minute;
         second = second >= 10 ? second : '0' + second;
-
         return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 	}
-		
+
 		
 	</script>
-
 </body>
 </html>

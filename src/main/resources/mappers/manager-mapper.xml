@@ -20,6 +20,16 @@
 	values (#{email}, #{black_detail},#{warning_count} )
 </insert>
 
+<!-- 블랙리스트 체크 박스로 선택 추가 -->
+<insert id="submitSelectBlack" parameterType="map">
+	insert all
+		<foreach collection="checkblack" item="email">
+			into blacklist values (#{email} , null, default)
+		</foreach>
+		select *
+		from dual
+</insert>
+
 <!-- 블랙리스트 검색 -->
 <select id="searchBlacklist" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
 	select * from member inner join blacklist using(email)
@@ -28,12 +38,13 @@
 
 <!-- 전체 회원 조회 -->
 <select id="selectAllmember" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-	select * from member full outer join report using(email) 
+	select * from member 
+		full outer join report using(email) 
 </select>
 
-<!-- 전체회원에서 블랙리스트 조회 (버튼 비활성화를 위해)-->
+<!-- 블랙리스트 검사 -->
 <select id="selectBlackmember" resultType="com.bjbj.manager.BlacklistDTO">
-	select * from blacklist
+	select email from blacklist
 </select>
 
 <!-- 전체 회원 검색 -->
@@ -44,13 +55,14 @@
 </select>
 
 
+
 <!-- 전체 모임 조회 --> 
 <select id="selectBookroom" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
 	select * from bookroom join role using(room_id) where role='L'
 </select>
 <!-- 모임 검색 -->
 <select id="searchBookclub" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-	select * from bookroom join role using(room_id)
+	select * from bookroom join role using(room_id) where role='L'
 		and ${category} like '%' || #{keyword} || '%'
 		
 		<!-- role 이 L 일때 -->
@@ -89,11 +101,6 @@
 			</foreach>
 </delete>
 
-<!-- 새로운 메세지 시퀀스 -->
-<!--  <select id="messageSeq" resultType="int">
-	select seq_letter.nextval from dual
-</select>-->
-
 
 <!-- 회원 신고 조회 -->
 <select id="selectAllreport" resultType="com.bjbj.manager.ReportDTO" >
@@ -116,7 +123,10 @@
 
 <!-- 회원신고 - 경고 횟수 추가 -->
 <update id="addReport" parameterType="com.bjbj.manager.ReportDTO">
-	update report set warning_count = warning_count +1 where email = #{email}
+	update report 
+	set warning_count = warning_count +1 
+	,report_action = 1
+		where email = #{email}
 </update>
 <!-- 회원신고 - 경고 추가 후 신고횟수 다시 선택하기 -->
 <select id="selectMemberReport" resultType="int">
