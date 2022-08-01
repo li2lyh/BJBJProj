@@ -330,6 +330,7 @@ body {
 				</div>
 				<!-- End -->
 				
+				<!-- 일반/카카오회원 판별용 -->
 				<div class="row">
 					<div class="col-9 p-0">
 						<input type="hidden" name="user_kakao" id="user_kakao" class="form-control"

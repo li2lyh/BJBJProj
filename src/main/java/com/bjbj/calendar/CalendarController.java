@@ -54,9 +54,12 @@ public List<Map<String, Object>> plan() throws Exception{
      HashMap<String, Object> map = new HashMap<>();
      
      for( int i = 0; i < list.size(); i++) {
+    	 
+    	 //yyyy-MM-dd (시간 삭제)
+    	 map.put("start", service.getCalStrDate(list.get(i).getStart_date()));
+    	 map.put("end", service.getCalStrDate(list.get(i).getEnd_date()) );
+    	 
     	 map.put("id",list.get(i).getCal_id());
-    	 map.put("start", list.get(i).getStart_date());
-    	 map.put("end", list.get(i).getEnd_date());
     	 map.put("title", list.get(i).getCal_title()); 
     	 map.put("textColor", list.get(i).getTextColor());
     	 map.put("backColor", list.get(i).getBackColor());

@@ -59,7 +59,7 @@
 	 			select * 
 	 			from dual
 	 </insert>
-	 
+	
 	
 	<!-- 모임장 쪽지 전송 (관리자 기능) -->
 	<insert id="insertRoomLetter" parameterType="com.bjbj.letter.LetterDTO" >
