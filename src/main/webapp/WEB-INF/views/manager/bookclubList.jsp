@@ -37,6 +37,13 @@ a {
 .inputContent {
 	margin: 1px;
 }
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
+}
 /*모달창*/
 textarea {
 	width: 300px;
@@ -93,7 +100,7 @@ textarea {
 								<th>모임명</th>
 								<th>모임장</th>
 								<th></th>
-								<th>인원수</th>
+								<th>모임인원</th>
 								<th>모임기간</th>
 								<th>모임상태</th>
 								<th></th>

@@ -25,22 +25,18 @@
 .foot-container {
 	font-size: 20px;
 }
-
 /* ******** policyBox ******** */
 .policyBox {
 	margin-top: 3.5rem;
 }
-
 .policyBox a {
 	text-decoration: none;
 	color: black;
 }
-
 /* ******** Foot Information ******** */
 .infoBox {
 	margin-top: 1.5rem;
 }
-
 .infoBox p {
 	margin-bottom: 0.3rem;
 }

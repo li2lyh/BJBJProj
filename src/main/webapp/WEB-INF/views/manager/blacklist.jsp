@@ -33,6 +33,14 @@ a {
 }
 
 /*rightBox*/
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
+}
+
 .selectBox {
 	margin: 1px;
 }

@@ -16,42 +16,33 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
-
 h4 {
 	text-align: left;
 }
-
 #btnBox {
 	text-align: right;
 }
-
 .card {
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
-
 .card-body {
 	text-align: center;
 	padding-bottom: 0;
 }
-
 .cardBox {
 	size: 80%;
 }
-
 .card-img-top {
 	height: 15rem;
 	object-fit: fill;
 }
-
 .card-text {
 	margin-bottom: 20px;
 }
-
 .inform {
 	margin-bottom: 0;
 }
-
 #tagBox {
 	text-align: center;
 	background-color: rgb(56, 177, 137);
@@ -65,18 +56,14 @@ h4 {
 	top: 85%;
 	object-fit: cover;
 }
-
 #cardImg {
 	position: relative;
 }
-
 /* 빈 하트 */
 #emptyLike{
 	width: 30px;
 	height: 25px;
 }
-
-
 </style>
 
 </head>
@@ -156,13 +143,11 @@ h4 {
 				alert("이미 참여 중인 모임이 있습니다.");
 				return false;
 			}
-
 			// 모임을 신청한 상태 일 때 (waiting)
 			if(waiting != ""){
 				alert("지원 중인 모임이 있습니다. 지원한 모임의 리더 혹은 관리자에게 문의하세요");
 				return false;
 			}
-
 		location.href = "/club/toWrite";
 			
 		})
