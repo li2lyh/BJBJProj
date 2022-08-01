@@ -162,6 +162,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 							</div>
 							<div class="descBox">
 								<div class="bookTitle">
@@ -194,6 +195,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -288,6 +290,7 @@ div {
 							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 							<input type="text" class="book_title" style="display:none;" value="${item.title}">
 							<input type="text" class="book_author" style="display:none;" value="${item.author}">
+							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -316,6 +319,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -413,6 +417,7 @@ div {
 							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 							<input type="text" class="book_title" style="display:none;" value="${item.title}">
 							<input type="text" class="book_author" style="display:none;" value="${item.author}">
+							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -441,6 +446,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -535,6 +541,7 @@ div {
 							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 							<input type="text" class="book_title" style="display:none;" value="${item.title}">
 							<input type="text" class="book_author" style="display:none;" value="${item.author}">
+							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -563,6 +570,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -657,6 +665,7 @@ div {
 							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 							<input type="text" class="book_title" style="display:none;" value="${item.title}">
 							<input type="text" class="book_author" style="display:none;" value="${item.author}">
+							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -685,6 +694,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -781,6 +791,7 @@ div {
 							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 							<input type="text" class="book_title" style="display:none;" value="${item.title}">
 							<input type="text" class="book_author" style="display:none;" value="${item.author}">
+							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -809,6 +820,7 @@ div {
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -895,14 +907,19 @@ div {
 		$(".likeBtn").on("click", function() {
 			let con = confirm("선택한 책을 찜할까요?");
 			if(con){
-				console.log($(".book_isbn").val());
+				if("${loginSession}" == "") {
+					alert("도서 찜에 추가하기 위해 로그인이 필요합니다.");
+					return;
+				}
+				let item = $(this).parent();
 				$.ajax({
 					url: "/books/likes"
 					, type: "post"
 					, data: {
-						book_isbn: $(".book_isbn").val()
-						, book_title: $(".book_title").val()
-						, book_author: $(".book_author").val()
+						book_isbn: item.children('input.book_isbn').val()
+						, book_title: item.children('input.book_title').val()
+						, book_author: item.children('input.book_author').val()
+						, book_cover: item.children('input.book_cover').val()
 						, email: "a"
 					}
 					, success: function(data){

@@ -13,16 +13,14 @@
 		<property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<property name="initialSize" value="30" />
+
 	</bean>
 
 	<!-- SqlSessionFactoryBean -->
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="bds" />
-		<property name="configLocation"
-			value="classpath:/mybatis-configuration.xml" />
-		<property name="mapperLocations"
-			value="classpath:mappers/*-mapper.xml" />
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="bds"/>
+    <property name="configLocation" value="classpath:/mybatis-configuration.xml"/>
+		<property name="mapperLocations" value="classpath:mappers/*-mapper.xml"/>
 	</bean>
 
 	<!-- SqlSession -->

@@ -132,33 +132,64 @@ textarea {
 							<div class="invalid-feedback">닉네임은 2~6자 이내로 입력해주세요. <br>(영어 대소문자, 한글, 숫자만 입력)</div>
 						</div>
 					</div>
-					<div class="row p-2">
-						<div class="col-3">
-							<label>비밀번호</label>
+					<c:if test="${loginSession.user_kakao eq 'n'}">
+						<%-- 일반 회원이라면 비밀번호, 전화번호 보이기 --%>
+						<div class="row p-2">
+							<div class="col-3">
+								<label>비밀번호</label>
+							</div>
+							<div class="col-9">
+								<input type="password" class="form-control" id="password" name="password" value="${dto.password}" readonly>
+								<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
+							</div>						
 						</div>
-						<div class="col-9">
-							<input type="password" class="form-control" id="password" name="password" value="${dto.password}" readonly>
-							<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
+						<div class="row p-2">
+							<div class="col-3">
+								<label>비밀번호확인</label>
+							</div>
+							<div class="col-9">
+								<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}" readonly>
+							</div>
 						</div>
-						
-					</div>
-					<div class="row p-2">
-						<div class="col-3">
-							<label>비밀번호확인</label>
+						<div class="row p-2">
+							<div class="col-3">
+								<label>휴대폰번호</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone}" readonly>
+								<div class="form-text d-none" id="phonetxt">휴대폰번호 변경은 관리자에게 문의해주세요.</div>
+							</div>
 						</div>
-						<div class="col-9">
-							<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}" readonly>
+					</c:if>
+					<c:if test="${loginSession.user_kakao eq 'y'}">
+						<%-- 카카오 회원이라면 비밀번호, 전화번호 감추기 --%>
+						<div class="row p-2 d-none">
+							<div class="col-3">
+								<label>비밀번호</label>
+							</div>
+							<div class="col-9">
+								<input type="password" class="form-control" id="password" name="password" value="${dto.password}" readonly>
+								<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
+							</div>						
 						</div>
-					</div>
-					<div class="row p-2">
-						<div class="col-3">
-							<label>휴대폰번호</label>
+						<div class="row p-2 d-none">
+							<div class="col-3">
+								<label>비밀번호확인</label>
+							</div>
+							<div class="col-9">
+								<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}" readonly>
+							</div>
 						</div>
-						<div class="col-9">
-							<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone}" readonly>
-							<div class="form-text d-none" id="phonetxt">휴대폰번호 변경은 관리자에게 문의해주세요.</div>
+						<div class="row p-2 d-none">
+							<div class="col-3">
+								<label>휴대폰번호</label>
+							</div>
+							<div class="col-9">
+								<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone}" readonly>
+								<div class="form-text d-none" id="phonetxt">휴대폰번호 변경은 관리자에게 문의해주세요.</div>
+							</div>
 						</div>
-					</div>
+					</c:if>
 					<div class="row p-2">
 						<div class="col-3">
 							<label>자기소개</label>

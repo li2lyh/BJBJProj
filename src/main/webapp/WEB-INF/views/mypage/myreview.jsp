@@ -133,12 +133,11 @@ a:hover {
 							<div class="row border-top p-3">
 								<div class="col-12 col-md-4 col-lg-4">
 									<c:choose>
-										<c:when test="${empty dto.img_id}">
+										<c:when test="${empty dto.img_no}">
 											<img src="/resources/images/noImg.png" id="noImg">
 										</c:when>
 										<c:otherwise>
-											<img class="card-img-top" src="/resources/images/noImg.png" id="reviewImg">
-											<%-- <img src="/profile/${dto.img_id}" id="reviewImg"> --%>
+											<img src="/profile/${dto.img_no}" id="reviewImg">
 										</c:otherwise>
 									</c:choose>
 								</div>

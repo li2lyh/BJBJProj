@@ -24,14 +24,12 @@
 .foot-container {
 	font-size: 20px;
 }
-
 /* ******** policyBox ******** */
 .policyBox {
 	margin-top: 3.5rem;
 	padding-left: 2rem;
 	padding-right: 2rem;
 }
-
 .policyBox a {
 	font-size: 1rem;
 	text-decoration: none;
@@ -39,6 +37,7 @@
 	align-items: center;
 }
 
+/* ******** Foot Information ******** */
 .infoBox {
 	padding-left: 2rem;
 	padding-right: 2rem;
@@ -62,15 +61,15 @@
 	margin-bottom: 5rem;
 }
 
-.resInfo p:first-child {
-	font-size: 1.1rem;
-	font-weight: bold;
+.resInfo p {
+  font-size: 0.9rem;
+	margin-bottom: 0.3rem;
 	text-align: center;
 }
 
-.resInfo p {
-	font-size: 0.9rem;
-	margin-bottom: 0.3rem;
+.resInfo p:first-child {
+	font-size: 1.1rem;
+	font-weight: bold;
 	text-align: center;
 }
 

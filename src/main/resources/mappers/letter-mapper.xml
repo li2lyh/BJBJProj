@@ -46,8 +46,19 @@
 	
 	<insert id="insertLetter" parameterType="com.bjbj.letter.LetterDTO">
 		insert into letter 
-			values(seq_letter.nextval ,#{email}, #{title},#{content}, sysdate, default)
+			values(seq_letter.nextval ,#{email}, #{title},#{content}, sysdate , default )
+
 	</insert>
+	
+	 <!-- 쪽지 전송 (check) -->
+	 <insert id="submitSelectLetter" parameterType="map">
+			insert all
+	 			<foreach collection="checkLetter" item="mail" index="num">
+	 			into letter values(seq_letter.nextval+#{num},#{mail}, #{emailList.title},#{emailList.content},sysdate , default)
+	 			</foreach>
+	 			select * 
+	 			from dual
+	 </insert>
 	
 	
 	<!-- 모임장 쪽지 전송 (관리자 기능) -->
@@ -67,6 +78,7 @@
 	</select>
 
 	
+
 
 
 

@@ -421,6 +421,43 @@ input.underlineSearch:focus {
 
 		<script>
 	
+// 주기적인 수신 쪽지 확인
+$(document).ready(function(){
+		
+	console.log("로그인세션 : " + "${loginSession.email}");
+	let loginSession = "${loginSession.email}";	
+	
+		setInterval(function(){
+		if(loginSession != ""){
+			
+			$.ajax({
+				url:"/member/readYn",
+				type:"post",
+				data:{"email":"${loginSession.email}"},
+				success: function(data){
+					
+					if(data == 'Y'){// 쪽지를 다 읽은 상태 혹은 쪽지가 없을 때
+						$(".letterImg").attr("src","/resources/images/letter.png");
+					}else if(data == 'N'){//안읽은 쪽지가 있을 때
+						console.log(data);
+						$(".letterImg").attr("src","/resources/images/letter3.png");
+					}
+				},
+				error: function(e){
+					console.log(e);
+				}	
+			})
+		}			
+		},5000); // 5000 : 5초
+	});
+	/* 쪽지함 */
+	$(".letterImg").on("click", function() {
+		let url = "/member//toLetter";
+		let name = "쪽지함";
+		let option = "width=700, height=600, left=600, top=100";
+		window.open(url, name, option);
+	})
+
 		/****************************************** 검색 버튼 *****************************************/
 		
 		/****************************************** 아이디 기억하기 ************************************/
@@ -482,7 +519,6 @@ input.underlineSearch:focus {
 		}
 		/****************************************** 로그인 ******************************************/
 		$("#loginBtn").on("click", function() {
-
 			$.ajax({
 				url : "/member/login",
 				type : "post",
@@ -504,13 +540,11 @@ input.underlineSearch:focus {
 					console.log(e);
 				}
 			})
-
 		});
 		
 		/****************************************** 카카오 로그인 ******************************************/
 		window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
 		console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
 		function kakaoLogin() {
 			window.Kakao.Auth.login({
 				 success: function(authObj){
@@ -518,7 +552,6 @@ input.underlineSearch:focus {
 					window.Kakao.API.request({
 						url : '/v2/user/me'
 						, success : res => {
-
 							const kakao_token = res.id;
 							
  							$.ajax({
