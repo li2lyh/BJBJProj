@@ -76,13 +76,13 @@ public class LetterDTO {
 		this.content = content;
 	}
 
-//	public Date getWritten_date() {
-//		return written_date;
-//	}
-//
-//	public void setWritten_date(Date written_date) {
-//		this.written_date = written_date;
-//	}
+	public String getWritten_date() {
+		return written_date;
+	}
+
+	public void setWritten_date(String written_date) {
+		this.written_date = written_date;
+	}
 	
 	public String getRead() {
 		return read;

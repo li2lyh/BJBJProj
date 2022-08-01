@@ -314,17 +314,16 @@ input.underlineSearch:focus {
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<!-- 로그인 안한 페이지 요청 -->
-						<c:if test="${empty loginSession}">
-							<button class="dropbtn"><a href="/club/toClub">BookClub</a></button>
-						</c:if>
-						<!-- 로그인 한 페이지 요청 -->
-						<c:if test="${not empty loginSession}">
-							<button class="dropbtn"><a href="/club/toClubList">BookClub</a></button>
-						</c:if>
+						<button class="dropbtn">BookClub</button>
 						<div class="dropdown-content">
-							<a href="/club/toClub">모집 중인 클럽</a>
-
+							<!-- 로그인 안한 페이지 요청 -->
+							<c:if test="${empty loginSession}">
+								<a href="/club/toClub">모집 중인 클럽</a>
+							</c:if>
+							<!-- 로그인 한 페이지 요청 -->
+							<c:if test="${not empty loginSession}">
+								<a href="/club/toClubList">모집 중인 클럽</a>
+							</c:if>
 							<c:choose>
 								<c:when test="${not empty loginSession}">
 									<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
