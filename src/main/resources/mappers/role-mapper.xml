@@ -38,5 +38,11 @@
 	<select id="selectExpirationRoleByEmail" parameterType="String" resultType="com.bjbj.bookclub.ExpirationRoleDTO">
 		select * from expirationRole where email = #{email}
 	</select>
-  
+  	
+  	<!-- room_id 로 해당 룸 멤버 닉네임 출력 -->
+	<select id="selectNickByRoom" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		select * from Role join member using(email) 
+			where room_id = #{room_id}
+	</select>
+	
 </mapper>
