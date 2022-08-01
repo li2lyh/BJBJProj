@@ -76,14 +76,14 @@ public class LetterDTO {
 		this.content = content;
 	}
 
-//	public Date getWritten_date() {
-//		return written_date;
-//	}
-//
-//	public void setWritten_date(Date written_date) {
-//		this.written_date = written_date;
-//	}
-	
+	public String getWritten_date() {
+		return written_date;
+	}
+
+	public void setWritten_date(String written_date) {
+		this.written_date = written_date;
+	}
+
 	public String getRead() {
 		return read;
 	}
@@ -91,5 +91,13 @@ public class LetterDTO {
 	public void setRead(String read) {
 		this.read = read;
 	}
-}
 
+	@Override
+	public String toString() {
+		return "LetterDTO [no=" + no + ", email=" + email + ", title=" + title + ", content=" + content
+				+ ", written_date=" + written_date + ", read=" + read + "]";
+	}
+
+	
+	
+}

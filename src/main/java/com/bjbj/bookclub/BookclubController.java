@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.maven.shared.invoker.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -263,6 +264,10 @@ public class BookclubController {
 		System.out.println("방 멤버 : " + roleList.toString());
 		model.addAttribute("member",roleList);
 		
+		// 해당 방의 멤버 닉네임 리스트 (윤선)
+		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
+		model.addAttribute("nickList" , nickList);
+		
 		// 현재 접속한 계정이 리더인가?
 		String role = service.selectRole(id).getRole();
 		System.out.println("해당 계정 역할 :" + role);
@@ -281,7 +286,6 @@ public class BookclubController {
 		// 해당 방의 멤버 닉네임 리스트
 		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
 		model.addAttribute("nickList" , nickList);
-
 				
 		return "/bookclub/clubBoard";
 	}
@@ -422,16 +426,13 @@ public class BookclubController {
 		return "redirect:/club/toClub";
 	}
 
-	// 회원 신고하기 요청
-	@RequestMapping(value = "/report")
-	public String report(ReportDTO dto) throws Exception {
-		System.out.println("email : " + dto.getEmail());
-		System.out.println("report_content : " + dto.getReport_content());
-		System.out.println("report_detail : " + dto.getReport_detail());
+	//회원 신고하기 요청 
+	@RequestMapping (value="/report")
+	public String insertReport(ReportDTO dto) throws Exception {
 
 		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
 		dto.setReporter_nickname(nickname);
-		
+	
 		service.insertReport(dto);
 		return "redirect:/club/clubBoard";
 	}

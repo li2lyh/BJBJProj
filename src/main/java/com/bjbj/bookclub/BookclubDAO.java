@@ -132,6 +132,11 @@ public class BookclubDAO {
 	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
 		return session.selectList("roleMapper.selectRoleByRoom", room_id);
 	}
+	
+	//room_id 로 해당 멤버 닉네임 출력 (윤선)
+	public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
+		return session.selectList("roleMapper.selectNickByRoom" , room_id);
+	}
 
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception{
@@ -157,11 +162,6 @@ public class BookclubDAO {
 	public void deleteBoard(int board_seq)throws Exception{
 		session.delete("boardMapper.deleteBoard", board_seq);
 	}
-	
-	
-	
-	
-	
 	
 	/* 페이징 */
 	public int getCount(String email) throws Exception {
@@ -214,12 +214,12 @@ public class BookclubDAO {
 	}
 	
 	// 신고자 닉네임 불러오기
-	public MemberDTO selectNickname(String nickname) throws Exception {
-		return session.selectOne("clubMapper.selectNickname", nickname);
-	}
+	//public MemberDTO selectNickname(String nickname) throws Exception {
+	//	return session.selectOne("clubMapper.selectNickname", nickname);
+	//}
 	
-	//room_id 로 해당 멤버 닉네임 출력
-	public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
+	// room_id 로 해당 멤버 닉네임 출력
+	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
 		return session.selectList("roleMapper.selectNickByRoom" , room_id);
 	}
 

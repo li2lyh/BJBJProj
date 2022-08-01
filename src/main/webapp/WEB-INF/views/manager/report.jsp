@@ -24,6 +24,14 @@ a{
 	color:black;
 }
 /*rightBox*/
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
+}
+
 .selectBox{
     margin:1px;
 }
@@ -159,22 +167,21 @@ textarea{
                         </div>
                       </div>
                     </div>
+                    
                     <div class="col-12 d-flex justify-content-center modal-footer">
                       <button type="button" class="btn btn-secondary deleteReport" id="deleteMemBtn" data-bs-dismiss="modal" >신고삭제</button>
-                    	  
-                    	  <c:set var = "afterBlacklist" value="false" />
-                    	  <c:forEach items="${blacklist}" var = "blacklist">
-                      			<c:if test="${blacklist.email eq dto.email}">
-                      				<c:set var="afterBlacklist" value="true"/>
-                      			</c:if>
-                      	  </c:forEach>
-                      	  <c:if test="${afterBlacklist}">
-                      	  		<button type="button" class="btn btn-primary" id="addBtn" disabled="disabled" value="${dto.email}">경고추가</button>
-                      	  </c:if>
-                      	 <c:if test="${not afterBlacklist}">
-                      	 		<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}">경고추가</button>
-                      	 </c:if>
-                      	 
+							<c:set var ="checkreport" value="false" />
+							<c:forEach items = "${report_list}" var="reportlist">
+								<c:if test="${reportlist.report_action == 0}">
+									<c:set var ="checkreport" value="true" />
+								</c:if>
+							</c:forEach>
+							<c:if test="${checkreport}">
+								<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}">경고추가</button>
+							</c:if>
+							<c:if test="${not checkreport}">
+								<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}" disabled="disabled">경고추가</button>
+							</c:if>
                     </div>
                   </div>
                 </div>

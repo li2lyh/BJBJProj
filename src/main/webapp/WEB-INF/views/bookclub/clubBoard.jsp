@@ -363,7 +363,6 @@ a{
                      <c:forEach items = "${nickList}" var = "nick">
                      <tr>
                         <td>${nick.nickname}</td> <!-- 신고당하는 사람 -->
-						<!--  <td><input type="hidden" id="hidden_email" value="${nick.email}"></td>-->
                         <td>
                            <c:choose>
                               <c:when test= "${session.nickname ne nick.nickname}">
@@ -470,8 +469,6 @@ a{
 	<%-- --------- 회원 신고하기 Modal ---------- --%>
    $(".memberReportBtn").on("click", function() {
       $("#reportModal").show();
-      	
-      //let email = $(this).prev().val();
       $("#hiddenemail").val($(this).prev().val());
       console.log(email);
          //취소버튼

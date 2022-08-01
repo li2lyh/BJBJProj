@@ -25,74 +25,69 @@
 	width: 150px;
 	height: 30;
 }
-
 .sendBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 .searchBtn {
 	margin: 2px;
 	width: 80px;
 	height: 30;
 }
-
 #submitBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 #closeBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 #closeSelectBtn {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 /*모달창*/
 textarea {
 	width: 300px;
 	height: 250px;
 	resize: none;
 }
-
 .sendTo {
 	width: 300px;
 }
-
 .letterTitle {
 	width: 300px;
 }
-
 #submitBtnCK {
 	margin: 2px;
 	width: 150px;
 	height: 30;
 }
-
 /*leftBox*/
 h6 {
 	margin: 10px;
 	padding: 2px;
 }
-
 a {
 	text-decoration: none;
 	color: black;
 }
-
 /*rightBox*/
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
+}
+
 .selectBox {
 	margin: 1px;
 }
-
 .inputContent {
 	margin: 1px;
 }
@@ -144,6 +139,7 @@ a {
 							</div>
 						</div>
 					</form>
+					<div style="width:100%; height:500px; overflow:auto">
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>
@@ -164,40 +160,37 @@ a {
 							</c:if>
 							<c:if test="${list.size() > 0}">
 								<c:forEach items="${list}" var="dto">
-									<tr>
-										<td class="email">${dto.email}</td>
-										<td>${dto.name}</td>
-										<td>${dto.nickname}</td>
-										<td>${dto.warning_count}</td>
-
-										<c:set var="afterBlacklist" value="false" />
-										<c:forEach items="${blacklist}" var="blacklist">
-											<c:if test="${blacklist.email eq dto.email}">
-												<c:set var="afterBlacklist" value="true" />
+									<c:set var ="checkblacklist" value ="false"/>
+										<c:forEach items="${blacklist}" var = "black">
+											<c:if test="${black.email eq dto.email}">
+												<c:set var ="checkblacklist" value="true"/>
 											</c:if>
-										</c:forEach>
-										<td><c:if test="${afterBlacklist}">
-												<button type="button" class="eachSubmitBtn"
-													value="${dto.email}" disabled="disabled">추가</button>
-											</c:if> <c:if test="${not afterBlacklist}">
-												<button type="button" class="eachAddBtn"
-													value="${dto.email}">추가</button>
-											</c:if></td>
-										<td>
-											<button type="button" class="eachSubmitBtn"
-												value="${dto.email}">전송</button>
-										</td>
-										<td><input type="checkbox" class="checkMember"
-											id="selectCheck" value="${dto.email}"></td>
-									</tr>
+										</c:forEach>			
+										<c:if test="${not checkblacklist}">
+											<tr>
+												<td class="email">${dto.email}</td>
+												<td>${dto.name}</td>
+												<td>${dto.nickname}</td>
+												<td>${dto.warning_count}</td>
+												<td>
+													<button type="button" class="eachAddBtn" value="${dto.email}">추가</button>
+												</td>
+												<td>
+													<button type="button" class="eachSubmitBtn" value="${dto.email}">전송</button>
+												</td>
+												<td>
+													<input type="checkbox" class="checkMember" id="selectCheck" value="${dto.email}">
+												</td>
+											</tr>
+										</c:if>		
 								</c:forEach>
 							</c:if>
 						</tbody>
 					</table>
+					</div>	
 					<div class="col-12 p-2 d-flex justify-content-end">
-						<button type="button" class="blacklistBtn">(선택)블랙리스트</button>
-						<button type="button" class="sendBtn" id="selectBtn">선택
-							쪽지 보내기</button>
+						<button type="button" class="blacklistBtn" id="checkBlack" name="checkBlack[]">(선택)블랙리스트</button>
+						<button type="button" class="sendBtn" id="selectBtn">선택 쪽지 보내기</button>
 					</div>
 				</div>
 			</div>
@@ -231,7 +224,7 @@ a {
 							<div class="row p-2">
 								<div class="col-3">내용</div>
 								<div class="col-9 contentBox">
-									<textarea id="letterContent" name="content" value="content"></textarea>
+									<textarea id="letterContent" name="content"></textarea>
 								</div>
 							</div>
 						</div>
@@ -371,7 +364,6 @@ a {
 			$("#submitBtn").on("click", function() {
 				$("#sendLetterForm").submit();
 			})
-
             
             //쪽지 모달(check)
             $("#selectBtn").on("click", function(){
@@ -408,6 +400,8 @@ a {
             				console.log(e);
             			}
             		})
+            	}else{
+            		alert("선택된 쪽지가 없습니다.")
             	}          	
             })
             
@@ -420,11 +414,36 @@ a {
             		 location.href = "/manager/addBlacklist?email="+this.value;
             	 }
              })
-
         
-
+             //선택 블랙리스트 추가
              
-
+             $(".blacklistBtn").on("click", function(){
+             	let submitArr = [];
+            	let noArr = $(".checkMember:checked");
+            	
+            	for(let no of noArr){
+            		submitArr.push(no.value);
+            	}
+            	$("#checkblack").val(submitArr);
+            	console.log(submitArr);
+            	if(submitArr.length > 0){
+            		$.ajax({
+            			url: "/manager/submitSelectBlack"
+            			, type:"post"
+            			, data: {"no[]" : submitArr}
+            			, success : function(){
+            				alert("정말 추가하시겠습니까?");
+            				location.href = "/manager/memberList"
+            			},error : function(e){
+            				console.log(e);
+            			}
+            		})
+            	}else{
+            		alert("선택된 정보가 없습니다.")
+            	}
+            	
+             })
+             
         </script>
 </body>
 </html>

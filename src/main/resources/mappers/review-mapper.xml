@@ -41,8 +41,4 @@
         where num between #{start} and #{end}
 	</select>
 	
-	<!-- 게시글 번호로 조회 -->
-	<select id="selectByNo" resultType="com.bjbj.review.ReviewDTO">
-		SELECT * FROM review where review_no = #{review_no}	
-	</select>
 </mapper>

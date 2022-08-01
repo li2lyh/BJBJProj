@@ -16,83 +16,65 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
-
 h4 {
 	text-align: left;
 }
-
 .btnBox {
 	text-align: right;
 	padding: 30px;
 }
-
 .imgBox {
 	padding: 30px;
 }
-
 .contentBox {
 	padding: 30px;
 	padding-left: 0;
 }
-
 #titleDiv {
 	margin-bottom: 50px;
 }
-
 #meetDiv {
 	margin-bottom: 30px;
 }
-
 #detail {
 	width: 100%;
 	height: 140px;
 	border: none;
 }
-
 textarea {
 	resize: none;
 }
-
 #mydesc {
 	width: 100%;
 	border: none;
 }
-
 .imgBox img{
 	width:80%;
 	height:80%;
 }
-
 #book_titleDiv{
 margin-bottom: 20px;
 }
-
 #book_title_h{
 font-weight:bold;
 }
-
 #reportForm{
 	width: 600px;
 }
-
 .modal-footer{
     text-align: right;
 }
-
 #report_con{
     padding-top: 15px;
     padding-left: 30px;
 }
-
 #report_con2{
     padding-right: 33px;
 }
-
 #report_detail{
     width: 300px;
     height: 200px;
 }
-
 </style>
 
 </head>
@@ -279,7 +261,6 @@ font-weight:bold;
 		$("#btnBack").on("click", function() {
 			location.href = "/club/toClub";
 		})
-
 		//신청하기
 		$("#btnRecruit").on("click", function() {
 			var con = confirm("해당 모임을 지원하시겠습니까?");
@@ -294,14 +275,12 @@ font-weight:bold;
 				//제출버튼
 				$("#btnComplete").on("click", function() {
 					// 글자 크기 제한 정규식 (10자 이상 XX자 이하)
-
 					//자기소개 제출
 					alert("해당 모임에 지원했습니다. 리더가 승인 할 때까지 기다려주세요!");
 					$("#mydescForm").submit();
 				})
 			}
 		})
-
 		// 리더가 모집현황 보기 버튼 클릭 시
 		$("#btnStatus").on("click", function() {
 			location.href = "/club/myclub?room_id="+${dto.room_id};

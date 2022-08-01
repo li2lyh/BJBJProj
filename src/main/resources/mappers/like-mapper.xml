@@ -17,7 +17,7 @@
 	<!-- 도서 찜 추가 -->
 	<insert id="insertLikeBook" parameterType="com.bjbj.books.LikeBookDTO">
 		INSERT INTO like_book 
-			VALUES( #{book_isbn}, #{book_title}, #{book_author}, #{email}, #{img_id})
+			VALUES( #{book_isbn}, #{book_title}, #{book_author}, #{email}, #{book_cover})
 	</insert>
 	
 	<!-- 도서 찜 삭제 -->

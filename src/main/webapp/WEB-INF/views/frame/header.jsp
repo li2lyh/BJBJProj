@@ -30,90 +30,72 @@
 .head-containe {
 	font-size: 20px;
 }
-
 /* ******** 로그인 영역 ******** */
 .loginBox {
 	margin-top: 1rem;
 }
-
 .loginBox a {
 	color: black;
 	text-decoration: none;
 }
-
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
 	height: 25rem;
 }
-
 /* 모달 body */
 .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
-
 .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
-
 .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
-
 /* 로그인 버튼 */
 .btnBox {
 	height: 2.5rem;
 	margin-top: 1.7rem;
 }
-
 .btnBox button {
 	margin-left: 0.8rem;
 	margin-right: 0.8rem;
 	width: 12rem;
 }
-
 /* Search 창 */
 input.underlineSearch {
 	width: 11rem;
 	border: 0;
 	border-bottom: 1px solid #2e2e2e;
 }
-
 input.underlineSearch:focus {
 	outline: none;
 }
-
 #searchIcon {
 	width: 2rem;
 	height: 2rem;
 }
-
 /* 쪽지함 */
-
 .letterImg {
 	width: 2rem;
 	height: 2rem;
 	padding: 2px;
 }
-
-
 .letterImg:hover {
 	cursor: pointer;
 }
-
 /* ******** Nav 박스 ******** */
 /* navBox */
 .navBox {
 	height: 100px;
 }
-
 /* blankBox */
 .blankBox {
 	height: 50%;
 }
-
 /* drop down */
 .dropbtn {
 	background-color: #ffffff;
@@ -126,12 +108,10 @@ input.underlineSearch:focus {
 	border: none;
 	text-align: center;
 }
-
 .dropdown {
 	position: relative;
 	display: inline-block;
 }
-
 .dropdown-content {
 	display: none;
 	position: absolute;
@@ -140,7 +120,6 @@ input.underlineSearch:focus {
 	font-size: 0.5rem;
 	text-align: end;
 }
-
 .dropdown-content a {
 	color: black;
 	width: inherit;
@@ -149,24 +128,19 @@ input.underlineSearch:focus {
 	text-decoration: none;
 	display: block;
 }
-
 .dropdown-content a:hover {
 	background-color: #ddd;
 }
-
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-
 .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
-
 /* menuBox */
 .menuBox div {
 	height: 50%;
 }
-
 .menuBox a {
 	font: 1.8em sans-serif;
 	color: black;
@@ -387,7 +361,6 @@ $(document).ready(function(){
 		}			
 		},5000); // 5000 : 5초
 	});
-
 	/* 쪽지함 */
 	$(".letterImg").on("click", function() {
 		let url = "/member//toLetter";
@@ -396,7 +369,6 @@ $(document).ready(function(){
 		window.open(url, name, option);
 	})
 	
-
    
 		/****************************************** 검색 버튼 *****************************************/
 		
@@ -459,9 +431,7 @@ $(document).ready(function(){
 		}
 		/****************************************** 로그인 ******************************************/
 		$("#loginBtn").on("click", function() {
-
 			$.ajax({
-
 				url : "/member/login",
 				type : "post",
 				data : {
@@ -482,13 +452,11 @@ $(document).ready(function(){
 					console.log(e);
 				}
 			})
-
 		});
 		
 		/****************************************** 카카오 로그인 ******************************************/
 		window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
 		console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
 		function kakaoLogin() {
 			window.Kakao.Auth.login({
 				 success: function(authObj){
@@ -496,7 +464,6 @@ $(document).ready(function(){
 					window.Kakao.API.request({
 						url : '/v2/user/me'
 						, success : res => {
-
 							const kakao_token = res.id;
 							
  							$.ajax({
