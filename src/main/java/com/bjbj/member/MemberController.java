@@ -261,8 +261,7 @@ public class MemberController {
 	@RequestMapping(value = "/toMyinfo")
 	public String toMyinfo(Model model) throws Exception {
 		// 참여 독서 모임
-		List<BookclubDTO> BookclubList = Bservice
-				.selectLately(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<BookclubDTO> BookclubList = Bservice.selectLately(((MemberDTO) session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("BookclubList", BookclubList);
 
 		for (BookclubDTO dto : BookclubList) {
@@ -280,7 +279,6 @@ public class MemberController {
 
 		// 찜 독서 모임
 		List<BookclubDTO> LikeclubList = Bservice.likeClub(((MemberDTO) session.getAttribute("loginSession")).getEmail());
-
 		model.addAttribute("LikeclubList", LikeclubList);
 
 		for (BookclubDTO dto : LikeclubList) {
@@ -288,6 +286,7 @@ public class MemberController {
 			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
 			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
 		}
+
 		return "/mypage/myinfo";
 	}
 	
@@ -422,20 +421,13 @@ public class MemberController {
 
 	// 찜 도서 페이지 요청
 	@RequestMapping(value = "/toLikebook")
-	public String toLikebook() {
-		return "/mypage/likebook";
-	}	
-	
-	// 찜 도서 삭제 요청
-  
-	/** public String toLikebook(Model model) throws Exception {
+	public String toLikebook(Model model) throws Exception {
 		List<LikeBookDTO> list = LBservice.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("list", list);
 		return "/mypage/likebook";
-	} **/
+	}
 
 	// 찜 도서 삭제 요청 -> 찜 도서 페이지
-
 	@RequestMapping(value = "/toDeleteLikeBook")
 	public String toDeleteLikeBook(String book_isbn) throws Exception {
 		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
@@ -448,7 +440,7 @@ public class MemberController {
 		}
 		return null;
 	}
-
+	
 	// 찜 도서 삭제 요청 -> 마이 페이지
 	@RequestMapping(value = "/toDeleteLikeBook2")
 	public String toDeleteLikeBook2(String book_isbn) throws Exception {
@@ -463,7 +455,6 @@ public class MemberController {
 		}
 		return null;
 	}
-	
 	/* ************ 찜 독서모임 ************ */
 
 	// 찜 독서모임 페이지 요청

@@ -91,6 +91,13 @@ h4 {
 	width: 30px;
 	height: 25px;
 }
+
+/* 하트 버튼 */
+.heartBtn {
+	border: none;
+	background-color: white;
+}
+
 </style>
 
 </head>
@@ -156,17 +163,17 @@ h4 {
 												<c:if test="${not empty loginSession}">
 													<!-- 만약 checkLike가 트루라면 찜한 모임이니 빨간 하트 띄워주고 -->
 													<c:if test="${checkLike}">
-														<a href="/club/deleteLike?room_id=${dto.room_id}"> <img
-															src="/resources/images/likee.png" id="likeImg"
-															onclick="return confirm('찜한 모임을 삭제 하시겠습니까?')">
-														</a>
+														<button type="button" class="heartBtn redHeartBtn" id="redHeartBtn">
+															<input type="text" class="d-none" value="${dto.room_id}"> 
+															<img id="likeImg" src="/resources/images/likee.png">
+														</button>
 													</c:if>
 													<!-- 만약 checkLike가 펄스라면 찜한 모임이 아니니 빈 하트 띄워주고 -->
 													<c:if test="${not checkLike}">
-														<a href="/club/insertLike?room_id=${dto.room_id}"> <img
-															src="/resources/images/emptyLike.png" id="emptyLike"
-															onclick="return confirm('선택한 모임을 찜 하시겠습니까?')">
-														</a>
+														<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
+															<input type="text" class="d-none" value="${dto.room_id}"> 
+															<img id="emptyLike" src="/resources/images/emptyLike.png">
+														</button>
 													</c:if>
 												</c:if>
 											</div>
@@ -190,7 +197,6 @@ h4 {
 				<button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집
 					글 쓰기</button>
 			</div>
-		
 		<div class=footer>
 		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	</div>
@@ -199,6 +205,54 @@ h4 {
 		</div>
 	</div>
 	<script>
+		// 모임 찜 하기
+	    $(".emptyHeartBtn").on("click",function(e) {
+			let yn = confirm("선택한 모임을 찜 하시겠습니까?");
+			console.log($(e.target).prev().val());
+			if (yn) {
+				console.log();
+				 $.ajax({
+					url : "/club/insertLike?room_id="+ $(e.target).prev().val()
+					,type : "get"
+					, success : function(data){
+						if(data === "success"){
+							if (confirm("해당 모임을 찜하셨습니다. 마이페이지로 이동하시겠습니까?")) {
+		                        // 승낙하면 마이페이지의 찜하기 리스트로 이동
+		                        location.href = "/member/toLikeclub";
+	                        } else {
+		                        // 거부하면 해당 페이지 새로고침하여 찜 반영
+		                        location.reload();
+	                        }
+						} else {
+							alert("에러가 발생하여 찜할 수 없습니다.")
+						}
+					}, error : function(e){
+						console.log(e);
+					}
+				})
+			}
+		})
+	
+		// 찜한 모임 삭제하기
+		$(".redHeartBtn").on("click",function(e) {
+			let yn = confirm("찜한 모임을 삭제 하시겠습니까?");
+			console.log($(e.target).prev().val());
+			$.ajax({
+				url : "/club/deleteLike?room_id="+ $(e.target).prev().val()
+				,type : "get"
+				, success : function(data){
+					if(data === "success"){
+						// 해당 페이지 새로고침하여 찜 반영
+						location.reload();
+					} else {
+						alert("에러가 발생하여 삭제 할 수 없습니다.")
+					}
+				}, error : function(e){
+					console.log(e);
+				}
+			})
+		})
+	
 		$("#btnClass").on("click", function() {
 			let loginSession = '${loginSession}';
 			let role = '${role}';
@@ -219,11 +273,8 @@ h4 {
 			if (waiting != "") {
 				alert("지원 중인 모임이 있습니다. 리더가 되고 싶다면 지원 신청을 취소해주세요!");
 				location.href = "/club/detailView?room_id="+'${waiting.room_id}';
-				return false;
 			}
-
 			location.href = "/club/toWrite";
-
 		})
 	</script>
 </body>

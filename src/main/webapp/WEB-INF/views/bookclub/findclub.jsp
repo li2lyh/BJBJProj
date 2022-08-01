@@ -26,42 +26,33 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
-
 h4 {
 	text-align: left;
 }
-
 #btnBox {
 	text-align: right;
 }
-
 .card {
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
-
 .card-body {
 	text-align: center;
 	padding-bottom: 0;
 }
-
 .cardBox {
 	size: 80%;
 }
-
 .card-img-top {
 	height: 15rem;
 	object-fit: fill;
 }
-
 .card-text {
 	margin-bottom: 20px;
 }
-
 .inform {
 	margin-bottom: 0;
 }
-
 #tagBox {
 	text-align: center;
 	background-color: rgb(56, 177, 137);
@@ -75,11 +66,9 @@ h4 {
 	top: 85%;
 	object-fit: cover;
 }
-
 #cardImg {
 	position: relative;
 }
-
 /* 빈 하트 */
 #emptyLike {
 	width: 30px;
@@ -134,8 +123,7 @@ h4 {
 											<h5 class="card-text">${dto.room_title}</h5>
 										</div>
 										<div class="col-4">
-											<img src="/resources/images/emptyLike.png" id="emptyLike"
-												onclick="alert('로그인 후 이용해주세요.');">
+											<img src="/resources/images/emptyLike.png" id="emptyLike" onclick="alert('로그인 후 이용해주세요.');">
 										</div>
 										<div class="col-12 p-3">
 											<p class="inform">${dto.open_date}시작 /
@@ -157,19 +145,15 @@ h4 {
 					글 쓰기</button>
 			</div>
 		</div>
-
-<div class=footer>
-		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
-</div>
+    <div class=footer>
+        <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+    </div>
 
 	</div>
 	<script>
 		$("#btnClass").on("click", function() {
-			
 			alert("로그인 후 이용 가능합니다.");
 			return false;
-
-		})
 	</script>
 </body>
 </html>

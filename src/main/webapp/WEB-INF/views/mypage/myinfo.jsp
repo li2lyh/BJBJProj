@@ -187,18 +187,17 @@ th, td{
 								<div class="row border-top border-bottom p-3">
 									<div class="col-12 col-md-4 col-lg-4">
 										<c:choose>
-											<c:when test="${empty dto.img_id}">
+											<c:when test="${empty dto.img_no}">
 												<img src="/resources/images/noImg.png id="noImg">
 											</c:when>
 											<c:otherwise>
-												<img class="card-img-top" src="/resources/images/noImg.png" id="reviewImg">
-												<%-- <img src="/profile/${dto.img_id}" id="reviewImg"> --%>
+												<img src="/profile/${dto.img_no}" id="reviewImg">
 											</c:otherwise>
 										</c:choose>
 									</div>
 									<div class="col-12 col-md-8 col-lg-8 p-5">
 										<p>${dto.book_title}</p>
-										<p class="fw-bolder">${dto.review_title}</p>
+										<p class="fw-bolder"><a href="/review/detail?review_no=${dto.review_no}">${dto.review_title}</a></p>
 										<span>${dto.nickname}</span> <span>${dto.written_date}</span>
 									</div>
 								</div>
@@ -275,7 +274,7 @@ th, td{
 	  								<tr>
 		  								<td>${j}</td>
 		  								<td>${dto.book_title}</td>
-		  								<td class="fw-bolder"><a href="#">${dto.room_title}</a></td>
+		  								<td class="fw-bolder"><a href="/club/detailView?room_id=${dto.room_id}">${dto.room_title}</a></td>
 		  								<td>~ ${dto.recruit_end}</td>
 		  								<td>${dto.open_date} ~ ${dto.close_date}</td>
 	  								</tr>

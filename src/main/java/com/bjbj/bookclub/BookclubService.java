@@ -139,6 +139,11 @@ public class BookclubService {
 		return dao.selectRoleByRoom(room_id);
 	}
 
+	// room_id 에 따른 닉네임 리스트 (모임원 신고 기능을 위한 작업)
+	public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
+		return dao.selectNickByRoom(room_id);
+	}
+	
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception {
 		dao.insertBoard(dto);
@@ -174,9 +179,9 @@ public class BookclubService {
 		dao.insertReport(reportDTO);
 	}
 
-	// 모임원 닉네임 불러오기
-	public List<MemberDTO> selectRoleMember(String email) throws Exception {
-		return dao.selectRoleMember(email);
+	// room_id 에 따른 닉네임 리스트
+	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
+		return dao.selectNickByRoom(room_id);
 	}
 	
 	//bookroom 삭제 (by room_id)

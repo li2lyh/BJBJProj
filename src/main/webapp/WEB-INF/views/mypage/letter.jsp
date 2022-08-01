@@ -43,7 +43,7 @@ a:hover {
 	<div class="container">
 		<div class="row">
 			<div class="col-9 col-lg-11 p-2">
-				<h2> 쪽지함 </h2>
+				<h2>쪽지함</h2>
 			</div>
 			<div class="col-3 col-lg-1 justify-content-end p-2">
 				<button type="button" class="btn btn-danger w-100" id="deleteBtn">삭제</button>
@@ -67,9 +67,8 @@ a:hover {
 					<c:if test="${list.size() > 0}">
 						<c:forEach items="${list}" var="dto">
 							<tr>
-								<td>
-									<input type="checkbox" class="deleteNo" id="deleteNo" name="no" value="${dto.no}">
-								</td>
+								<td><input type="checkbox" class="deleteNo" id="deleteNo"
+									name="no" value="${dto.no}"></td>
 								<!-- 읽은 쪽지 제목 font-weight 조정 -->
 								<c:choose>
 								<c:when test="${dto.read == 'Y'}">
@@ -82,9 +81,10 @@ a:hover {
 									<a href="/member/toDetailLetter?no=${dto.no}">${dto.title}</a>
 								</td>
 								</c:otherwise>
+
 								</c:choose>
 								<!-- 읽은 쪽지 제목 font-weight 조정 끝 -->
-								
+
 								<td>${dto.written_date}</td>
 							</tr>
 						</c:forEach>
@@ -95,31 +95,30 @@ a:hover {
 				<ul class="pagination justify-content-center">
 					<c:choose>
 						<c:when test="${pagination.startPage ne 1}">
-							<li class="page-item">
-								<a class="page-link" href="/member/toLetter?page=${pagination.startPage - 1}"><<</a>
+							<li class="page-item"><a class="page-link"
+								href="/member/toLetter?page=${pagination.startPage - 1}"><<</a>
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item d-none">
-								<a class="page-link" href="javascript:"></a>
-							</li>
+							<li class="page-item d-none"><a class="page-link"
+								href="javascript:"></a></li>
 						</c:otherwise>
 					</c:choose>
-					<c:forEach var="page" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
-						<li class="page-item">
-							<a class="page-link" href="/member/toLetter?page=${page}" <c:if test="${pagination.page eq page}">style="background-color: black; color: white; font-weight: bolder;"</c:if> >${page}</a>
+					<c:forEach var="page" begin="${pagination.startPage}"
+						end="${pagination.endPage}" step="1">
+						<li class="page-item"><a class="page-link"
+							href="/member/toLetter?page=${page}"
+							<c:if test="${pagination.page eq page}">style="background-color: black; color: white; font-weight: bolder;"</c:if>>${page}</a>
 						</li>
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pagination.endPage lt pagination.totalPageCnt}">
-							<li class="page-item">
-								<a class="page-link" href="/member/toLetter?page=${pagination.endPage + 1}">>></a>
-							</li>
+							<li class="page-item"><a class="page-link"
+								href="/member/toLetter?page=${pagination.endPage + 1}">>></a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item d-none">
-								<a class="page-link" href="javascript:"></a>
-							</li>
+							<li class="page-item d-none"><a class="page-link"
+								href="javascript:"></a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

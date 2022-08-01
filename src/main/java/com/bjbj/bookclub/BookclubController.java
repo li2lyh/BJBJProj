@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.maven.shared.invoker.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,6 +74,7 @@ public class BookclubController {
 		model.addAttribute("role", roleDTO);
 		
 		return "/bookclub/findclubList";
+
 	}
 	
 	
@@ -114,16 +116,17 @@ public class BookclubController {
 
 		model.addAttribute("dto", dto);
 
-		String email = ((MemberDTO)session.getAttribute("loginSession")).getEmail();
+		String email = ((MemberDTO)session.getAttribute("loginSession")).getEmail();		
 
-		//해당 유저의 waiting 테이블(승인대기) , role 테이블(가입되어있는지) 데이터
+		// 해당 유저의 waiting 테이블(승인대기) , role 테이블(가입되어있는지) 데이터
 				WaitingDTO waitingDTO = service.selectByEmail(email);
 				RoleDTO roleDTO = service.selectRole(email);
 				
 				model.addAttribute("waiting", waitingDTO);
 				model.addAttribute("role", roleDTO);
-				
 		
+		List<BookclubDTO> likeList = service.likeClub(email);
+		model.addAttribute("likeList", likeList);
 
 		return "/bookclub/detailView";
 	}
@@ -293,6 +296,10 @@ public class BookclubController {
 		System.out.println("방 멤버 : " + roleList.toString());
 		model.addAttribute("member",roleList);
 		
+		// 해당 방의 멤버 닉네임 리스트 (윤선)
+		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
+		model.addAttribute("nickList" , nickList);
+		
 		// 현재 접속한 계정이 리더인가?
 		String role = service.selectRole(id).getRole();
 		System.out.println("해당 계정 역할 :" + role);
@@ -308,11 +315,10 @@ public class BookclubController {
 		model.addAttribute("board", boardList);
 		// 해당 방의 캘린더 정보
 		
-		// 해당 모임의 멤버 닉네임 나열하기
-		List<MemberDTO> list = service.selectRoleMember(id);
-		System.out.println("list : " + list);
-		model.addAttribute("list", list);
-
+		// 해당 방의 멤버 닉네임 리스트
+		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
+		model.addAttribute("nickList" , nickList);
+				
 		return "/bookclub/clubBoard";
 	}
 
@@ -364,7 +370,8 @@ public class BookclubController {
 	}
 
 	
-	@RequestMapping(value = "/insertLike") // 찜 추가
+	@ResponseBody
+	@RequestMapping(value = "/insertLike") // 찜 추가 -> 로그인 한 클럽리스트 페이지
 	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
 		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
 		dto.setRoom_id(room_id);
@@ -374,12 +381,14 @@ public class BookclubController {
 		int rs = service.insertLike(dto); 		
 		if (rs > 0) {
 			System.out.println("찜 완료 " +room_id); 
-			return "redirect:/club/toClubList";
-		}
-		return null;			
+			return "success";
+		} else {
+			return "fail";		
+		}	
 	}
   
-	@RequestMapping(value = "/deleteLike") // 찜 삭제
+	@ResponseBody
+	@RequestMapping(value = "/deleteLike") // 찜 삭제 -> 로그인 한 클럽리스트 페이지
 	public String deleteLike(int room_id) throws Exception {
 		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
 		System.out.println("room_id : " + room_id);
@@ -387,9 +396,10 @@ public class BookclubController {
 		
 		if (rs > 0) {
 			System.out.println("삭제 완료 "  +email+ " : " +room_id);
-			return "redirect:/club/toClubList";
-		}
-		return null;
+			return "success";
+		}else {
+			return "fail";		
+		}	
 	}
 	
 	// 모임 신고하기 요청
@@ -406,19 +416,13 @@ public class BookclubController {
 		return "redirect:/club/toClubList";
 	}
 
-	// 회원 신고하기 요청
-	@RequestMapping(value = "/report")
-	public String report(ReportDTO dto) throws Exception {
-		System.out.println("email : " + dto.getEmail());
-		System.out.println("reporter_nickname : " + dto.getReporter_nickname());
-		System.out.println("report_content : " + dto.getReport_content());
-		System.out.println("report_detail : " + dto.getReport_detail());
-		
+	//회원 신고하기 요청 
+	@RequestMapping (value="/report")
+	public String insertReport(ReportDTO dto) throws Exception {
 
-		
 		String nickname = ((MemberDTO)session.getAttribute("loginSession")).getNickname();
 		dto.setReporter_nickname(nickname);
-		
+	
 		service.insertReport(dto);
 		return "redirect:/club/clubBoard";
 	}

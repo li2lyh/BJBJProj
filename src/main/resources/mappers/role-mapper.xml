@@ -21,7 +21,7 @@
 		select * from Role
 		where room_id = #{room_id}
 	</select>
-
+	
 	<delete id="deleteRoleByRoomId" parameterType="int">
 		delete from role where room_id = #{room_id}
 	</delete>
@@ -38,6 +38,5 @@
 	<select id="selectExpirationRoleByEmail" parameterType="String" resultType="com.bjbj.bookclub.ExpirationRoleDTO">
 		select * from expirationRole where email = #{email}
 	</select>
-
-
+  
 </mapper>
