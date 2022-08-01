@@ -134,6 +134,8 @@ td, th {
 	width:80%;
 	height:80%;
 }
+.dateBox{
+}
 </style>
 
 </head>
@@ -141,6 +143,12 @@ td, th {
 	<form action="/club/modify" id="modifyForm" method="post"
 		enctype="multipart/form-data">
 		<div class="container">
+	<%-- *************************** header *************************** --%>
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+		
+		
 			<div class="row">
 				<div class="col">
 					<h3 id="head">BookClub</h3>
@@ -157,9 +165,7 @@ td, th {
 				<div class="col btnBox">
 					<button type="button" id="btnBack" class="btn btn-secondary">뒤로가기</button>
 				
-				<c:if test="${dto.room_status == '모집중'}">
-					<button type="button" id="btnModify" class="btn btn-primary">수정</button>
-					<button type="submit" class="btn btn-primary d-none" id="complete">완료</button>
+				<c:if test="${dto.room_status == '모집중'}">	
 					<button type="button" class="btn btn-danger" id="delete">삭제</button>
 				</c:if>
 				</div>
@@ -181,8 +187,7 @@ td, th {
 
 				<div class="col-8 contentBox">
 					<div id="titleDiv" class="row r1">
-						<input type="text" class="form-control" id="room_title"
-							name="room_title" value="${dto.room_title}" readonly>
+						<h2>${dto.room_title}</h2>
 					</div>
 
 					<div class="row r1">
@@ -195,21 +200,6 @@ td, th {
 						<div class="col-1 currentBox" id="slashBox">
 							<p class="room_current">/</p>
 						</div>
-						<div class="col-2" id="selectPeople" style="display: none">
-
-							<select class="form-select" id="room_people" name="room_people"
-								style="width: 100px;" aria-label="Default select example"
-								value="${dto.room_people}" disabled>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-							</select>
-						</div>
 						<div class="col-2" id="peopleBox">
 							<p id="room_people">${dto.room_people}</p>
 						</div>
@@ -217,46 +207,35 @@ td, th {
 						<div class="col-1" id="con">
 							<h5>명</h5>
 						</div>
-						<div>(수정 시 현재 인원보다 적게 설정하면 alert창 뜨고 return false) -> 구현완료 후
-							지울예정</div>
 
 					</div>
+					
+					
+					<div class="row r1">
+						<div class="col-2" id="con">
+							<h5>도서명 :</h5>
+						</div>
+						<div class="col-10 dateBox" id="con">
+							<h5>${dto.book_title}</h5>
+	
+					</div>
+					
 
 					<div class="row r1">
 						<div class="col-2" id="con">
 							<h5>모임 기간 :</h5>
 						</div>
-						<div class="col-4">
-							<input type="text" id="open_date" class="form-control"
-								name="open_date" style="width: 200px;" value="${dto.open_date}"
-								readonly />
-
-						</div>
-						<div class="col-2" id="tilde" style="width: 60px;">~</div>
-						<div class="col-4">
-							<input type="text" id="close_date" class="form-control"
-								name="close_date" style="width: 200px;"
-								value="${dto.close_date}" readonly />
-						</div>
+						<div class="col-10 dateBox" id="con">
+							<h5>${dto.open_date} ~ ${dto.close_date}</h5>
+	
 					</div>
-
-					<div>1. 최소 모임 기간 설정 2. close_date가 open_date보다 과거일 경우 alert 후
-						return false</div>
 
 					<div class="row r1">
 						<div class="col-2" id="con">
 							<h5>장소 :</h5>
 						</div>
-						<div class="col-10">
-							<select class="form-select" id="place" name="place"
-								style="width: 100px;" aria-label="Default select example"
-								value="${dto.place}" disabled>
-								<option value="서울">서울</option>
-								<option value="경기">경기</option>
-								<option value="대전">대전</option>
-								<option value="부산">부산</option>
-								<option value="기타">기타(모집 상세에 기입)</option>
-							</select>
+						<div class="col-10" id="con">
+							<h5>${dto.place} 지역</h5>
 						</div>
 					</div>
 
@@ -264,13 +243,8 @@ td, th {
 						<div class="col-2" id="con">
 							<h5>참여 방식 :</h5>
 						</div>
-						<div class="col-10" id="con2">
-							<div class="col radioBox" id="tag" value="${dto.tag}">
-								<input type="radio" class="tag" name="tag" value="온라인" disabled>온라인
-								<input type="radio" class="tag" name="tag" value="오프라인" disabled>오프라인
-								<input type="radio" class="tag" name="tag" value="온/오프라인"
-									disabled>온/오프라인
-							</div>
+						<div class="col-10" id="con">
+							<h5>${dto.tag}</h5>
 						</div>
 					</div>
 
@@ -278,29 +252,20 @@ td, th {
 						<div class="col-2" id="con">
 							<h5>참여 횟수 :</h5>
 						</div>
-						<div class="col-10">
-							<select class="form-select" id="meet_week" name="meet_week"
-								style="width: 100px;" aria-label="Default select example"
-								value="${dto.meet_week}" disabled>
-								<option value="1">주 1회</option>
-								<option value="2">주 2회</option>
-								<option value="3">주 3회</option>
-								<option value="4">주 4회</option>
-								<option value="5">주 5회</option>
-							</select>
+						<div class="col-10" id="con">
+							<h5>주 ${dto.meet_week}회</h5>
 						</div>
 
 					</div>
 
 					<div class="row r1">
-						<div class="col">
-							<textarea class="form-control" id="room_detail"
-								name="room_detail" rows="5" value="${dto.room_detail}" readonly>${dto.room_detail}</textarea>
+						<div class="col" id="con">
+							<p>${dto.room_detail}</p>
 						</div>
 					</div>
 
 				</div>
-
+			</div>
 			</div>
 			<div class="row">
 				<h4>신청 인원</h4>
@@ -355,7 +320,13 @@ td, th {
 					</tbody>
 				</table>
 			</div>
-
+	<%-- *************************** footer *************************** --%>
+	<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	</div>
+	
+	
+	</div>
 			<!-- 소개글 보기 modal -->
 			<div class="modal" id="myModal" tabindex="-1">
 				<div class="modal-dialog">
@@ -478,38 +449,35 @@ td, th {
 	<%-- 신청목록 끝 --%>
 		// 뒤로가기
 		$("#btnBack").on("click", function() {
-			location.href = "/club/toClub";
+			location.href = "/club/toClubList";
 		})
 
-		// readonly 적용
-		$("#tag").not(":selected").attr("disable", "disable");
-		$("#meet_week").not(":selected").attr("disable", "disable");
-		$("#place").not(":selected").attr("disable", "disable");
-		$("#room_people").not(":selected").attr("disable", "disable");
-
-		// 수정 버튼을 클릭했을 때
-		$("#modify").on("click", function() {
-			$("#modify").addClass("d-none");
-			$("#complete").removeClass("d-none");
-			$("#room_title").attr("readonly", false);
-			$("#tag").not(":selected").attr("disable", "");
-			$("#meet_week").not(":selected").attr("disable", "");
-			$("#room_people").not(":selected").attr("disable", "");
-			$("#place").not(":selected").attr("disable", "");
-			$("#open_date").attr("readonly", false);
-			$("#close_date").attr("readonly", false);
-			$("#room_detail").attr("readonly", false);
-		})
-
+		// 게시글 삭제
 		$("#delete").on("click", function() {
-			let answer = confirm("정말 삭제하시겠습니까?");
-			if (answer) {
-				let deleteForm = $("<form>").attr({
-					"method" : "post",
-					"action" : "/club/delete"
-				}).css("display", "none");
+			let con = confirm("이 클럽을 삭제하시겠습니까?");
+			if (con) {
+
+				$.ajax({
+					type:"post",
+					url : "/club/deleteBookroom",
+					data:{"room_id":'${dto.room_id}'},
+					success: function(data){
+							alert("삭제가 완료되었습니다.");
+							location.href = "/club/toClubList";
+					},
+					error: function(e){
+						console.log(e);
+					}
+					
+				})
+
 			}
 		})
+		
+		
+		
+		
+		
 	</script>
 </body>
 </html>

@@ -6,7 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<<<<<<< HEAD
+<%-- CDN --%>
+=======
 <%-- ----------------------- CDN ----------------------- --%>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -46,22 +50,58 @@ body {
 	padding-left: 1.5rem;
 }
 
+<<<<<<< HEAD
+#blank1 {
+	height: 1.88rem;
+}
+
+#blank2 {
+	height: 1.88rem;
+}
+
+#blank3 {
+	height: 1.88rem;
+}
+
+#blank4 {
+	height: 1.88rem;
+}
+
+#blank5 {
+	height: 1.88rem;
+}
+/* 휴대폰 인증 */
+#phone {
+	margin-bottom: 1.88rem;
+}
+
+=======
 .blank {
 	height: 1.7rem;
 }
 
 /* 휴대폰 인증 */
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 .confirmPhone {
 	padding-right: 0;
 }
 
+<<<<<<< HEAD
+.registerBox button {
+	width: 100%;
+=======
 .registerBox .row button {
 	width: 85%;
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	height: 3rem;
 }
 
 /* ******** 가입 버튼 ******** */
+<<<<<<< HEAD
+.submitBtn button {
+=======
 #signupBtn {
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	width: 100%;;
 	height: 3rem;
 	margin-bottom: 0.5rem;
@@ -75,11 +115,14 @@ body {
 .enrollmentPolicy p {
 	margin-bottom: 0;
 }
+<<<<<<< HEAD
+=======
 
 .enrollmentPolicy a {
 	text-decoration: none;
 	color: black;
 }
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 </style>
 </head>
 <body>
@@ -93,7 +136,11 @@ body {
 		<div class="registerBox">
 
 			<!-- 타이틀 -->
+<<<<<<< HEAD
+			<form id="signupForm" action="/member/signUp" method="post">
+=======
 			<form id="signupForm" action="/member/kakaoSignUp" method="post">
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				<div class="row registerTitle">
 					<div class="col-12 d-flex justify-content-center">
 						<h2>회원가입</h2>
@@ -110,7 +157,11 @@ body {
 				<%-- 빈칸 --%>
 				<div class="row blankBox">
 					<div class="col p-0">
+<<<<<<< HEAD
+						<div id="blank1"></div>
+=======
 						<div class="blank" id="blank1"></div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					</div>
 				</div>
 				<%-- 알림정보 --%>
@@ -124,14 +175,85 @@ body {
 				<!-- 이메일 -->
 				<div class="row">
 					<div class="col-12 p-0">
+<<<<<<< HEAD
+						<input type="text" name="email" id="email" class="form-control"
+							value="${email}" readonly>
+					</div>
+				</div>
+				<%-- 빈칸 --%>
+				<div class="row blankBox">
+					<div class="col-12 p-0">
+						<div id="blank2"></div>
+					</div>
+				</div>
+				<%-- 알림정보 --%>
+				<div class="row clsCheckInfo">
+					<div class="col-12 p-0">
+						<div id="checkEmail"></div>
+					</div>
+				</div>
+				<!-- End -->
+=======
 						<input type="hidden" name="email" id="email" class="form-control"
 							value="${email}" readonly>
 					</div>
 				</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 
 				<!-- 비밀번호 -->
 				<div class="row">
 					<div class="col p-0">
+<<<<<<< HEAD
+						<input type="password" name="password" id="password"
+							class="form-control" placeholder="비밀번호">
+					</div>
+				</div>
+				<%-- 빈칸 --%>
+				<div class="row blankBox">
+					<div class="col-12 p-0">
+						<div id="blank3"></div>
+					</div>
+				</div>
+				<%-- 알림정보 --%>
+				<div class="row clsCheckInfo">
+					<div class="col-12 p-0">
+						<div id="checkPw"></div>
+					</div>
+				</div>
+				<!-- End -->
+
+				<!-- 비밀번호 확인 -->
+				<div class="row">
+					<div class="col p-0">
+						<input type="password" id="confirmPw" class="form-control"
+							placeholder="비밀번호 확인">
+					</div>
+				</div>
+				<%-- 빈칸 --%>
+				<div class="row blankBox">
+					<div class="col-12 p-0">
+						<div id="blank4"></div>
+					</div>
+				</div>
+				<%-- 알림정보 --%>
+				<div class="row clsCheckInfo">
+					<div class="col-12 p-0">
+						<div id="checkPw2"></div>
+					</div>
+				</div>
+				<!-- End -->
+
+				<!-- 닉네임 -->
+				<div class="row">
+					<div class="col-9 p-0">
+						<input type="text" name="nickname" id="nickname"
+							class="form-control" placeholder="닉네임">
+					</div>
+					<div class="col-3">
+						<button type="button" id="confirmNickname"
+							class="btn btn-outline-secondary">중복확인</button>
+					</div>
+=======
 						<input type="hidden" name="password" id="password"
 							class="form-control" value="">
 					</div>
@@ -144,11 +266,16 @@ body {
 						<input type="text" name="nickname" id="nickname"
 							class="form-control" placeholder="닉네임">
 					</div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				</div>
 				<%-- 빈칸 --%>
 				<div class="row blankBox">
 					<div class="col-12 p-0">
+<<<<<<< HEAD
+						<div id="blank5"></div>
+=======
 						<div class="blank" id="blank5"></div>
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 					</div>
 				</div>
 				<%-- 알림정보 --%>
@@ -162,6 +289,29 @@ body {
 				<!-- 휴대폰 번호 -->
 				<div class="row">
 					<div class="col-9 p-0">
+<<<<<<< HEAD
+						<input type="text" name="phone" id="phone" class="form-control"
+							placeholder="휴대번호">
+					</div>
+					<div class="col-3 confirmPhone">
+						<button type="button" id="verifyPhoneBtn"
+							class="btn btn-outline-secondary">인증하기</button>
+					</div>
+				</div>
+
+				<%-- 인증번호 발송 --%>
+				<div class="row verifyPhone d-none">
+					<div class="col-9 p-0">
+						<input type="text" class="form-control" id="verifyNum"
+							maxlength="4">
+					</div>
+					<div class="col-3 checkPhone p-0">
+						<button type="button" id="completeBtn"
+							class="btn btn-outline-secondary">확인</button>
+					</div>
+				</div>
+
+=======
 						<input type="hidden" name="phone" id="phone" class="form-control"
 							value="${phone}">
 					</div>
@@ -180,6 +330,7 @@ body {
 				</div>
 				<!-- End -->
 				
+				<!-- 일반/카카오회원 판별용 -->
 				<div class="row">
 					<div class="col-9 p-0">
 						<input type="hidden" name="user_kakao" id="user_kakao" class="form-control"
@@ -187,6 +338,7 @@ body {
 					</div>
 				</div>
 				
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 				<!-- 제출 버튼 -->
 				<div class="submitBtn row">
 					<button type="button" id="signupBtn"
@@ -336,6 +488,219 @@ body {
 
 
 	<script>
+<<<<<<< HEAD
+		/* *********** 중복확인 ************** */
+		
+		// 유효성 검사서 사용할 중복값 담기
+		let verifyEmail = "";
+		let verifyNickname = "";
+		
+		// 이메일 중복확인
+		$("#confirmEmail").on("click", function() {
+			$.ajax({
+				url : "/member/confirmEmail",
+				type : "get",
+				async : false,
+				data : {
+					email : $("#email").val()
+				},
+				success : function(data) {
+					if (data == "available") {
+						alert("사용 가능한 이메일입니다.");
+						return verifyEmail = data;
+						
+					} else if (data == "unavailable") {
+						alert("사용 불가능한 이메일입니다.")
+						return verifyEmail = data;
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+		})
+
+		// 닉네임 중복확인
+		$("#confirmNickname").on("click", function() {
+			$.ajax({
+				url : "/member/confirmNickname",
+				type : "get",
+				data : {
+					nickname : $("#nickname").val()
+				},
+				async : false,
+				success : function(data) {
+					if (data == "available") {
+						alert("사용 가능한 닉네임입니다.");
+						return verifyNickname = data;
+					} else if (data == "unavailable") {
+						alert("사용 불가능한 닉네임입니다.");
+						return verifyNickname = data;
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+		})
+
+		/* *********** 휴대폰 본인확인 ************** */
+
+		// 보안문자 4자리
+		let verifyNum = "";
+
+		// 인증번호 발송 버튼 눌렀을 때
+		$("#verifyPhoneBtn").on("click", function() {
+			alert("입력하신 번호로 인증번호가 발송되었습니다.");
+			$(".verifyPhone").removeClass("d-none");
+			console.log($("#phone").val());
+
+			$.ajax({
+				type : "post",
+				url : "/member/phoneCheck",
+				data : {
+					phone : $("#phone").val()
+				},
+				async : false,
+				cache : false,
+				success : function(data) {
+					console.log(data);
+					verifyNum = data;
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+
+		})
+
+		/* *********** 유효성 검사 ************** */
+		// 이름
+		
+		$("#name").focus(function() {
+			$("#blank1").css("display", "none");
+			$("#checkName").html("한글 및 영문으로 2~6자 이내로 작성해주세요.");
+			$("#checkName").css("color", "green");
+		});
+		$("#name").blur(function() {
+			$("#blank1").show();
+			$("#checkName").html("");
+		});
+		
+		
+		// 이메일
+		$("#email").focus(function() {
+			$("#blank2").css("display", "none");
+			$("#checkEmail").html("이메일 형식으로 아이디를 작성해주세요.");
+			$("#checkEmail").css("color", "green");
+		});
+		$("#email").blur(function() {
+			$("#blank2").show();
+			$("#checkEmail").html("");
+		});
+		
+		
+		//비밀번호
+		$("#password").focus(
+				function() {
+					$("#blank3").css("display", "none");
+					$("#checkPw").html(
+							"대소문자, 숫자, 특수문자(~!@#$)를 이용해서 6~12자 이내로 작성해 주세요.");
+					$("#checkPw").css("color", "green");
+				});
+		$("#password").blur(function() {
+			$("#blank3").show();
+			$("#checkPw").html("");
+		});
+
+		//비밀번호 확인
+		$("#confirmPw").focus(function() {
+			$("#blank4").css("display", "none");
+
+			if ($("#confirmPw").val() === "") {
+				$("#checkPw2").html("비밀번호를 입력해주세요");
+				$("#checkPw2").css("color", "red");
+			} else if ($("#password").val() !== $("#confirmPw").val()) {
+				$("#checkPw2").html("일치하지 않습니다");
+				$("#checkPw2").css("color", "red");
+			} else {
+				$("#checkPw2").html("일치합니다");
+				$("#checkPw2").css("color", "green");
+			}
+			
+
+		});
+
+		$("#confirmPw").blur(function() {
+			$("#blank4").show();
+			$("#checkPw2").html("");
+		});
+		
+		// 닉네임
+		$("#nickname").focus(function() {
+			$("#blank5").css("display", "none");
+			$("#checkNickname").html("한글 및 영문으로 2~6자 이내로 작성해주세요.");
+			$("#checkNickname").css("color", "green");
+		});
+		$("#nickname").blur(function() {
+			$("#blank5").show();
+			$("#checkNickname").html("");
+		});
+		
+		// 휴대폰
+		
+		// 휴대폰 인증번호
+
+	
+
+		/* *********** 유효성 검사2 ************** */
+		/*
+		 $("#signupBtn")
+		 .on(
+		 "click",
+		 function() { // 회원가입 제출 유효성 검사
+		 let regexName = /[a-zA-Z가-힣]{2,6}$/;
+		 let regexEmail = /^[a-zA-Z0-9][\w]+@[a-zA-z]+\.(com|net|co\.kr|or\.kr)$/;
+		 let regexPw = /^[a-zA-Z0-9~!@#$]{6,12}$/;
+		 let regexNickname = /^[a-zA-Z0-9ㄱ-힣]{2,10}$/;
+
+		 let name = $("#name").val();
+		 let email = $("#email").val();
+		 let pw = $("#password").val();
+		 let nickname = $("#nickname").val();
+		 let phone = $("#phone").val();
+
+		 if (!regexName.test(name) || name === "") { //이름
+		 alert("이름을 정확히 입력해주세요");
+		 $("#name").focus();
+		 return false;
+		 }else if (!regexEmail.test(email) || email === ""){ // 이메일 (아이디)
+		 alert("아이디는 이메일 형식으로 정확히 작성해주세요.");
+		 $("#email").focul();
+		 return false;
+		 }else if (!regexPw.test(pw) || pw ===""){ // 비밀번호
+		 alert("비밀번호를 형식에 맞게 작성해주세요.")
+		 $("#password").focus();
+		 return false;
+		 }else if ($("#confirmPw").val() !== pw){ // 비밀번호 확인
+		 alert("비밀번호가 일치하지 않습니다.")
+		 $("#confirmPw").focus();
+		 return false;
+		 } else if (!regexNickname.test(nickname)
+		 || nickname === "") {
+		 alert("대소문자, 한글 또는 숫자를 이용하여 2 ~ 10자 이내로 작성해주세요.");
+		 $("#nickname").focus();
+		 return false;
+		 } else if (phone === "") {
+		 alert("휴대폰 번호를 입력해주세요.");
+		 $("#phone").focus();
+		 return false;
+		 }
+
+		 $("#signupForm").submit();
+		 })
+		 */
+=======
 		/* *********** 유효성 검사 _ 제출시 검사 ************** */
 
 		$("#signupBtn").on("click", function() {
@@ -466,6 +831,7 @@ body {
 			}
 			;
 		});
+>>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
 	</script>
 </body>
 </html>

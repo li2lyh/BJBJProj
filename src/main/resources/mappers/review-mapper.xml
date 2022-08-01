@@ -26,7 +26,7 @@
 	</select>
 	
 	<!-- 최근순으로 조회 -->
-	<select id="selectLately" resultType="com.bjbj.review.ReviewDTO">
+	<select id="selectLately" resultType="com.bjbj.review.ReviewDTO" parameterType="String">
 		select * from review join member using(email) where email = #{email} order by written_date desc
 	</select>
 
@@ -40,5 +40,5 @@
 		select * from (select review.*, row_number() over(order by written_date desc) as num from review where email = #{email}) join member using(email)
         where num between #{start} and #{end}
 	</select>
-	
+
 </mapper>

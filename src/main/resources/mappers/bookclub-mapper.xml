@@ -72,6 +72,11 @@
 	<update id="updateStatus" parameterType="map">
 		update bookroom set room_status = #{room_status} where room_id = #{room_id}
 	</update>
+	
+	<!-- bookroom 삭제 (by room_id) -->
+	<delete id="deleteBookroom" parameterType="int">
+		delete from bookroom where room_id = #{room_id}
+	</delete>
 
 
 	<!-- create Room_id(seq_room) sequence -->
@@ -86,14 +91,36 @@
   
 	<!-- 회원 신고 -->
 	<insert id="insertReport" parameterType="com.bjbj.manager.ReportDTO">
-	  insert into report values(#{email}, null, default, #{report_date}, #{report_detail}, default, #{reporter_nickname})
+	  insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname})
 	</insert>
-  
-	<!-- insert into report values(#{email}, #{report_content}, default, sysdate, #{report_detail}, #{reporter_nickname}) -->
-  
+
 	<!-- 회원 닉네임 받아오기 -->
 	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
-		select member.email, nickname from member inner join role on member.email = role.email where member.email != #{email}
+		select role.email, nickname from role inner join member on role.email = member.email where role.email != #{email}
+	</select>
+
+	<!-- 현재 날짜(sysdate)에 모집 종료되는 '모집중' 클럽 room_id -->
+	<select id="selectRoomIdByRecruit" resultType="int">
+		select room_id from bookroom where recruit_end = TO_CHAR(SYSDATE,'yyyy-MM-dd') and room_status = '모집중'
+	</select>
+
+	
+	<!-- 현재 날짜(sysdate)에 모임이 종료되는 '진행중' 클럽 room_id -->
+	<select id="selectRoomIdByClosedate" resultType="int">
+		select room_id from bookroom where close_date = TO_CHAR(SYSDATE,'yyyy-MM-dd') and room_status = '진행중'
 	</select>
 	
+	<update id="setEndStatus" parameterType="int">
+		update bookroom set room_status = '종료' where room_id = #{room_id}
+	</update>
+	
+	<!-- 종료된 모임 정보 expiration 테이블에 삽입 -->
+	<insert id="insertExpiration" parameterType="com.bjbj.bookclub.ExpirationDTO">
+		insert into expiration values (#{room_id}, #{room_title}, #{room_detail},#{book_title}, #{book_cover}, #{room_people}, #{room_current}, to_date(#{open_date},'YYYY/MM/DD hh24:mi:ss'), to_date(#{close_date},'YYYY/MM/DD hh24:mi:ss'), #{tag}, #{meet_week}, #{place})
+	</insert>
+	
+	<select id="selectExpirationById" parameterType="int" resultType="com.bjbj.bookclub.ExpirationDTO">
+		select * from expiration where room_id = #{room_id}
+	</select>
+
 </mapper>

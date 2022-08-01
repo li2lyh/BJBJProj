@@ -37,4 +37,23 @@ public class CalendarDAO {
 		session.update("calendarMapper.updatePlan", dto);
 	}
 	
+	//날짜 형식 변경 String to String
+		public String getCalStrDate(String string) {
+			String rs = null;
+			try {
+				// String to Date
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date(sdf.parse(string).getTime());
+
+				// Date to String
+				SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+				rs = sdf2.format(date);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return rs;
+		}
+	
+	
 }

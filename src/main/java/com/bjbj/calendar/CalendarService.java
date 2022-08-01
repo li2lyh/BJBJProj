@@ -1,5 +1,7 @@
 package com.bjbj.calendar;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -31,24 +33,9 @@ public void updatePlan(CalendarDTO dto)throws Exception{
 	dao.updatePlan(dto);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public String getCalStrDate(String string) {
+	return dao.getCalStrDate(string);
+}
 
 
 }
