@@ -356,6 +356,7 @@ public class BookclubController {
 		return "/bookclub/findclubList";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/insertLike") // 찜 추가 -> 로그인 한 클럽리스트 페이지
 	public String insertLike(LikeClubDTO dto, int room_id)throws Exception{
 		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");		
@@ -366,11 +367,14 @@ public class BookclubController {
 		int rs = service.insertLike(dto); 		
 		if (rs > 0) {
 			System.out.println("찜 완료 " +room_id); 
-			return "redirect:/club/toClubList";
-		}
-		return null;			
+			return "success";
+		} else {
+			return "fail";		
+		}	
 	}
   
+  
+	@ResponseBody
 	@RequestMapping(value = "/deleteLike") // 찜 삭제 -> 로그인 한 클럽리스트 페이지
 	public String deleteLike(int room_id) throws Exception {
 		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
@@ -379,10 +383,12 @@ public class BookclubController {
 		
 		if (rs > 0) {
 			System.out.println("삭제 완료 "  +email+ " : " +room_id);
-			return "redirect:/club/toClubList";
-		}
-		return null;
+			return "success";
+		}else {
+			return "fail";		
+		}	
 	}
+
 	
 	@RequestMapping(value = "/detailInsertLike") // 찜 추가 -> 디테일뷰 요청
 	public String detailInsertLike(LikeClubDTO dto, int room_id)throws Exception{
