@@ -161,6 +161,9 @@ input.underlineSearch:focus {
 .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
+#btnClubBoard:hover{
+cursor:pointer;
+}
 
 /* menuBox */
 .menuBox div {
@@ -176,6 +179,7 @@ input.underlineSearch:focus {
 
 
 <body>
+
 	<div class="head-container">
 		<!-- ************ 로그인 영역 ************ -->
 		<div class="loginBox">
@@ -314,20 +318,30 @@ input.underlineSearch:focus {
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<!-- 로그인 안한 페이지 요청 -->
+					<button class="dropbtn">BookClub</button>
+					
 						<c:if test="${empty loginSession}">
-							<button class="dropbtn"><a href="/club/toClub">BookClub</a></button>
-						</c:if>
-						<!-- 로그인 한 페이지 요청 -->
-						<c:if test="${not empty loginSession}">
-							<button class="dropbtn"><a href="/club/toClubList">BookClub</a></button>
-						</c:if>
 						<div class="dropdown-content">
 							<a href="/club/toClub">모집 중인 클럽</a>
-
+							
+						</c:if>
+						<c:if test="${not empty loginSession}">
+							<div class="dropdown-content">
+							<a href="/club/toClubList">모집 중인 클럽</a>
+						    
+						</c:if>
+						
+						
 							<c:choose>
 								<c:when test="${not empty loginSession}">
+									<c:if test="${not empty roleSession}">
 									<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
+									</c:if>
+									<c:if test="${empty roleSession}">
+									<a id="btnClubBoard" id="btnClubBoard" onclick="alert('아직 클럽에 속해있지 않아요.')">내 클럽</a>
+									</c:if>
+							
+							
 								</c:when>
 								<c:otherwise>
 									<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
@@ -338,9 +352,19 @@ input.underlineSearch:focus {
 
 							<c:choose>
 								<c:when test="${not empty loginSession}">
-									<a href="/club/myClub" id="btnMyclub">클럽 관리</a>
+									
+									<!-- 리더이면서 클럽이 모집중일 때 -->
+									<c:if test="${roleSession.role == 'L' && clubSession.room_status == '모집중'}">
+										<a href="/club/myclub?room_id=${roleSession.room_id}" id="btnMyclub">모집중인 클럽 관리</a>
+									</c:if>
+									
+									<!-- 리더이면서 클럽이 진행중일 때 -->
+									<c:if test="${roleSession.role == 'L' && clubSession.room_status == '진행중'}">
+										<a href="/club/clubBoard" id="btnMyclub">진행 중인 클럽 관리</a>
+									</c:if>
+									
 								</c:when>
-								<c:otherwise>
+								<c:otherwise> <!-- 게스트 상태일 때 -->
 									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
 										data-bs-target="#login">클럽 관리</a>
 								</c:otherwise>
@@ -354,7 +378,7 @@ input.underlineSearch:focus {
 			</div>
 		</div>
 
-	</div>
+	
 
 	<script>
 	

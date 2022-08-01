@@ -20,6 +20,9 @@
    		delete from waiting where email = #{email}
    </delete>
    
+   <delete id ="deleteWaitingByRoomId" parameterType="int">
+   		delete from waiting where room_id = #{room_id}
+   </delete>
    
    
    </mapper>
