@@ -31,6 +31,13 @@ public class ManagerDAO {
 		session.insert("managerMapper.insert" , dto);
 	}
 	
+	public void submitSelectBlack(String[]checkBlack, BlacklistDTO dto) throws Exception{ //블랙리스트 선택 추가
+		Map<Object, Object> map = new HashMap<>();
+		map.put("checkBlack", checkBlack);
+		map.put("blacklist", dto);
+		session.insert("managerMappper.submitSelectBlack",map);
+	}
+	
 	public List<MemberDTO>searchBlacklist(String category, String keyword) throws Exception{ //블랙리스트 검색
 		Map<String , String> map = new HashMap<>();
 		map.put("category",category);
@@ -53,6 +60,9 @@ public class ManagerDAO {
 		return session.selectList("managerMapper.searchMember" , map);
 	}
 	
+	//public List<BlacklistDTO>compareBlacklist()throws Exception{ //블랙리스트 검사 (전체회원에서)
+	//	return session.selectList("managerMapper.compareBlacklist");
+	//}
 	
 	public List<Map<String, Object>> selectBookroom() throws Exception{ //전체 모임 조회
 		return session.selectList("managerMapper.selectBookroom");
@@ -104,6 +114,7 @@ public class ManagerDAO {
 	public void deleteReportBookroom(int room_id)throws Exception{ //모임신고 - 신고 삭제
 		session.delete("managerMapper.deleteReportBookroom", room_id);
 	}
+
 	
 	public void addReport(ReportDTO dto)throws Exception{ //회원신고 - 경고 추가
 		session.update("managerMapper.addReport", dto);
@@ -130,6 +141,7 @@ public class ManagerDAO {
 			e.printStackTrace();
 		}
 		return rs;
-	}	
+	}
 	
+
 }

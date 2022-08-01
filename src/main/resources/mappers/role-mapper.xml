@@ -22,11 +22,21 @@
 		where room_id = #{room_id}
 	</select>
 	
-	   
-	<!-- room_id 로 해당 룸 멤버 닉네임 출력 -->
-	<select id="selectNickByRoom" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-		select * from Role join member using(email) 
-			where room_id = #{room_id}
+	<delete id="deleteRoleByRoomId" parameterType="int">
+		delete from role where room_id = #{room_id}
+	</delete>
+	
+	<!-- 종료된 모임 ExpirationRole -->
+	<insert id="insertExpirationRole" parameterType="com.bjbj.bookclub.ExpirationRoleDTO">
+		insert into expirationRole values (#{room_id}, #{email})
+	</insert>
+	
+	<select id="selectExpirationRole" parameterType="int" resultType="com.bjbj.bookclub.ExpirationRoleDTO">
+		select * from expirationRole where room_id = #{room_id}
 	</select>
 	
+	<select id="selectExpirationRoleByEmail" parameterType="String" resultType="com.bjbj.bookclub.ExpirationRoleDTO">
+		select * from expirationRole where email = #{email}
+	</select>
+  
 </mapper>
