@@ -93,5 +93,5 @@
 	<select id="selectRoleMember" parameterType="String" resultType="com.bjbj.member.MemberDTO">
 		select role.email, nickname from role inner join member on role.email = member.email where role.email != #{email}
 	</select>
-	
+
 </mapper>

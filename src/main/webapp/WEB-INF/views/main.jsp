@@ -10,13 +10,13 @@
 <title>Main</title>
 <%-- CDN --%>
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
-	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 	crossorigin="anonymous"></script>
 <style>
 /* ******** 기준 ******** */
@@ -26,7 +26,7 @@
 	margin-bottom: 10rem;
 }
 /* ******** 공통 ******** */
-.contentBox {
+.content-container .contentBox {
 	margin-top: 4rem;
 }
 /* ******** 캐러셀 ******** */
@@ -58,9 +58,9 @@
 	transform: translateX(0);
 }
 /* ******** 더보기 버튼 ******** */
-.moreBtnBox {
+.content-container .moreBtnBox {
 	margin-top: 1.5rem;
-	width: 13rem;
+	width: 15rem;
 }
 </style>
 </head>
