@@ -18,11 +18,13 @@ public class LibraryController {
 	@Autowired
 	private LibraryService service;
 	
+	// 도서관 지도 페이지로 이동
 	@RequestMapping("/map")
 	public String toLibrary() {
 		return "library/map";
 	}
 	
+	// 근처 도서관 정보 조회
 	@ResponseBody
 	@RequestMapping(value = "/getLibrary")
 	public Map<String, Object> getLibrary(String addr_depth1, String addr_depth2) throws Exception {
@@ -37,6 +39,7 @@ public class LibraryController {
 		return map;
 	}
 	
+	// 에러 핸들링
 	@ExceptionHandler
 	public String errorHandler(Exception e) {
 		e.printStackTrace();

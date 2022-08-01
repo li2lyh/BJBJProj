@@ -15,53 +15,26 @@ import org.springframework.stereotype.Repository;
 public class CalendarDAO {
 	@Autowired
 	private SqlSession session;
-	
-	public List<CalendarDTO> calendarList(int room_id) throws Exception{
-		
+
+	public List<CalendarDTO> calendarList(int room_id) throws Exception {
+
 		return session.selectList("calendarMapper.calendarList", room_id);
-		
+
 	}
-	
-	public void insertPlan(CalendarDTO dto) throws Exception{
-		
+
+	public void insertPlan(CalendarDTO dto) throws Exception {
+
 		session.insert("calendarMapper.insertPlan", dto);
 	}
-	
-	
-	
-	
-	public String setDateFormat(String string) {
-		String afterDate = null;
-			try {
-				
-				System.out.println("String : " + string);
-		DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy'T'hh:mm:ss z (zzzz)", Locale.KOREA);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-			
-		java.util.Date date =  dateFormat.parse(string);
-		afterDate = sdf.format(date);
-		
-		System.out.println(date);
-		System.out.println(afterDate);
-				
-		/*
-		//time:String
-		val format = SimpleDateFormat("YYYY-MM-DD'T'hh:mm:ss.SSSZ", Locale.KOREAN)
-		val date = format.parse(time)
-		val formatter = SimpleDateFormat("yyyy-MM-dd",Locale.KOREAN)
-		val dateString: String = formatter.format(date!!)
-		
-		*/
-		
-		
-		
-		
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return afterDate;
-		}
 
+	public void deletePlan(int cal_id) throws Exception{
+	
+		session.delete("calendarMapper.deletePlan", cal_id);
+	}
+	
+	public void updatePlan(CalendarDTO dto)throws Exception{
 		
+		session.update("calendarMapper.updatePlan", dto);
+	}
 	
 }

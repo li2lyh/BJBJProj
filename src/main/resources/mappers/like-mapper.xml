@@ -11,7 +11,7 @@
 	
 	<!-- 찜한 도서 삭제 -->
 	<delete id="deleteLikeBook" parameterType="string">
-		delete from like_book where book_isbn = #{book_isbn}
+		delete from like_book where book_isbn = #{book_isbn} and email = #{email}
 	</delete>  
 
 	<!-- 도서 찜 추가 -->

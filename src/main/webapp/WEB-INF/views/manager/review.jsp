@@ -138,6 +138,7 @@ a{
         
         //리뷰 개별 삭제
         $(".deleteBtn").on("click", function(){
+        	alert("정말 삭제하시겠습니까");
         	location.href = "/manager/deleteReview?review_no="+this.value;
         })
         
@@ -156,6 +157,7 @@ a{
 	 				, type: "post"
 	 				, data: {"no[]" : deleteArr}
 	 				, success : function(){
+	 					alert("정말 삭제하시겠습니까?");
 	 					location.href="/manager/toReview"
 	 				},error : function(e){
 	 					console.log(e);

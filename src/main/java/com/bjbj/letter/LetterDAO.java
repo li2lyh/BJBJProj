@@ -70,5 +70,41 @@ public class LetterDAO {
 	public void insertLetter(LetterDTO dto)throws Exception{
 		session.insert("letterMapper.insertLetter" , dto);
 	}
+	// 선택된 쪽지 전송 (관리자 기능)
+	public void submitSelectLetter(String[] checkLetter, LetterDTO dto)throws Exception{
+	 // map 이용해 쪽지 DTO, 이메일 스트링 배열 담아줌 
+		Map<Object, Object> map = new HashMap<>();
+		map.put("checkLetter", checkLetter );
+		map.put("emailList",  dto);
+		session.insert("letterMapper.submitSelectLetter", map); 
+	}
+	
+	//쪽지 모임장 전송 (관리자 기능)
+	public void insertRoomLetter(LetterDTO dto)throws Exception{
+		session.insert("letterMapper.insertRoomLetter", dto);
+	}
+	// 쪽지 읽음처리
+	public void updateRead(int no) throws Exception{
+		session.update("letterMapper.updateRead", no);
+	}
+	
+	// 쪽지 읽음 유무 (이메일)
+	public int readYn(String email) throws Exception{
+		return session.selectOne("letterMapper.readYn", email);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

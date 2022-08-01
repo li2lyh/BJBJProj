@@ -1,5 +1,8 @@
 package com.bjbj.manager;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class ReportDTO {
 	private String email;
 	private String report_content;
@@ -7,11 +10,12 @@ public class ReportDTO {
 	private String report_date;
 	private String report_detail;
 	private String reporter_nickname;
+	private int room_report;
 	
 	public ReportDTO() {}
 
 	public ReportDTO(String email, String report_content, int warning_count, String report_date, String report_detail,
-			String reporter_nickname) {
+			String reporter_nickname, int room_report) {
 		super();
 		this.email = email;
 		this.report_content = report_content;
@@ -19,6 +23,7 @@ public class ReportDTO {
 		this.report_date = report_date;
 		this.report_detail = report_detail;
 		this.reporter_nickname = reporter_nickname;
+		this.room_report = room_report;
 	}
 
 	public String getEmail() {
@@ -69,9 +74,19 @@ public class ReportDTO {
 		this.reporter_nickname = reporter_nickname;
 	}
 
+	public int getRoom_report() {
+		return room_report;
+	}
+
+	public void setRoom_report(int room_report) {
+		this.room_report = room_report;
+	}
+
 	@Override
 	public String toString() {
-		return  email +  report_content + warning_count+ report_date + report_detail + reporter_nickname;
+		return "ReportDTO [email=" + email + ", report_content=" + report_content + ", warning_count=" + warning_count
+				+ ", report_date=" + report_date + ", report_detail=" + report_detail + ", reporter_nickname="
+				+ reporter_nickname + ", room_report=" + room_report + "]";
 	}
 	
 	

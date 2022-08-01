@@ -13,11 +13,7 @@
 .empty{
     height:30px;
 }
-
 /*버튼*/
-
-
-
 /*leftBox*/
 h6{
     margin:10px;
@@ -27,7 +23,6 @@ a{
 	text-decoration:none;
 	color:black;
 }
-
 /*rightBox*/
 .selectBox{
     margin:1px;
@@ -35,7 +30,6 @@ a{
 .inputContent{
     margin:1px;
 }
-
 /*모달창*/
 textarea{
     width:300px;
@@ -45,7 +39,6 @@ textarea{
 .reasonTitle{
     width:300px;
 }
-
 </style>
 </head>
 <body>
@@ -77,10 +70,9 @@ textarea{
                         <thead class="table-secondary">
                         <tr>
                             <th>신고일자</th>
-                            <th>ID</th>
+                            <th>신고당한 회원</th>
                             <th>신고사유</th>
                             <th>신고자</th>
-                            <th>조치</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,7 +88,6 @@ textarea{
 										<td>${dto.email}</td>
 										<td class="report_detail">${dto.report_detail}</td>
 										<td>${dto.reporter_nickname}</td>
-										<td>${dto.report_action}</td>
 										<td class="d-none report_content">${dto.report_content}</td>
 									</tr>
 								</c:forEach>
@@ -113,10 +104,10 @@ textarea{
                         <thead class="table-secondary">
                             <tr>
                                 <th>신고일자</th>
-                                <th>모임명</th>
+                                <th>신고당한 모임명</th>
                                 <th>신고 사유</th>
                                 <th>신고자</th>
-                                <th>조치</th>
+                                <th></th>
                             </tr>
                         </thead>
 						<tbody>
@@ -133,8 +124,10 @@ textarea{
 									<td class="d-none room_id">${report_bookroom.room_id}</td>
 									<td class="bookroom_detail">${report_bookroom.report_detail}</td>
 									<td>${report_bookroom.reporter_nickname}</td>
-									<td>${report_bookroom.report_action}</td>
 									<td class="d-none report_contentBR">${report_bookroom.report_content}</td>
+									<td>
+										<button type="button" class="deleteBookroom" value="${report_bookroom.room_id}">모임삭제</button>
+									</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -168,7 +161,20 @@ textarea{
                     </div>
                     <div class="col-12 d-flex justify-content-center modal-footer">
                       <button type="button" class="btn btn-secondary deleteReport" id="deleteMemBtn" data-bs-dismiss="modal" >신고삭제</button>
-                      <button type="button" class="btn btn-primary" id="addBtn">경고추가</button>
+                    	  
+                    	  <c:set var = "afterBlacklist" value="false" />
+                    	  <c:forEach items="${blacklist}" var = "blacklist">
+                      			<c:if test="${blacklist.email eq dto.email}">
+                      				<c:set var="afterBlacklist" value="true"/>
+                      			</c:if>
+                      	  </c:forEach>
+                      	  <c:if test="${afterBlacklist}">
+                      	  		<button type="button" class="btn btn-primary" id="addBtn" disabled="disabled" value="${dto.email}">경고추가</button>
+                      	  </c:if>
+                      	 <c:if test="${not afterBlacklist}">
+                      	 		<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}">경고추가</button>
+                      	 </c:if>
+                      	 
                     </div>
                   </div>
                 </div>
@@ -199,7 +205,7 @@ textarea{
                     </div>
                     <div class="col-12 d-flex justify-content-center modal-footer">
                       <button type="button" class="btn btn-secondary" id="deleteBRBtn" data-bs-dismiss="modal">신고삭제</button>
-                      <button type="button" class="btn btn-primary" id="addBRBtn">경고추가</button>
+                      
                     </div>
                   </div>
                 </div>
@@ -207,6 +213,14 @@ textarea{
          </div>  
         
         <script>
+       //모임삭제  
+        $(".deleteBookroom").on("click", function(){
+        	let del = confirm("모임을 삭제하시겠습니까?");
+        	if(del){
+        		location.href = "/manager/deleteEachBookroom?room_id="+this.value;
+        	}
+        })
+       
         //회원 신고 모달 열기
         $(".report_detail").on("click", function(){
         	let report_detail = $(this).html(); // 사유
@@ -243,12 +257,18 @@ textarea{
         })
         
         //회원 신고 삭제 (모달창에서)
-        $("#deleteMemBtn").on("click", function(){
-        	location.href= "/manager/deleteReport?email="+this.value;
+        $("#deleteMemBtn").on("click", function(e){
+        	let del1 = confirm("정말 삭제하시겠습니까?");
+        	if(del1){
+        		location.href= "/manager/deleteReport?email="+this.value;
+        	}
         })
         //모임 신고 삭제 (모달창에서)
-        $("#deleteBRBtn").on("click", function(){
-        	location.href = "/manager/deleteReportBR?room_id="+this.value;
+        $("#deleteBRBtn").on("click", function(e){
+        	let del2 = confirm("정말 삭제하시겠습니까?");
+        	if(del2){
+        		location.href = "/manager/deleteReportBookroom?room_id="+this.value;
+        	}   	
         })
         
         //회원 신고 - 경고 추가(모달창에서)
@@ -257,11 +277,7 @@ textarea{
 		})
         
         
-        //모임 신고 - 경고 추가 (모달창에서)
-        $("#addBRBtn").on("click", function(){
-        	location.href="/manager/addReportBR?room_id="+this.value;
-        })
-        
+ 
         </script>
         
         
