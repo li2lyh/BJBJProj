@@ -175,7 +175,95 @@ th, td {
 						</ul>
 					</nav>
 				</div>
+
+
+					<div class="row">
+					<div class="d-flex justify-content-center p-2">
+						<h4>종료된 독서 모임</h4>
+					</div>
+					<div class="p-0">최근 참여한 독서모임 순으로 보여드립니다.</div>
+					<table class="table">
+						<thead class="table-secondary">
+							<tr>
+								
+								<th scope="col">책</th>
+								<th scope="col">모임이름</th>
+								<th scope="col">기간</th>
+								<th scope="col">진행상황</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${eList.size() == 0}">
+								<tr>
+									<td colspan="5">
+										종료된 독서모임이 없습니다.
+									</td>
+								</tr>
+							</c:if>							
+							<c:if test="${eList.size() > 0}">				
+								<c:forEach items="${eList}" var="dto">
+									<tr>
+										
+										<td>${dto.book_title}</td>
+										<td class="fw-bolder">${dto.room_title}</td>
+										<td>${dto.open_date} ~ ${dto.close_date}</td>
+										<td>종료</td>
+									</tr>							
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table>
+					<nav>
+						<ul class="pagination justify-content-center">
+							<c:choose>
+								<c:when test="${pagination.startPage ne 1}">
+									<li class="page-item">
+										<a class="page-link" href="/member/toMybookclub?page=${pagination.startPage - 1}"><<</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item d-none">
+										<a class="page-link" href="javascript:"></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							<c:forEach var="page" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+								<li class="page-item">
+									<a class="page-link" href="/member/toMybookclub?page=${page}" <c:if test="${pagination.page eq page}">style="background-color: black; color: white; font-weight: bolder;"</c:if> >${page}</a>
+								</li>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${pagination.endPage lt pagination.totalPageCnt}">
+									<li class="page-item">
+										<a class="page-link" href="/member/toMybookclub?page=${pagination.endPage + 1}">>></a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item d-none">
+										<a class="page-link" href="javascript:"></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</nav>
+				</div>
+
+
+
+
+
+
+
+
 			</div>
+		
+		
+		
+		
+		
+		
+		
+		
 		</div>
 	</div>
 </body>

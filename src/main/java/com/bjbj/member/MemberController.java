@@ -1,5 +1,6 @@
 package com.bjbj.member;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.bookclub.BookclubService;
+import com.bjbj.bookclub.ExpirationDTO;
+import com.bjbj.bookclub.ExpirationRoleDTO;
+import com.bjbj.bookclub.RoleDTO;
 import com.bjbj.books.BookService;
 import com.bjbj.books.LikeBookDTO;
 import com.bjbj.letter.LetterDTO;
@@ -55,6 +59,24 @@ public class MemberController {
 			if (dto != null) {
 				session.setAttribute("loginSession", dto);
 				System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
+						
+				// 로그인한 계정의 role 정보
+				if( Bservice.selectRole(email) != null) {
+					RoleDTO roleDTO = Bservice.selectRole(email);
+					session.setAttribute("roleSession", roleDTO );
+				
+					// 로그인한 계정의 club 정보
+					if( Bservice.selectOne(roleDTO.getRoom_id()) != null) {
+						BookclubDTO roomDTO = Bservice.selectOne(roleDTO.getRoom_id());
+						session.setAttribute("clubSession", roomDTO);
+					}else {
+						session.setAttribute("clubSession", null );
+					}
+					
+				}else {
+					session.setAttribute("roleSession", null );
+				}
+
 				return "success";
 			} else {
 				return "fail";
@@ -70,6 +92,24 @@ public class MemberController {
 		if (dto != null) {
 			session.setAttribute("loginSession", dto);
 			System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
+			
+			
+			// 로그인한 계정의 role 정보
+			if( Bservice.selectRole(email) != null) {
+				RoleDTO roleDTO = Bservice.selectRole(email);
+				session.setAttribute("roleSession", roleDTO );
+			
+				// 로그인한 계정의 club 정보
+				if( Bservice.selectOne(roleDTO.getRoom_id()) != null) {
+					BookclubDTO roomDTO = Bservice.selectOne(roleDTO.getRoom_id());
+					session.setAttribute("clubSession", roomDTO);
+				}else {
+					session.setAttribute("clubSession", null );
+				}
+				
+			}else {
+				session.setAttribute("roleSession", null );
+			}
 			
 			return "success";
 		} else {
@@ -108,6 +148,8 @@ public class MemberController {
 	@RequestMapping(value = "/logout")
 	public String logout() {
 		session.removeAttribute("loginSession");
+		session.removeAttribute("roleSession");
+		session.removeAttribute("clubSession");
 		return "redirect: / ";
 	}
 
@@ -328,6 +370,22 @@ public class MemberController {
 			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
 			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
 		}
+		
+		// 참여했던 종료된 독서모임 리스트 가져오기
+		List<ExpirationRoleDTO> exList = Bservice.selectExpirationRoleByEmail(((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<ExpirationDTO> expirationList = new ArrayList<ExpirationDTO>();
+		for(int i = 0; i < exList.size(); i++) {
+			int id = exList.get(i).getRoom_id();
+			
+			expirationList.add(Bservice.selectExpirationById(id));
+		}
+		for (ExpirationDTO dto : expirationList) {
+			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
+			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
+		}
+
+		model.addAttribute("eList", expirationList);
+		// 종료된 모임 리스트 추가 종료
 
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);

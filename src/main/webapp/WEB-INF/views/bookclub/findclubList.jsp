@@ -97,11 +97,18 @@ h4 {
 	border: none;
 	background-color: white;
 }
+
 </style>
 
 </head>
 <body>
 	<div class="container">
+
+<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+
+
 
 		<div class="row">
 			<div class="col">
@@ -190,6 +197,11 @@ h4 {
 				<button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집
 					글 쓰기</button>
 			</div>
+		<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	</div>
+		
+		
 		</div>
 	</div>
 	<script>
@@ -259,12 +271,10 @@ h4 {
 
 			// 모임을 신청한 상태 일 때 (waiting)
 			if (waiting != "") {
-				alert("지원 중인 모임이 있습니다. 지원한 모임의 리더 혹은 관리자에게 문의하세요");
-				return false;
+				alert("지원 중인 모임이 있습니다. 리더가 되고 싶다면 지원 신청을 취소해주세요!");
+				location.href = "/club/detailView?room_id="+'${waiting.room_id}';
 			}
-
 			location.href = "/club/toWrite";
-
 		})
 	</script>
 </body>

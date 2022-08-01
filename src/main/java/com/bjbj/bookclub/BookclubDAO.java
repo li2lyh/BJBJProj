@@ -222,6 +222,57 @@ public class BookclubDAO {
 	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
 		return session.selectList("roleMapper.selectNickByRoom" , room_id);
 	}
-
+	
+	//bookroom 삭제 (by room_id)
+	public void deleteBookroom(int room_id) throws Exception{
+		session.delete("clubMapper.deleteBookroom", room_id);
+	}
+	
+	//waiting 삭제 (by room_id)
+	public void deleteWaitingByRoomId(int room_id) throws Exception{
+		session.delete("waitingMapper.deleteWaitingByRoomId", room_id);
+	}
+	
+	//role 삭제 (by room_id)
+	public void deleteRoleByRoomId(int room_id) throws Exception{
+		session.delete("roleMapper.deleteRoleByRoomId", room_id);
+	}
+	
+	//현재 날짜(sysdate)에 모집 종료되는 클럽 room_id
+	public List<Integer> selectRoomIdByRecruit() throws Exception{
+		return session.selectList("clubMapper.selectRoomIdByRecruit");
+	}
+	
+	//현재 날짜(sysdate)에 정상적으로 모임이 종료되는 클럽 room_id
+	public List<Integer> selectRoomIdByClosedate() throws Exception{
+	return session.selectList("clubMapper.selectRoomIdByClosedate");
+	}
+	
+	// 모임 종료
+	public void setEndStatus(int room_id) throws Exception{
+		session.update("clubMapper.setEndStatus", room_id);
+	}
+	
+	//종료된 모임 정보 expiration 테이블에 삽입 
+	public void insertExpiration(ExpirationDTO dto) throws Exception{
+		session.insert("clubMapper.insertExpiration", dto);
+	}
+	
+	// 종료된 모임 참여자 및 방 정보 삽입
+	public void insertExpirationRole(ExpirationRoleDTO dto) throws Exception{
+		session.insert("roleMapper.insertExpirationRole", dto);
+	}
+	// 종료된 모임 참여자 및 방 정보 요청
+	public List<ExpirationRoleDTO> selectExpirationRole(int room_id)throws Exception{
+		return session.selectList("roleMapper.selectExpirationRole", room_id);
+	}
+	// 종료된 모임 참여자 및 방 정보 요청 (email)
+	public List<ExpirationRoleDTO> selectExpirationRoleByEmail(String email)throws Exception{
+		return session.selectList("roleMapper.selectExpirationRoleByEmail", email);
+	}
+	// 종료된 모임 정보 가져오기 (email)
+	public ExpirationDTO selectExpirationById(int room_id) throws Exception{
+		return session.selectOne("clubMapper.selectExpirationById", room_id);
+	}
 }
 

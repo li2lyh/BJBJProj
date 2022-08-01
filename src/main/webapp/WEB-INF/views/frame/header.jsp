@@ -156,6 +156,9 @@ input.underlineSearch:focus {
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
+#btnClubBoard:hover{
+cursor:pointer;
+}
 
 /* menuBox */
 .navBox-nonType .menuBox div {
@@ -170,6 +173,7 @@ input.underlineSearch:focus {
 </style>
 
 <body>
+
 	<div class="head-container">
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
@@ -345,9 +349,7 @@ input.underlineSearch:focus {
 				<div class="logo 	">
 					<img src="/resources/images/like.png" style="width: 7rem;">
 				</div>
-			</div>
-
-			<!-- -------------- 비반응형 : Blank -------------- -->
+        	<!-- -------------- 비반응형 : Blank -------------- -->
 			<div class="col-8 p-0 ">
 				<div class="row justify-content-end">
 					<ul class="nav menuBox justify-content-end p-0">
@@ -381,12 +383,14 @@ input.underlineSearch:focus {
 										<a id="btnClubBoard" id="btnClubBoard"
 											onclick="alert('아직 클럽에 속해있지 않아요.')">내 클럽</a>
 									</c:if>
-								</c:when>
+                 </c:when>
 								<c:otherwise>
 									<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
 										data-bs-target="#login">내 클럽</a>
 								</c:otherwise>
-							</c:choose> <c:choose>
+							</c:choose>
+              
+              <c:choose>
 								<c:when test="${not empty loginSession}">
 
 									<!-- 리더이면서 클럽이 모집중일 때 -->
@@ -401,23 +405,22 @@ input.underlineSearch:focus {
 										test="${roleSession.role == 'L' && clubSession.room_status == '진행중'}">
 										<a href="/club/clubBoard" id="btnMyclub">진행 중인 클럽 관리</a>
 									</c:if>
-
-								</c:when>
+                  
+                  
+                </c:when>
 								<c:otherwise>
-									<!-- 게스트 상태일 때 -->
+                !-- 게스트 상태일 때 -->
 									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
 										data-bs-target="#login">클럽 관리</a>
 								</c:otherwise>
 							</c:choose>
-
-						</li>
-						<li class="nav-item"><a href="/library/map"><button
+            </div>
+           </li>
+           <li class="nav-item"><a href="/library/map"><button
 									class="dropbtn">Library</button></a></li>
-					</ul>
-				</div>
+          </ul>
 			</div>
 		</div>
-
 
 		<script>
 	

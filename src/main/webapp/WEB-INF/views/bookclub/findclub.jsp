@@ -79,6 +79,10 @@ h4 {
 </head>
 <body>
 	<div class="container">
+	
+	<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+	</div>
 
 		<div class="row">
 			<div class="col">
@@ -101,7 +105,7 @@ h4 {
 					<c:if test="${dto.room_status == '모집중' }">
 						<div class="col-6 col-lg-3 d-flex justify-content-center cardBox">
 							<div class="card" style="width: 18rem;">
-								<a id="cardImg" href="/club/detailView?room_id=${dto.room_id}" name="${dto.room_id}"> 
+								<a id="cardImg"onclick="alert('로그인 후 이용해주세요.');"> 
 									<c:choose>
 										<c:when test="${dto.book_cover eq null}">
 											<img src="/resources/images/noImg.png" class="card-img-top">
@@ -141,32 +145,15 @@ h4 {
 					글 쓰기</button>
 			</div>
 		</div>
+    <div class=footer>
+        <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+    </div>
+
 	</div>
 	<script>
 		$("#btnClass").on("click", function() {
-			let loginSession = '${loginSession}';
-			let role = '${role}';
-			let waiting = '${waiting}';
-
-			// 비로그인 상태 일 때
-			if (loginSession == "") {
-				alert("로그인이 필요합니다.");
-				return false;
-			}
-			// 이미 모임을 가지고 있을 때(role)
-			if (role != "") {
-				alert("이미 참여 중인 모임이 있습니다.");
-				return false;
-			}
-			// 모임을 신청한 상태 일 때 (waiting)
-			if (waiting != "") {
-				alert("지원 중인 모임이 있습니다. 지원한 모임의 리더 혹은 관리자에게 문의하세요");
-				return false;
-			}
-
-			location.href = "/club/toWrite";
-      
-		})
+			alert("로그인 후 이용 가능합니다.");
+			return false;
 	</script>
 </body>
 </html>

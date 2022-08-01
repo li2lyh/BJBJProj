@@ -40,5 +40,5 @@
 		select * from (select review.*, row_number() over(order by written_date desc) as num from review where email = #{email}) join member using(email)
         where num between #{start} and #{end}
 	</select>
-	
+
 </mapper>

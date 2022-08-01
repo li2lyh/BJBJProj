@@ -258,11 +258,28 @@ resize:none;
 	
 		// 뒤로 가기 버튼
 		document.getElementById("toCancle").onclick = function() {
-			location.href = "/club/toClub";
+			location.href = "/club/toClubList";
 		}
 
 		// 등록 버튼 클릭
 		$("#write").on("click", function() {
+			
+			//유효성 검사
+			if($("#book_title").val() == ""){
+				alert("대상 도서를 입력해주세요.");
+				return false;
+			}
+			if($("#room_title").val() == ""){
+				alert("모임 제목을 입력해주세요.");
+				$("#room_title").focus();
+				return false;
+			}
+			if($("#room_detail").val() == ""){
+				alert("상세 내용을 기입해주세요.");
+				return false;
+			}
+			
+			
 			
 			// 현재 날짜
 			let today = new Date();   

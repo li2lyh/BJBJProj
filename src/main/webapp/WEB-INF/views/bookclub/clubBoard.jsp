@@ -175,6 +175,11 @@ a{
 <body>
 
 	<div class="container">
+	
+	<%-- *************************** header *************************** --%>
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
 
 		<div class="row">
 			<div class="col">
@@ -243,53 +248,7 @@ a{
 					</div>
 				</div>
 				<div class="row" id='calendar-container'>
-				
-			<%-- 
-				<div class="col-2">
-				
-				
-				<div id='external-events'>
-    <p>
-      <strong>Draggable Events</strong>
-    </p>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>My Event 1</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>My Event 2</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>My Event 3</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>My Event 4</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>My Event 5</div>
-    </div>
-    <p>
-      <input type='checkbox' id='drop-remove' />
-      <label for='drop-remove'>remove after drop</label>
-    </p>
-  </div>
-				
-				
-				
-				
-				
-				
-				</div>
-				
-				<div class="col-10">
-				
-				</div>
-				
-	--%>	
-				
 				<div id='calendar'></div>
-				
-				
-
 				</div>
 				
 			</div>
@@ -298,7 +257,6 @@ a{
 				<div class="row">
 					<div class="col-12">
 						<h5 class="titleB">게시글</h5>
-						
 					</div>
 				</div>
 				<div class="row boardBox">
@@ -333,15 +291,15 @@ a{
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>	
-				
-				
-				
 				</div>
+				
 				<div class="row" id="btnBox">
 					<div class="col" id="btnCol">
 						 <button type="button" id="btnWrite" class="btn btn-secondary">글쓰기</button>
 					</div>
 				</div>
+				
+				
 				<div>
 					<div class="row">
 						<div class="col-6">
@@ -350,7 +308,8 @@ a{
 					</div>
 				</div>
 
-					<%-- 승윤님 신고하기 화면 부분--%>
+				<%-- 승윤님 신고하기 화면 부분--%>
+				<div>
 					<table>
                   <thead>
                      <tr>
@@ -379,8 +338,7 @@ a{
                   </tbody>
                </table>
 				</div>
-		</div>
-
+        
 		<%-- 회원 신고하기 Modal --%>
 		<form id="reportForm" action="/club/report" method="post">
 			<div class="modal" id="reportModal">
@@ -417,6 +375,16 @@ a{
 				</div>
 			</div>
 		</form>
+	
+	</div>	
+	</div>
+	
+	<%-- *************************** footer *************************** --%>
+	<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	</div>
+
+	</div>
 	
 	<%-- Modal --%>
 	
@@ -462,7 +430,7 @@ a{
 
 </form>
 
-	</div>
+	
 
 
 	<script>
