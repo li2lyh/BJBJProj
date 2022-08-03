@@ -10,9 +10,23 @@
 <meta charset="UTF-8">
 <title>리뷰 관리</title>
 <style>
-/*공백*/
-.empty{
-    height:30px;
+
+/*폰트*/
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+.nanumgothiccoding * {
+ font-family: 'Nanum Gothic Coding', monospace;
+}
+
+*{
+	font-family : 'MapoGoldenPier';
 }
 
 /*버튼*/
@@ -20,88 +34,132 @@
     margin:2px;
     width:50px;
     height:30px;
+    color:white;
+	background-color:black;
 }
 
+.deleteBtn{
+	margin: 2px;
+	width: 60px;
+	height: 30;
+	color:black;
+	background-color:white;	
+	border-color:gray;
+}
+.deleteAllBtn{
+	margin: 2px;
+	width: 150px;
+	height: 30;
+	color:black;
+	background-color:white;	
+	border-color:gray;
+}
 
 /*leftBox*/
-h6{
-    margin:10px;
-    padding:2px;
-    
+.leftPageBox h5{
+	margin: 5px;
 }
-a{
-	text-decoration:none;
-	color:black;
+.leftPageBox h6{
+	margin: 8px;
+}
+
+.leftPageBox a {
+	text-decoration: none;
+	color: black;
 }
 
 /*rightBox*/
-.selectBox{
-    margin:1px;
+.rightPage th{
+	font-family : 'Nanum Gothic Coding' ;
+	text-align:center;
 }
-.inputContent{
-    margin:1px;
+
+.rightPage td{
+	font-family : 'Nanum Gothic Coding';
+	text-align:center;
+}
+
+.selectBox {
+	margin: 1px;
+}
+
+.inputContent {
+	margin: 1px;
 }
 </style>
 </head>
 <body>
-    <div class="empty"></div>
-    <div class="container">
-        <h2>관리자</h2>
-        <hr text-align:center>
-        <div class="row">
-            <div class="col-3 p-4 leftPage">
-                <div class="row">
-                    <h5>회원관리</h5>
-                    <h6><a href="/manager/toAllmember">전체 회원</a></h6>
-                    <h6><a href="/manager/toblacklist">블랙리스트</a></h6>
-                    <h5>모임관리</h5>
-                    <h6><a href="/manager/toAllclub">전체모임</a></h6>
-                    <h5>게시글 관리</h5>
-                    <h6><a href="/manager/toReview">리뷰관리</a></h6>
-                    <h5><a href="/manager/toReport">신고</a></h5>
-                </div>
-            </div>
-            <div class="col-9 rightPage">
-                <div class="reportContainer">
-                    <form id="searchReviewForm">
-                    <div class="row">
-                        <div class="col-5">
-                            <h3>리뷰관리</h3>
-                        </div>
-                        <div class="col-7 p-3 d-flex justify-content-end">
-                            <select name="category" class="selectBox">
-                                <option name="nickname" value="nickname">작성자</option>
-                                <option name="book_title" value="book_title">책이름</option>
-                                <option name="review_title" value="review_title">제목</option>
-                            </select>
-                            <input type="text" placeholder="내용을 입력해주세요" class="inputContent" name="keyword">
-                            <button type="button" class="searchBtn">검색</button>
-                        </div>
-                    </div>
-                    </form>
-                    <table class="table table-hover">
-                        <thead class="table-secondary">
-                        <tr>
-                            <th>책이름</th>
-                            <th>게시글 제목</th>
-                            <th>작성자</th>
-                            <th>작성일자</th>
-                            <th>개별</th>
-                            <th>
-                                <input type="checkbox" id="allCheck">
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        	<c:if test="${list.size() == 0}">
-                        		<tr>
-                        			<td colspan ="6">등록된 리뷰가 없습니다.</td>
-                        		</tr>
-                        	</c:if>
-                        	<c:if test="${list.size() > 0}">
-                        		<c:forEach items="${list}" var="dto">
-                        			<tr>
-                                        <td>${dto.book_title}</td>
+	<div class="container">
+		<!-- header -->
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+		
+		<h2>관리자</h2>
+		<hr text-align:center>
+		<div class="row">
+			<div class="col-3 p-4 leftPage">
+				<div class="row leftPageBox">
+					<h5>회원관리</h5>
+					<h6>
+						<a href="/manager/toAllmember">전체 회원</a>
+					</h6>
+					<h6>
+						<a href="/manager/toblacklist">블랙리스트</a>
+					</h6>
+					<h5>모임관리</h5>
+					<h6>
+						<a href="/manager/toAllclub">전체모임</a>
+					</h6>
+					<h5>게시글 관리</h5>
+					<h6>
+						<a href="/manager/toReview">리뷰관리</a>
+					</h6>
+					<h5>
+						<a href="/manager/toReport">신고</a>
+					</h5>
+				</div>
+			</div>
+			<div class="col-9 rightPage">
+				<div class="reportContainer">
+					<form id="searchReviewForm">
+						<div class="row">
+							<div class="col-5">
+								<h3>리뷰관리</h3>
+							</div>
+							<div class="col-7 p-3 d-flex justify-content-end">
+								<select name="category" class="selectBox">
+									<option name="nickname" value="nickname">작성자</option>
+									<option name="book_title" value="book_title">책이름</option>
+									<option name="review_title" value="review_title">제목</option>
+								</select> <input type="text" placeholder="내용을 입력해주세요"
+									class="inputContent" name="keyword">
+								<button type="button" class="searchBtn">검색</button>
+							</div>
+						</div>
+					</form>
+					<div style="width:100%; height:500px; overflow:auto">
+											<table class="table table-hover">
+						<thead class="table">
+							<tr>
+								<th>책이름</th>
+								<th>게시글 제목</th>
+								<th>작성자</th>
+								<th>작성일자</th>
+								<th>개별</th>
+								<th><input type="checkbox" id="allCheck"></th>
+							</tr>
+						</thead>
+						<tbody class="reviewBody">
+							<c:if test="${list.size() == 0}">
+								<tr>
+									<td colspan="6">등록된 리뷰가 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:if test="${list.size() > 0}">
+								<c:forEach items="${list}" var="dto">
+									<tr>
+										<td>${dto.book_title}</td>
 										<td>${dto.review_title}</td>
 										<td>${dto.nickname}</td>
 										<td>${dto.written_date}</td>
@@ -110,20 +168,26 @@ a{
 										</td>
 										<td><input type="checkbox" class="checkReview" value="${dto.review_no}" name="review_no"></td>
 									</tr>
-                      			</c:forEach>
-                        	</c:if>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="button" class="deleteAllBtn">전체 삭제</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-       </div> 
-        <script>
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table>
+					</div>
+
+					<div class="row">
+						<div class="col-12 d-flex justify-content-end">
+							<button type="button" class="deleteAllBtn">전체 삭제</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- footer -->
+		<div class=footer>
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
+	</div>
+	<script>
         $("#allCheck").on("click", function(){ //전체 선택, 해제
             if(this.checked){ 
                 $(".checkReview").prop("checked" , true);
@@ -137,10 +201,13 @@ a{
         })
         
         //리뷰 개별 삭제
-        $(".deleteBtn").on("click", function(){
-        	alert("정말 삭제하시겠습니까");
-        	location.href = "/manager/deleteReview?review_no="+this.value;
-        })
+        $(".reviewBody").on("click",".deleteBtn" ,function(){
+        	let del = confirm("정말 삭제하시겠습니까?");
+        	
+        	if(del){
+        		location.href = "/manager/deleteReview?review_no="+this.value;
+        	}
+   		 })
         
          //리뷰 전체선택 삭제
  		$(".deleteAllBtn").on("click",function(){

@@ -9,35 +9,62 @@
 <meta charset="UTF-8">
 <title>블랙리스트</title>
 <style>
-/*공백*/
-.empty {
-	height: 30px;
+
+/*폰트*/
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+.nanumgothiccoding * {
+ font-family: 'Nanum Gothic Coding', monospace;
+}
+
+*{
+	font-family : 'MapoGoldenPier';
+}
 /*버튼*/
 .searchBtn {
 	margin: 2px;
 	width: 50px;
 	height: 30px;
+	color:white;
+	background-color:black;
+}
+.deleteBtn{
+	margin: 2px;
+	width: 50px;
+	height: 30px;
+	color:black;
+	background-color:white;	
+	border-color:gray;
 }
 
 /*leftBox*/
-h6 {
-	margin: 10px;
-	padding: 2px;
+.leftPageBox h5{
+	margin: 5px;
+}
+.leftPageBox h6{
+	margin: 8px;
 }
 
-a {
+.leftPageBox a {
 	text-decoration: none;
 	color: black;
 }
 
 /*rightBox*/
-th{
+.rightPage th{
+	font-family : 'Nanum Gothic Coding' ;
 	text-align:center;
 }
 
-td{
+.rightPage td{
+	font-family : 'Nanum Gothic Coding';
 	text-align:center;
 }
 
@@ -51,13 +78,17 @@ td{
 </style>
 </head>
 <body>
-	<div class="empty"></div>
 	<div class="container">
+		<!-- header -->
+		<div class="header">
+		<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+	
 		<h2>관리자</h2>
 		<hr text-align:center>
 		<div class="row">
             <div class="col-3 p-4 leftPage">
-                <div class="row">
+                <div class="row leftPageBox">
                     <h5>회원관리</h5>
                     <h6><a href="/manager/toAllmember">전체 회원</a></h6>
                     <h6><a href="/manager/toblacklist">블랙리스트</a></h6>
@@ -86,8 +117,9 @@ td{
 							</div>
 						</div>
 						</form>
+						<div style="width:100%; height:500px; overflow:auto">
 						<table class="table table-hover">
-							<thead class="table-secondary">
+							<thead class="table">
 								<tr>
 									<th>회원 아이디</th>
 									<th>이름</th>
@@ -96,7 +128,7 @@ td{
 									<th>해제</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="blacklistBody">
 								<c:if test="${list.size() == 0}">
 									<tr>
 										<td colspan="6">등록된 블랙리스트가 없습니다.</td>
@@ -117,14 +149,20 @@ td{
 								</c:if>
 							</tbody>
 						</table>
+						</div>
+
 					</div>
 				</div>
 			</div>
+		<!-- footer -->
+		<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 		</div>
+			</div>
 			<script>
 			
 		//블랙리스트 해제
-		$(".deleteBtn").on("click", function(){
+		$(".blacklistBody").on("click",".deleteBtn", function(){
 			alert("정말 해제하시겠습니까?");
 			location.href = "/manager/deleteBlacklist?email="+this.value
 		})

@@ -9,27 +9,73 @@
 <meta charset="UTF-8">
 <title>전체 모임</title>
 <style>
-/*공백*/
-.empty {
-	height: 30px;
+
+/*폰트*/
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+.nanumgothiccoding * {
+ font-family: 'Nanum Gothic Coding', monospace;
+}
+
+*{
+	font-family : 'MapoGoldenPier';
 }
 /*버튼*/
 .searchBtn {
 	margin: 2px;
 	width: 50px;
 	height: 30px;
+	color:white;
+	background-color:black;
 }
-/*leftBox*/
-h6 {
-	margin: 10px;
-	padding: 2px;
+.messageBtn{
+	margin: 2px;
+	width: 50px;
+	height: 30px;
+	color:black;
+	background-color:white;
+	border-color:gray;
 }
 
-a {
+.deleteBtn{
+	margin: 2px;
+	width: 50px;
+	height: 30px;
+	color:black;
+	background-color:white;
+	border-color:gray;
+}
+/*leftBox*/
+.leftPageBox h5{
+	margin: 5px;
+}
+.leftPageBox h6{
+	margin: 8px;
+}
+
+.leftPageBox a {
 	text-decoration: none;
 	color: black;
 }
+
 /*rightBox*/
+.rightPage th{
+	font-family : 'Nanum Gothic Coding' ;
+	text-align:center;
+}
+
+.rightPage td{
+	font-family : 'Nanum Gothic Coding';
+	text-align:center;
+}
+
 .selectBox {
 	margin: 1px;
 }
@@ -37,36 +83,53 @@ a {
 .inputContent {
 	margin: 1px;
 }
-th{
-	text-align:center;
+/*모달창*/
+.bookclubModal{
+	width: 500px;
+	height: 600px;
 }
 
-td{
-	text-align:center;
-}
-/*모달창*/
-textarea {
+.contentBox textarea {
 	width: 300px;
-	height: 250px;
+	height: 200px;
 	resize: none;
 }
 
-.sendTo {
-	width: 300px;
+.bookclubModal .modal-content{
+	height:500px;
 }
+
+.sendTo {
+	margin: 2px;
+	width: 300px;
+	height: 30px;
+	color:black;
+	background-color:white;	
+	border-color:gray;
+}
+/*modal input title*/
 .titleBox{
-	width:300px;
+	margin: 2px;
+	width: 300px;
+	height: 30px;
+	color:black;
+	background-color:white;	
+	border-color:gray;
 }
 </style>
 </head>
 <body>
-	 <div class="empty"></div>
 	<div class="container">
+		<!-- header -->
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+
 		<h2>관리자</h2>
 		<hr text-align:center>
 		<div class="row">
 			<div class="col-3 p-4 leftPage">
-				<div class="row">
+				<div class="row leftPageBox">
 					<h5>회원관리</h5>
 					<h6><a href="/manager/toAllmember">전체 회원</a></h6>
 					<h6><a href="/manager/toblacklist">블랙리스트</a></h6>
@@ -94,8 +157,9 @@ textarea {
 						</div>
 					</div>
 					</form>
+					<div style="width:100%; height:500px; overflow:auto">
 					<table class="table table-hover">
-						<thead class="table-secondary">
+						<thead class="table">
 							<tr>
 								<th>모임명</th>
 								<th>모임장</th>
@@ -106,7 +170,7 @@ textarea {
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="bookclubBody">
 							<c:if test="${list.size() == 0}">
 								<tr>
 									<td colspan="7">등록된 모임이 없습니다.</td>
@@ -127,13 +191,14 @@ textarea {
 							</c:if>
 						</tbody>
 					</table>
+					</div>
 				</div>
 			</div>
-		</div>.
+		</div>
 
 		<!-- 쪽지 모달 -->
 		<form id="roomMessageForm" action="/manager/insertRoomLetter" method="post">
-			<div class="modal" tabindex="-1">
+			<div class="modal bookclubModal" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -160,14 +225,17 @@ textarea {
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" id="closeBtn"
-								data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal">닫기</button>
 							<button type="button" class="btn btn-primary" id="submitBtn">전송</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
+		<!-- footer -->
+		<div class=footer>
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
 	</div>
 		<script>
 			//모임 검색
@@ -227,16 +295,17 @@ textarea {
 
 			
 			//쪽지 모달
-			$(".messageBtn").on("click", function() {
+			$(".bookclubBody").on("click",".messageBtn",function() {
 				let letter_email = $(this).parent("td").prev(".email").html();
 				$("#letter_email").val(letter_email);
-				$(".modal").show();
+				$(".bookclubModal").show();
 				console.log(letter_email);
 			});
 			//쪽지 모달 닫기
-			document.getElementById("closeBtn").onclick = function() {
-				$(".modal").hide();
-			}
+			$("#closeBtn").on("click", function(){
+				$(".bookclubModal").hide();
+			})
+
 			//쪽지 form 전송 
 			$("#submitBtn").on("click", function() {
 				$("#roomMessageForm").submit();
@@ -244,7 +313,7 @@ textarea {
 			
 			
 			//모임 삭제
-			$(".deleteBtn").on("click", function(e){
+			$(".bookclubBody").on("click",".deleteBtn", function(e){
 				let yn = confirm("정말 삭제하시겠습니까?");
 				if(yn){
 					location.href="/manager/deleteBookroom?room_id="+this.value;

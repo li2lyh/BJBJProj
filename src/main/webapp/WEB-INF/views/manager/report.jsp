@@ -9,37 +9,65 @@
 <meta charset="UTF-8">
 <title>신고</title>
 <style>
-/*공백*/
-.empty{
-    height:30px;
+/*폰트*/
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+.nanumgothiccoding * {
+ font-family: 'Nanum Gothic Coding', monospace;
+}
+
+*{
+	font-family : 'MapoGoldenPier';
 }
 /*버튼*/
-/*leftBox*/
-h6{
-    margin:10px;
-    padding:2px;
-}
-a{
-	text-decoration:none;
+.deleteBookroom{
+	margin: 2px;
+	width: 100px;
+	height: 30px;
 	color:black;
+	background-color:white;
+	border-color:gray;	
+}
+
+/*leftBox*/
+.leftPageBox h5{
+	margin: 5px;
+}
+.leftPageBox h6{
+	margin: 8px;
+}
+
+.leftPageBox a {
+	text-decoration: none;
+	color: black;
 }
 /*rightBox*/
-th{
+.rightPage th{
+	font-family : 'Nanum Gothic Coding' ;
 	text-align:center;
 }
 
-td{
+.rightPage td{
+	font-family : 'Nanum Gothic Coding';
 	text-align:center;
 }
 
-.selectBox{
-    margin:1px;
+.selectBox {
+	margin: 1px;
 }
-.inputContent{
-    margin:1px;
+
+.inputContent {
+	margin: 1px;
 }
 /*모달창*/
-textarea{
+.contentBox textarea{
     width:300px;
     height:250px;
     resize:none;
@@ -47,16 +75,26 @@ textarea{
 .reasonTitle{
     width:300px;
 }
+.reportmodal .modal-content{
+	height : 500px;
+}
+
+.bookroomModal .modal-content{
+	height:500px;
+}
 </style>
 </head>
 <body>
-    <div class="empty"></div>
     <div class="container">
-        <h2>관리자</h2>
+		<!-- header -->
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+		<h2>관리자</h2>
         <hr text-align:center>
         <div class="row">
             <div class="col-3 p-4 leftPage">
-                <div class="row">
+                <div class="row leftPageBox">
                     <h5>회원관리</h5>
                     <h6><a href="/manager/toAllmember">전체 회원</a></h6>
                     <h6><a href="/manager/toblacklist">블랙리스트</a></h6>
@@ -74,8 +112,9 @@ textarea{
                             <h3>회원 신고</h3>
                         </div>
                     </div>
+                    <div style="width:100%; height:300px; overflow:auto">
                     <table class="table table-hover MemberReport" id="memberReport">
-                        <thead class="table-secondary">
+                        <thead class="table">
                         <tr>
                             <th>신고일자</th>
                             <th>신고당한 회원</th>
@@ -102,14 +141,17 @@ textarea{
                         	</c:if>
                         </tbody>
                     </table>
+                    </div>
+
                     <div class="empty"></div>
                     <div class="row">
                         <div class="col">
                             <h3>모임 신고</h3>
                         </div>
                     </div>
+                    <div style="width:100%; height:300px; overflow:auto">
                     <table class="table table-hover BookroomReport" id="roomReport">
-                        <thead class="table-secondary">
+                        <thead class="table">
                             <tr>
                                 <th>신고일자</th>
                                 <th>신고당한 모임명</th>
@@ -141,6 +183,8 @@ textarea{
 							</c:if>
 						</tbody>
                     </table>
+                    </div>
+
                 </div>
             </div>
         </div> 
@@ -170,19 +214,19 @@ textarea{
                     
                     <div class="col-12 d-flex justify-content-center modal-footer">
                       <button type="button" class="btn btn-secondary deleteReport" id="deleteMemBtn" data-bs-dismiss="modal" >신고삭제</button>
-							<c:set var ="checkreport" value="false" />
+                            <c:set var ="checkreport" value="false" />
 							<c:forEach items = "${report_list}" var="reportlist">
 								<c:if test="${reportlist.report_action == 0}">
 									<c:set var ="checkreport" value="true" />
 								</c:if>
 							</c:forEach>
 							<c:if test="${checkreport}">
-								<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}">경고추가</button>
+								<button type="button" class="btn btn-danger addReportBtn" id="addBtn" value="${dto.email}">경고추가</button>
 							</c:if>
 							<c:if test="${not checkreport}">
-								<button type="button" class="btn btn-primary" id="addBtn" value="${dto.email}" disabled="disabled">경고추가</button>
+								<button type="button" class="d-none" id="addBtn" value="${dto.email}" disabled="disabled">경고추가</button>
 							</c:if>
-                    </div>
+					</div>
                   </div>
                 </div>
               </div>
@@ -217,8 +261,11 @@ textarea{
                   </div>
                 </div>
               </div>
-         </div>  
-        
+		<!-- footer -->
+		<div class=footer>
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
+	</div>  
         <script>
        //모임삭제  
         $(".deleteBookroom").on("click", function(){

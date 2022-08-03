@@ -8,13 +8,14 @@ public class MemberDTO {
 	private String phone;
 	private String mydesc;
 	private String user_kakao;
-
+	private String admin;
+	
 	public MemberDTO() {
 	}
 
 
 	public MemberDTO(String email, String password, String name, String nickname, String phone, String mydesc,
-			String user_kakao) {
+			String user_kakao, String admin) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -23,6 +24,7 @@ public class MemberDTO {
 		this.phone = phone;
 		this.mydesc = mydesc;
 		this.user_kakao = user_kakao;
+		this.admin = admin;
 	}
 
 
@@ -94,11 +96,20 @@ public class MemberDTO {
 	public void setUser_kakao(String user_kakao) {
 		this.user_kakao = user_kakao;
 	}
+	
+	public String getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
 
 
 	@Override
 	public String toString() {
-		return email + " : " + password+ " : " + name + " : " + nickname + " : " + phone + " : " + mydesc + " : " + user_kakao;
+		return email + " : " + password+ " : " + name + " : " + nickname + " : " + phone + " : " + mydesc + " : " + user_kakao + ":" + admin;
 	}
 
 }

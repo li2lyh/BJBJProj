@@ -95,4 +95,10 @@ public class HomeController {
 		return "error";
 	}
 	
+	//introducce
+	@RequestMapping(value = "/toIntroduce")
+	public String toIntroduce() {
+		return "introduce";
+	}
+	
 }

@@ -58,6 +58,7 @@ h3 {
 	width: 15.5%;
 	margin-top: -7px;
 }
+
 /* 모임기간 */
 .date{ 
 	margin-bottom: 0px;
@@ -296,7 +297,6 @@ font-weight:bold;
 		document.getElementById("toCancle").onclick = function() {
 			location.href = "/club/toClubList";
 		}
-
 		// 등록 버튼 클릭
 		$("#write").on("click", function() {
 			
@@ -319,12 +319,10 @@ font-weight:bold;
 			
 			// 현재 날짜
 			let today = new Date();   
-
 			let year = today.getFullYear(); // 년도
 			let month = today.getMonth() + 1;  // 월
 			let date = today.getDate();  // 날짜
 			let day = today.getDay();  // 요일
-
 			let sysdate = year + '-' + month + '-' + date;
 			console.log("현재날짜 : " + sysdate);
 			
@@ -337,9 +335,7 @@ font-weight:bold;
 			
 			let open_date = new Date(open);
 			let close_date = new Date(close);
-
 			let date_gap = diffDate(open_date, close_date);
-
 			let sysdate_date = new Date(sysdate);
 			
 			
@@ -372,7 +368,6 @@ font-weight:bold;
 				$("#submitForm").submit();
 			}
 		})
-
 		//DatePicker
 		$("#open_date").datepicker();
 		$("#close_date").datepicker();
@@ -466,19 +461,18 @@ font-weight:bold;
 		
 		
 		// 글자 수 처리 function
-		function textLengthOverCut(txt, len, lastTxt) {
-        if (len == "" || len == null) { // 기본값
-            len = 20;
-        }
-        if (lastTxt == "" || lastTxt == null) { // 기본값
-            lastTxt = "...";
-        }
-        if (txt.length > len) {
-            txt = txt.substr(0, len) + lastTxt;
-        }
-        return txt;
-    }
-
+		function textLengthOverCut(txt, len, lastTxt) {
+        if (len == "" || len == null) { // 기본값
+            len = 20;
+        }
+        if (lastTxt == "" || lastTxt == null) { // 기본값
+            lastTxt = "...";
+        }
+        if (txt.length > len) {
+            txt = txt.substr(0, len) + lastTxt;
+        }
+        return txt;
+    }
 		// 검색창 초기화 function
 		function initialize(){
 			
