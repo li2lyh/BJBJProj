@@ -310,12 +310,7 @@ public class BookclubController {
 		}
 		
 		model.addAttribute("board", boardList);
-		// 해당 방의 캘린더 정보
-		
-		// 해당 방의 멤버 닉네임 리스트
-		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
-		model.addAttribute("nickList" , nickList);
-				
+
 		return "/bookclub/clubBoard";
 	}
 

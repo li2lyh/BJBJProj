@@ -95,6 +95,7 @@ li {
 						<div class="imgBox"
 							style="margin: 5px; margin-left: 20px; margin-right: 15px;">
 							<img src="/resources/images/noImg.png">
+
 						</div>
 					</td>
 					<td>
