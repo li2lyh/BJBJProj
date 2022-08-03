@@ -37,7 +37,7 @@
 	   	
 	   	<!-- 회원가입 -->
 	   	<insert parameterType="com.bjbj.member.MemberDTO" id="insert">
-	   		insert into member values(#{email}, #{password}, #{name}, #{nickname}, #{phone}, '', #{user_kakao})
+	   		insert into member values(#{email}, #{password}, #{name}, #{nickname}, #{phone}, #{mydesc}, #{user_kakao}, default)
 	   	</insert>
 	   	
 	   	<!-- 아이디 찾기 -->

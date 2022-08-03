@@ -241,47 +241,20 @@
 				</div>
 				<!-- 캐러셀 -->
 
-
 				<div class="bookBox">
 					<div class="row mx-auto my-auto justify-content-center">
 						
-						<div class="col-lg-3">
-							<div class="card" style="width: 18rem;">
-								<img src="/media/4.jpg" class="card-img-top" alt="...">
-								<div class="card-body">
-									<h4 class="card-title">책 제목</h4>
-									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+						<c:forEach items="${newBooks}" var="book" begin="0" end="3">
+							<div class="col-lg-3">
+								<div class="card" style="width: 18rem;">
+									<a href="${book.link}"><img src="${book.cover}" class="card-img-top" alt="..."></a>
+									<div class="card-body">
+										<h4 class="card-title">${book.title}</h4>
+										<p class="card-text">${book.description}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="card" style="width: 18rem;">
-								<img src="/media/4.jpg" class="card-img-top" alt="...">
-								<div class="card-body">
-									<h4 class="card-title">책 제목</h4>
-									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="card" style="width: 18rem;">
-								<img src="/media/4.jpg" class="card-img-top" alt="...">
-								<div class="card-body">
-									<h4 class="card-title">책 제목</h4>
-									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="card" style="width: 18rem;">
-								<img src="/media/4.jpg" class="card-img-top" alt="...">
-								<div class="card-body">
-									<h4 class="card-title">책 제목</h4>
-									<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-								</div>
-							</div>
-						</div>
-
+						</c:forEach>
 					</div>
 				</div>
 
@@ -299,73 +272,34 @@
 							<div id="recipeCarousel2" class="carousel slide carousel-book"
 								data-bs-ride="carousel">
 								<div class="carousel-inner" role="listbox">
+									<!-- 카드 -->
+									<c:forEach items="${bestBooks}" var="book" begin="0" end="0">
 									<div class="carousel-item active">
-										<!-- 카드 -->
 										<div class="col-lg-3">
 											<div class="card" style="width: 18rem;">
-												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<img src="${book.cover}" class="card-img-top" alt="...">
 												<div class="card-body">
-													<h4 class="card-title">책 제목</h4>
-													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+													<h4 class="card-title">${book.title}</h4>
+													<p class="card-text">${book.description}</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="carousel-item">
+									</c:forEach>
+									
+									<c:forEach items="${bestBooks}" var="book" begin="1">
+										<div class="carousel-item">
 										<div class="col-lg-3">
 											<div class="card" style="width: 18rem;">
-												<img src="/media/4.jpg" class="card-img-top" alt="...">
+												<img src="${book.cover}" class="card-img-top" alt="...">
 												<div class="card-body">
-													<h4 class="card-title">책 제목</h4>
-													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+													<h4 class="card-title">${book.title}</h4>
+													<p class="card-text">${book.description}</p>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-lg-3">
-											<div class="card" style="width: 18rem;">
-												<img src="/media/4.jpg" class="card-img-top" alt="...">
-												<div class="card-body">
-													<h4 class="card-title">책 제목</h4>
-													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-												</div>
-											</div>
 										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-lg-3">
-											<div class="card" style="width: 18rem;">
-												<img src="/media/4.jpg" class="card-img-top" alt="...">
-												<div class="card-body">
-													<h4 class="card-title">책 제목</h4>
-													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-lg-3">
-											<div class="card" style="width: 18rem;">
-												<img src="/media/4.jpg" class="card-img-top" alt="...">
-												<div class="card-body">
-													<h4 class="card-title">책 제목</h4>
-													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="col-lg-3">
-											<div class="card" style="width: 18rem;">
-												<img src="/media/4.jpg" class="card-img-top" alt="...">
-												<div class="card-body">
-													<h4 class="card-title">책 제목</h4>
-													<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-												</div>
-											</div>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
 								<!-- 버튼-->
 								<a class="carousel-control-prev bg-transparent w-aut"
