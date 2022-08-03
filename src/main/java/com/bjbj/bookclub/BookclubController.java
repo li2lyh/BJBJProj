@@ -289,7 +289,9 @@ public class BookclubController {
 		// 해당 방의 멤버 정보
 		List<RoleDTO> roleList = service.selectRoleByRoom(room_id);
 		System.out.println("방 멤버 : " + roleList.toString());
+    
 		model.addAttribute("member", roleList);
+
 
 		// 현재 접속한 계정이 리더인가?
 		String role = service.selectRole(id).getRole();
@@ -304,11 +306,13 @@ public class BookclubController {
 		}
 
 		model.addAttribute("board", boardList);
+
 		// 해당 방의 캘린더 정보
 
 		// 해당 방의 멤버 닉네임 리스트
 		List<RoleDTO> nickList = service.selectNickByRoom(room_id);
 		model.addAttribute("nickList", nickList);
+
 
 		return "/bookclub/clubBoard";
 	}

@@ -20,31 +20,56 @@
 
 ul {
 	padding: 10px;
-	margin: 0px;
 }
+#ulBox{
+	margin-bottom:0px;
+	padding-bottom:0px;
+}	
+#ulBox > li > a{
+	text-decoration:none;
+	color:black;
+}
+#ulBox > li > a:hover{
+	font-weight:bold;
+}
+
+
 
 li {
 	list-style: none;
-}
-
-tr {
-	border-top: 1px solid grey;
-	border-bottom: 1px solid grey;
+	margin-bottom: 10px;
 }
 
 .titleBox {
 	margin-bottom: 10px;
+	padding-bottom:10px;
 }
-
+#headTitle{
+	border-bottom: 1px solid lightgray;
+	margin-bottom: 0px;
+}
 .contentBox {
 	width: 100%;
 	padding: 5px;
 }
 
-.imgBox {
+.imgBox img{
 	width: 80px;
 	height: 80px;
 }
+#reviewRow{
+	border-bottom: 1px solid lightgray;
+}
+.btnBox{
+	text-align:right;
+}
+#titleLi{
+	font-size:1rem;
+}
+#etcLi span{
+	font-size:1rem;
+}
+
 </style>
 </head>
 <body>
@@ -55,7 +80,7 @@ tr {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		<!------------------------------------- main content ----------------------------------->
-		<div class="titleBox">
+		<div class="titleBox" id="headTitle">
 			<h1>Book Review</h1>
 			<span>회원 여러분들의 소중한 리뷰를 남겨주세요!</span>
 		</div>
@@ -65,19 +90,20 @@ tr {
 					<p style="font-size: 30px;">작성된 리뷰가 없습니다.</p>
 				</c:if>
 				<c:forEach items="${list}" var="item">
-				<tr>
+				<tr id="reviewRow">
 					<td width="10%">
 						<div class="imgBox"
 							style="margin: 5px; margin-left: 20px; margin-right: 15px;">
-							<img src="">
+							<img src="/resources/images/noImg.png">
+
 						</div>
 					</td>
 					<td>
 						<div class="titleBox" style="margin: 5px;">
-							<ul>
-								<li>${item.book_title}</li>
+							<ul id="ulBox">
+								<li id="titleLi">${item.book_title}</li>
 								<li><a href="/review/detail?review_no=${item.review_no}">${item.review_title}</a></li>
-								<li><span>${item.nickname}</span><span>${item.written_date}</span></li>
+								<li id="etcLi"><span>${item.nickname}</span>&nbsp; &nbsp; <span>${item.written_date}</span></li>
 							</ul>
 						</div>
 					</td>

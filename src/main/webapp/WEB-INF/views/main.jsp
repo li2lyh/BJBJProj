@@ -356,18 +356,15 @@
 
 	<script>
 		/* 더보기 버튼 */
-		
 		$("#btnBookclub").on("click", function(){
 		      let loginSession = '${loginSession}';
-		      
 		      if(loginSession == ""){
 		         location.href = "/club/toClub";
 		      }else{
 		         location.href = "/club/toClubList";
 		      }
-		      
 		   })
-		
+
 	
 		/* 캐러셀 */
         let items = document.querySelectorAll('.carousel-book .carousel-item')

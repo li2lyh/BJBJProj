@@ -35,6 +35,7 @@
    			select count(*) from member where nickname = #{nickname}
    		</select>
 	   	
+
 	   <!-- 회원가입 -->
 	   <insert parameterType="com.bjbj.member.MemberDTO" id="insert">
    			insert into member values(#{email}, #{password}, #{name}, #{nickname}, #{phone}, #{mydesc}, #{user_kakao}, default)

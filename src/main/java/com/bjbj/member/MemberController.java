@@ -47,11 +47,11 @@ public class MemberController {
 
 	/* ************ 로그인 ************ */
 
-	// 일반 로그인 
+	// 일반 로그인
 	@ResponseBody
 	@RequestMapping(value = "/login")
 	public String login(String email, String password) throws Exception {
-		MemberDTO dto = Mservice.checkBlack(email); //블랙리스트 확인
+		MemberDTO dto = Mservice.checkBlack(email); // 블랙리스트 확인
 		if (dto != null) { // 블랙리스트 O
 			return "blackList";
 		} else { // 블랙리스트 X
@@ -59,22 +59,22 @@ public class MemberController {
 			if (dto != null) {
 				session.setAttribute("loginSession", dto);
 				System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
-						
+
 				// 로그인한 계정의 role 정보
-				if( Bservice.selectRole(email) != null) {
+				if (Bservice.selectRole(email) != null) {
 					RoleDTO roleDTO = Bservice.selectRole(email);
-					session.setAttribute("roleSession", roleDTO );
-				
+					session.setAttribute("roleSession", roleDTO);
+
 					// 로그인한 계정의 club 정보
-					if( Bservice.selectOne(roleDTO.getRoom_id()) != null) {
+					if (Bservice.selectOne(roleDTO.getRoom_id()) != null) {
 						BookclubDTO roomDTO = Bservice.selectOne(roleDTO.getRoom_id());
 						session.setAttribute("clubSession", roomDTO);
-					}else {
-						session.setAttribute("clubSession", null );
+					} else {
+						session.setAttribute("clubSession", null);
 					}
-					
-				}else {
-					session.setAttribute("roleSession", null );
+
+				} else {
+					session.setAttribute("roleSession", null);
 				}
 
 				return "success";
@@ -83,7 +83,7 @@ public class MemberController {
 			}
 		}
 	}
-	
+
 	// 카카오 로그인
 	@ResponseBody
 	@RequestMapping(value = "/kakaoLogin")
@@ -91,7 +91,6 @@ public class MemberController {
 		MemberDTO dto = Mservice.checkBlack(email); //블랙리스트 확인
 		if (dto != null) {
 			return "blackList";
-			
 		} else {
 			dto = Mservice.kakaoLogin(email);
 			
@@ -122,34 +121,31 @@ public class MemberController {
 				return "fail";
 			}
 		}
+	}
+
+	// 쪽지 판별
+	@RequestMapping(value = "/readYn")
+	@ResponseBody
+	public String readYn(String email) throws Exception {
+
+		// 읽지 않은 쪽지가 있는지 판별
+		List<LetterDTO> letterList = Lservice.selectLately(email);
+		String readYn = "";
+		for (LetterDTO lt : letterList) {
+			if (lt.getRead().equals("N")) { // 읽지 않은 쪽지가 있을 떄
+				readYn = "N";
+				break;
+			} else if (lt.getRead().equals("Y")) {
+				readYn = "Y";
+			} else { // 쪽지 자체가 없을 때
+				readYn = "Y";
+			}
+		}
+		return readYn;
 
 	}
-	
-	// 쪽지 판별
-	@RequestMapping(value="/readYn")
-	@ResponseBody
-	public String readYn(String email) throws Exception{
-		
-			//읽지 않은 쪽지가 있는지 판별 
-			List<LetterDTO> letterList = Lservice.selectLately(email);
-			String readYn = "";
-			for(LetterDTO lt : letterList) {
-				if(lt.getRead().equals("N")) { // 읽지 않은 쪽지가 있을 떄
-					readYn = "N";
-					break;
-				}else if(lt.getRead().equals("Y")) {
-					readYn = "Y";
-				}else { // 쪽지 자체가 없을 때
-					readYn = "Y";
-				}
-			}
-			return readYn;
-		
-	}
-		
-	
+
 	/* ************ 로그아웃 ************ */
-	
 
 	// 로그아웃
 	@RequestMapping(value = "/logout")
@@ -179,18 +175,18 @@ public class MemberController {
 
 	// 카카오 회원가입 페이지
 	@RequestMapping(value = "/toKakaoSignUp")
-	public String toKakaoSignUp(String email,String phone, Model model) {
+	public String toKakaoSignUp(String email, String phone, Model model) {
 		System.out.println("도착");
 		model.addAttribute("email", email);
 		model.addAttribute("phone", phone);
 		return "/member/signup-kakao";
 	}
-	
+
 	// 카카오 회원가입 요청
 	@RequestMapping(value = "/kakaoSignUp")
-	public String kakaoSingUp(MemberDTO dto) throws Exception{
+	public String kakaoSingUp(MemberDTO dto) throws Exception {
 		System.out.println("카카오 회원가입 요청");
-		if(dto.getPassword() == "") {
+		if (dto.getPassword() == "") {
 			String ranPw = Mservice.makePw(dto.getEmail());
 			dto.setPassword(ranPw);
 		}
@@ -223,7 +219,7 @@ public class MemberController {
 
 	// VerifyPhoneNumber _ 휴대폰 본인인증
 	@ResponseBody
-  @RequestMapping(value = "/phoneCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.POST)
 	public String sendSMS(String phone) { // 휴대폰 문자보내기
 		int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);// 난수 생성
 
@@ -251,7 +247,7 @@ public class MemberController {
 		MemberDTO dto = Mservice.searchEmail(name, phone);
 		return dto;
 	}
-	
+
 	// 비밀번호 찾기시 이메일 찾기
 	@ResponseBody
 	@RequestMapping(value = "/searchPw")
@@ -279,6 +275,10 @@ public class MemberController {
 		// 도서 리뷰
 		List<ReviewDTO> ReviewList = Rservice.selectLately(((MemberDTO) session.getAttribute("loginSession")).getEmail());
 		model.addAttribute("ReviewList", ReviewList);
+		
+		for (ReviewDTO dto : ReviewList) {
+			dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
+		}
 
 		// 찜 도서
 		List<LikeBookDTO> LikeBooklist = LBservice.likeBook(((MemberDTO) session.getAttribute("loginSession")).getEmail());
@@ -296,7 +296,7 @@ public class MemberController {
 
 		return "/mypage/myinfo";
 	}
-	
+
 	/* ************ 내 정보 수정 ************ */
 
 	// 내 정보 수정 페이지 요청1
@@ -341,7 +341,12 @@ public class MemberController {
 	@RequestMapping(value = "/toDelete")
 	@ResponseBody
 	public String toDelete(String email, String password) throws Exception {
+		// pw 암호화
+		password = EncryptionUtils.getSHA512(password);
+		
 		System.out.println(email + " : " + password);
+		
+		
 		int rs = Mservice.delete(((MemberDTO) session.getAttribute("loginSession")).getEmail(), password);
 		if (rs > 0) {
 			session.invalidate();
@@ -352,9 +357,8 @@ public class MemberController {
 			return "fail";
 		}
 	}
-	
-	/* ************ 참여 독서 모임 ************ */
 
+	/* ************ 참여 독서 모임 ************ */
 
 	// 참여 독서 모임 페이지 요청
 	@RequestMapping(value = "/toMybookclub")
@@ -377,13 +381,13 @@ public class MemberController {
 			dto.setOpen_date(Bservice.getDate(dto.getOpen_date()));
 			dto.setClose_date(Bservice.getDate(dto.getClose_date()));
 		}
-		
+
 		// 참여했던 종료된 독서모임 리스트 가져오기
 		List<ExpirationRoleDTO> exList = Bservice.selectExpirationRoleByEmail(((MemberDTO) session.getAttribute("loginSession")).getEmail());
 		List<ExpirationDTO> expirationList = new ArrayList<ExpirationDTO>();
-		for(int i = 0; i < exList.size(); i++) {
+		for (int i = 0; i < exList.size(); i++) {
 			int id = exList.get(i).getRoom_id();
-			
+
 			expirationList.add(Bservice.selectExpirationById(id));
 		}
 		for (ExpirationDTO dto : expirationList) {
@@ -399,7 +403,7 @@ public class MemberController {
 
 		return "/mypage/mybookclub";
 	}
-	
+
 	/* ************ 리뷰 ************ */
 
 	// 도서 리뷰 페이지 요청
@@ -416,14 +420,18 @@ public class MemberController {
 		// 페이지 당 보여지는 게시글의 최대 개수
 		int pageSize = page * pagination.getPageSize();
 
-		List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<ReviewDTO> list = Rservice.selectPage(startIndex, pageSize,((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
+		for (ReviewDTO dto : list) {
+			dto.setWritten_date(Rservice.getDate(dto.getWritten_date()));
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);
 
 		return "/mypage/myreview";
 	}
-	
+
 	/* ************ 찜 도서 ************ */
 
 	// 찜 도서 페이지 요청
@@ -437,9 +445,9 @@ public class MemberController {
 	// 찜 도서 삭제 요청 -> 찜 도서 페이지
 	@RequestMapping(value = "/toDeleteLikeBook")
 	public String toDeleteLikeBook(String book_isbn) throws Exception {
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
-		System.out.println("삭제 :" +email +" : " + book_isbn);
-		
+		String email = ((MemberDTO) (session.getAttribute("loginSession"))).getEmail();
+		System.out.println("삭제 :" + email + " : " + book_isbn);
+
 		int rs = LBservice.deleteLikeBook(book_isbn, email);
 		if (rs > 0) {
 			System.out.println("삭제 완료");
@@ -447,13 +455,13 @@ public class MemberController {
 		}
 		return null;
 	}
-	
+
 	// 찜 도서 삭제 요청 -> 마이 페이지
 	@RequestMapping(value = "/toDeleteLikeBook2")
 	public String toDeleteLikeBook2(String book_isbn) throws Exception {
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
-		System.out.println("삭제 :" +email +" : " + book_isbn);
-		
+		String email = ((MemberDTO) (session.getAttribute("loginSession"))).getEmail();
+		System.out.println("삭제 :" + email + " : " + book_isbn);
+
 		int rs = LBservice.deleteLikeBook(book_isbn, email);
 		System.out.println("rs :" + rs);
 		if (rs > 0) {
@@ -483,13 +491,13 @@ public class MemberController {
 	@RequestMapping(value = "/toDeleteLikeClub")
 	@ResponseBody
 	public String toDeleteLikeClub(@RequestParam(value = "no[]") int[] no) throws Exception {
-		String email =((MemberDTO)(session.getAttribute("loginSession"))).getEmail();
-		System.out.println("삭제 :" +email +" : " + no);
+		String email = ((MemberDTO) (session.getAttribute("loginSession"))).getEmail();
+		System.out.println("삭제 :" + email + " : " + no);
 		Bservice.deleteLikeClub(no, email);
 
 		return "success";
 	}
-	
+
 	/* ************ 쪽지함 ************ */
 
 	/* ************ 쪽지함 ************ */
@@ -507,10 +515,11 @@ public class MemberController {
 		int startIndex = pagination.getStartIndex();
 		// 페이지 당 보여지는 게시글의 최대 개수
 		int pageSize = page * pagination.getPageSize();
-		List<LetterDTO> list = Lservice.selectPage(startIndex, pageSize, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
+		List<LetterDTO> list = Lservice.selectPage(startIndex, pageSize,
+				((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
 		for (LetterDTO dto : list) {
-			// dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
+			dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 		}
 
 		model.addAttribute("list", list);
@@ -532,13 +541,13 @@ public class MemberController {
 	public String toDetailLetter(Model model, int no) throws Exception {
 		LetterDTO dto = Lservice.detailLetter(no, ((MemberDTO) session.getAttribute("loginSession")).getEmail());
 
-		// dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
+		dto.setWritten_date(Lservice.getDate(dto.getWritten_date()));
 
 		model.addAttribute("dto", dto);
-		
+
 		// 해당 쪽지 읽음 처리
 		Lservice.updateRead(no);
-		
+
 		return "/mypage/detailLetter";
 	}
 
