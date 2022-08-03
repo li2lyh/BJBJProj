@@ -17,9 +17,6 @@
 	crossorigin="anonymous"></script>
 <title>북적북적 - 도서 리뷰</title>
 <style>
-div {
-	border: 1px solid grey;
-}
 
 ul {
 	padding: 10px;
@@ -64,6 +61,9 @@ tr {
 		</div>
 		<table class="contentBox">
 			<tbody>
+				<c:if test="${empty list}">
+					<p style="font-size: 30px;">작성된 리뷰가 없습니다.</p>
+				</c:if>
 				<c:forEach items="${list}" var="item">
 				<tr>
 					<td width="10%">
@@ -95,6 +95,10 @@ tr {
 	</div>
 	<script>
 		document.getElementById('btnWriteReview').onclick = function() {
+			if(${loginSession == null}){
+				alert("리뷰 작성을 위해서 로그인이 필요합니다.");
+				return;
+			}
 			location.href = "/review/toWrite";
 		}
 	</script>
