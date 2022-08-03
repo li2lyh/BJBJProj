@@ -12,12 +12,12 @@ public class ReviewDTO {
 	private String written_date;
 	private String content;
 	private int views;
-	private String img_id;
+	private int img_no;
 	
 	public ReviewDTO() {}
 
 	public ReviewDTO(int review_no, String review_title, String email, String book_title, String nickname,
-			Date written_date, String content, int views, String img_id) {
+			Date written_date, String content, int views, int img_no) {
 		super();
 		this.review_no = review_no;
 		this.review_title = review_title;
@@ -27,7 +27,7 @@ public class ReviewDTO {
 		this.written_date = getStrDate(written_date);
 		this.content = content;
 		this.views = views;
-		this.img_id = img_id;
+		this.img_no = img_no;
 	}
 	public String getStrDate(Date date) {
 		String rs = null;
@@ -87,10 +87,13 @@ public class ReviewDTO {
 	public void setViews(int views) {
 		this.views = views;
 	}
-	public String getImg_id() {
-		return img_id;
+
+	public int getImg_no() {
+		return img_no;
 	}
-	public void setImg_id(String img_id) {
-		this.img_id = img_id;
-	}	
+
+	public void setImg_no(int img_no) {
+		this.img_no = img_no;
+	}
+
 }
