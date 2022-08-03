@@ -60,10 +60,6 @@ public class ManagerDAO {
 		return session.selectList("managerMapper.searchMember" , map);
 	}
 	
-	//public List<BlacklistDTO>compareBlacklist()throws Exception{ //블랙리스트 검사 (전체회원에서)
-	//	return session.selectList("managerMapper.compareBlacklist");
-	//}
-	
 	public List<Map<String, Object>> selectBookroom() throws Exception{ //전체 모임 조회
 		return session.selectList("managerMapper.selectBookroom");
 	}

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -122,7 +123,7 @@ public class ManagerController {
 	@RequestMapping(value="/toAllclub") //전체 모임페이지 요청
 	public String toAllclub(Model model) throws Exception{
 		List<Map<String, Object>> list = service.selectBookroom();
-
+		
 		model.addAttribute("list", list);
 		
 		return "/manager/bookclubList";
@@ -134,7 +135,8 @@ public class ManagerController {
 		System.out.println("category : " + category);
 		System.out.println("keyword : " + keyword );
 		
-		List<BookclubDTO>list = service.searchBookclub(category, keyword);
+		List<BookclubDTO>list = service.searchBookclub(category, keyword);		
+
 		return list;
 				
 	}
@@ -246,6 +248,12 @@ public class ManagerController {
 
 	}
 
-	
+	// 에러
+	@ExceptionHandler
+	public String toError(Exception e) {
+		System.out.println("예외 발생");
+		e.printStackTrace();
+		return "redirect:/toError";
+	}
 	
 }

@@ -1,5 +1,8 @@
 package com.bjbj.manager;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -57,17 +60,25 @@ public class ManagerService {
 		return dao.searchMember(category, keyword);
 	}
 	
-	//블랙리스트 검사 (전체 회원에서 제외시켜주기)
-	//public List<BlacklistDTO>compareBlacklist(String email)throws Exception{
-	//	return dao.compareBlacklist();
-	//}
-	
 	//전체 모임 조회
 	public List<Map<String, Object>> selectBookroom() throws Exception{
-		return dao.selectBookroom();
+		List<Map<String, Object>> list = dao.selectBookroom();
+		for(Map map : list) {
+
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			Timestamp open_date = (Timestamp)map.get("open_date");
+			Timestamp close_date = (Timestamp)map.get("close_date");
+			
+			map.put("open_date" , sdf.format(open_date));
+			map.put("close_date" , sdf.format(close_date));
+
+		}
+		return list;
 	}
 	//모임 검색
 	public List<BookclubDTO>searchBookclub(String category, String keyword)throws Exception{
+		List<BookclubDTO> list = dao.searchBookclub(category, keyword);
+
 		return dao.searchBookclub(category, keyword);
 	}
 	
@@ -153,7 +164,6 @@ public class ManagerService {
 		dao.addReportBookroom(room_id);
 
 	}
-	
 	
 	// 날짜 형식 변경
 	public String getDate(String string) throws Exception {
