@@ -269,5 +269,12 @@ public class BookclubDAO {
 	public ExpirationDTO selectExpirationById(int room_id) throws Exception{
 		return session.selectOne("clubMapper.selectExpirationById", room_id);
 	}
+
+	// 검색페이지 북클럽 검색
+	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
+		return session.selectList("clubMapper.searchByTitle", keyword);
+	}
+	
+
 }
 

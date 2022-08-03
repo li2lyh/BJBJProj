@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bjbj.member.MemberDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import oracle.net.aso.m;
 
 @RequestMapping(value = "/books")
 @Controller
@@ -20,6 +25,8 @@ public class BookController {
 
 	@Autowired
 	private BookService service;
+	@Autowired
+	private HttpSession session;
 	
 	// 베스트셀러 페이지로 이동
 	@RequestMapping(value = "/bestseller")
@@ -46,6 +53,12 @@ public class BookController {
 		Map<String, Object> mapEssay = mapper.readValue(essayList, Map.class);
 		model.addAttribute("essay", mapEssay.get("item"));
 		
+		// 로그인한 경우 찜한 도서는 이미지 변경
+		if (session.getAttribute("loginSession") != null) {
+			List<LikeBookDTO> likeBookList = service.likeBook(((MemberDTO)session.getAttribute("loginSession")).getEmail());
+			model.addAttribute("likeBookList", likeBookList);
+		}
+		
 		return "/books/bestseller";
 	}
 	
@@ -67,6 +80,7 @@ public class BookController {
 	@RequestMapping(value = "/likes")
 	public String likeBook(LikeBookDTO dto) throws Exception {
 		System.out.println(dto.toString());
+		dto.setEmail(((MemberDTO)session.getAttribute("loginSession")).getEmail());
 		int rs = service.addLikeBook(dto);
 		if (rs > 0) {
 			return "success";
@@ -100,13 +114,6 @@ public class BookController {
 				
 		return map.get("item");
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	@ExceptionHandler
 	public String errorHandler(Exception e) {

@@ -38,20 +38,19 @@ h4 {
 .card {
 	margin-top: 50px;
 	margin-bottom: 50px;
+	width:250px;
 }
 
 .card-body {
 	text-align: center;
-	padding-bottom: 0;
+	padding-bottom: 0px;
 }
 
-.cardBox {
-	size: 80%;
-}
 
 .card-img-top {
 	height: 15rem;
 	object-fit: fill;
+	
 }
 
 .card-text {
@@ -70,11 +69,17 @@ h4 {
 	border-radius: 10px;
 	color: white;
 	text-decoration: none;
-	margin-left: 68%;
+	margin-left: 63%;
 	position: absolute;
-	top: 85%;
+	top: 86%;
 	object-fit: cover;
 }
+.likeBox{
+position: absolute;
+	bottom:5px;
+	right:2px;
+}
+
 
 #cardImg {
 	position: relative;
@@ -97,6 +102,28 @@ h4 {
 	border: none;
 	background-color: white;
 }
+.titleBox{
+display: block;
+overflow: hidden;
+text-overflow: ellipsis;
+ white-space: normal;
+ line-height: 1.2;
+ word-wrap: break-word;
+ display: -webkit-box;
+   -webkit-line-clamp: 1 ;
+   -webkit-box-orient: vertical;
+}
+.titleBox h5{
+font-weight: bold;
+}
+.titleBar{
+text-align:center;
+}
+.informBox{
+padding-top:20px;
+text-align:left;
+}
+
 
 </style>
 
@@ -116,9 +143,13 @@ h4 {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col">
+			<div class="col-9">
 				<h4>모집 중 클럽</h4>
 			</div>
+			<div class="col-3" id="btnBox">
+				<button type="button" class="btn btn-warning btn-lg" id="btnClass">모집글 쓰기</button>
+			</div>
+		
 		</div>
 
 		<div class="row">
@@ -130,7 +161,7 @@ h4 {
 				<c:forEach items="${list}" var="dto">
 					<c:if test="${dto.room_status == '모집중' }">
 						<div class="col-6 col-lg-3 d-flex justify-content-center cardBox">
-							<div class="card" style="width: 18rem;">
+							<div class="card">
 								<a id="cardImg" href="/club/detailView?room_id=${dto.room_id}" name="${dto.room_id}"> 
 									<c:choose>
 										<c:when test="${dto.book_cover eq null}">
@@ -140,15 +171,27 @@ h4 {
 											<img src="${dto.book_cover}" class="card-img-top">
 										</c:otherwise>
 									</c:choose>
+									
 									<div id="tagBox">${dto.tag}</div>
 								</a>
 								<div class="card-body">
 									<!-- 찜 적용 -->
 									<div class="row">
-										<div class="col-8 d-flex justify-content-end">
-											<h5 class="card-text">${dto.room_title}</h5>
+										<div class="col-12  titleBox">
+											<h5 class="card-text titleBar">${dto.room_title}</h5>
 										</div>
-										<div class="col-4">
+										
+										
+										<div class="col-12 informBox">
+											<p class="inform">&#183; ${dto.open_date} 시작 <br>
+												&#183; 인원 ${dto.room_current} / ${dto.room_people} 명 
+												<br>&#183; 주 ${dto.meet_week}회 모임 
+												<br>&#183; ${dto.place}지역</p>
+										</div>
+							
+									</div>
+									
+									<div class="col likeBox">
 											<!-- checkLike : 해당 모임을 찜한건지 아닌거지 여부를 담아줄 변수 -->
 											<c:set var="checkLike" value="false" />
 											<!-- 찜 리스트를 반복문 돌리며 해당 모임이 찜한건지 아닌지 여부만 checkLike변수에 저장 -->
@@ -178,12 +221,6 @@ h4 {
 												</c:if>
 											</div>
 										</div>
-										<div class="col-12 p-3">
-											<p class="inform">${dto.open_date}시작 /
-												${dto.room_people}명 / 주 ${dto.meet_week}회 / ${dto.place}지역</p>
-										</div>
-									</div>
-									<!-- 찜 적용 끝-->
 								</div>
 							</div>
 						</div>
@@ -192,17 +229,11 @@ h4 {
 			</c:if>
 		</div>
 
-		<div class="row">
-			<div class="col" id="btnBox">
-				<button type="button" class="btn btn-secondary btn-lg" id="btnClass">모집
-					글 쓰기</button>
-			</div>
-		<div class=footer>
+<div class=footer>
 		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	</div>
-		
-		
-		</div>
+
+
 	</div>
 	<script>
 		// 모임 찜 하기

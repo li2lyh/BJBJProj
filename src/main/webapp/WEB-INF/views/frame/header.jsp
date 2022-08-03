@@ -135,8 +135,9 @@ input.underlineSearch:focus {
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
-#btnClubBoard:hover{
-cursor:pointer;
+
+#btnClubBoard:hover {
+	cursor: pointer;
 }
 /* menuBox */
 .navBox-nonType .menuBox div {
@@ -309,12 +310,14 @@ cursor:pointer;
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
+				<form action="/search" method="get" id="searchForm">
 				<div
 					class="d-none d-md-block col-2 d-flex justify-content-between p-0">
-					<input type="text" class="underlineSearch"> <img
+					<input type="text" class="underlineSearch" name="text"> <img
 						src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-						id="searchIcon" onclick="javascript:location.href='';">
+						id="searchIcon">
 				</div>
+				</form>
 			</div>
 		</div>
 
@@ -327,27 +330,21 @@ cursor:pointer;
 				<div class="logo 	">
 					<img src="/resources/images/like.png" style="width: 7rem;">
 				</div>
-        	<!-- -------------- 비반응형 : Blank -------------- -->
-			<div class="col-8 p-0 ">
-				<div class="row justify-content-end">
-					<ul class="nav menuBox justify-content-end p-0">
-						<li class="nav-item">
-							<button class="dropbtn">Intro</button>
-						</li>
-						<li class="nav-item dropdown">
-							<button class="dropbtn" id="">&nbspBook&nbsp</button>
-							<div class="dropdown-content">
-								<a href="/books/arrivals">신간도서</a> <a href="/books/bestseller">베스트셀러</a>
-								<a href="/review/board">도서리뷰</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<button class="dropbtn">BookClub</button> <c:if
-								test="${empty loginSession}">
+				<!-- -------------- 비반응형 : Blank -------------- -->
+				<div class="col-8 p-0 ">
+					<div class="row justify-content-end">
+						<ul class="nav menuBox justify-content-end p-0">
+							<li class="nav-item">
+								<button class="dropbtn">Intro</button>
+							</li>
+							<li class="nav-item dropdown">
+								<button class="dropbtn" id="">&nbspBook&nbsp</button>
 								<div class="dropdown-content">
-									<a href="/club/toClub">모집 중인 클럽</a>
+									<a href="/books/arrivals">신간도서</a> <a href="/books/bestseller">베스트셀러</a>
+									<a href="/review/board">도서리뷰</a>
 								</div>
-							</c:if> <c:if test="${not empty loginSession}">
+							</c:if>
+              <c:if test="${not empty loginSession}">
 								<div class="dropdown-content">
 									<a href="/club/toClubList">모집 중인 클럽</a>
 								</div>
@@ -387,20 +384,22 @@ cursor:pointer;
                   
                 </c:when>
 								<c:otherwise>
-                !-- 게스트 상태일 때 -->
+                				<!-- 게스트 상태일 때 -->
+
 									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
-										data-bs-target="#login">클럽 관리</a>
-								</c:otherwise>
-							</c:choose>
-            </div>
-           </li>
-           <li class="nav-item"><a href="/library/map"><button
-									class="dropbtn">Library</button></a></li>
-          </ul>
+											data-bs-target="#login">클럽 관리</a>
+									</c:otherwise>
+								</c:choose>
+							<li class="nav-item">
+								<a href="/library/map"><button class="dropbtn">Library</button></a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
-
-		<script>
+	</div>
+			<script>
 	
 // 주기적인 수신 쪽지 확인
 $(document).ready(function(){
@@ -439,6 +438,17 @@ $(document).ready(function(){
 		window.open(url, name, option);
 	})
 		/****************************************** 검색 버튼 *****************************************/
+		$("#searchIcon").on("click", function(){
+			
+			if($("#underlineSearch").val() == ""){
+				alert("검색어를 입력해주세요");
+				$("#underlineSearch").focus;
+				return false;
+			}
+			
+			$("#searchForm").submit();
+		})
+		
 		
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //

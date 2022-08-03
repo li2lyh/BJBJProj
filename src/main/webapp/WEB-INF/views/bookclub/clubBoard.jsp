@@ -91,6 +91,7 @@ textarea {
 	text-align:right;
 }
 /* 모임내 게시글 */	
+
 .boardBox{
 	border-bottom: 1px solid lightgray;
 	padding-bottom: 10px;
@@ -163,6 +164,7 @@ textarea {
 #calendar-container{
 	margin-bottom:100px;
 }
+
 /*요일*/
 .fc-col-header-cell-cushion {
 	text-decoration: none;
@@ -178,7 +180,7 @@ textarea {
 	font-size:1em;
 	text-decoration: none;
 }
-.fc-daygrid-day-number:hover{
+.fc-daygrid-day-number:hover {
   	font-weight: 600;
 }
 a{
