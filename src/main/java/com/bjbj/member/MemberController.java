@@ -88,33 +88,39 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/kakaoLogin")
 	public String kakaoLogin(String email) throws Exception {
-		MemberDTO dto = Mservice.kakaoLogin(email);
+		MemberDTO dto = Mservice.checkBlack(email); //블랙리스트 확인
 		if (dto != null) {
-			session.setAttribute("loginSession", dto);
-			System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
-
-			// 로그인한 계정의 role 정보
-			if (Bservice.selectRole(email) != null) {
-				RoleDTO roleDTO = Bservice.selectRole(email);
-				session.setAttribute("roleSession", roleDTO);
-
-				// 로그인한 계정의 club 정보
-				if (Bservice.selectOne(roleDTO.getRoom_id()) != null) {
-					BookclubDTO roomDTO = Bservice.selectOne(roleDTO.getRoom_id());
-					session.setAttribute("clubSession", roomDTO);
-				} else {
-					session.setAttribute("clubSession", null);
-				}
-
-			} else {
-				session.setAttribute("roleSession", null);
-			}
-
-			return "success";
+			return "blackList";
 		} else {
-			return "fail";
+			dto = Mservice.kakaoLogin(email);
+			
+			if (dto != null) {
+				session.setAttribute("loginSession", dto);
+				System.out.println(((MemberDTO) session.getAttribute("loginSession")).toString());
+				
+				
+				// 로그인한 계정의 role 정보
+				if( Bservice.selectRole(email) != null) {
+					RoleDTO roleDTO = Bservice.selectRole(email);
+					session.setAttribute("roleSession", roleDTO );
+				
+					// 로그인한 계정의 club 정보
+					if( Bservice.selectOne(roleDTO.getRoom_id()) != null) {
+						BookclubDTO roomDTO = Bservice.selectOne(roleDTO.getRoom_id());
+						session.setAttribute("clubSession", roomDTO);
+					}else {
+						session.setAttribute("clubSession", null );
+					}
+					
+				}else {
+					session.setAttribute("roleSession", null );
+				}
+				
+				return "success";
+			} else {
+				return "fail";
+			}
 		}
-
 	}
 
 	// 쪽지 판별

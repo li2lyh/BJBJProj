@@ -28,6 +28,17 @@
 
 </head>
 <style>
+/*폰트*/
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+   font-family : 'MapoGoldenPier';
+}
 /* ******** 기준 ******** */
 .head-container {
 	font-size: 20px;
@@ -43,7 +54,7 @@
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
-	height: 25rem;
+	height: 23rem;
 }
 /* 모달 body */
 .modal-body {
@@ -58,27 +69,10 @@
 	margin-bottom: 0.5rem;
 }
 
-/* ******** 로그인 모달 ******** */
-#login .modal-dialog {
-	margin-top: 7rem;
-	margin-bottom: 7rem;
-	height: auto;
-	
-}
 
-#login .modal-content {
-	height: 100%;
-	width : 70%;
-	
-	
-}
-
-#login .modal-content .modal-body {
-	margin-top: 1rem;
-	margin-bottom: 2rem;
-	font-size: 1rem;
-	color: #424242;
-}
+/* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
+.etcBox {
+	font-size: 0.85rem;
 
 /* 로그인 버튼 */
 .head-container .btnBox {
@@ -138,12 +132,13 @@ input.underlineSearch:focus {
 	display: none;
 	position: absolute;
 	width: 8.5rem;
-	height: 5rem;
+	height: 5.5rem;
 	min-width: auto;
 	z-index: 1;
 	font-size: 1rem;
 	text-align: center;
 	align-item: center;
+	background : white;
 }
 .navBox-nonType .dropdown-content a {
 	color: black;
@@ -151,6 +146,7 @@ input.underlineSearch:focus {
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
 	text-decoration: none;
+	
 	display: block;
 }
 .navBox-nonType .dropdown-content a:hover {
@@ -158,6 +154,7 @@ input.underlineSearch:focus {
 }
 .navBox-nonType .dropdown:hover .dropdown-content {
 	display: block;
+
 }
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
@@ -203,59 +200,6 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
-			
-				<%-- <div class="res-1">
-				<!-- -------------- 반응형 -------------- -->
-					<!-- -------- 반응형 상단 Nav바 -------- -->
-					<div class="col-3 d-md-none justify-content-start"></div>
-					<!-- -------- 반응형 상단 Logo -------- -->
-					<div class="col-6 d-md-none justify-content-center">logo</div>
-	
-					<!-- -------- 반응형 상단 Content(login/mypage/search -------- -->
-					<!-- -------- 반응형 상단 회원 : 쪽지함/ 비회원 : Login -------- -->
-					<div class="col-1 d-md-none d-flex justify-content-start p-0">
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<!-- 로그인 : 쪽지함 -->
-								쪽지함
-							</c:when>
-							<c:otherwise>
-								<!-- 비로그인 : login -->
-								<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
-									로그인 </a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<!-- -------- 반응형 상단 myBook(마이페이지) -------- -->
-					<div class="col-1 d-md-none d-flex justify-content-start p-0">
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<!-- 로그인 : 마이페이지 -->
-								<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
-							</c:when>
-							<c:otherwise>
-								<!-- 비로그인 : mypage -->
-								<a href="#login" id="myBookBtn" data-bs-toggle="modal"
-									data-bs-target="#login">MyBook</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<!-- -------- 반응형 상단 회원 : 로그아웃/ 비회원 : 회원가입 -------- -->
-					<div class="col-1 d-md-none d-flex justify-content-start p-0">
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<!-- 로그인 : 로그아웃 -->
-								<a href="/member/logout" id="logout">로그아웃</a>
-							</c:when>
-							<c:otherwise>
-								<!-- 비로그인 : 회원가입 -->
-								<a href="/member/toSignUp" id="signUp">회원가입</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<!-- ------------------------------ 반응형 끝 ------------------------------ -->
-				</div> --%>
-
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
 				<div class="d-none d-md-block col-3 d-flex justify-content-start p-0" style="margin-right: 1.9rem;">
@@ -278,7 +222,7 @@ input.underlineSearch:focus {
 					<!-- Modal -->
 					<div class="modal fade" id="login" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-lg modal-dialog-center">
+						<div class="modal-dialog modal-dialog-center">
 							<div class="modal-content">
 								<!-- 모달 타이틀 -->
 								<div class="modal-header">
@@ -320,10 +264,10 @@ input.underlineSearch:focus {
 
 									<div class="btnBox d-flex justify-content-center">
 										<button type="button" class="btn btn-outline-secondary"
-											id="loginBtn">로그인</button>
+											id="loginBtn" style="width: 162px;">로그인</button>
 										<a href="javascript:kakaoLogin();"> <img
 											src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-											alt="카카오 로그인 버튼" />
+											alt="카카오 로그인 버튼" style="height: 40px;">
 										</a>
 										<form action="/member/toKakaoSignUp" method="post">
 											<input type="hidden" id="emailForKakao" value="" name="email">
@@ -337,8 +281,8 @@ input.underlineSearch:focus {
 					</div>
 				</div>
 				<!-- -------------- myBook -------------- -->
-				<div
-					class="d-none d-md-block col-1 d-flex justify-content-start p-0">
+				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+					style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
 							<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
@@ -350,8 +294,8 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- SignUp/LogOut -------------- -->
-				<div
-					class="d-none d-md-block col-1 d-flex justify-content-start p-0">
+				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+						style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
 							<a href="/member/logout" id="logout">로그아웃</a>
@@ -362,16 +306,15 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
-				<form action="/search" method="get" id="searchForm">
-				<div
-					class="d-none d-md-block col-2 d-flex justify-content-between p-0">
-					<input type="text" class="underlineSearch" name="text"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-						id="searchIcon">
-				</div>
-				</form>
-			</div>
-		</div>
+            	<div class="d-none d-md-block col-2 d-flex justify-content-between p-0">
+            		<form action="/search" method="get" id="searchForm">
+               			<input type="text" class="underlineSearch" name="text"> 
+               			<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchIcon">
+            		
+            		</form>
+            	</div>
+         	</div>
+      	</div>
 
 		<!-- -------------- Logo, nav 영역 -------------- -->
 
@@ -379,7 +322,7 @@ input.underlineSearch:focus {
 			<!-- ***** 비반응형 : Logo ***** -->
 			<div class="col-4 p-0 d-flex justify-content-center">
 				<div class="logo 	">
-					<img src="/resources/images/like.png" style="width: 7rem;">
+					<a href="/"><img src="/resources/images/logo.png" style="width: 10rem;"></a>
 				</div>
 			</div>
 
@@ -387,7 +330,8 @@ input.underlineSearch:focus {
 			<div class="col-8 p-0 ">
 				<div class="row justify-content-end">
 					<ul class="nav menuBox justify-content-end p-0">
-						<!--  ---------- 관리자 아이디로 로그인 시 Admin 드롭버튼 보이기 -------- -->
+          
+					<!--  ---------- 관리자 아이디로 로그인 시 Admin 드롭버튼 보이기 -------- -->
 						<c:choose>
 							<c:when test="${loginSession.admin eq 'Y'}">
 								<li class="nav-item dropdown">
@@ -402,7 +346,9 @@ input.underlineSearch:focus {
 								</li>
 							</c:when>
 						</c:choose>
+
 						<!-- 관리자 로그인 시 끝  -->
+
 						<li class="nav-item">
 							<a href="/toIntroduce">
 								<button	class="dropbtn">Intro</button>
@@ -446,7 +392,7 @@ input.underlineSearch:focus {
 										<c:if
 											test="${roleSession.role == 'L' && clubSession.room_status == '모집중'}">
 											<a href="/club/myclub?room_id=${roleSession.room_id}"
-												id="btnMyclub">모집중인 클럽 관리</a>
+												id="btnMyclub">모집클럽 관리</a>
 										</c:if>
 	
 										<!-- 리더이면서 클럽이 진행중일 때 -->
@@ -470,12 +416,26 @@ input.underlineSearch:focus {
 							</a>
 						</li>
 					</ul>
-
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="empty"></div>
-			<script>
-	
+  <div class="empty"></div>
+		<script>
+		/****************************************** 검색 기능 ************************************/
+		
+		/****************************************** 검색 버튼 *****************************************/
+      $("#searchIcon").on("click", function(){
+         
+         if($("#underlineSearch").val() == ""){
+            alert("검색어를 입력해주세요");
+            $("#underlineSearch").focus;
+            return false;
+         }
+         
+         $("#searchForm").submit();
+      })   	
+		
 		/****************************************** 쪽지함 *****************************************/
 		// 주기적인 수신 쪽지 확인
 		$(document).ready(function(){
@@ -514,18 +474,6 @@ input.underlineSearch:focus {
 		let option = "width=700, height=600, left=600, top=100";
 		window.open(url, name, option);
 	})
-
-		/****************************************** 검색 버튼 *****************************************/
-		$("#searchIcon").on("click", function(){
-			
-			if($("#underlineSearch").val() == ""){
-				alert("검색어를 입력해주세요");
-				$("#underlineSearch").focus;
-				return false;
-			}
-			
-			$("#searchForm").submit();
-		})
 
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //

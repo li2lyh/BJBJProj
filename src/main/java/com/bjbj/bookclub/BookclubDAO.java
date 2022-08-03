@@ -133,6 +133,7 @@ public class BookclubDAO {
 		return session.selectList("roleMapper.selectRoleByRoom", room_id);
 	}
 
+
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception{
 		session.insert("boardMapper.insertBoard", dto);
@@ -271,9 +272,9 @@ public class BookclubDAO {
 	}
 
 	// 검색페이지 북클럽 검색
-	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
-		return session.selectList("clubMapper.searchByTitle", keyword);
-	}
+	   public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
+	      return session.selectList("clubMapper.searchByTitle", keyword);
+  }
 	
 
 }
