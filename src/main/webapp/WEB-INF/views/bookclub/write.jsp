@@ -12,57 +12,99 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>BookClub 모집</title>
 <style>
-#room_people {
-	width: 25%;
+.container{
+	margin-left: 500px;
 }
-
-#meet_week {
-	width: 25%;
-}
-
-#place {
-	width: 25%;
-}
-
-#open_date {
-	
-}
-
-#close_date {
-	
-}
-
-.writing {
-	text-align: right;
-}
-
-h3 {
-	margin-bottom: 50px;
-}
-
-.row:not(#head) {
-	margin-bottom: 20px;
-}
-
-.radioBox {
-	margin: auto;
-}
-
-#content {
-	height: 200px;
-	resize: none;
-}
-
 #head {
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 	margin: 0;
 }
-
+h3 {
+	margin-bottom: 50px;
+	width: 1000px;
+}
+/* 콘텐츠 - 제목 */
+.writing {
+	text-align: right;
+}
+/* 모임제목 */
+#room_title{
+	margin-top: -7px;
+}
+/* 파일 input창 */
+#fileBox{
+	margin-top: -7px;
+}
+#btnSearch{
+	margin-left: 70px;
+}
+/* 모임장소 - radio */
+#metpl{
+	margin-top: -3px;
+}
+/* 모임횟수 - select */
+#meet_week {
+	width: 15.5%;
+	margin-top: -7px;
+}
+/* 모집인원 - select */
+#room_people {
+	width: 15.5%;
+	margin-top: -7px;
+}
+/* 모임지역 - select */
+#place {
+	width: 15.5%;
+	margin-top: -7px;
+}
+/* 모임기간 */
+.date{ 
+	margin-bottom: 0px;
+}
+#open_date{
+	width: 21%;
+	margin-top: -7px;	
+	text-align: center;
+}
+#close_date{
+	width: 21%;
+	margin-top: -7px;	
+	text-align: center;
+	margin-left: -10px;
+}
+#slashBox{
+	width: 60px;
+	margin-top: -15px;
+	margin-left: -570px;
+	font-size: 30px;
+}
+/* 줄 간격 */
+.row:not(#head) {
+	margin-bottom: 20px;
+}
+/* 원형선택 간격 */
+.radioBox {
+	margin: auto;
+}
+/* 모집상세 */
+#room_detail{
+	margin-top: 3px;
+	resize:none;
+	width:381px;
+}
+/* 모집 기간은 등록일로부터 2주입니다 */
 #p1 {
 	margin-top: 15px;
 }
-
+/* 버튼 */
+.btnBox{
+	margin-right: 310px;
+}
+#toCancel{
+	width: 50px;
+}
+/* 모달 */
 #modal-body p{
   display:block;
   overflow: hidden;
@@ -75,23 +117,18 @@ h3 {
 cursor:pointer;
 font-weight:bold;
 }
-#etc{
-font-weight:bold;
-}
 #keyword{
 width:70%;
 }
-#room_detail{
-resize:none;
+#etc{
+font-weight:bold;
 }
-
-
 </style>
 </head>
 <body>
 	<form action="/club/write" id="submitForm" method="post"
 		enctype="multipart/form-data">
-		<div class="container">
+		<div class="container justify-content-center">
 
 			<div class="row">
 				<div class="col">
@@ -110,25 +147,24 @@ resize:none;
 				<div class="col-3 writing">
 					<label for="title" class="form-label">모임 제목</label>
 				</div>
-				<div class="col">
-					<input type="text" class="form-control" id="room_title"	name="room_title" placeholder="제목을 입력하세요.">
+				<div class="col" id="roomName">
+					<input type="text" style="width:381px;" class="form-control" id="room_title"	name="room_title" placeholder="제목을 입력하세요.">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-3 writing">
 					<label for="file" class="form-label">도서 이름</label>
 				</div>
-				<div class="col">
-
+				<div class="col" id="fileBox">
 					<div class="row m-0">
-            <div class="col-3 p-0">
-            <input type="text" id="book_title" name="book_title" class="form-control" readonly>
-            <input type="hidden" id="itemId" name="itemId" value="">
-            <input type="hidden" id="book_cover" name="book_cover" value="">
-            </div>		
-            <div class="col-9">
-            <button type="button" id="btnSearch" class="btn btn-warning">검색</button>
-            </div>	
+			            <div class="col-3 p-0">
+				            <input type="text" style="width:320px;" id="book_title" name="book_title" class="form-control" readonly>
+				            <input type="hidden" id="itemId" name="itemId" value="">
+				            <input type="hidden" id="book_cover" name="book_cover" value="">
+			            </div>		
+			            <div class="col-9">
+				            <button type="button" id="btnSearch" class="btn btn-warning">검색</button>
+			            </div>	
 					</div>
 
 				</div>
@@ -137,10 +173,10 @@ resize:none;
 				<div class="col-3 writing">
 					<label for="content" class="form-label">모임 장소</label>
 				</div>
-				<div class="col radioBox">
-					<input type="radio" class="tag" name="tag" value="온라인">온라인
-					<input type="radio" class="tag" name="tag" value="오프라인" checked>오프라인
-					<input type="radio" class="tag" name="tag" value="온/오프라인">온/오프라인
+				<div class="col radioBox" id="metpl" style="font-size: 20px;">
+					<input type="radio" class="tag" name="tag" value="온라인"> 온라인
+					<input type="radio" class="tag" name="tag" value="오프라인" checked> 오프라인
+					<input type="radio" class="tag" name="tag" value="온/오프라인"> 온/오프라인
 				</div>
 			</div>
 			<div class="row">
@@ -191,21 +227,23 @@ resize:none;
 					</select>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row date" style="margin-bottom: 0px;">
 				<div class="col-3 writing">
-					<label for="content" class="form-label">모임 기간</label>
+					<label for="content" class="form-label" >모임 기간</label>
 				</div>
 				<div class="col">
 					<input type="text" id="open_date" class="form-control"
-						name="open_date" value="" />
+						name="open_date" value="">
 				</div>
-
+				<div class="col-1" id="slashBox">
+					<p class="room_current">~</p>
+				</div>
 				<div class="col">
 					<input type="text" id="close_date" class="form-control"
-						name="close_date" value="" />
+						name="close_date" value="">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 writing">
 					<label for="content" class="form-label">모집 상세</label>
 				</div>
@@ -215,8 +253,8 @@ resize:none;
 				</div>
 			</div>
 			<div class="row">
-				<div class="col d-flex justify-content-end btnBox">
-					<p id="p1">* 모집 기간은 등록일로부터 2주입니다</p>
+				<div class="col d-flex justify-content-center btnBox">
+					<p id="p1">* 모집 기간은 등록일로부터 2주입니다.</p>
 					<button type="button" class="btn btn-secondary m-1 btn-lg"
 						id="toCancle">취소</button>
 					<button type="button" class="btn btn-primary m-1 btn-lg" id="write">등록</button>

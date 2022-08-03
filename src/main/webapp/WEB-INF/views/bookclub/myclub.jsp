@@ -17,124 +17,117 @@
 <title>BookClub 모집</title>
 
 <style>
-.r1 {
-	margin-bottom: 10px;
-}
-
 #head {
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
-
 h4 {
 	text-align: left;
 }
-
+/* 버튼 */
 .btnBox {
 	text-align: right;
-	padding: 30px;
-	padding-bottom: 0px;
 }
-
+#btnBack{
+	margin: 0px;
+	width: 120px;
+}
+#delete{
+	margin: 0px;
+	width: 120px;
+}
+/* 책 이미지 */
 .imgBox {
-	padding: 30px;
-}
-
-.contentBox {
-	padding: 20px;
-	padding-left: 0;
-}
-
-#titleDiv {
-	margin-bottom: 30px;
-}
-
-#meetDiv {
-	margin-bottom: 30px;
-}
-
-#detail {
-	width: 100%;
-	height: 140px;
-	border: none;
-}
-
-textarea {
-	resize: none;
-}
-
-#mydesc {
-	width: 100%;
-	border: none;
-}
-
-table, td, th {
-	border-collapse: collapse;
-	border-bottom: 1px solid lightgray;
-}
-
-td, th {
-	padding: 10px;
-}
-
-#tilde {
-	font-size: 25px;
-	margin: none;
-}
-
-#con {
-	padding: 5px;
-}
-
-#con2 {
-	padding: 8px;
-}
-
-#room_title {
-	height: 50px;
-	font-size: larger;
-	font-weight: 700;
-}
-
-#open_date {
-	margin-left: 0px;
-	margin-right: 0px;
-}
-
-.modal {
-	position: fixed;
-	top: 100%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.currentBox {
-	text-align: center;
 	padding: 0px;
-}
-
-.room_current {
-	font-size: x-large;
-}
-
-#room_people {
-	font-size: x-large;
-}
-
-#peopleBox {
-	text-align: center;
-	padding: 0px;
-	width: 50px;
-}
-
-#slashBox {
-	width: 20px;
 }
 .imgBox img{
 	width:80%;
 	height:80%;
 }
-.dateBox{
+/* 콘텐츠 */
+.contentBox {
+	padding: 0px;
+}
+#titleDiv {
+	margin-bottom: 20px;
+}
+#meetDiv {
+	margin-bottom: 10px;
+}
+#detail {
+	width: 100%;
+	height: 140px;
+	border: none;
+	resize: none;
+}
+textarea {
+	resize: none;
+}
+#mydesc {
+	width: 100%;
+	border: none;
+}
+/* 콘텐츠 - 모임명 */
+#room_title {
+	height: 50px;
+	font-size: larger;
+	font-weight: 700;
+}
+/* 콘텐츠 - 모집인원 */
+#recruit{
+	height: 32px;
+}
+#room_current{
+	padding-right: 0px;
+	margin-top: -3px;
+	width: 30px;
+}
+#slashBox{
+	width: 30px;
+	margin-top: -3px;
+	margin-left: -10px;
+}
+#peopleBox{
+	width: 30px;
+	margin-top: -3px;
+	margin-left: -10px;
+}
+#num{
+	width: 30px;
+	margin-top: 1px;
+	margin-left: -10px;
+}
+/* 모임기간 */
+#open_date {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+/* 참여 횟수 */
+#part{
+	height: 40px;
+}
+/* 신청인원 테이블 */
+#app{
+	border-bottom: 1px solid lightgray;
+}
+table, td, th {
+	border-collapse: collapse;
+	border-bottom: 1px solid lightgray;
+}
+td, th {
+	padding: 10px;
+}
+/* 책 이미지 */
+.imgBox img{
+	width:80%;
+	height:80%;
+}
+/* 소개글 보기 모달 */
+.modal {
+	position: fixed;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 </style>
 
@@ -159,9 +152,6 @@ td, th {
 				<div class="col">
 					<h4>MyClub</h4>
 				</div>
-			</div>
-
-			<div class="row">
 				<div class="col btnBox">
 					<button type="button" id="btnBack" class="btn btn-secondary">뒤로가기</button>
 				
@@ -170,32 +160,37 @@ td, th {
 				</c:if>
 				</div>
 			</div>
-
-
-
 			<div class="row">
 				<div class="col-4 imgBox">
 					<c:choose>
 						<c:when test="${dto.book_cover eq null}">
-							<img src="/resources/images/noImg.png" class="card-img-top">
+							<center><img src="/resources/images/noImg.png" class="card-img-top"></center>
 						</c:when>
 						<c:otherwise>
-							<img src="${dto.book_cover}" class="card-img-top">
+							<center><img src="${dto.book_cover}" class="card-img-top"></center>
 						</c:otherwise>
 					</c:choose>
 				</div>
 
 				<div class="col-8 contentBox">
 					<div id="titleDiv" class="row r1">
-						<h2>${dto.room_title}</h2>
+						<h1>${dto.room_title}</h1>
 					</div>
-
-					<div class="row r1">
+					
+					<div class="row">
 						<div class="col-2" id="con">
-							<h5>인원 :</h5>
+							<h5>도서명 :</h5>
 						</div>
-						<div class="col-1 currentBox">
-							<p class="room_current" id="room_current">${dto.room_current}
+						<div class="col-10" id="con">
+							<h5>${dto.book_title}</h5>
+						</div>
+					</div>
+					<div class="row" id="recruit">
+						<div class="col-2" id="con">
+							<h5>모집인원 :</h5>
+						</div>
+						<div class="col-1 currentBox"  id="room_current">
+							<p class="room_current">${dto.room_current}
 						</div>
 						<div class="col-1 currentBox" id="slashBox">
 							<p class="room_current">/</p>
@@ -203,34 +198,21 @@ td, th {
 						<div class="col-2" id="peopleBox">
 							<p id="room_people">${dto.room_people}</p>
 						</div>
-
-						<div class="col-1" id="con">
+						<div class="col-1" id="num">
 							<h5>명</h5>
 						</div>
-
 					</div>
 					
-					
-					<div class="row r1">
-						<div class="col-2" id="con">
-							<h5>도서명 :</h5>
-						</div>
-						<div class="col-10 dateBox" id="con">
-							<h5>${dto.book_title}</h5>
-	
-					</div>
-					
-
-					<div class="row r1">
+					<div class="row">
 						<div class="col-2" id="con">
 							<h5>모임 기간 :</h5>
 						</div>
 						<div class="col-10 dateBox" id="con">
 							<h5>${dto.open_date} ~ ${dto.close_date}</h5>
 	
+						</div>
 					</div>
-
-					<div class="row r1">
+					<div class="row">
 						<div class="col-2" id="con">
 							<h5>장소 :</h5>
 						</div>
@@ -239,7 +221,7 @@ td, th {
 						</div>
 					</div>
 
-					<div class="row r1">
+					<div class="row">
 						<div class="col-2" id="con">
 							<h5>참여 방식 :</h5>
 						</div>
@@ -248,8 +230,8 @@ td, th {
 						</div>
 					</div>
 
-					<div class="row r1">
-						<div class="col-2" id="con">
+					<div class="row">
+						<div class="col-2" id="part">
 							<h5>참여 횟수 :</h5>
 						</div>
 						<div class="col-10" id="con">
@@ -258,23 +240,22 @@ td, th {
 
 					</div>
 
-					<div class="row r1">
-						<div class="col" id="con">
+					<div class="row">
+						<div class="col" id="detail">
 							<p>${dto.room_detail}</p>
 						</div>
 					</div>
-
 				</div>
-			</div>
-			</div>
-			<div class="row">
+			</div>	
+			
+			
+			<div class="row" id="app">
 				<h4>신청 인원</h4>
 			</div>
 			<div class="row">
 				<table style="text-align: center;">
 					<thead>
 						<tr>
-
 							<th scope="col" class="thTitle">이메일</th>
 							<th scope="col" class="thTitle">닉네임</th>
 							<th scope="col" class="thTitle">소개글</th>
@@ -326,7 +307,7 @@ td, th {
 	</div>
 	
 	
-	</div>
+	
 			<!-- 소개글 보기 modal -->
 			<div class="modal" id="myModal" tabindex="-1">
 				<div class="modal-dialog">

@@ -296,7 +296,7 @@ public class BookclubController {
 		System.out.println("방 멤버 : " + roleList.toString());
 		model.addAttribute("member",roleList);
 		
-		
+
 		// 현재 접속한 계정이 리더인가?
 		String role = service.selectRole(id).getRole();
 		System.out.println("해당 계정 역할 :" + role);

@@ -174,11 +174,6 @@ public class BookclubService {
 	public void insertReport(ReportDTO reportDTO) throws Exception {
 		dao.insertReport(reportDTO);
 	}
-
-	// room_id 에 따른 닉네임 리스트
-	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
-		return dao.selectNickByRoom(room_id);
-	}
 	
 	//bookroom 삭제 (by room_id)
 		public void deleteBookroom(int room_id) throws Exception{
