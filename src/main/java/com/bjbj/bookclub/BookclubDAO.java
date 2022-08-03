@@ -132,7 +132,6 @@ public class BookclubDAO {
 	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception{
 		return session.selectList("roleMapper.selectRoleByRoom", room_id);
 	}
-	
 
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception{
