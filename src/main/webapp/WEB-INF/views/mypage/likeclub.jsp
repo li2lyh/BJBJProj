@@ -135,7 +135,7 @@ th, td{
 	  						</c:if>
 						</tbody>
 					</table>
-					<div class="row p-0 m-0"">
+					<div class="row p-0 m-0">
 						<div class="col d-flex justify-content-end p-0 m-0">
 							<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
 						</div>
