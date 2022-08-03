@@ -144,6 +144,7 @@ div {
 		<div class="row genreRow">
 			<div class="col-12">종합도서</div>
 		</div>
+		${likeBookList}
 		<!-- 갤러리 형식으로 보기 -->
 		<div id="bookPhotoAll" class="carousel carousel-dark slide bookList"
 			data-bs-ride="carousel">
@@ -158,7 +159,19 @@ div {
 									src="${item.cover}"></a>
 							</div>
 							<div class="likeBox">
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+									<c:if test="${checkLike}">
+									
+									
+									</c:if>
+									<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+									</c:if>
+								</c:forEach>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
@@ -920,11 +933,11 @@ div {
 						, book_title: item.children('input.book_title').val()
 						, book_author: item.children('input.book_author').val()
 						, book_cover: item.children('input.book_cover').val()
-						, email: "a"
 					}
 					, success: function(data){
 						if(data === "success"){
 							alert("선택한 책을 찜했습니다.")
+							location.href = "/books/bestseller";
 						} else {
 							alert("에러가 발생하여 요청이 처리되지 않았습니다.")
 						}

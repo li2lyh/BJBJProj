@@ -122,51 +122,49 @@ div th, td{
 						</div>
 					</div>
 				</div>
-	
-				<!-- 찜 독서 모임 -->
-				<div class="col-9 p-4">
-					<div class="row">
-						<div class="d-flex justify-content-center p-2">
-							<h4>찜 독서 모임</h4>
-						</div>
-						<div class="p-0">신청을 원하시면 원하시는 모임의 이름을 누르면, 상세페이지로 넘어갑니다.</div>
-						<div class="table-container p-0"">
-							<table class="table">
-								<thead>
-									<tr class="table-secondary">
-										<th scope="col"><input type="checkbox" id="all"></th>
-										<th scope="col">책</th>
-										<th scope="col">모임이름</th>
-										<th scope="col">모집 기간</th>
-										<th scope="col">모임 기간</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:if test="${list.size() == 0}">
-										<tr>
-											<td colspan="5">
-												찜한 독서 모임이 없습니다.
-											</td>
-										</tr>
-									</c:if>
-									<c:if test="${list.size() > 0}">							
-			  							<c:forEach items="${list}" var="dto">
-			  								<tr>
-				  								<td><input type="checkbox" class="deleteNo" id="deleteNo" name="room_id" value="${dto.room_id}"></td>
-				  								<td>${dto.book_title}</td>
-				  								<td class="fw-bolder"><a href="/club/detailView?room_id=${dto.room_id}">${dto.room_title}</a></td>
-				  								<td>~ ${dto.recruit_end}</td>
-				  								<td>${dto.open_date} ~ ${dto.close_date}</td>
-			  								</tr>
-			  							</c:forEach>
-			  						</c:if>
-								</tbody>
-							</table>
-						</div>
-						<div class="row p-0 m-0"">
-							<div class="col d-flex justify-content-end p-0 m-0">
-								<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
-							</div>
+			</div>
+
+			<!-- 찜 독서 모임 -->
+			<div class="col-8 p-4">
+				<div class="row">
+					<div class="d-flex justify-content-center p-2">
+						<h4>찜 독서 모임</h4>
+					</div>
+					<div class="p-0">신청을 원하시면 원하시는 모임의 이름을 누르면, 상세페이지로 넘어갑니다.</div>
+					<table class="table">
+						<thead>
+							<tr class="table-secondary">
+								<th scope="col"><input type="checkbox" id="all"></th>
+								<th scope="col">책</th>
+								<th scope="col">모임이름</th>
+								<th scope="col">모집 기간</th>
+								<th scope="col">모임 기간</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${list.size() == 0}">
+								<tr>
+									<td colspan="5">
+										찜한 독서 모임이 없습니다.
+									</td>
+								</tr>
+							</c:if>
+							<c:if test="${list.size() > 0}">							
+	  							<c:forEach items="${list}" var="dto">
+	  								<tr>
+		  								<td><input type="checkbox" class="deleteNo" id="deleteNo" name="room_id" value="${dto.room_id}"></td>
+		  								<td>${dto.book_title}</td>
+		  								<td class="fw-bolder"><a href="/club/detailView?room_id=${dto.room_id}">${dto.room_title}</a></td>
+		  								<td>~ ${dto.recruit_end}</td>
+		  								<td>${dto.open_date} ~ ${dto.close_date}</td>
+	  								</tr>
+	  							</c:forEach>
+	  						</c:if>
+						</tbody>
+					</table>
+					<div class="row p-0 m-0">
+						<div class="col d-flex justify-content-end p-0 m-0">
+							<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
 						</div>
 					</div>
 				</div>
