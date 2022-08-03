@@ -133,10 +133,7 @@ public class BookclubDAO {
 		return session.selectList("roleMapper.selectRoleByRoom", room_id);
 	}
 	
-	//room_id 로 해당 멤버 닉네임 출력 (윤선)
-	public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
-		return session.selectList("roleMapper.selectNickByRoom" , room_id);
-	}
+	
 
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception{
@@ -274,5 +271,12 @@ public class BookclubDAO {
 	public ExpirationDTO selectExpirationById(int room_id) throws Exception{
 		return session.selectOne("clubMapper.selectExpirationById", room_id);
 	}
+
+	// 검색페이지 북클럽 검색
+	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
+		return session.selectList("clubMapper.searchByTitle", keyword);
+	}
+	
+
 }
 

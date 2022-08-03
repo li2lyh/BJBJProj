@@ -122,114 +122,46 @@
 
 				<!-- 북클럽 모집 컨텐츠 -->
 				<div class="clubCon row d-flex ">
+					
+					
+					<c:choose>
+						<c:when test="${empty clubList}">
+							<p>모집 중인 클럽이 없습니다.</p>
+						</c:when>
+						<c:otherwise>
+							
+							<c:forEach items="${clubList}" var="dto" begin="0" end="3">
+								
+								<c:if test="${dto.room_status == '모집중'}">
 					<div class="col-3 p-0 d-flex justify-content-center">
 						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
+							<img src="${dto.book_cover}" class="card-img-top" alt="...">
 							<div class="card-body">
-								<h4 class="card-title">[위치] Title</h4>
+								<h4 class="card-title">[${dto.place}] ${dto.room_title}</h4>
 								<p class="card-text">
-									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
+									모집기간 : ${dto.recruit_start} ~ ${dto.recruit_end} <br> 
+									모임기간 : ${dto.open_date} ~ ${dto.close_date}
 								</p>
 							</div>
 						</div>
-					</div>
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">[위치] Title</h4>
-								<p class="card-text">
-									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">[위치] Title</h4>
-								<p class="card-text">
-									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">[위치] Title</h4>
-								<p class="card-text">
-									모집기간 : 00.00 ~ 00.00 <br> 모임기간 : 00.00 ~ 00.00
-								</p>
-							</div>
-						</div>
-					</div>
+					</div>	
+								</c:if>
+							</c:forEach>
+							
+						</c:otherwise>
+					
+					</c:choose>
+				
+				
 				</div>
 
 				<!-- 더보기 버튼 -->
 				<div class="moreBtnBox row">
-					<button type="button" class="btn btn-secondary moreBtn" id="">더
+					<button type="button" class="btn btn-secondary moreBtn" id="btnBookclub">더
 						보 기</button>
 				</div>
 			</div>
 
-			<!-- *************************** Review *************************** -->
-			<div class="contentBox reviewBox row d-flex justify-content-center">
-				<!-- 타이틀 -->
-				<div class="reviewTitle row">
-					<div class="col-12">
-						<h1>Review</h1>
-					</div>
-				</div>
-
-				<!-- 북클럽 모집 컨텐츠 -->
-				<div class="reviewCon row d-flex ">
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">책 제목</h4>
-								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">책 제목</h4>
-								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">책 제목</h4>
-								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-3 p-0 d-flex justify-content-center">
-						<div class="card" style="width: 18rem;">
-							<img src="/media/4.jpg" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h4 class="card-title">책 제목</h4>
-								<p class="card-text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- 더보기 버튼 -->
-				<div class="moreBtnBox row">
-					<button type="button" class="btn btn-secondary moreBtn" id="">더
-						보 기</button>
-				</div>
-			</div>
 
 			<!-- *************************** 신간도서 Book *************************** -->
 			<div class="contentBox reviewCon row d-flex justify-content-center ">
@@ -323,6 +255,19 @@
 	</div>
 
 	<script>
+	$("#btnBookclub").on("click", function(){
+		let loginSession = '${loginSession}';
+		
+		if(loginSession == ""){
+			location.href = "/club/toClub";
+		}else{
+			location.href = "/club/toClubList";
+		}
+		
+	})
+	
+	
+	
 	
                     let items = document.querySelectorAll('.carousel-book .carousel-item')
                     items.forEach((el) => {

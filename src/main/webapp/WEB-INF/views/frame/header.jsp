@@ -331,12 +331,14 @@ cursor:pointer;
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
+				<form action="/search" method="get" id="searchForm">
 				<div
 					class="d-none d-md-block col-2 d-flex justify-content-between p-0">
-					<input type="text" class="underlineSearch"> <img
+					<input type="text" class="underlineSearch" name="text"> <img
 						src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-						id="searchIcon" onclick="javascript:location.href='';">
+						id="searchIcon">
 				</div>
+				</form>
 			</div>
 		</div>
 
@@ -409,7 +411,7 @@ cursor:pointer;
                   
                 </c:when>
 								<c:otherwise>
-                !-- 게스트 상태일 때 -->
+                				<!-- 게스트 상태일 때 -->
 									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
 										data-bs-target="#login">클럽 관리</a>
 								</c:otherwise>
@@ -462,6 +464,17 @@ $(document).ready(function(){
 	})
 
 		/****************************************** 검색 버튼 *****************************************/
+		$("#searchIcon").on("click", function(){
+			
+			if($("#underlineSearch").val() == ""){
+				alert("검색어를 입력해주세요");
+				$("#underlineSearch").focus;
+				return false;
+			}
+			
+			$("#searchForm").submit();
+		})
+		
 		
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //
