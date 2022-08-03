@@ -122,5 +122,10 @@
 	<select id="selectExpirationById" parameterType="int" resultType="com.bjbj.bookclub.ExpirationDTO">
 		select * from expiration where room_id = #{room_id}
 	</select>
+	
+	<!-- 검색페이지 북클럽 검색 -->
+   <select id="searchByTitle" parameterType="String" resultType="com.bjbj.bookclub.BookclubDTO">
+      select * from bookroom where book_title like '%'||#{keyword}||'%' and room_status = '모집중'
+   </select>
 
 </mapper>
