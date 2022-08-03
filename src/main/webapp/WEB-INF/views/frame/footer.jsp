@@ -26,7 +26,6 @@
 }
 /* ******** policyBox ******** */
 .policyBox {
-	margin-top: 3.5rem;
 	padding-left: 2rem;
 	padding-right: 2rem;
 }

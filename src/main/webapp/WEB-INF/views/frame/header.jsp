@@ -28,6 +28,17 @@
 
 </head>
 <style>
+/*폰트*/
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+   font-family : 'MapoGoldenPier';
+}
 /* ******** 기준 ******** */
 .head-container {
 	font-size: 20px;
@@ -46,7 +57,7 @@
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
-	height: 25rem;
+	height: 23rem;
 }
 
 /* 모달 body */
@@ -64,13 +75,19 @@
 	margin-bottom: 0.5rem;
 }
 
+/* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
+.etcBox {
+	font-size: 0.85rem;
+
+}
+
 /* 로그인 버튼 */
-.btnBox {
+.head-container .btnBox {
 	height: 2.5rem;
 	margin-top: 1.7rem;
 }
 
-.btnBox button {
+.head-container .btnBox button {
 	margin-left: 0.8rem;
 	margin-right: 0.8rem;
 	width: 12rem;
@@ -79,6 +96,9 @@
 /* Search 창 */
 input.underlineSearch {
 	width: 11rem;
+	height: 1.3rem;
+	padding-left: 0.5rem;
+	padding-right:0.5rem;
 	border: 0;
 	border-bottom: 1px solid #2e2e2e;
 }
@@ -88,8 +108,9 @@ input.underlineSearch:focus {
 }
 
 #searchIcon {
-	width: 2rem;
-	height: 2rem;
+	margin-bottom: 0.3rem;
+	width: 1.3rem;
+	height: 1.3rem;
 }
 
 /* ********비반응형 Nav 박스 ******** */
@@ -127,13 +148,13 @@ input.underlineSearch:focus {
 	display: none;
 	position: absolute;
 	width: 8.5rem;
-	height: 2rem;
+	height: 5.5rem;
 	min-width: auto;
 	z-index: 1;
 	font-size: 1rem;
 	text-align: center;
 	align-item: center;
-	min-width: auto;
+	background : white;
 }
 
 .navBox-nonType .dropdown-content a {
@@ -142,6 +163,7 @@ input.underlineSearch:focus {
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
 	text-decoration: none;
+	
 	display: block;
 }
 
@@ -151,13 +173,11 @@ input.underlineSearch:focus {
 
 .navBox-nonType .dropdown:hover .dropdown-content {
 	display: block;
+
 }
 
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
-}
-#btnClubBoard:hover{
-cursor:pointer;
 }
 
 /* menuBox */
@@ -170,84 +190,54 @@ cursor:pointer;
 	color: black;
 	text-decoration: none;
 } */
+
+/* 쪽지함 */
+
+.letterImg {
+	width: 2rem;
+	height: 2rem;
+	padding: 2px;
+	margin-right: 0.2rem;
+}
+
+
+.letterImg:hover {
+	cursor: pointer;
+}
+
+
 </style>
 
 <body>
-
 	<div class="head-container">
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
-			<!-- -------------- 반응형 -------------- -->
 			<div class="row d-flex justify-content-end">
-				<!-- -------- 반응형 상단 Nav바 -------- -->
-				<div class="col-3 d-md-none justify-content-start"></div>
-				<!-- -------- 반응형 상단 Logo -------- -->
-				<div class="col-6 d-md-none justify-content-center">logo</div>
-
-				<!-- -------- 반응형 상단 Content(login/mypage/search -------- -->
-				<!-- -------- 반응형 상단 회원 : 쪽지함/ 비회원 : Login -------- -->
-				<div class="col-1 d-md-none d-flex justify-content-start p-0">
-					<c:choose>
-						<c:when test="${not empty loginSession}">
-							<!-- 로그인 : 쪽지함 -->
-							쪽지함
-						</c:when>
-						<c:otherwise>
-							<!-- 비로그인 : login -->
-							<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
-								로그인 </a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<!-- -------- 반응형 상단 myBook(마이페이지) -------- -->
-				<div class="col-1 d-md-none d-flex justify-content-start p-0">
-					<c:choose>
-						<c:when test="${not empty loginSession}">
-							<!-- 로그인 : 마이페이지 -->
-							<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
-						</c:when>
-						<c:otherwise>
-							<!-- 비로그인 : mypage -->
-							<a href="#login" id="myBookBtn" data-bs-toggle="modal"
-								data-bs-target="#login">MyBook</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<!-- -------- 반응형 상단 회원 : 로그아웃/ 비회원 : 회원가입 -------- -->
-				<div class="col-1 d-md-none d-flex justify-content-start p-0">
-					<c:choose>
-						<c:when test="${not empty loginSession}">
-							<!-- 로그인 : 로그아웃 -->
-							<a href="/member/logout" id="logout">로그아웃</a>
-						</c:when>
-						<c:otherwise>
-							<!-- 비로그인 : 회원가입 -->
-							<a href="/member/toSignUp" id="signUp">회원가입</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<!-- ------------------------------ 반응형 끝 ------------------------------ -->
-
+		
 
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
-				<div
-					class="d-none d-md-block col-1 d-flex justify-content-start p-0">
+				<div class="d-none d-md-block col-3 d-flex justify-content-start p-0" style="margin-right: 1.9rem;">
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
-							${loginSession.nickname}<span>님 환영합니다!</span>
+							<div class="welcomeBox" style="text-align:right;">
+								<img class="letterImg" src="/resources/images/letter.png">
+								${loginSession.nickname}<span>님 환영합니다!</span>
+							</div>
 						</c:when>
 						<c:otherwise>
-							<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
-								로그인 </a>
+							<div class="login-Part" style="text-align:right;">
+								<a href="#login" data-bs-toggle="modal" data-bs-target="#login" >
+									로그인 </a>
+							</div>	
 						</c:otherwise>
 					</c:choose>
 
 					<!-- Modal -->
 					<div class="modal fade" id="login" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
+						<div class="modal-dialog modal-dialog-center">
 							<div class="modal-content">
 								<!-- 모달 타이틀 -->
 								<div class="modal-header">
@@ -289,10 +279,10 @@ cursor:pointer;
 
 									<div class="btnBox d-flex justify-content-center">
 										<button type="button" class="btn btn-outline-secondary"
-											id="loginBtn">로그인</button>
+											id="loginBtn" style="width: 162px;">로그인</button>
 										<a href="javascript:kakaoLogin();"> <img
 											src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-											alt="카카오 로그인 버튼" />
+											alt="카카오 로그인 버튼" style="height: 40px;">
 										</a>
 										<form action="/member/toKakaoSignUp" method="post">
 											<input type="hidden" id="emailForKakao" value="" name="email">
@@ -306,8 +296,8 @@ cursor:pointer;
 					</div>
 				</div>
 				<!-- -------------- myBook -------------- -->
-				<div
-					class="d-none d-md-block col-1 d-flex justify-content-start p-0">
+				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+					style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
 							<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
@@ -319,8 +309,8 @@ cursor:pointer;
 					</c:choose>
 				</div>
 				<!-- -------------- SignUp/LogOut -------------- -->
-				<div
-					class="d-none d-md-block col-1 d-flex justify-content-start p-0">
+				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+						style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
 							<a href="/member/logout" id="logout">로그아웃</a>
@@ -331,28 +321,45 @@ cursor:pointer;
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
-				<div
-					class="d-none d-md-block col-2 d-flex justify-content-between p-0">
-					<input type="text" class="underlineSearch"> <img
-						src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-						id="searchIcon" onclick="javascript:location.href='';">
-				</div>
-			</div>
-		</div>
+            	<div class="d-none d-md-block col-2 d-flex justify-content-between p-0">
+            		<form action="/search" method="get" id="searchForm">
+               			<input type="text" class="underlineSearch" name="text"> 
+               			<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchIcon">
+            		
+            		</form>
+            	</div>
+         	</div>
+      	</div>
 
 		<!-- -------------- Logo, nav 영역 -------------- -->
 
-		<div
-			class="navBox-nonType row d-none d-md-inline-flex justify-content-between align-items-end">
+		<div class="navBox-nonType row d-none d-md-inline-flex justify-content-between align-items-end">
 			<!-- ***** 비반응형 : Logo ***** -->
 			<div class="col-4 p-0 d-flex justify-content-center">
 				<div class="logo 	">
-					<img src="/resources/images/like.png" style="width: 7rem;">
+					<a href="/"><img src="/resources/images/logo.png" style="width: 10rem;"></a>
 				</div>
-        	<!-- -------------- 비반응형 : Blank -------------- -->
+			</div>
+
+			<!-- -------------- 비반응형 : Blank -------------- -->
 			<div class="col-8 p-0 ">
 				<div class="row justify-content-end">
 					<ul class="nav menuBox justify-content-end p-0">
+					<!--  ---------- 관리자 아이디로 로그인 시 Admin 드롭버튼 보이기 -------- -->
+						<c:choose>
+							<c:when test="${loginSession.admin eq 'Y'}">
+								<li class="nav-item dropdown">
+									<button class="dropbtn">Admin</button>
+									<div class="dropdown-content">
+										<a href="/manager/toAllmember">전체회원</a>
+										<a href="manager/toblacklist">블랙리스트</a>
+										<a href="/manager/toAllclub">전체모임</a>
+										<a href="/manager/toReview">리뷰관리</a>
+										<a href="/manager/toReport">신고</a>
+								   </div>
+								</li>
+							</c:when>
+						</c:choose>
 						<li class="nav-item">
 							<button class="dropbtn">Intro</button>
 						</li>
@@ -364,95 +371,112 @@ cursor:pointer;
 							</div>
 						</li>
 						<li class="nav-item dropdown">
-							<button class="dropbtn">BookClub</button> <c:if
-								test="${empty loginSession}">
-								<div class="dropdown-content">
-									<a href="/club/toClub">모집 중인 클럽</a>
-								</div>
-							</c:if> <c:if test="${not empty loginSession}">
-								<div class="dropdown-content">
-									<a href="/club/toClubList">모집 중인 클럽</a>
-								</div>
-							</c:if> 
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<c:if test="${not empty roleSession}">
-										<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
-									</c:if>
-									<c:if test="${empty roleSession}">
-										<a id="btnClubBoard" id="btnClubBoard"
-											onclick="alert('아직 클럽에 속해있지 않아요.')">내 클럽</a>
-									</c:if>
-                 </c:when>
-								<c:otherwise>
-									<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
-										data-bs-target="#login">내 클럽</a>
-								</c:otherwise>
-							</c:choose>
-              
-              <c:choose>
-								<c:when test="${not empty loginSession}">
-
-									<!-- 리더이면서 클럽이 모집중일 때 -->
-									<c:if
-										test="${roleSession.role == 'L' && clubSession.room_status == '모집중'}">
-										<a href="/club/myclub?room_id=${roleSession.room_id}"
-											id="btnMyclub">모집중인 클럽 관리</a>
-									</c:if>
-
-									<!-- 리더이면서 클럽이 진행중일 때 -->
-									<c:if
-										test="${roleSession.role == 'L' && clubSession.room_status == '진행중'}">
-										<a href="/club/clubBoard" id="btnMyclub">진행 중인 클럽 관리</a>
-									</c:if>
-                  
-                  
-                </c:when>
-								<c:otherwise>
-                !-- 게스트 상태일 때 -->
-									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
-										data-bs-target="#login">클럽 관리</a>
-								</c:otherwise>
-							</c:choose>
-            </div>
-           </li>
-           <li class="nav-item"><a href="/library/map"><button
-									class="dropbtn">Library</button></a></li>
-          </ul>
+							<button class="dropbtn">Club</button> 
+							<div class="dropdown-content">
+								<c:if test="${empty loginSession}">
+										<a href="/club/toClub">모집 중인 클럽</a>
+								</c:if> 
+								<c:if test="${not empty loginSession}">
+										<a href="/club/toClubList">모집 중인 클럽</a>
+								</c:if> 
+								<c:choose>
+									<c:when test="${not empty loginSession}">
+										<c:if test="${not empty roleSession}">
+											<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
+										</c:if>
+										<c:if test="${empty roleSession}">
+											<a id="btnClubBoard" id="btnClubBoard"
+												onclick="alert('아직 클럽에 속해있지 않아요.')">내 클럽</a>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
+											data-bs-target="#login">내 클럽</a>
+									</c:otherwise>
+								</c:choose> 
+								<c:choose>
+									<c:when test="${not empty loginSession}">
+	
+										<!-- 리더이면서 클럽이 모집중일 때 -->
+										<c:if
+											test="${roleSession.role == 'L' && clubSession.room_status == '모집중'}">
+											<a href="/club/myclub?room_id=${roleSession.room_id}"
+												id="btnMyclub">모집클럽 관리</a>
+										</c:if>
+	
+										<!-- 리더이면서 클럽이 진행중일 때 -->
+										<c:if
+											test="${roleSession.role == 'L' && clubSession.room_status == '진행중'}">
+											<a href="/club/clubBoard" id="btnMyclub">진행 중인 클럽 관리</a>
+										</c:if>
+	
+									</c:when>
+									<c:otherwise>
+										<!-- 게스트 상태일 때 -->
+										<a href="#login" id="btnMyclub" data-bs-toggle="modal"
+											data-bs-target="#login">클럽 관리</a>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a href="/library/map">
+								<button	class="dropbtn">Library</button>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
+	</div>
 
 		<script>
-	
-// 주기적인 수신 쪽지 확인
-$(document).ready(function(){
+		/****************************************** 검색 기능 ************************************/
 		
-	console.log("로그인세션 : " + "${loginSession.email}");
-	let loginSession = "${loginSession.email}";	
-	
-		setInterval(function(){
-		if(loginSession != ""){
+		/****************************************** 검색 버튼 *****************************************/
+      $("#searchIcon").on("click", function(){
+         
+         if($("#underlineSearch").val() == ""){
+            alert("검색어를 입력해주세요");
+            $("#underlineSearch").focus;
+            return false;
+         }
+         
+         $("#searchForm").submit();
+      })   
+		
+		
+		/****************************************** 쪽지함 *****************************************/
+		// 주기적인 수신 쪽지 확인
+		$(document).ready(function(){
+				
+			console.log("로그인세션 : " + "${loginSession.email}");
+			let loginSession = "${loginSession.email}";	
 			
-			$.ajax({
-				url:"/member/readYn",
-				type:"post",
-				data:{"email":"${loginSession.email}"},
-				success: function(data){
+				setInterval(function(){
+				if(loginSession != ""){
 					
-					if(data == 'Y'){// 쪽지를 다 읽은 상태 혹은 쪽지가 없을 때
-						$(".letterImg").attr("src","/resources/images/letter.png");
-					}else if(data == 'N'){//안읽은 쪽지가 있을 때
-						console.log(data);
-						$(".letterImg").attr("src","/resources/images/letter3.png");
-					}
-				},
-				error: function(e){
-					console.log(e);
-				}	
-			})
-		}			
-		},5000); // 5000 : 5초
-	});
+					$.ajax({
+						url:"/member/readYn",
+						type:"post",
+						data:{"email":"${loginSession.email}"},
+						success: function(data){
+							
+							if(data == 'Y'){// 쪽지를 다 읽은 상태 혹은 쪽지가 없을 때
+								$(".letterImg").attr("src","/resources/images/letter.png");
+							}else if(data == 'N'){//안읽은 쪽지가 있을 때
+								console.log(data);
+								$(".letterImg").attr("src","/resources/images/letter3.png");
+							}
+						},
+						error: function(e){
+							console.log(e);
+						}	
+					})
+				}			
+				},5000); // 5000 : 5초
+			});
+
 	/* 쪽지함 */
 	$(".letterImg").on("click", function() {
 		let url = "/member//toLetter";
@@ -460,8 +484,8 @@ $(document).ready(function(){
 		let option = "width=700, height=600, left=600, top=100";
 		window.open(url, name, option);
 	})
-
-		/****************************************** 검색 버튼 *****************************************/
+	
+		
 		
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //
@@ -522,6 +546,7 @@ $(document).ready(function(){
 		}
 		/****************************************** 로그인 ******************************************/
 		$("#loginBtn").on("click", function() {
+
 			$.ajax({
 				url : "/member/login",
 				type : "post",
@@ -543,11 +568,13 @@ $(document).ready(function(){
 					console.log(e);
 				}
 			})
+
 		});
 		
 		/****************************************** 카카오 로그인 ******************************************/
 		window.Kakao.init('e2d6408118d8e73e46ae000a50439ccb'); // 발급받은 키 중 javascript키를 사용해준다.
 		console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
 		function kakaoLogin() {
 			window.Kakao.Auth.login({
 				 success: function(authObj){
@@ -555,6 +582,7 @@ $(document).ready(function(){
 					window.Kakao.API.request({
 						url : '/v2/user/me'
 						, success : res => {
+
 							const kakao_token = res.id;
 							
  							$.ajax({
