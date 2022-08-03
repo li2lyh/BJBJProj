@@ -32,82 +32,67 @@
 .head-container {
 	font-size: 20px;
 }
-
 /* ******** 로그인 영역 ******** */
 .loginBox {
 	margin-top: 1rem;
 }
-
 .loginBox a {
 	color: black;
 	text-decoration: none;
 }
-
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
 	height: 25rem;
 }
-
 /* 모달 body */
 .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
-
 .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
-
 .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
-
 /* 로그인 버튼 */
 .btnBox {
 	height: 2.5rem;
 	margin-top: 1.7rem;
 }
-
 .btnBox button {
 	margin-left: 0.8rem;
 	margin-right: 0.8rem;
 	width: 12rem;
 }
-
 /* Search 창 */
 input.underlineSearch {
 	width: 11rem;
 	border: 0;
 	border-bottom: 1px solid #2e2e2e;
 }
-
 input.underlineSearch:focus {
 	outline: none;
 }
-
 #searchIcon {
 	width: 2rem;
 	height: 2rem;
 }
-
 /* ********비반응형 Nav 박스 ******** */
 /* navBox */
 .navBox-nonType {
 	width: 100%;
 }
-
 /* drop down */
 .navBox-nonType .nav {
 	width: auto;
 }
-
 .navBox-nonType .nav-item {
 	width: auto;
 	margin-left: 2rem;
 }
-
 .navBox-nonType .dropbtn {
 	background-color: #ffffff;
 	color: black;
@@ -117,12 +102,10 @@ input.underlineSearch:focus {
 	border: none;
 	text-align: center;
 }
-
 .navBox-nonType .dropdown {
 	position: relative;
 	display: inline-block;
 }
-
 .navBox-nonType .dropbtn+.dropdown-content {
 	display: none;
 	position: absolute;
@@ -135,7 +118,6 @@ input.underlineSearch:focus {
 	align-item: center;
 	min-width: auto;
 }
-
 .navBox-nonType .dropdown-content a {
 	color: black;
 	width: inherit;
@@ -144,22 +126,18 @@ input.underlineSearch:focus {
 	text-decoration: none;
 	display: block;
 }
-
 .navBox-nonType .dropdown-content a:hover {
 	background-color: #ddd;
 }
-
 .navBox-nonType .dropdown:hover .dropdown-content {
 	display: block;
 }
-
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
 #btnClubBoard:hover{
 cursor:pointer;
 }
-
 /* menuBox */
 .navBox-nonType .menuBox div {
 	height: 50%;
@@ -460,7 +438,6 @@ $(document).ready(function(){
 		let option = "width=700, height=600, left=600, top=100";
 		window.open(url, name, option);
 	})
-
 		/****************************************** 검색 버튼 *****************************************/
 		
 		/****************************************** 아이디 기억하기 ************************************/

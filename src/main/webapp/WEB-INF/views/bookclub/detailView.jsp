@@ -19,27 +19,55 @@
 h4 {
 	text-align: left;
 }
+/* 버튼 */
+.boxSize{
+	height: 50px;
+}
 .btnBox {
 	text-align: right;
-	padding: 30px;
+	padding-left: 0px;
+	padding-right: 0px;
+	
 }
+#btnBack{
+	margin: 0px;
+	width: 120px;
+}
+#btnMyclub{
+	margin: 0px;
+	width: 134px;
+}
+#btnReport{
+	margin: 0px;
+	width: 120px;
+}
+#btnRecruit{
+	margin: 0px;
+	width: 120px;
+}
+/* 책 이미지 */
 .imgBox {
-	padding: 30px;
+	padding: 0px;
 }
+.imgBox img{
+	width:80%;
+	height:80%;
+}
+/* 콘텐츠 */
 .contentBox {
-	padding: 30px;
-	padding-left: 0;
+	padding: 0px;
 }
 #titleDiv {
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 #meetDiv {
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 #detail {
 	width: 100%;
 	height: 140px;
 	border: none;
+	resize: none;
 }
 textarea {
 	resize: none;
@@ -48,21 +76,19 @@ textarea {
 	width: 100%;
 	border: none;
 }
-.imgBox img{
-	width:80%;
-	height:80%;
-}
 #book_titleDiv{
-margin-bottom: 20px;
+margin-bottom: 0px;
 }
 #book_title_h{
 font-weight:bold;
 }
+/* 모달 */
 #reportForm{
 	width: 600px;
 }
 .modal-footer{
-    text-align: right;
+	padding-top: 6px;
+	text-align: right;
 }
 #report_con{
     padding-top: 15px;
@@ -73,19 +99,21 @@ font-weight:bold;
 }
 #report_detail{
     width: 300px;
-    height: 200px;
+    height: 150px;
+    resize: none;
 }
-
 /* 빈 하트 */
 #emptyLike{
-	width: 30px;
-	height: 25px;
+	width: 50px;
+	height: 40px;
+	margin-left: 300px;
 }
 
 /* 빨간 하트 */
 #likeImg{
-	width: 30px;
-	height: 25px;
+	width: 50px;
+	height: 40px;
+	margin-left: 300px;
 }
 
 /* 하트 버튼 */
@@ -93,7 +121,13 @@ font-weight:bold;
 	border: none;
 	background-color: white;
 }
+.likeClub{
+	padding-top: 11px;
+}
 
+.footer{
+	border-top: 1px solid lightgray;
+}
 </style>
 
 </head>
@@ -120,11 +154,10 @@ font-weight:bold;
 			<div class="col-4 imgBox">
 				<c:choose>
 					<c:when test="${dto.book_cover eq null}">
-						<img src="/resources/images/noImg.png" class="card-img-top">
+						<center><img src="/resources/images/noImg.png" class="card-img-top"></center>
 					</c:when>
 					<c:otherwise>
-						<img src="${dto.book_cover}" class="card-img-top">
-						
+						<center><img src="${dto.book_cover}" class="card-img-top"></center>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -134,7 +167,7 @@ font-weight:bold;
 				<div class="row">
 					<div class="col-6">
 						<div id="titleDiv">
-							<h3>${dto.room_title}</h3>
+							<h1>${dto.room_title}</h1>
 						</div>
 					</div>
 					<div class="col-6">
@@ -196,7 +229,7 @@ font-weight:bold;
 				</div>
 
 				<div>
-					<textarea id="detail">${dto.room_detail}</textarea>
+					<textarea readonly id="detail">${dto.room_detail}</textarea>
 
 				</div>
 
@@ -204,7 +237,7 @@ font-weight:bold;
 
 		</div>
 
-		<div class="row">
+		<div class="row boxSize">
 			<div class="col btnBox">
 				<button type="button" id="btnBack" class="btn btn-secondary">뒤로가기</button>
 		
@@ -283,7 +316,7 @@ font-weight:bold;
 								<textarea id="report_detail" name="report_detail" placeholder="악의적인 신고는 불이익을 발생할 수 있습니다. 상세한 설명 부탁드립니다."></textarea>
 							</div>
 					</div>
-	                <div class="modal-footer">
+	                <div class="modal-footer" style="padding-top: 6px;">
 		                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportBookroomCancel">신고취소</button>
 	                    <button type="button" class="btn btn-primary" id="btnReportBookroomComplete">신고완료</button>
 	                    <input type="hidden" id="room_id" name="room_id" value="${dto.room_id}">

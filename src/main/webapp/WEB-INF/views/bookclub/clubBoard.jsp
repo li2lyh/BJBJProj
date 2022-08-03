@@ -19,9 +19,6 @@
 <script src='/resources/fullcalendar-5.11.0/lib/main.js'></script>
 <script src='/resources/fullcalendar-5.11.0/lib/locales-all.js'></script>
 
-
-
-
 <title>BookClub 모집</title>
 
 <style>
@@ -29,36 +26,57 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
+.titleA {
+	border-bottom: 1px solid lightgray;
+	text-align: left;
+	margin-bottom: 3px;
+	height: 30px;.
+	text-align: center;
+}
 .titleB {
 	border-bottom: 1px solid lightgray;
 	text-align: left;
-	margin-bottom: 30px;
-	height: 40px;
+	margin-bottom: 10px;
+	height: 30px;.
+	text-align: center;
+}
+.titleC {
+	border-bottom: 1px solid lightgray;
+	text-align: left;
+	margin-bottom: 3px;
+	height: 30px;.
+	text-align: center;
 }
 h4 {
 	text-align: left;
 }
 .btnBox {
 	text-align: right;
-	padding: 30px;
+	padding-bottom: 30px;
 }
+/* 책 이미지 */
 .imgBox {
-	padding: 30px;
+	padding: 0px;
 }
+.imgBox img{
+	width:80%;
+	height:80%;
+}
+/* 콘텐츠 */
 .contentBox {
-	padding: 30px;
-	padding-left: 0;
+	padding: 0px;
 }
 #titleDiv {
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 #meetDiv {
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 #detail {
 	width: 100%;
 	height: 140px;
 	border: none;
+	resize: none;
 }
 textarea {
 	resize: none;
@@ -69,84 +87,115 @@ textarea {
 	border: none;
 }
 #btnCol{
-	margin-top:30px;
+	margin-top:5px;
 	text-align:right;
 }
-#board_content{
-width:90%;
-}
-#board_title{
-width:90%;
-}
-.modalTitleBox{
-margin-bottom: 20px;
-}
-.modal-body{
-padding:0px;
-}
-.modalWriting{
-text-align:right;
-}
+/* 모임내 게시글 */	
 .boardBox{
-border-bottom: 1px solid lightgray;
-padding-bottom: 10px;
+	border-bottom: 1px solid lightgray;
+	padding-bottom: 10px;
+	overflow-x: hidden;
+	width:645px; 
+	height:250px; 
+	padding:10px 
+	margin-right: 0px;
+	margin-left: 0px;
 }
 .T1{
-margin-bottom:3px;
+	margin-bottom:3px;
+}
+.T2{
+	margin-bottom:3px;
+	text-align: center;
 }
 .boardBox p{
-margin-bottom:0px;
+	margin-bottom:0px;
 }
 .title{
-font-weight:600;
+	font-weight:600;
 }
 .title:hover{
-cursor:pointer;
+	cursor:pointer;
 }
 #content{
-display:none;
+	display:none;
+}
+/* 게시글 모달 */
+#modalForm{
+	width: 600px;
+}
+#modalWriting{
+	text-align: left;
+}
+.modalTitleBox{
+	width: 498px;
+	height: 189px;
+	margin-top: 20px;
+	margin-left: 3px;
+	margin-right: 0px;
+}
+#board_title{
+	padding: 0px;
+	width: 300px;
+	margin-left: 5px;
+}
+#con1{
+	text-align: center;
+}
+#con2{
+	text-align: center;
+}
+#board_content{
+	width: 300px;
+    height:150px;
+    resize: none;
 }
 #btnModify{
-display:none;
+	display:none;
 }
 #btnDelete{
-display:none;
+	display:none;
 }
 #btnModifyComplete{
-display:none;
-}
-.imgBox img{
-	width:80%;
-	height:80%;
+	display:none;
 }
 <%-- calendar --%>
 #calendar-container{
-margin-bottom:100px;
+	margin-bottom:100px;
 }
- /*요일*/
-  .fc-col-header-cell-cushion {
+/*요일*/
+.fc-col-header-cell-cushion {
+	text-decoration: none;
 	color: #000;
-  }
-  .fc-col-header-cell-cushion:hover {
+}
+.fc-col-header-cell-cushion:hover {
 	text-decoration: none;
 	color:#000;
-  }
-  /*일자*/
-  .fc-daygrid-day-number{
+}
+/*일자*/
+.fc-daygrid-day-number{
 	color: #000;
 	font-size:1em;
-  }
-  .fc-daygrid-day-number:hover{
-  	font-weight: 600;
-  }
-a{
- text-decoration: none;
+	text-decoration: none;
 }
+.fc-daygrid-day-number:hover{
+  	font-weight: 600;
+}
+a{
+	text-decoration: none;
+}
+.modalTitleBox{
+	margin-bottom: 20px;
+}
+.modal-body{
+	padding:0px;
+}
+.modalWriting{
+	text-align:right;
+}
+/* 신고하기 모달 */
 #reportForm{
 	width: 600px;
-}
-.modal-footer{
-    text-align: right;
 }
 #report_con{
     padding-top: 15px;
@@ -157,18 +206,49 @@ a{
 }
 #report_content{
     width: 300px;
-    height: 200px;
+    height:150px;
+    resize: none;
 }
-
-/* 모임원 신고 */
+.modal-footer{
+    text-align: right;
+    padding-top: 6px;
+}
+/* 모임원 보여주는 테이블  */
+.containerR{
+	overflow: auto;
+	height:232px
+}
+table{
+	margin: 0px;
+}
+.td1{
+	width: 1000px;
+	text-align: center;
+	padding-right: 200px;
+	margin: 0px;
+}
+.td2{
+	padding-left: 220px;
+	margin: 0px;
+}
 #reportTextarea{
 	width: 300px;
 	height: 200px;
 }
+.memberReportBtn{
+	width: 75px;
+}
+#emptyLine{
+	border-bottom: 1px solid lightgray;
+	text-align: left;
+}
 
-
-
-
+.footer{
+	border-top: 1px solid lightgray;
+}
+.contents{
+	height: 650px;
+}
 </style>
 
 </head>
@@ -196,10 +276,10 @@ a{
 			<div class="col-4 imgBox">
 				<c:choose>
 					<c:when test="${dto.book_cover eq null}">
-						<img src="/resources/images/noImg.png" class="card-img-top">
+						<center><img src="/resources/images/noImg.png" class="card-img-top"></center>
 					</c:when>
 					<c:otherwise>
-						<img src="${dto.book_cover}" class="card-img-top">
+						<center><img src="${dto.book_cover}" class="card-img-top"></center>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -207,7 +287,7 @@ a{
 			<div class="col-8 contentBox">
 
 				<div id="titleDiv">
-					<h3>${dto.room_title}</h3>
+					<h1>${dto.room_title}</h1>
 				</div>
 
 				<div>
@@ -231,7 +311,7 @@ a{
 				</div>
 
 				<div>
-					<textarea id="detail">${dto.room_detail}</textarea>
+					<textarea readonly id="detail">${dto.room_detail}</textarea>
 
 				</div>
 
@@ -241,7 +321,7 @@ a{
 
 		<div class="row">
 		
-			<div class="col-6">
+			<div class="col-6 contents">
 				<div class="row">
 					<div class="col">
 						<h5 class="titleB">모임 일정</h5>
@@ -253,15 +333,14 @@ a{
 				
 			</div>
 			
-			<div class="col-6">
+			<div class="col-6 contents">
 				<div class="row">
 					<div class="col-12">
-						<h5 class="titleB">게시글</h5>
+						<h5 class="titleA">게시글</h5>
 					</div>
 				</div>
 				<div class="row boardBox">
-					
-					
+		
 						<c:choose>
 							<c:when test="${board.size() == ''}">
 								<div class="col">
@@ -274,13 +353,13 @@ a{
 									
 							<input type="hidden" id="board_seq" name="board_seq" value="${board.board_seq}">
 							
-									<div class="col-6 T1">
+									<div class="col-5 T1">
 									<p class="title">${board.board_title}</p>
 									</div>
-									<div class="col-2 T1">
+									<div class="col-4 T2">
 									<p>${board.nickname}</p>
 									</div>
-									<div class="col-3 T1">
+									<div class="col-3 T2">
 									<p>${board.board_date}</p>
 									</div>
 									
@@ -302,43 +381,50 @@ a{
 				
 				<div>
 					<div class="row">
-						<div class="col-6">
-							<h5 class="titleB">모임원</h5>						
+						<div class="col-12">
+							<h5 class="titleC">모임원</h5>						
 						</div>
 					</div>
 				</div>
 
-				<%-- 승윤님 신고하기 화면 부분--%>
-				<div>
+				<%-- 모임원 부분--%>
+				<div class="containerR">
 					<table>
-                  <thead>
-                     <tr>
-                        <th>닉네임</th>                        
-                        <th></th>
-                        <th>신고</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <c:forEach items = "${nickList}" var = "nick">
-                     <tr>
-                        <td>${nick.nickname}</td> <!-- 신고당하는 사람 -->
-                        <td>
-                           <c:choose>
-                              <c:when test= "${session.nickname ne nick.nickname}">
-                                 <input type="text" class="d-none" id="email" value="${nick.email}"> <!-- 신고당하는 사람 이메일 숨겨놓기-->
-                                 <button type="button" class="btn btn-danger memberReportBtn">신고</button>
-                              </c:when>
-                              <c:otherwise>
-                                 <button type="button" class="btn btn-danger" disabled="disabled">신고</button>
-                              </c:otherwise>
-                           </c:choose>
-                        </td>
-                     </tr>
-                     </c:forEach>
-                  </tbody>
-               </table>
+ 
+	                  <tbody>
+	                     <c:forEach items = "${nickList}" var = "nick">
+	                     <tr>
+	                        <td class="td1">${nick.nickname}</td> <!-- 신고당하는 사람 -->
+	                      
+	                        <td class="td2">
+	                           <c:choose>
+	                              <c:when test= "${session.nickname ne nick.nickname}">
+	                                 <input type="text" class="d-none" id="email" value="${nick.email}"> <!-- 신고당하는 사람 이메일 숨겨놓기-->
+	                                 <button type="button" class="btn btn-danger memberReportBtn">신고</button>
+	                              </c:when>
+	                              <c:otherwise>
+	                                 <button type="button" class="btn btn-danger memberReportBtn" disabled="disabled">신고</button>
+	                              </c:otherwise>
+	                           </c:choose>
+	                        </td>
+	                     </tr>
+	                     </c:forEach>
+	                  </tbody>
+					</table>
 				</div>
-        
+			</div>	
+        <div class="row">
+			<div class="col" id="emptyLine">
+				
+			</div>
+		</div>
+	</div>
+	  	<%-- *************************** footer *************************** --%>
+		<div class=footer>
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
+	
+		      
 		<%-- 회원 신고하기 Modal --%>
 		<form id="reportForm" action="/club/report" method="post">
 			<div class="modal" id="reportModal">
@@ -367,73 +453,59 @@ a{
 								</div>
 						</div>
 						<input type="text" class="d-none" id="hiddenemail" name="email" value="email">
-		                <div class="modal-footer">
+		                <div class="modal-footer" style="padding-top: 6px;">
 			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnReportCancel">신고취소</button>
 		                    <button type="button" class="btn btn-primary" id="btnReportComplete">신고완료</button>
 		                </div>		
 					</div>
 				</div>
 			</div>
-		</form>
+		</form>	
 	
-	</div>	
-	</div>
-	
-	<%-- *************************** footer *************************** --%>
-	<div class=footer>
-		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
-	</div>
 
-	</div>
-	
 	<%-- Modal --%>
-	
-<form id="modalForm" action="/club/insertReport" method="post">	
-	<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="modalHeadTitle">새 글 작성</h5>
-      </div>
-      
-      <div class="row modalTitleBox">
-      	<div class="col-3 modalWriting">
-      	<p>제목</p>
-      	</div>
-      	<div class="col-9">
-      	<input type="text" class="modal-title" id="board_title" name="board_title" placeholder="제목 입력">
-      	</div>
-      </div>
-      
-      <div class="modal-body">
-      	<div class="row modalContentBox">
-      		<div class="col-3 modalWriting">
-      		<p>내용</p>
-      		</div>
-      		<div class="col-9">
-      		<textarea placeholder="내용 입력" class="board_content" id="board_content" name="board_content"></textarea>
-      		</div>
-      	</div>
- 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCancel">닫기</button>
-        <button type="button" class="btn btn-primary" id="btnComplete">완료</button>
-        <button type="button" class="btn btn-warning" id="btnModify"  value="">수정</button>
-        <button type="button" class="btn btn-success" id="btnModifyComplete" value="">수정완료</button>
-        <button type="button" class="btn btn-danger" id="btnDelete"  value="">삭제</button>
-      	<input type="hidden" id="board_no" name="board_seq" value="">
-      </div>
-    </div>
- 	 </div>
-	</div>
+	<form id="modalForm" action="/club/insertReport" method="post">	
+		<div class="modal" id="boardModal" tabindex="-1">
+		 	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h2 id="modalHeadTitle">새 글 작성</h2>
+			      </div>
+			      
+			      <div class="row modalTitleBox" style="margin-top: 20px; margin-left: 3px;	margin-right: 0px;">
+			      	<div class="col-4 modalWriting" id="con" style="text-align: center;">
+			      		<h3>제목</h3>
+			      	</div>
+			      	<div class="col-8" id="con2" style="text-align: center; padding-left: 0px; padding-right: 15px;">
+			      		<input type="text" class="modal-title" id="board_title" name="board_title" placeholder="제목 입력">
+			      	</div>
+			      </div>
+			      
+			      <div class="modal-body">
+			      	<div class="row modalContentBox">
+			      		<div class="col-4 modalWriting" id="con" style="text-align: center;">
+			      			<h3>내용</h3>
+			      		</div>
+			      		<div class="col-8" id="con2" style="text-align: center;">
+			      			<textarea placeholder="내용 입력" class="board_content" id="board_content" name="board_content"></textarea>
+			      		</div>
+			      	</div>
+			 
+			      </div>
+			      <div class="modal-footer" style="padding-top: 0px;">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCancel">닫기</button>
+			        <button type="button" class="btn btn-primary" id="btnComplete">완료</button>
+			        <button type="button" class="btn btn-warning" id="btnModify"  value="">수정</button>
+			        <button type="button" class="btn btn-success" id="btnModifyComplete" value="">수정완료</button>
+			        <button type="button" class="btn btn-danger" id="btnDelete"  value="">삭제</button>
+			      	<input type="hidden" id="board_no" name="board_seq" value="">
+			      </div>
+			    </div>
+	 		</div>
+		</div>
+	</form>
 
-</form>
-
-	
-
-
-	<script>
+<script>
 	<%-- --------- 회원 신고하기 Modal ---------- --%>
    $(".memberReportBtn").on("click", function() {
       $("#reportModal").show();
@@ -468,10 +540,10 @@ a{
 			$("#btnModifyComplete").hide();
 			$("#btnComplete").show();
 			
-			$(".modal").show();
+			$("#boardModal").show();
 		})
 		$("#btnCancel").on("click", function(){
-			$(".modal").hide();
+			$("#boardModal").hide();
 		})
 		
 		// 글쓰기 완료 시
@@ -534,7 +606,7 @@ a{
 							$("#btnDelete").hide();
 						})
 					}
-					$(".modal").show();
+					$("#boardModal").show();
 	
 					// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 					
@@ -585,7 +657,7 @@ a{
 					$("#btnDelete").hide();
 				})
 			}
-			$(".modal").show();
+			$("#boardModal").show();
 			
 			// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 			$("#btnCancel").on("click", function(){
@@ -622,7 +694,7 @@ a{
 					let content = $(".board_content").val();		
 					
 					$("#modalForm").attr({"action":"/club/modify"});
-					$(".modal").hide();
+					$("#boardModal").hide();
 					$("#modalForm").submit();
 				
 				$("#btnModifyComplete").hide();
@@ -692,7 +764,7 @@ a{
 								$("#btnDelete").hide();
 							})
 						}
-						$(".modal").show();
+						$("#boardModal").show();
 						
 						// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 						$("#btnCancel").on("click", function(){
@@ -742,7 +814,7 @@ a{
 				$(".boardBox").append(board_seq, titleDiv, nicknameDiv, dateDiv, contentDiv);			
 			}
 			
-			$(".modal").hide();
+			$("#boardModal").hide();
 			
 		}
 		
@@ -761,130 +833,9 @@ a{
 		
 		// 로그인된 계정이 리더 일 때 (일정 조정 가능)
 		
-	if('${role}'=='L'){	 
-		 document.addEventListener('DOMContentLoaded', function() {
-		
-			 $(function() {
-				var request = $.ajax({
-					url: "/calendar/selectAll",
-					method:"post",
-					dataType:"json"		
-				});
-				 
-				request.done(function (data) {
-					console.log(data);
-					var calendarEl = document.getElementById('calendar');
-			        var calendar = new FullCalendar.Calendar(calendarEl, {
-			        	
-			        	headerToolbar: {
-			                left: 'prev,next today',
-			                center: 'title',
-			                right: 'dayGridMonth'
-			            },
-			          locale : "ko",
-			          timeZone:'local',
-			          navLinks: true, // can click day/week names to navigate views
-			          selectable: true,
-			          selectMirror: true,   
-			
-			          select: function(arg) {
-						  
-			        	  
-			        	  
-			        	  var title = prompt('일정 추가');
-			              if (title) {
-	            
-			            	  var insert = $.ajax({
-			  					url: "/calendar/insertPlan",
-			  					method:"post",
-			  					dataType:"json",
-			  					data:{"cal_title":title, "start_date": dateFormat(arg.start), "end_date":dateFormat(arg.end),"allday":arg.allDay}
-			  			
-			            	  });
-			            	  insert.done(function(data) { 
-			            	  })
-			            	  calendar.addEvent({              
-			            		  title: title,  
-			            		  start: arg.start,
-			            		  end: arg.end,
-			            		  allDay: arg.allDay 
-			            		  })
-						
-			            		  location.reload();
-			              }
-						  
-			             // calendar.unselect()
-			             
-			          },
-			          eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트 
-			        	  console.log(obj);       
-			         	  
-			         	alert("일정이 설정되었습니다!");
-			         	  
-			          
-			          },
-			          // 수정
-			          eventDrop: function (info){
-                          console.log(info);
-                          if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
-                                
-						 
-                          let id = info.event._def.publicId;
-                          let title = info.event._def.title;
-                          let start = info.event._instance.range.start;
-                          let end = info.event._instance.range.end;
-                          
-                          
-                          $(function updatePlan() {
-                              $.ajax({
-                                  url: "/calendar/updatePlan",
-                                  method: "post",
-                                  dataType: "json",
-                                  data: {"cal_id":id, "cal_title":title, "start_date":updateDateFormat(start), "end_date":updateDateFormat(end)}
-                                 
-                              })
-                          })
-                          }
-                        },
-			        	//삭제 
-			          eventClick: function(info) {
-			              if (confirm('해당 일정을 삭제하시겠습니까?')) {
-							 
-			            	  let cal_id = info.event._def.publicId;
-			            	
-			            	  console.log("id : " + cal_id);
-			            	  console.log("title : " + info.event.title);
-			            	  console.log(info.event.start);
-			            	  
-			            	  
-			            	  var deletePlan = $.ajax({
-				  					url: "/calendar/deletePlan",
-				  					method:"post",
-				  					data:{"cal_id":cal_id}
-			              });
-			              deletePlan.done(function(data) {
-			            	  })
-			            	  info.event.remove()
-			              }
-			              
-			              
-			          },
-			          editable: true ,
-			          dayMaxEvents: true,
-			          events: data	 
-			          
-			          });
-			        calendar.render();
-			   	   }); 
-					
-				})
-				
-			 })	
-		
-		}else{
-			
+		if('${role}'=='L'){	 
 			 document.addEventListener('DOMContentLoaded', function() {
-					
+			
 				 $(function() {
 					var request = $.ajax({
 						url: "/calendar/selectAll",
@@ -893,72 +844,185 @@ a{
 					});
 					 
 					request.done(function (data) {
-						//console.log(data);
-						
+						console.log(data);
 						var calendarEl = document.getElementById('calendar');
 				        var calendar = new FullCalendar.Calendar(calendarEl, {
+				        	
 				        	headerToolbar: {
 				                left: 'prev,next today',
 				                center: 'title',
-				                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+				                right: 'dayGridMonth'
 				            },
-				          timeZone:'local',
 				          locale : "ko",
+				          timeZone:'local',
 				          navLinks: true, // can click day/week names to navigate views
 				          selectable: true,
 				          selectMirror: true,   
 				
 				          select: function(arg) {
- 							 alert("일정조정은 리더권한입니다.");
-				              calendar.unselect()
+	   	  
+				        	  var title = prompt('일정 추가');
+				              if (title) {
+		            
+				            	  var insert = $.ajax({
+				  					url: "/calendar/insertPlan",
+				  					method:"post",
+				  					dataType:"json",
+				  					data:{"cal_title":title, "start_date": dateFormat(arg.start), "end_date":dateFormat(arg.end),"allday":arg.allDay}
+				  			
+				            	  });
+				            	  insert.done(function(data) { 
+				            	  })
+				            	  calendar.addEvent({              
+				            		  title: title,  
+				            		  start: arg.start,
+				            		  end: arg.end,
+				            		  allDay: arg.allDay 
+				            		  })
+							
+				            		  location.reload();
+				              }
+							  
+				             // calendar.unselect()
+				             
 				          },
-				          eventClick: function(arg) {
-				        	  alert("일정조정은 리더권한입니다.");
+				          eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트 
+				        	  console.log(obj);       
+				         	  
+				         	alert("일정이 설정되었습니다!");      
 				          },
-				          editable: false ,
+				          // 수정
+				          eventDrop: function (info){
+	                          console.log(info);
+	                          if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
+	                                
+							 
+	                          let id = info.event._def.publicId;
+	                          let title = info.event._def.title;
+	                          let start = info.event._instance.range.start;
+	                          let end = info.event._instance.range.end;
+	                          
+	                          
+	                          $(function updatePlan() {
+	                              $.ajax({
+	                                  url: "/calendar/updatePlan",
+	                                  method: "post",
+	                                  dataType: "json",
+	                                  data: {"cal_id":id, "cal_title":title, "start_date":updateDateFormat(start), "end_date":updateDateFormat(end)}
+	                                 
+	                              })
+	                          })
+	                          }
+	                        },
+				        	//삭제 
+				          eventClick: function(info) {
+				              if (confirm('해당 일정을 삭제하시겠습니까?')) {
+								 
+				            	  let cal_id = info.event._def.publicId;
+				            	
+				            	  console.log("id : " + cal_id);
+				            	  console.log("title : " + info.event.title);
+				            	  console.log(info.event.start);
+				            	  
+				            	  
+				            	  var deletePlan = $.ajax({
+					  					url: "/calendar/deletePlan",
+					  					method:"post",
+					  					data:{"cal_id":cal_id}
+				              });
+				              deletePlan.done(function(data) {
+				            	  })
+				            	  info.event.remove()
+				              }             	              
+				          },
+				          editable: true ,
 				          dayMaxEvents: true,
-				          events: data
+				          events: data	 
 				          
-				        	  
-				        });
+				          });
 				        calendar.render();
 				   	   }); 
 						
 					})
 					
-				 })	 
+				 })	
+			
+			}else{
+			
+				 document.addEventListener('DOMContentLoaded', function() {
+						
+					 $(function() {
+						var request = $.ajax({
+							url: "/calendar/selectAll",
+							method:"post",
+							dataType:"json"		
+						});
+						 
+						request.done(function (data) {
+							//console.log(data);
+							
+							var calendarEl = document.getElementById('calendar');
+					        var calendar = new FullCalendar.Calendar(calendarEl, {
+					        	headerToolbar: {
+					                left: 'prev,next today',
+					                center: 'title',
+					                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+					            },
+					          timeZone:'local',
+					          locale : "ko",
+					          navLinks: true, // can click day/week names to navigate views
+					          selectable: true,
+					          selectMirror: true,   
+					
+					          select: function(arg) {
+	 							 alert("일정조정은 리더권한입니다.");
+					              calendar.unselect()
+					          },
+					          eventClick: function(arg) {
+					        	  alert("일정조정은 리더권한입니다.");
+					          },
+					          editable: false ,
+					          dayMaxEvents: true,
+					          events: data
+					          
+					        	  
+					        });
+					        calendar.render();
+					   	   }); 
+							
+						})
+						
+					 })	 
 		} 
 		
-	function dateFormat(date) {
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        let hour = date.getHours();
-        let minute = date.getMinutes();
-        let second = date.getSeconds();
-        month = month >= 10 ? month : '0' + month;
-        day = day >= 10 ? day : '0' + day;
-        hour = hour >= 10 ? hour : '0' + hour;
-        minute = minute >= 10 ? minute : '0' + minute;
-        second = second >= 10 ? second : '0' + second;
-        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-}
-	
-	// 업데이트 시 default hour값이 달라지므로 조정 필요
-	function updateDateFormat(date){
-		let month = date.getMonth() + 1;
-        let day = date.getDate();
-        let hour = date.getHours();
-        let minute = date.getMinutes();
-        let second = date.getSeconds();
-        month = month >= 10 ? month : '0' + month;
-        day = day >= 10 ? day : '0' + day;
-        hour =  -9 + hour;
-        minute = minute >= 10 ? minute : '0' + minute;
-        second = second >= 10 ? second : '0' + second;
-        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-	}
-
+		function dateFormat(date) {
+	        let month = date.getMonth() + 1;
+	        let day = date.getDate();
+	        let hour = date.getHours();
+	        let minute = date.getMinutes();
+	        let second = date.getSeconds();
+	        month = month >= 10 ? month : '0' + month;
+	        day = day >= 10 ? day : '0' + day;
+	        hour = hour >= 10 ? hour : '0' + hour;
+	        minute = minute >= 10 ? minute : '0' + minute;
+	        second = second >= 10 ? second : '0' + second;
+	        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+		}
 		
+		// 업데이트 시 default hour값이 달라지므로 조정 필요
+		function updateDateFormat(date){
+			let month = date.getMonth() + 1;
+	        let day = date.getDate();
+	        let hour = date.getHours();
+	        let minute = date.getMinutes();
+	        let second = date.getSeconds();
+	        month = month >= 10 ? month : '0' + month;
+	        day = day >= 10 ? day : '0' + day;
+	        hour =  -9 + hour;
+	        minute = minute >= 10 ? minute : '0' + minute;
+	        second = second >= 10 ? second : '0' + second;
+	        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+		}
 	</script>
 </body>
 </html>

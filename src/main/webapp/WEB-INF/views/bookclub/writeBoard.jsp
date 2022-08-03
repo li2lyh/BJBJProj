@@ -93,7 +93,7 @@ resize:none;
 
 			<div class="row">
 				<div class="col-3 writing">
-					<label for="title" class="form-label"> 제목</label>
+					<label for="title" class="form-label">제목</label>
 				</div>
 				<div class="col">
 					<input type="text" class="form-control" id="room_title"
