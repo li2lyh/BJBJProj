@@ -74,9 +74,11 @@ textarea {
 }
 #board_content{
 width:90%;
+resize:none;
+height:150px;
 }
 #board_title{
-width:90%;
+width:85%;
 }
 .modalTitleBox{
 margin-bottom: 20px;
@@ -125,6 +127,7 @@ margin-bottom:100px;
 }
  /*요일*/
   .fc-col-header-cell-cushion {
+	text-decoration: none;
 	color: #000;
   }
   .fc-col-header-cell-cushion:hover {
@@ -135,6 +138,7 @@ margin-bottom:100px;
   .fc-daygrid-day-number{
 	color: #000;
 	font-size:1em;
+	text-decoration: none;
   }
   .fc-daygrid-day-number:hover{
   	font-weight: 600;
@@ -389,7 +393,7 @@ a{
 	<%-- Modal --%>
 	
 <form id="modalForm" action="/club/insertReport" method="post">	
-	<div class="modal" tabindex="-1">
+	<div class="modal" id="boardModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -468,10 +472,10 @@ a{
 			$("#btnModifyComplete").hide();
 			$("#btnComplete").show();
 			
-			$(".modal").show();
+			$("#boardModal").show();
 		})
 		$("#btnCancel").on("click", function(){
-			$(".modal").hide();
+			$("#boardModal").hide();
 		})
 		
 		// 글쓰기 완료 시
@@ -534,7 +538,7 @@ a{
 							$("#btnDelete").hide();
 						})
 					}
-					$(".modal").show();
+					$("#boardModal").show();
 	
 					// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 					
@@ -585,7 +589,7 @@ a{
 					$("#btnDelete").hide();
 				})
 			}
-			$(".modal").show();
+			$("#boardModal").show();
 			
 			// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 			$("#btnCancel").on("click", function(){
@@ -622,7 +626,7 @@ a{
 					let content = $(".board_content").val();		
 					
 					$("#modalForm").attr({"action":"/club/modify"});
-					$(".modal").hide();
+					$("#boardModal").hide();
 					$("#modalForm").submit();
 				
 				$("#btnModifyComplete").hide();
@@ -692,7 +696,7 @@ a{
 								$("#btnDelete").hide();
 							})
 						}
-						$(".modal").show();
+						$("#boardModal").show();
 						
 						// 취소버튼 눌렀을 때 원상복구 (글쓰기 버튼에 영향 가지 않게)
 						$("#btnCancel").on("click", function(){
@@ -742,7 +746,7 @@ a{
 				$(".boardBox").append(board_seq, titleDiv, nicknameDiv, dateDiv, contentDiv);			
 			}
 			
-			$(".modal").hide();
+			$("#boardModal").hide();
 			
 		}
 		

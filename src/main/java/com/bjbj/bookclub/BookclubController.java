@@ -294,7 +294,8 @@ public class BookclubController {
 		// 해당 방의 멤버 정보
 		List<RoleDTO> roleList =  service.selectRoleByRoom(room_id);
 		System.out.println("방 멤버 : " + roleList.toString());
-		model.addAttribute("member",roleList);		
+		model.addAttribute("member",roleList);
+		
 		
 		// 현재 접속한 계정이 리더인가?
 		String role = service.selectRole(id).getRole();

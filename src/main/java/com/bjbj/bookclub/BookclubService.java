@@ -138,6 +138,7 @@ public class BookclubService {
 	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception {
 		return dao.selectRoleByRoom(room_id);
 	}
+
 	
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception {
@@ -231,4 +232,11 @@ public class BookclubService {
 	public ExpirationDTO selectExpirationById(int room_id) throws Exception{
 		return dao.selectExpirationById(room_id);
 	}
+
+	
+	// 검색페이지 북클럽 검색
+	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
+		return dao.searchByTitle(keyword);
+		}
+	
 }

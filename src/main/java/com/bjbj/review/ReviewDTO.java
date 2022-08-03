@@ -13,12 +13,13 @@ public class ReviewDTO {
 	private String content;
 	private int views;
 	private int img_no;
+
 	
 	public ReviewDTO() {}
 
 	public ReviewDTO(int review_no, String review_title, String email, String book_title, String nickname,
 			Date written_date, String content, int views, int img_no) {
-			
+
 		super();
 		this.review_no = review_no;
 		this.review_title = review_title;
@@ -98,5 +99,4 @@ public class ReviewDTO {
 	public void setImg_no(int img_no) {
 		this.img_no = img_no;
 	}
-
 }

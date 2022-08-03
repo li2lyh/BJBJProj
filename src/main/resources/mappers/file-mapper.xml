@@ -6,7 +6,7 @@
 <mapper namespace="fileMapper">
 	<!-- 파일 시퀀스 번호 미리 가져오기 -->
 	<select id="selectNo" resultType="int">
-		SELECT seq_file.nextval from dual
+		SELECT seq_img.nextval from dual
 	</select>
 	
 	<!-- 파일 정보 DB에 업로드 -->

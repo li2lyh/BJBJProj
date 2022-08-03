@@ -332,12 +332,14 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
+				<form action="/search" method="get" id="searchForm">
 				<div
 					class="d-none d-md-block col-2 d-flex justify-content-between p-0">
-					<input type="text" class="underlineSearch"> <img
+					<input type="text" class="underlineSearch" name="text"> <img
 						src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
-						id="searchIcon" onclick="javascript:location.href='';">
+						id="searchIcon">
 				</div>
+				</form>
 			</div>
 		</div>
 
@@ -363,51 +365,49 @@ input.underlineSearch:focus {
 									<a href="/books/arrivals">신간도서</a> <a href="/books/bestseller">베스트셀러</a>
 									<a href="/review/board">도서리뷰</a>
 								</div>
-							</li>
-							<li class="nav-item dropdown">
-								<button class="dropbtn">BookClub</button> <c:if
-									test="${empty loginSession}">
-									<div class="dropdown-content">
-										<a href="/club/toClub">모집 중인 클럽</a>
-									</div>
-								</c:if> <c:if test="${not empty loginSession}">
-									<div class="dropdown-content">
-										<a href="/club/toClubList">모집 중인 클럽</a>
-									</div>
-								</c:if> <c:choose>
-									<c:when test="${not empty loginSession}">
-										<c:if test="${not empty roleSession}">
-											<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
-										</c:if>
-										<c:if test="${empty roleSession}">
-											<a id="btnClubBoard" id="btnClubBoard"
-												onclick="alert('아직 클럽에 속해있지 않아요.')">내 클럽</a>
-										</c:if>
-									</c:when>
-									<c:otherwise>
-										<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
-											data-bs-target="#login">내 클럽</a>
-									</c:otherwise>
-								</c:choose> <c:choose>
-									<c:when test="${not empty loginSession}">
+							</c:if>
+              <c:if test="${not empty loginSession}">
+								<div class="dropdown-content">
+									<a href="/club/toClubList">모집 중인 클럽</a>
+								</div>
+							</c:if> 
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<c:if test="${not empty roleSession}">
+										<a href="/club/clubBoard" id="btnClubBoard">내 클럽</a>
+									</c:if>
+									<c:if test="${empty roleSession}">
+										<a id="btnClubBoard" id="btnClubBoard"
+											onclick="alert('아직 클럽에 속해있지 않아요.')">내 클럽</a>
+									</c:if>
+                 </c:when>
+								<c:otherwise>
+									<a href="#login" id="btnClubBoard" data-bs-toggle="modal"
+										data-bs-target="#login">내 클럽</a>
+								</c:otherwise>
+							</c:choose>
+              
+              <c:choose>
+								<c:when test="${not empty loginSession}">
 
-										<!-- 리더이면서 클럽이 모집중일 때 -->
-										<c:if
-											test="${roleSession.role == 'L' && clubSession.room_status == '모집중'}">
-											<a href="/club/myclub?room_id=${roleSession.room_id}"
-												id="btnMyclub">모집중인 클럽 관리</a>
-										</c:if>
+									<!-- 리더이면서 클럽이 모집중일 때 -->
+									<c:if
+										test="${roleSession.role == 'L' && clubSession.room_status == '모집중'}">
+										<a href="/club/myclub?room_id=${roleSession.room_id}"
+											id="btnMyclub">모집중인 클럽 관리</a>
+									</c:if>
 
-										<!-- 리더이면서 클럽이 진행중일 때 -->
-										<c:if
-											test="${roleSession.role == 'L' && clubSession.room_status == '진행중'}">
-											<a href="/club/clubBoard" id="btnMyclub">진행 중인 클럽 관리</a>
-										</c:if>
+									<!-- 리더이면서 클럽이 진행중일 때 -->
+									<c:if
+										test="${roleSession.role == 'L' && clubSession.room_status == '진행중'}">
+										<a href="/club/clubBoard" id="btnMyclub">진행 중인 클럽 관리</a>
+									</c:if>
+                  
+                  
+                </c:when>
+								<c:otherwise>
+                				<!-- 게스트 상태일 때 -->
 
-
-									</c:when>
-									<c:otherwise>
-                <!-- 게스트 상태일 때 -->
 									<a href="#login" id="btnMyclub" data-bs-toggle="modal"
 											data-bs-target="#login">클럽 관리</a>
 									</c:otherwise>
@@ -461,6 +461,17 @@ $(document).ready(function(){
 	})
 
 		/****************************************** 검색 버튼 *****************************************/
+		$("#searchIcon").on("click", function(){
+			
+			if($("#underlineSearch").val() == ""){
+				alert("검색어를 입력해주세요");
+				$("#underlineSearch").focus;
+				return false;
+			}
+			
+			$("#searchForm").submit();
+		})
+		
 		
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //
