@@ -119,9 +119,9 @@ resize:none;
 					<label for="file" class="form-label">도서 이름</label>
 				</div>
 				<div class="col">
-<<<<<<< HEAD
+
 					<input type="file" class="form-control" id="files" name="files" multiple>
-=======
+
 					<div class="row m-0">
             <div class="col-3 p-0">
             <input type="text" id="book_title" name="book_title" class="form-control" readonly>
@@ -132,7 +132,7 @@ resize:none;
             <button type="button" id="btnSearch" class="btn btn-warning">검색</button>
             </div>	
 					</div>
->>>>>>> 6978c39d30bf637f86b6c6ad5f0d814c6c959b6f
+
 				</div>
 			</div>
 			<div class="row">
