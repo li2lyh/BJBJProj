@@ -18,7 +18,7 @@ public class ReviewDTO {
 	public ReviewDTO() {}
 
 	public ReviewDTO(int review_no, String review_title, String email, String book_title, String nickname,
-			Date written_date, String content, int views, int img_no) {
+			String written_date, String content, int views, int img_no) {
 
 		super();
 		this.review_no = review_no;
@@ -32,16 +32,16 @@ public class ReviewDTO {
 		this.img_no = img_no;
 	}
 	
-	public String getStrDate(Date date) {
-		String rs = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
-			rs = sdf.format(date);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return rs;
-	}
+//	public String getStrDate(Date date) {
+//		String rs = null;
+//		try {
+//			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+//			rs = sdf.format(date);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return rs;
+//	}
 	
 	public int getReview_no() {
 		return review_no;
@@ -76,8 +76,8 @@ public class ReviewDTO {
 	public String getWritten_date() {
 		return written_date;
 	}
-	public void setWritten_date(Date written_date) {
-		this.written_date = getStrDate(written_date);
+	public void setWritten_date(String written_date) {
+		this.written_date = written_date;
 	}
 	public String getContent() {
 		return content;
