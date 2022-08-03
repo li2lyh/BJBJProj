@@ -12,12 +12,25 @@ public class ReviewDTO {
 	private String written_date;
 	private String content;
 	private int views;
-	private String img_id;
+	private String img_no;
 	
 	public ReviewDTO() {}
 
 	public ReviewDTO(int review_no, String review_title, String email, String book_title, String nickname,
-			Date written_date, String content, int views, String img_id) {
+			String written_date, String content, int views, String img_no) {
+		super();
+		this.review_no = review_no;
+		this.review_title = review_title;
+		this.email = email;
+		this.book_title = book_title;
+		this.nickname = nickname;
+		this.written_date = written_date;
+		this.content = content;
+		this.views = views;
+		this.img_no = img_no;
+	}
+	public ReviewDTO(int review_no, String review_title, String email, String book_title, String nickname,
+			Date written_date, String content, int views, String img_no) {
 		super();
 		this.review_no = review_no;
 		this.review_title = review_title;
@@ -27,8 +40,9 @@ public class ReviewDTO {
 		this.written_date = getStrDate(written_date);
 		this.content = content;
 		this.views = views;
-		this.img_id = img_id;
+		this.img_no = img_no;
 	}
+	
 	public String getStrDate(Date date) {
 		String rs = null;
 		try {
@@ -39,6 +53,7 @@ public class ReviewDTO {
 		}
 		return rs;
 	}
+	
 	public int getReview_no() {
 		return review_no;
 	}
@@ -72,8 +87,8 @@ public class ReviewDTO {
 	public String getWritten_date() {
 		return written_date;
 	}
-	public void setWritten_date(String written_date) {
-		this.written_date = written_date;
+	public void setWritten_date(Date written_date) {
+		this.written_date = getStrDate(written_date);
 	}
 	public String getContent() {
 		return content;
@@ -87,10 +102,10 @@ public class ReviewDTO {
 	public void setViews(int views) {
 		this.views = views;
 	}
-	public String getImg_id() {
-		return img_id;
+	public String getImg_no() {
+		return img_no;
 	}
-	public void setImg_id(String img_id) {
-		this.img_id = img_id;
+	public void setImg_no(String img_no) {
+		this.img_no = img_no;
 	}	
 }
