@@ -46,6 +46,7 @@ div {
 	border: 1px solid black;
 	width: 100%;
 	height: 600px;
+	overflow: scroll;
 }
 
 .loc_item {
@@ -54,6 +55,10 @@ div {
 	margin: 7px;
 	padding:5px;
 	width: 95%;
+}
+
+.selectLocRange {
+	padding-bottom: 10px;
 }
 
 .hAddr {
@@ -103,10 +108,10 @@ div {
 				</div>
 			</div>
 			<div class="col-4">
-				<button type="button" id="myLocation">내위치</button>
+				
 				<div class="selectLocRange">
-					선택지역
-					<select class="form-select area1" style="width: auto; display:inline;" aria-label="Default select example">
+				<button type="button" class="" id="myLocation">내위치</button>
+					<select class="form-select area1" style="width: 100px; display:inline;" aria-label="Default select example">
 						<option selected>시도명</option>
 
 					</select>
@@ -354,10 +359,10 @@ div {
 			
 			for (let item of addrList){
 				let div = $("<div>").attr("class","loc_item");
-				let span1 = $("<span>").append(item.lbrryNm)
-				let span2 = $("<span>").append(item.weekdayOperOpenHhmm + " ~ " + item.weekdayOperColseHhmm)
-				let span3 = $("<span>").append(item.rdnmadr)
-				let span4 = $("<span>").append(item.phoneNumber)
+				let span1 = $("<span style='margin-right: 10px'>").append(item.lbrryNm)
+				let span2 = $("<span style='font-size : 15px'>").append(item.weekdayOperOpenHhmm + " ~ " + item.weekdayOperColseHhmm)
+				let span3 = $("<span style='display: block'>").append(item.rdnmadr)
+				let span4 = $("<span style='display: block'>").append(item.phoneNumber)
 				
 				div.append(span1, span2, span3, span4)
 				$(".loc_list").append(div)

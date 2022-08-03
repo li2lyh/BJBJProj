@@ -138,6 +138,7 @@ public class BookclubService {
 	public List<RoleDTO> selectRoleByRoom(int room_id) throws Exception {
 		return dao.selectRoleByRoom(room_id);
 	}
+
 	
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception {
@@ -172,11 +173,6 @@ public class BookclubService {
 	// 회원 신고
 	public void insertReport(ReportDTO reportDTO) throws Exception {
 		dao.insertReport(reportDTO);
-	}
-
-	// room_id 에 따른 닉네임 리스트
-	public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
-		return dao.selectNickByRoom(room_id);
 	}
 	
 	//bookroom 삭제 (by room_id)
@@ -231,5 +227,11 @@ public class BookclubService {
 	public ExpirationDTO selectExpirationById(int room_id) throws Exception{
 		return dao.selectExpirationById(room_id);
 	}
+
+	
+	// 검색페이지 북클럽 검색
+	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
+		return dao.searchByTitle(keyword);
+		}
 	
 }

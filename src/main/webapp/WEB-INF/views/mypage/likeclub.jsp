@@ -18,13 +18,24 @@
 <title>찜 독서 모임</title>
 <style>
 /* Contents */
+.header{
+	height: 20%;
+}
+
+.body{
+	height: 80%;
+}
+
+.footer{
+	height: 20%;
+}
 /* 메뉴 */
-a {
+div a {
 	color: black;
 	text-decoration: none;
 }
 
-a:hover {
+div a:hover {
 	color: black;
 	font-weight: bolder;
 }
@@ -39,16 +50,25 @@ a:hover {
 	font-weight: bolder;
 }
 
-.dropdown-menu {
+div > .dropdown-menu {
 	border: none;
 }
 
-.dropdown-item:hover {
+div > .dropdown-item:hover {
 	background-color: white;
 }
 
 /* 찜 독서 모임 */
-th, td{
+.table-container {
+  overflow-x: auto;
+}
+      
+div table {
+  width: 100%;
+  min-width: 550px;
+}
+
+div th, td{
 	text-align : center;
 }
 
@@ -59,38 +79,45 @@ th, td{
 </head>
 
 <body>
-	<!-- Contents -->
 	<div class="container m-auto">
-		<div class="row border-bottom border-dark">
-			<h2>MyBook</h2>
+		<!-- header -->
+		<div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
-		<div class="row d-flex">
-			<!-- 메뉴 -->
-			<div class="col-4 p-4">
-				<div class="row p-2">
-					<a href="/member/toChange">
-						<div>내 정보 수정</div>
-					</a>
-				</div>
-				<div class="row p-2">
-					<a href="/member/toMybookclub">
-						<div>참여 독서 모임</div>
-					</a>
-				</div>
-				<div class="row p-2">
-					<a href="/member/toMyreview">
-						<div>도서 리뷰</div>
-					</a>
-				</div>
-				<div class="row p-2">
-					<div class="nav-item dropdown">
-						<a class="list nav-link dropdown-toggle p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-							<div>
-								<a class="dropdown-item" href="/member/toLikebook">도서</a>
-							</div>
-							<div>
-								<a class="dropdown-item" href="/member/toLikeclub">독서모임</a>
+		
+		<!-- body -->
+		<div class="body p-0">
+			<div class="row border-bottom border-dark">
+				<h2>MyBook</h2>
+			</div>
+			<div class="row d-flex">
+				<!-- 메뉴 -->
+				<div class="col-3 p-4">
+					<div class="row p-2">
+						<a href="/member/toChange">
+							<div>내 정보 수정</div>
+						</a>
+					</div>
+					<div class="row p-2">
+						<a href="/member/toMybookclub">
+							<div>참여 독서 모임</div>
+						</a>
+					</div>
+					<div class="row p-2">
+						<a href="/member/toMyreview">
+							<div>도서 리뷰</div>
+						</a>
+					</div>
+					<div class="row p-2">
+						<div class="nav-item dropdown">
+							<a class="list nav-link dropdown-toggle p-0 fw-bolder" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 찜 목록 </a>
+							<div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+								<div>
+									<a class="dropdown-item" href="/member/toLikebook">도서</a>
+								</div>
+								<div>
+									<a class="dropdown-item" href="/member/toLikeclub">독서모임</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -135,7 +162,7 @@ th, td{
 	  						</c:if>
 						</tbody>
 					</table>
-					<div class="row p-0 m-0"">
+					<div class="row p-0 m-0">
 						<div class="col d-flex justify-content-end p-0 m-0">
 							<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
 						</div>
@@ -143,53 +170,58 @@ th, td{
 				</div>
 			</div>
 		</div>
+		
+		<!-- footer -->
+		<div class="footer">
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+		</div>
 	</div>
 	
-	<script>
-	// 체크박스 전체 체크/ 해제
-	$("#all").on("click", function(){
-		if(this.checked){
-			$(".deleteNo").prop("checked", true);
-			$(".deleteNo").click(function(e){
-				e.preventDefault();				
-			});
-		}else{ 
-			$(".deleteNo").prop("checked", false);
-			$(".deleteNo").unbind();
-		}
-	})
-	
-	// 찜 모임 삭제
-	$("#deleteBtn").on("click",function(){
-		let deleteArr = []; 
-		
-		let noArr = $(".deleteNo:checked"); 
-		for(let no of noArr){ 
-			deleteArr.push(no.value);
-		}
-		console.log(deleteArr);
-		
-		if (confirm("정말 삭제하시겠습니까?") == true) { // 삭제 확인
-			if(deleteArr.length > 0) {
-				$.ajax({
-					url : "/member/toDeleteLikeClub"
-					,type : "post"
-					, data : {"no[]" : deleteArr}
-					, success : function(){
-						location.href = "/member/toLikeclub";
-					}, error : function(e){
-						console.log(e);
-					}
-				})	
-			} else {
-				alert("선택된 모임이 없습니다.");
+	<script>	
+		// 체크박스 전체 체크/ 해제
+		$("#all").on("click", function(){
+			if(this.checked){
+				$(".deleteNo").prop("checked", true);
+				$(".deleteNo").click(function(e){
+					e.preventDefault();				
+				});
+			}else{ 
+				$(".deleteNo").prop("checked", false);
+				$(".deleteNo").unbind();
 			}
-		} else { // 삭제 취소
-			$("input:checkbox[id='deleteNo']").prop("checked", false);
-			return false;
-		}
+		})
 		
-	})
+		// 찜 모임 삭제
+		$("#deleteBtn").on("click",function(){
+			let deleteArr = []; 
+			
+			let noArr = $(".deleteNo:checked"); 
+			for(let no of noArr){ 
+				deleteArr.push(no.value);
+			}
+			console.log(deleteArr);
+			
+			if (confirm("정말 삭제하시겠습니까?") == true) { // 삭제 확인
+				if(deleteArr.length > 0) {
+					$.ajax({
+						url : "/member/toDeleteLikeClub"
+						,type : "post"
+						, data : {"no[]" : deleteArr}
+						, success : function(){
+							location.href = "/member/toLikeclub";
+						}, error : function(e){
+							console.log(e);
+						}
+					})	
+				} else {
+					alert("선택된 모임이 없습니다.");
+				}
+			} else { // 삭제 취소
+				$("input:checkbox[id='deleteNo']").prop("checked", false);
+				return false;
+			}
+			
+		})
 	</script>
 </body>
 
