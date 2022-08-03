@@ -133,10 +133,6 @@ public class BookclubDAO {
 		return session.selectList("roleMapper.selectRoleByRoom", room_id);
 	}
 	
-	//room_id 로 해당 멤버 닉네임 출력 (윤선)
-	public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
-		return session.selectList("roleMapper.selectNickByRoom" , room_id);
-	}
 
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception{
