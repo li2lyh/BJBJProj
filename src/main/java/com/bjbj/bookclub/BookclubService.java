@@ -232,7 +232,12 @@ public class BookclubService {
 	// 검색페이지 북클럽 검색
 	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
 		return dao.searchByTitle(keyword);
-		}
+	}
+	
+	// room_id 로 해당 멤버 닉네임 출력
+    public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
+        return dao.selectNickByRoom(room_id);
+    }
 	
 }
 

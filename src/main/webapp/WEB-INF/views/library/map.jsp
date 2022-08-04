@@ -20,7 +20,7 @@
 	crossorigin="anonymous"></script>
 <!-- Kakao Map API Script -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5fd402f6df39dff24bcbfe35ca0aca0f&libraries=services"></script>
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2d6408118d8e73e46ae000a50439ccb&libraries=services"></script>
 </head>
 <style>
 div {
@@ -110,7 +110,7 @@ div {
 			<div class="col-4">
 				
 				<div class="selectLocRange">
-				<button type="button" class="" id="myLocation">내위치</button>
+				<button type="button" class="btn btn-outline-primary" id="myLocation">내위치</button>
 					<select class="form-select area1" style="width: 100px; display:inline;" aria-label="Default select example">
 						<option selected>시도명</option>
 
