@@ -176,7 +176,7 @@ div textarea {
 										<label>비밀번호</label>
 									</div>
 									<div class="col-md-8">
-										<input type="password" class="form-control" id="password" name="password" value="${dto.password}" readonly>
+										<input type="password" class="form-control" id="password" name="password" value="${dto.password}">
 										<div class="invalid-feedback">비밀번호는 6~12자 이내로 입력해주세요. <br>(영어 대소문자, 숫자, ~!@#$만 입력)</div>								
 									</div>						
 								</div>
@@ -185,7 +185,7 @@ div textarea {
 										<label>비밀번호확인</label>
 									</div>
 									<div class="col-md-8">
-										<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}" readonly>
+										<input type="password" class="form-control" id="pwCheck" name="pwCheck" value="${dto.password}">
 									</div>
 								</div>
 								<div class="row p-2">
