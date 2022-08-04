@@ -43,36 +43,43 @@
 .head-container {
 	font-size: 20px;
 }
+
 /* ******** 로그인 영역 ******** */
 .loginBox {
 	margin-top: 1rem;
 }
+
 .loginBox a {
 	color: black;
 	text-decoration: none;
 }
+
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
 	height: 23rem;
 }
+
 /* 모달 body */
 .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
+
 .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
+
 .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
 
-
 /* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
 .etcBox {
 	font-size: 0.85rem;
+
+}
 
 /* 로그인 버튼 */
 .head-container .btnBox {
@@ -85,6 +92,7 @@
 	margin-right: 0.8rem;
 	width: 12rem;
 }
+
 /* Search 창 */
 input.underlineSearch {
 	width: 11rem;
@@ -94,27 +102,33 @@ input.underlineSearch {
 	border: 0;
 	border-bottom: 1px solid #2e2e2e;
 }
+
 input.underlineSearch:focus {
 	outline: none;
 }
+
 #searchIcon {
 	margin-bottom: 0.3rem;
 	width: 1.3rem;
 	height: 1.3rem;
 }
+
 /* ********비반응형 Nav 박스 ******** */
 /* navBox */
 .navBox-nonType {
 	width: 100%;
 }
+
 /* drop down */
 .navBox-nonType .nav {
 	width: auto;
 }
+
 .navBox-nonType .nav-item {
 	width: auto;
 	margin-left: 2rem;
 }
+
 .navBox-nonType .dropbtn {
 	background-color: #ffffff;
 	color: black;
@@ -124,10 +138,12 @@ input.underlineSearch:focus {
 	border: none;
 	text-align: center;
 }
+
 .navBox-nonType .dropdown {
 	position: relative;
 	display: inline-block;
 }
+
 .navBox-nonType .dropbtn+.dropdown-content {
 	display: none;
 	position: absolute;
@@ -140,6 +156,7 @@ input.underlineSearch:focus {
 	align-item: center;
 	background : white;
 }
+
 .navBox-nonType .dropdown-content a {
 	color: black;
 	width: inherit;
@@ -149,20 +166,20 @@ input.underlineSearch:focus {
 	
 	display: block;
 }
+
 .navBox-nonType .dropdown-content a:hover {
 	background-color: #ddd;
 }
+
 .navBox-nonType .dropdown:hover .dropdown-content {
 	display: block;
 
 }
+
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
 
-#btnClubBoard:hover {
-	cursor: pointer;
-}
 /* menuBox */
 .navBox-nonType .menuBox div {
 	height: 50%;
@@ -188,10 +205,6 @@ input.underlineSearch:focus {
 	cursor: pointer;
 }
 
-/*empty*/
-.empty{
-	height:80px;
-}
 
 </style>
 
@@ -200,6 +213,59 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
+			
+				<%-- <div class="res-1">
+				<!-- -------------- 반응형 -------------- -->
+					<!-- -------- 반응형 상단 Nav바 -------- -->
+					<div class="col-3 d-md-none justify-content-start"></div>
+					<!-- -------- 반응형 상단 Logo -------- -->
+					<div class="col-6 d-md-none justify-content-center">logo</div>
+	
+					<!-- -------- 반응형 상단 Content(login/mypage/search -------- -->
+					<!-- -------- 반응형 상단 회원 : 쪽지함/ 비회원 : Login -------- -->
+					<div class="col-1 d-md-none d-flex justify-content-start p-0">
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<!-- 로그인 : 쪽지함 -->
+								쪽지함
+							</c:when>
+							<c:otherwise>
+								<!-- 비로그인 : login -->
+								<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
+									로그인 </a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<!-- -------- 반응형 상단 myBook(마이페이지) -------- -->
+					<div class="col-1 d-md-none d-flex justify-content-start p-0">
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<!-- 로그인 : 마이페이지 -->
+								<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
+							</c:when>
+							<c:otherwise>
+								<!-- 비로그인 : mypage -->
+								<a href="#login" id="myBookBtn" data-bs-toggle="modal"
+									data-bs-target="#login">MyBook</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<!-- -------- 반응형 상단 회원 : 로그아웃/ 비회원 : 회원가입 -------- -->
+					<div class="col-1 d-md-none d-flex justify-content-start p-0">
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<!-- 로그인 : 로그아웃 -->
+								<a href="/member/logout" id="logout">로그아웃</a>
+							</c:when>
+							<c:otherwise>
+								<!-- 비로그인 : 회원가입 -->
+								<a href="/member/toSignUp" id="signUp">회원가입</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<!-- ------------------------------ 반응형 끝 ------------------------------ -->
+				</div> --%>
+
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
 				<div class="d-none d-md-block col-3 d-flex justify-content-start p-0" style="margin-right: 1.9rem;">
@@ -330,7 +396,6 @@ input.underlineSearch:focus {
 			<div class="col-8 p-0 ">
 				<div class="row justify-content-end">
 					<ul class="nav menuBox justify-content-end p-0">
-          
 					<!--  ---------- 관리자 아이디로 로그인 시 Admin 드롭버튼 보이기 -------- -->
 						<c:choose>
 							<c:when test="${loginSession.admin eq 'Y'}">
@@ -346,13 +411,10 @@ input.underlineSearch:focus {
 								</li>
 							</c:when>
 						</c:choose>
-
-						<!-- 관리자 로그인 시 끝  -->
-
 						<li class="nav-item">
-							<a href="/toIntroduce">
-								<button	class="dropbtn">Intro</button>
-							</a>
+						    <a href="/toIntroduce">
+						        <button class="dropbtn">Intro</button>
+						    </a>
 						</li>
 						<li class="nav-item dropdown">
 							<button class="dropbtn" id="">&nbspBook&nbsp</button>
@@ -420,7 +482,7 @@ input.underlineSearch:focus {
 			</div>
 		</div>
 	</div>
-  <div class="empty"></div>
+
 		<script>
 		/****************************************** 검색 기능 ************************************/
 		
@@ -434,7 +496,8 @@ input.underlineSearch:focus {
          }
          
          $("#searchForm").submit();
-      })   	
+      })   
+		
 		
 		/****************************************** 쪽지함 *****************************************/
 		// 주기적인 수신 쪽지 확인
@@ -474,7 +537,9 @@ input.underlineSearch:focus {
 		let option = "width=700, height=600, left=600, top=100";
 		window.open(url, name, option);
 	})
-
+	
+		
+		
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //
 		$(document).ready(function() {

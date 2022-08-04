@@ -17,18 +17,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>참여 독서 모임</title>
 <style>
-/* Contents */
-.header{
-	height: 20%;
+/* content 길이 */
+.content{
+	height: 1500px;
 }
 
-.body{
-	height: 80%;
-}
-
-.footer{
-	height: 20%;
-}
 /* 메뉴 */
 div a {
 	color: black;
@@ -92,8 +85,8 @@ li > .page-link:hover {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		
-		<!-- body -->
-		<div class="body p-0">
+		<!-- content -->
+		<div class="content p-0">
 			<div class="row border-bottom border-dark">
 				<h2>MyBook</h2>
 			</div>

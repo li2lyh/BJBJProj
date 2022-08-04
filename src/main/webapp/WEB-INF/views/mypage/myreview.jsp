@@ -18,18 +18,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>도서 리뷰</title>
 <style>
-/* Contents */
-.header{
-	height: 20%;
+/* content 길이 */
+.content{
+	height: 1200px;
 }
 
-.body{
-	height: 80%;
-}
-
-.footer{
-	height: 20%;
-}
 /* 메뉴 */
 div a {
 	color: black;
@@ -90,8 +83,8 @@ li > .page-link:hover {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		
-		<!-- body -->
-		<div class="body p-0">
+		<!-- content -->
+		<div class="content p-0">
 			<div class="row border-bottom border-dark">
 				<h2>MyBook</h2>
 			</div>
@@ -155,8 +148,7 @@ li > .page-link:hover {
 												<img src="/resources/images/noImg.png" id="noImg">
 											</c:when>
 											<c:otherwise>
-												<img src="/resources/images/noImg.png" id="noImg">
-											<%-- 	<img src="/profile/${dto.img_no}" id="reviewImg"> --%>
+												<img src="${dto.img_no}" id="reviewImg">
 											</c:otherwise>
 										</c:choose>
 									</div>
