@@ -52,6 +52,11 @@ div {
 	white-space: nowrap;
 }
 
+.bookTitle a{
+	text-decoration: none;
+	color:black;
+}
+
 .bookAuthor {
 	overflow: hidden;
 	text-overflow: ellipsis;
