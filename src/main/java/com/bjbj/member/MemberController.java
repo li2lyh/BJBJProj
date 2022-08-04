@@ -55,6 +55,9 @@ public class MemberController {
 		if (dto != null) { // 블랙리스트 O
 			return "blackList";
 		} else { // 블랙리스트 X
+			// 비밀번호 암호화
+			password = EncryptionUtils.getSHA512(password);
+			
 			dto = Mservice.login(email, password);
 			if (dto != null) {
 				session.setAttribute("loginSession", dto);
@@ -76,7 +79,6 @@ public class MemberController {
 				} else {
 					session.setAttribute("roleSession", null);
 				}
-
 				return "success";
 			} else {
 				return "fail";
@@ -169,6 +171,13 @@ public class MemberController {
 	@RequestMapping(value = "/signUp")
 	public String signUp(MemberDTO dto) throws Exception {
 		System.out.println(dto.toString());
+		
+		//비밀번호 암호화
+		String password = dto.getPassword();
+		password = EncryptionUtils.getSHA512(password);
+		dto.setPassword(password);
+		
+		//회원가입
 		Mservice.signUp(dto);
 		return "redirect:/";
 	}
@@ -187,8 +196,16 @@ public class MemberController {
 	public String kakaoSingUp(MemberDTO dto) throws Exception {
 		System.out.println("카카오 회원가입 요청");
 		if (dto.getPassword() == "") {
+			// 랜덤으로 비밀번호 생성
 			String ranPw = Mservice.makePw(dto.getEmail());
+			
+			// 비밀번호 암호화
+			ranPw = EncryptionUtils.getSHA512(ranPw);
+			
+			// 비밀번호 설정
 			dto.setPassword(ranPw);
+			
+			
 		}
 		System.out.println(dto.toString());
 		Mservice.signUp(dto);

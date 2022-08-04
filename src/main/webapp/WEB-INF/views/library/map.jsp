@@ -20,11 +20,20 @@
 	crossorigin="anonymous"></script>
 <!-- Kakao Map API Script -->
 <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2d6408118d8e73e46ae000a50439ccb&libraries=services"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2d6408118d8e73e46ae000a50439ccb&libraries=services"></script>
 </head>
 <style>
 div {
 	border: 0px solid gray;
+}
+
+/*content-container*/
+.content-container {
+	margin-top: 2rem;
+	margin-bottom : 5rem;
+	padding-left: 6rem;
+	padding-right: 6rem;
+	
 }
 
 .map_wrap {
@@ -93,38 +102,39 @@ div {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		<!------------------------------------- main content ----------------------------------->
-		<div class="titleBox">
-			<h1>Library</h1>
-			<span>주변 도서관 정보를 보여줍니다. 모임을 할 장소를 찾아보세요!</span>
-		</div>
-		
-		<div class="row">
-			<div class="col-8">
-				<div class="map_wrap">
-					<div id="map"></div>
-					<div class="hAddr">
-						<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
-					</div>
-				</div>
+		<div class="content-container">
+			<div class="titleBox">
+				<h1>Library</h1>
+				<span>주변 도서관 정보를 보여줍니다. 모임을 할 장소를 찾아보세요!</span>
 			</div>
+
+			
+			<div class="row">
+				<div class="col-8">
+					<div class="map_wrap">
+						<div id="map"></div>
+						<div class="hAddr">
+							<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
+						</div>
+					</div>
+
 			<div class="col-4">
-				
 				<div class="selectLocRange">
-				<button type="button" class="btn btn-outline-primary" id="myLocation">내위치</button>
 					<select class="form-select area1" style="width: 100px; display:inline;" aria-label="Default select example">
 						<option selected>시도명</option>
-
 					</select>
 					<select class="form-select area2" style="width: auto; display:inline;" aria-label="Default select example">
 						<option selected>시군구명</option>
 					</select>
+
 				</div>
-				<div class="loc_list">
-					<div class="loc_item">
-						<span><a href="#">도서관 이름</a></span>
-						<span>10:00 ~ 18:00 운영시간</span>
-						<span style="display: block;">인천광역시 미추홀구 석정로 462</span>
-						<span>연락처</span>
+					<div class="loc_list">
+						<div class="loc_item">
+							<span><a href="#">도서관 이름</a></span>
+							<span>10:00 ~ 18:00 운영시간</span>
+							<span style="display: block;">인천광역시 미추홀구 석정로 462</span>
+							<span>연락처</span>
+						</div>
 					</div>
 				</div>
 			</div>

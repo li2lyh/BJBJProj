@@ -134,7 +134,7 @@ font-weight:bold;
 <body>
 
 	<div class="container">
-	
+	<%-- *************************** header *************************** --%>
 	<div class="header">
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
@@ -281,7 +281,7 @@ font-weight:bold;
 						</c:if>
 			</div>
 		</div>
-
+<%-- *************************** footer *************************** --%>
 <div class=footer>
 		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	</div>

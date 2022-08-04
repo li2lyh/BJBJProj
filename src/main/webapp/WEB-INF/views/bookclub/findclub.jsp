@@ -27,6 +27,13 @@
 	text-align: left;
 }
 
+/*content-container*/
+.content-container {
+	margin-top: 2rem;
+	padding-left: 3rem;
+	padding-right: 3rem;
+}
+
 h4 {
 	text-align: left;
 }
@@ -132,11 +139,12 @@ cursor:pointer;
 </head>
 <body>
 	<div class="container">
-	
+	<%-- *************************** header *************************** --%>
 	<div class="header">
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 	</div>
-
+	<%-- *************************** content-container *************************** --%>
+	<div class="content-container">
 		<div class="row">
 			<div class="col">
 				<h3 id="head">BookClub</h3>
@@ -228,7 +236,8 @@ cursor:pointer;
 				</c:forEach>
 			</c:if>
 		</div>
-
+	</div>
+	
     <div class=footer>
         <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
     </div>

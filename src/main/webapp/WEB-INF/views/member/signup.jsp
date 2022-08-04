@@ -258,7 +258,7 @@ body {
 							<input type="text" class="form-control" id="verifyNum"
 								maxlength="4" placeholder="인증번호">
 						</div>
-						<div class="col-3 checkPhone p-0">
+						<div class="col-3 checkPhone p-0 d-flex justify-content-end">
 							<button type="button" id="completeBtn"
 								class="btn btn-outline-secondary">확인</button>
 						</div>

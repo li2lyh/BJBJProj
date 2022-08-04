@@ -20,6 +20,14 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <style>
+/*content-container*/
+.content-container {
+	margin-top: 2rem;
+	padding-left: 6rem;
+	padding-right: 6rem;
+}
+
+
 div {
 	border: 0px solid grey;
 }
@@ -144,6 +152,7 @@ div {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		<!------------------------------- main content ------------------------------->
+		<div class="content-container">
 		<div class="titleBox">
 			<h1>베스트셀러 Bestseller</h1>
 			<span>지금 북적북적에서는 이 책들을 읽고 있어요!</span>
@@ -1060,7 +1069,7 @@ div {
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 			</button>
 		</div>
-
+</div>
 		<!---------------------------------- footer ---------------------------------->
 		<div class="footer">
 			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>

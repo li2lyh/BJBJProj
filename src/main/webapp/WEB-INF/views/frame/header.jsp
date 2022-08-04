@@ -43,6 +43,7 @@
 /* ******** 기준 ******** */
 .head-container {
 	font-size: 20px;
+	margin-bottom : 2rem;
 }
 
 /* ******** 로그인 영역 ******** */
@@ -56,29 +57,28 @@
 }
 
 /* 로그인 모달 */
-.modal-content {
-	width: 43rem;
-	height: 23rem;
-}
 
 /* 모달 body */
-.modal-body {
+#login .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
 
-.modal-body .logintitle {
+
+#login .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
 
-.modal-body .inputBox input {
+#login .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
 
 /* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
-.etcBox {
-	font-size: 0.85rem;
+.etcBox{
+	font-size: 0.75rem;
+
+}
 
 }
 
@@ -214,7 +214,6 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
-		
 
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
@@ -272,7 +271,7 @@ input.underlineSearch:focus {
 											<div class="col-4 d-flex justify-content-end p-0">
 												<a href="/member/toFindInfo">아이디/비밀번호 찾기</a>
 											</div>
-											<div class="col-2 d-flex justify-content-end">
+											<div class="col-2 d-flex justify-content-center p-0">
 												<a href="/member/toSignUp" id="signUp">회원가입</a>
 											</div>
 										</div>

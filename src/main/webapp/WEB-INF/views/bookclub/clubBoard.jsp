@@ -426,7 +426,7 @@ table{
 			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 		</div>
 	
-		      
+	</div>	      
 		<%-- 회원 신고하기 Modal --%>
 		<form id="reportForm" action="/club/report" method="post">
 			<div class="modal" id="reportModal">
