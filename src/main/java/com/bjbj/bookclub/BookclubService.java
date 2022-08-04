@@ -239,5 +239,9 @@ public class BookclubService {
         return dao.selectNickByRoom(room_id);
     }
 	
+	// room_id 에 따른 닉네임 리스트 (모임원 신고 기능을 위한 작업)
+    public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
+        return dao.selectNickByRoom(room_id);
+    }
 }
 

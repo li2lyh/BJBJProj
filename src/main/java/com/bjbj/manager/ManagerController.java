@@ -131,15 +131,16 @@ public class ManagerController {
 	
 	@ResponseBody
 	@RequestMapping(value="/toSearchBookclub") // 모임 검색
-	public List<BookclubDTO> searchBookclub(String category, String keyword)throws Exception{
-		System.out.println("category : " + category);
-		System.out.println("keyword : " + keyword );
-		
-		List<BookclubDTO>list = service.searchBookclub(category, keyword);		
-
-		return list;
-				
-	}
+	public List<Map<String, Object>> searchBookclub(String category, String keyword)throws Exception{
+	     System.out.println("category : " + category);
+	     System.out.println("keyword : " + keyword );
+	   
+	     List<Map<String, Object>>list = service.searchBookclub(category, keyword);      
+	     
+	      System.out.println(list);
+	      return list;
+	            
+	   }
 	
 	@RequestMapping(value="/deleteBookroom") // 모임 개별 삭제 
 	public String deleteBookroom(int room_id)throws Exception{

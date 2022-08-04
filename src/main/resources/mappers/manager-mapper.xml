@@ -60,14 +60,13 @@
 <select id="selectBookroom" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
 	select * from bookroom join role using(room_id) where role='L'
 </select>
+
 <!-- 모임 검색 -->
 <select id="searchBookclub" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
 	select * from bookroom join role using(room_id) where role='L'
-		and ${category} like '%' || #{keyword} || '%'
-		
-		<!-- role 이 L 일때 -->
-		
+		and ${category} like '%' || #{keyword} || '%'	
 </select>
+
 <!-- 모임 개별 삭제 -->
 <delete id= "deleteBookroom" parameterType="int">
 	delete from bookroom 
