@@ -25,7 +25,7 @@
 
 .contentBox {
 	margin-top: 7rem;
-	margin-bottom: 5rem;
+	margin-bottom: 10rem;
 	padding-left: 6rem;
 	padding-right: 6rem;
 }
