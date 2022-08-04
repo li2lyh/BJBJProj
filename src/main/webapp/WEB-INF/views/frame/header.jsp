@@ -26,6 +26,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
+
 </head>
 <style>
 /*폰트*/
@@ -43,36 +44,43 @@
 .head-container {
 	font-size: 20px;
 }
+
 /* ******** 로그인 영역 ******** */
 .loginBox {
 	margin-top: 1rem;
 }
+
 .loginBox a {
 	color: black;
 	text-decoration: none;
 }
+
 /* 로그인 모달 */
 .modal-content {
 	width: 43rem;
 	height: 23rem;
 }
+
 /* 모달 body */
 .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
+
 .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
+
 .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
 
-
 /* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
 .etcBox {
 	font-size: 0.85rem;
+
+}
 
 /* 로그인 버튼 */
 .head-container .btnBox {
@@ -85,36 +93,43 @@
 	margin-right: 0.8rem;
 	width: 12rem;
 }
+
 /* Search 창 */
 input.underlineSearch {
-	width: 11rem;
+	width: 10rem;
 	height: 1.3rem;
 	padding-left: 0.5rem;
 	padding-right:0.5rem;
 	border: 0;
 	border-bottom: 1px solid #2e2e2e;
 }
+
 input.underlineSearch:focus {
 	outline: none;
 }
+
 #searchIcon {
 	margin-bottom: 0.3rem;
 	width: 1.3rem;
 	height: 1.3rem;
 }
+
 /* ********비반응형 Nav 박스 ******** */
 /* navBox */
 .navBox-nonType {
 	width: 100%;
 }
+
 /* drop down */
 .navBox-nonType .nav {
 	width: auto;
 }
+
 .navBox-nonType .nav-item {
 	width: auto;
 	margin-left: 2rem;
 }
+
 .navBox-nonType .dropbtn {
 	background-color: #ffffff;
 	color: black;
@@ -124,15 +139,17 @@ input.underlineSearch:focus {
 	border: none;
 	text-align: center;
 }
+
 .navBox-nonType .dropdown {
 	position: relative;
 	display: inline-block;
 }
+
 .navBox-nonType .dropbtn+.dropdown-content {
 	display: none;
 	position: absolute;
 	width: 8.5rem;
-	height: 5.5rem;
+	height: auto;
 	min-width: auto;
 	z-index: 1;
 	font-size: 1rem;
@@ -140,6 +157,7 @@ input.underlineSearch:focus {
 	align-item: center;
 	background : white;
 }
+
 .navBox-nonType .dropdown-content a {
 	color: black;
 	width: inherit;
@@ -149,20 +167,20 @@ input.underlineSearch:focus {
 	
 	display: block;
 }
+
 .navBox-nonType .dropdown-content a:hover {
 	background-color: #ddd;
 }
+
 .navBox-nonType .dropdown:hover .dropdown-content {
 	display: block;
 
 }
+
 .navBox-nonType .dropdown:hover .dropbtn {
 	background-color: #ffffff;
 }
 
-#btnClubBoard:hover {
-	cursor: pointer;
-}
 /* menuBox */
 .navBox-nonType .menuBox div {
 	height: 50%;
@@ -188,10 +206,6 @@ input.underlineSearch:focus {
 	cursor: pointer;
 }
 
-/*empty*/
-.empty{
-	height:80px;
-}
 
 </style>
 
@@ -200,9 +214,11 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
+
+
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
-				<div class="d-none d-md-block col-3 d-flex justify-content-start p-0" style="margin-right: 1.9rem;">
+				<div class="col-3 d-flex justify-content-end p-0" style="margin-right: 1.9rem;">
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -281,7 +297,7 @@ input.underlineSearch:focus {
 					</div>
 				</div>
 				<!-- -------------- myBook -------------- -->
-				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+				<div class="col-1 d-flex justify-content-center p-0"
 					style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -294,7 +310,7 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- SignUp/LogOut -------------- -->
-				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+				<div class="col-1 d-flex justify-content-center p-0"
 						style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -306,7 +322,7 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
-            	<div class="d-none d-md-block col-2 d-flex justify-content-between p-0">
+            	<div class="col-2 d-flex justify-content-end p-0">
             		<form action="/search" method="get" id="searchForm">
                			<input type="text" class="underlineSearch" name="text"> 
                			<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchIcon">
@@ -318,10 +334,10 @@ input.underlineSearch:focus {
 
 		<!-- -------------- Logo, nav 영역 -------------- -->
 
-		<div class="navBox-nonType row d-none d-md-inline-flex justify-content-between align-items-end">
+		<div class="navBox-nonType row justify-content-between align-items-end">
 			<!-- ***** 비반응형 : Logo ***** -->
 			<div class="col-4 p-0 d-flex justify-content-center">
-				<div class="logo 	">
+				<div class="logo">
 					<a href="/"><img src="/resources/images/logo.png" style="width: 10rem;"></a>
 				</div>
 			</div>
@@ -330,7 +346,6 @@ input.underlineSearch:focus {
 			<div class="col-8 p-0 ">
 				<div class="row justify-content-end">
 					<ul class="nav menuBox justify-content-end p-0">
-          
 					<!--  ---------- 관리자 아이디로 로그인 시 Admin 드롭버튼 보이기 -------- -->
 						<c:choose>
 							<c:when test="${loginSession.admin eq 'Y'}">
@@ -346,9 +361,6 @@ input.underlineSearch:focus {
 								</li>
 							</c:when>
 						</c:choose>
-
-						<!-- 관리자 로그인 시 끝  -->
-
 						<li class="nav-item">
 							<a href="/toIntroduce">
 								<button	class="dropbtn">Intro</button>
@@ -420,7 +432,7 @@ input.underlineSearch:focus {
 			</div>
 		</div>
 	</div>
-  <div class="empty"></div>
+
 		<script>
 		/****************************************** 검색 기능 ************************************/
 		
@@ -434,7 +446,8 @@ input.underlineSearch:focus {
          }
          
          $("#searchForm").submit();
-      })   	
+      })   
+		
 		
 		/****************************************** 쪽지함 *****************************************/
 		// 주기적인 수신 쪽지 확인
@@ -474,7 +487,9 @@ input.underlineSearch:focus {
 		let option = "width=700, height=600, left=600, top=100";
 		window.open(url, name, option);
 	})
-
+	
+		
+		
 		/****************************************** 아이디 기억하기 ************************************/
 		// 아이디, 체크박스 영역 //
 		$(document).ready(function() {

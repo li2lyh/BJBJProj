@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bjbj.bookclub.BookclubDTO;
 import com.bjbj.member.MemberDTO;
 import com.bjbj.review.ReviewDTO;
 
@@ -76,10 +75,21 @@ public class ManagerService {
 		return list;
 	}
 	//모임 검색
-	public List<BookclubDTO>searchBookclub(String category, String keyword)throws Exception{
-		List<BookclubDTO> list = dao.searchBookclub(category, keyword);
+	public List<Map<String, Object>>searchBookclub(String category, String keyword)throws Exception{
+		List<Map<String, Object>> list = dao.searchBookclub(category, keyword);
+		
+		for(Map map : list) {
 
-		return dao.searchBookclub(category, keyword);
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			Timestamp open_date = (Timestamp)map.get("open_date");
+			Timestamp close_date = (Timestamp)map.get("close_date");
+			
+			map.put("open_date" , sdf.format(open_date));
+			map.put("close_date" , sdf.format(close_date));
+		
+		}
+		return list;
+		//return dao.searchBookclub(category, keyword);
 	}
 	
 	// 모임 개별 삭제 

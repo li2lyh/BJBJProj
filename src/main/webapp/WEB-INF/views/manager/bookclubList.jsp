@@ -142,7 +142,7 @@
 			</div>
 			<div class="col-9 rightPage">
 				<div class="reportContainer">
-					<form id="searchForm">
+					<form id="searchclubForm">
 					<div class="row">
 						<div class="col-5">
 							<h3>전체 모임</h3>
@@ -240,7 +240,7 @@
 		<script>
 			//모임 검색
 			$(".searchBtn").on("click", function(){
-				let data = $("#searchForm").serialize();
+				let data = $("#searchclubForm").serialize();
 				console.log(data);
 				
 				$.ajax({
