@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.bjbj.manager.ReportDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/manager/ReportDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="261" x="4007" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.bjbj.bookclub.WaitingDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/WaitingDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="163" x="4886" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.bjbj.books.LikeBookDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/books/LikeBookDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="250" x="2766" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.bjbj.bookclub.BookclubService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/BookclubService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="855" width="317" x="4527" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.bjbj.books.BookController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/books/BookController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="185" x="3103" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.bjbj.file.FileDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/file/FileDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="144" x="1738" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.bjbj.bookclub.BookclubDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/BookclubDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1071" width="538" x="4308" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.bjbj.manager.ManagerService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/manager/ManagerService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="268" x="3859" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.bjbj.review.ReviewController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/review/ReviewController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="246" x="1976" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.bjbj.member.MailService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/member/MailService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="226" x="1943" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.bjbj.bookclub.RoleDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/RoleDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="149" x="6232" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.bjbj.file.FileService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/file/FileService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="144" x="1513" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.bjbj.letter.LetterDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/letter/LetterDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="232" x="5958" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.bjbj.calendar.CalendarDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/calendar/CalendarDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="200" x="6468" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.bjbj.clubboard.ClubBoardService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/clubboard/ClubBoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="126" x="661" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.bjbj.member.MemberService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/member/MemberService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="220" x="3599" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.bjbj.home.HomeController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/home/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="158" x="4021" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.bjbj.manager.BlacklistDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/manager/BlacklistDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="198" x="3056" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.bjbj.calendar.CalendarService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/calendar/CalendarService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="200" x="6489" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.bjbj.bookclub.BookclubController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/BookclubController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="243" x="4527" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.bjbj.bookclub.LikeClubDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/LikeClubDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="137" x="5737" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.bjbj.clubboard.ClubBoardController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/clubboard/ClubBoardController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="139" x="827" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.bjbj.utils.EncryptionUtils" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/utils/EncryptionUtils.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="148" x="2539" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.bjbj.review.ReviewService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/review/ReviewService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="269" x="2209" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.bjbj.member.MailController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/member/MailController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="187" x="3328" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.bjbj.manager.ManagerController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/manager/ManagerController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="268" x="4219" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.bjbj.review.ReviewDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/review/ReviewDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="238" x="2150" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.bjbj.clubboard.ClubBoardDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/clubboard/ClubBoardDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="108" x="1006" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.bjbj.member.MemberDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/member/MemberDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="338" x="3294" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.bjbj.calendar.CalendarDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/calendar/CalendarDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="693" width="381" x="6710" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.bjbj.manager.ManagerDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/manager/ManagerDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="268" x="3570" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.bjbj.books.LikeBookDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/books/LikeBookDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="197" x="2925" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.bjbj.utils.Pagination" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/utils/Pagination.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="621" width="147" x="2727" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.bjbj.calendar.CalendarController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/calendar/CalendarController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="182" x="6295" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.bjbj.letter.LetterDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/letter/LetterDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="249" x="6421" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="com.bjbj.utils.Scheduler" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/utils/Scheduler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="133" x="5541" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.bjbj.bookclub.BookclubDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/BookclubDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="873" width="317" x="4926" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.bjbj.file.FileDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/file/FileDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="151" x="1738" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="com.bjbj.library.LibraryController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/library/LibraryController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="239" x="1697" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.bjbj.bookclub.ExpirationDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/ExpirationDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="765" width="403" x="5089" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.bjbj.library.LibraryService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/library/LibraryService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="185" x="1697" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="com.bjbj.manager.ReportBookroomDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/manager/ReportBookroomDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="295" x="3672" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="com.bjbj.clubboard.ClubBoardDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/clubboard/ClubBoardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="107" x="1154" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="com.bjbj.member.MemberDAO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/member/MemberDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="220" x="3920" y="1660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="com.bjbj.bookclub.BoardDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/BoardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="278" x="5914" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="com.bjbj.bookclub.ExpirationRoleDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/bookclub/ExpirationRoleDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="165" x="5532" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.bjbj.books.BookService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/books/BookService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="240" x="3143" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="com.bjbj.review.ReviewDTO" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/review/ReviewDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="585" width="317" x="2409" y="2573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="com.bjbj.utils.Pagination2" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/utils/Pagination2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="621" width="147" x="2914" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="com.bjbj.letter.LetterService" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/letter/LetterService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="232" x="5665" y="765"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="com.bjbj.utils.AuthLoginInterceptor" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/utils/AuthLoginInterceptor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="356" x="1301" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="com.bjbj.member.MemberController" project="BJBJProj" 
+    file="/BJBJProj/src/main/java/com/bjbj/member/MemberController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="639" width="228" x="3753" y="86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="53">    
+    <bendpoint x="4895" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <association id="55">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="56" name="Bservice"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="59" name="dao"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="61">    
+    <bendpoint x="3091" y="765"/>    
+    <bendpoint x="2749" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <dependency id="62">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <association id="63">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="64" name="service"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="66">    
+    <bendpoint x="6698" y="1660"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="67">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="68">    
+    <bendpoint x="5466" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <dependency id="69">    
+    <bendpoint x="3518" y="1660"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="70">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="71">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="72">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="73">    
+    <bendpoint x="4443" y="765"/>    
+    <bendpoint x="4296" y="1660"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="74">    
+    <bendpoint x="3413" y="765"/>    
+    <bendpoint x="2894" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <dependency id="75">    
+    <bendpoint x="4233" y="765"/>    
+    <bendpoint x="4275" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <association id="76">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="77" name="memberDao"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="80" name="clubService"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="82">    
+    <bendpoint x="5550" y="765"/>    
+    <bendpoint x="5508" y="1660"/>    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <association id="83">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="84" name="service"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="86">    
+    <bendpoint x="4401" y="765"/>    
+    <bendpoint x="4338" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="87">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="88" name="clubService"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="91" name="service"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="94" name="service"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="96">    
+    <bendpoint x="5508" y="765"/>    
+    <bendpoint x="5613" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <association id="97">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="98" name="letterService"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="100">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="101">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="102" name="Mservice"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="104">    
+    <bendpoint x="2508" y="765"/>    
+    <bendpoint x="2770" y="1660"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="105">    
+    <bendpoint x="3497" y="765"/>    
+    <bendpoint x="3476" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="106">    
+    <bendpoint x="4380" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <dependency id="107">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="108">    
+    <bendpoint x="5592" y="765"/>    
+    <bendpoint x="5592" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <dependency id="109">    
+    <bendpoint x="4254" y="765"/>    
+    <bendpoint x="4254" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="110">    
+    <bendpoint x="5927" y="765"/>    
+    <bendpoint x="5927" y="1660"/>    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="111">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <dependency id="112">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="113">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="114" name="memberDAO"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="116">    
+    <bendpoint x="1982" y="1660"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <association id="117">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="118" name="Rservice"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="120">    
+    <bendpoint x="3497" y="1660"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="121">    
+    <bendpoint x="5487" y="765"/>    
+    <bendpoint x="5445" y="1660"/>    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <association id="122">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="123" name="Bservice"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="125">    
+    <bendpoint x="5634" y="765"/>    
+    <bendpoint x="5634" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="126">    
+    <bendpoint x="5273" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <association id="127">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="128" name="service"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="130">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="131">    
+    <bendpoint x="4359" y="765"/>    
+    <bendpoint x="4359" y="1660"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="132">    
+    <bendpoint x="6283" y="765"/>    
+    <bendpoint x="6283" y="1660"/>    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="133">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="134">    
+    <bendpoint x="4212" y="1660"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <association id="135">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="136" name="memberService"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="138">    
+    <bendpoint x="5487" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="139">    
+    <bendpoint x="1912" y="765"/>    
+    <bendpoint x="1912" y="1660"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <association id="140">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="141" name="service"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="143">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <association id="144">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="145" name="dao"/>      
+      <multiplicity id="146" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="147">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="148" name="fileDao"/>      
+      <multiplicity id="149" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="150">    
+    <bendpoint x="4285" y="765"/>    
+    <bendpoint x="4317" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="151">    
+    <bendpoint x="4464" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="152">    
+    <bendpoint x="4422" y="765"/>    
+    <bendpoint x="4401" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="153">    
+    <bendpoint x="2418" y="1660"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <association id="154">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="155" name="Lservice"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="157">    
+    <bendpoint x="4485" y="765"/>    
+    <bendpoint x="4485" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="158">    
+    <bendpoint x="1635" y="1660"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <association id="159">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="160" name="clubService"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="163" name="dao"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="165">    
+    <bendpoint x="3152" y="1660"/>    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="166">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <dependency id="167">    
+    <bendpoint x="4170" y="765"/>    
+    <bendpoint x="4170" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <dependency id="168">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="169">    
+    <bendpoint x="6262" y="765"/>    
+    <bendpoint x="6262" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="170">    
+    <bendpoint x="5466" y="765"/>    
+    <bendpoint x="5571" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="171">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="49"/>  
+  </dependency>  
+  <dependency id="172">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <dependency id="173">    
+    <bendpoint x="4191" y="1660"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="174">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="175">    
+    <bendpoint x="4443" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="176">    
+    <bendpoint x="5529" y="765"/>    
+    <bendpoint x="5529" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="177">    
+    <bendpoint x="3434" y="1660"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="48"/>  
+  </dependency>  
+  <association id="178">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="179" name="dao"/>      
+      <multiplicity id="180" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="181">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <association id="182">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="183" name="dao"/>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="185">    
+    <bendpoint x="4338" y="765"/>    
+    <bendpoint x="4422" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="40"/>  
+  </dependency>  
+  <dependency id="186">    
+    <bendpoint x="4380" y="765"/>    
+    <bendpoint x="4506" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <association id="187">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="188" name="memberService"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="190">    
+    <bendpoint x="5294" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <association id="191">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="192" name="dao"/>      
+      <multiplicity id="193" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="194">    
+    <bendpoint x="3112" y="765"/>    
+    <bendpoint x="3173" y="1660"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="195">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <dependency id="196">    
+    <bendpoint x="6719" y="765"/>    
+    <bendpoint x="6719" y="1660"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="197">    
+    <bendpoint x="4191" y="765"/>    
+    <bendpoint x="3889" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="198">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="199" name="mailService"/>      
+      <multiplicity id="200" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="202" name="LBservice"/>      
+      <multiplicity id="203" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="204">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="205" name="dao"/>      
+      <multiplicity id="206" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="207">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="208" name="service"/>      
+      <multiplicity id="209" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="211" name="letterService"/>      
+      <multiplicity id="212" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="213">    
+    <bendpoint x="4874" y="765"/>    
+    <bendpoint x="4874" y="1660"/>    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="214">    
+    <bendpoint x="3539" y="1660"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="215">    
+    <bendpoint x="6220" y="1660"/>    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="35"/>  
+  </dependency>  
+  <dependency id="216">    
+    <bendpoint x="5315" y="1660"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="217">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="218">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <association id="219">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="220" name="Lservice"/>      
+      <multiplicity id="221" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="222">    
+    <bendpoint x="3455" y="765"/>    
+    <bendpoint x="3455" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="223">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="224" name="memberService"/>      
+      <multiplicity id="225" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="226">    
+    <bendpoint x="6304" y="765"/>    
+    <bendpoint x="6241" y="1660"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="227">    
+    <bendpoint x="5445" y="765"/>    
+    <bendpoint x="5550" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="228">    
+    <bendpoint x="3476" y="765"/>    
+    <bendpoint x="3413" y="1660"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="229">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="230">    
+    <bendpoint x="3434" y="765"/>    
+    <bendpoint x="3392" y="1660"/>    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="231">    
+    <bendpoint x="4306" y="765"/>    
+    <bendpoint x="4233" y="1660"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <dependency id="232">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="233">    
+    <bendpoint x="3868" y="1660"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
