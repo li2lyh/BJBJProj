@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bjbj.member.MemberDTO;
+
 @Controller
 @RequestMapping(value = "/review")
 public class ReviewController {
@@ -25,6 +27,9 @@ public class ReviewController {
 	@RequestMapping(value = "/board")
 	public String toReviewBoard(Model model) throws Exception {
 		List<Map<String, Object>> boardList = service.selectAllReview();
+		
+		
+		
 		model.addAttribute("list", boardList);
 		return "/review/board";
 	}
@@ -46,8 +51,12 @@ public class ReviewController {
 	// 리뷰 작성 요청
 	@RequestMapping(value = "/writeProc")
 	public String insertReview(ReviewDTO dto, MultipartFile file) throws Exception {
-		System.out.println(dto.toString());
 		String path = session.getServletContext().getRealPath("photo");
+		String email = ((MemberDTO) (session.getAttribute("loginSession"))).getEmail();
+		String nickname = ((MemberDTO) (session.getAttribute("loginSession"))).getNickname();
+		dto.setEmail(email);
+		dto.setNickname(nickname);
+		
 		service.insertReview(dto, path, file);
 		
 		return "redirect:/review/board";
