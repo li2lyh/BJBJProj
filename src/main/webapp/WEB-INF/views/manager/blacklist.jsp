@@ -101,7 +101,7 @@
             </div>
 				<div class="col-9 rightPage">
 					<div class="reportContainer">
-						<form id="searchForm">
+						<form id="searchBlackForm">
 						<div class="row">
 							<div class="col-5">
 								<h3>블랙리스트</h3>
@@ -170,7 +170,7 @@
 
 		//검색
 		$(".searchBtn").on("click", function(){
-			let data = $("#searchForm").serialize();
+			let data = $("#searchBlackForm").serialize();
 			console.log(data);
 			
 			$.ajax({
