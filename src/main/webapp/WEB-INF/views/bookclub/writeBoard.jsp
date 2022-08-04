@@ -75,10 +75,15 @@ resize:none;
 </style>
 </head>
 <body>
-	<form action="/club/write" id="submitForm" method="post"
-		enctype="multipart/form-data">
-		<div class="container">
 
+	<div class="container">
+	<%-- *************************** header *************************** --%>
+	    <div class="header">
+			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+		</div>
+	<%-- *************************** header 끝 *************************** --%>
+		<form action="/club/write" id="submitForm" method="post"
+		enctype="multipart/form-data">
 			<div class="row">
 				<div class="col">
 					<h3 id="head">BookClub</h3>
@@ -118,8 +123,15 @@ resize:none;
 					<button type="button" class="btn btn-primary m-1 btn-lg" id="write">등록</button>
 				</div>
 			</div>
+		</form>
+		
+		<%-- *************************** footer *************************** --%>
+        <div class=footer>
+			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 		</div>
-	</form>
+		
+	</div>
+
 	<script>
 		
 	

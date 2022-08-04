@@ -26,6 +26,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
+
 </head>
 <style>
 /*폰트*/
@@ -42,6 +43,7 @@
 /* ******** 기준 ******** */
 .head-container {
 	font-size: 20px;
+	margin-bottom : 2rem;
 }
 
 /* ******** 로그인 영역 ******** */
@@ -55,29 +57,28 @@
 }
 
 /* 로그인 모달 */
-.modal-content {
-	width: 43rem;
-	height: 23rem;
-}
 
 /* 모달 body */
-.modal-body {
+#login .modal-body {
 	padding-top: 2rem;
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
 
-.modal-body .logintitle {
+
+#login .modal-body .logintitle {
 	padding-bottom: 0.9rem;
 }
 
-.modal-body .inputBox input {
+#login .modal-body .inputBox input {
 	margin-bottom: 0.5rem;
 }
 
 /* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
-.etcBox {
-	font-size: 0.85rem;
+.etcBox{
+	font-size: 0.75rem;
+
+}
 
 }
 
@@ -95,7 +96,7 @@
 
 /* Search 창 */
 input.underlineSearch {
-	width: 11rem;
+	width: 10rem;
 	height: 1.3rem;
 	padding-left: 0.5rem;
 	padding-right:0.5rem;
@@ -148,7 +149,7 @@ input.underlineSearch:focus {
 	display: none;
 	position: absolute;
 	width: 8.5rem;
-	height: 5.5rem;
+	height: auto;
 	min-width: auto;
 	z-index: 1;
 	font-size: 1rem;
@@ -213,62 +214,10 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
-			
-				<%-- <div class="res-1">
-				<!-- -------------- 반응형 -------------- -->
-					<!-- -------- 반응형 상단 Nav바 -------- -->
-					<div class="col-3 d-md-none justify-content-start"></div>
-					<!-- -------- 반응형 상단 Logo -------- -->
-					<div class="col-6 d-md-none justify-content-center">logo</div>
-	
-					<!-- -------- 반응형 상단 Content(login/mypage/search -------- -->
-					<!-- -------- 반응형 상단 회원 : 쪽지함/ 비회원 : Login -------- -->
-					<div class="col-1 d-md-none d-flex justify-content-start p-0">
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<!-- 로그인 : 쪽지함 -->
-								쪽지함
-							</c:when>
-							<c:otherwise>
-								<!-- 비로그인 : login -->
-								<a href="#login" data-bs-toggle="modal" data-bs-target="#login">
-									로그인 </a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<!-- -------- 반응형 상단 myBook(마이페이지) -------- -->
-					<div class="col-1 d-md-none d-flex justify-content-start p-0">
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<!-- 로그인 : 마이페이지 -->
-								<a href="/member/toMyinfo" id="myBookBtn">MyBook</a>
-							</c:when>
-							<c:otherwise>
-								<!-- 비로그인 : mypage -->
-								<a href="#login" id="myBookBtn" data-bs-toggle="modal"
-									data-bs-target="#login">MyBook</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<!-- -------- 반응형 상단 회원 : 로그아웃/ 비회원 : 회원가입 -------- -->
-					<div class="col-1 d-md-none d-flex justify-content-start p-0">
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<!-- 로그인 : 로그아웃 -->
-								<a href="/member/logout" id="logout">로그아웃</a>
-							</c:when>
-							<c:otherwise>
-								<!-- 비로그인 : 회원가입 -->
-								<a href="/member/toSignUp" id="signUp">회원가입</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<!-- ------------------------------ 반응형 끝 ------------------------------ -->
-				</div> --%>
 
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
-				<div class="d-none d-md-block col-3 d-flex justify-content-start p-0" style="margin-right: 1.9rem;">
+				<div class="col-3 d-flex justify-content-end p-0" style="margin-right: 1.9rem;">
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -322,7 +271,7 @@ input.underlineSearch:focus {
 											<div class="col-4 d-flex justify-content-end p-0">
 												<a href="/member/toFindInfo">아이디/비밀번호 찾기</a>
 											</div>
-											<div class="col-2 d-flex justify-content-end">
+											<div class="col-2 d-flex justify-content-center p-0">
 												<a href="/member/toSignUp" id="signUp">회원가입</a>
 											</div>
 										</div>
@@ -347,7 +296,7 @@ input.underlineSearch:focus {
 					</div>
 				</div>
 				<!-- -------------- myBook -------------- -->
-				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+				<div class="col-1 d-flex justify-content-center p-0"
 					style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -360,7 +309,7 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- SignUp/LogOut -------------- -->
-				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+				<div class="col-1 d-flex justify-content-center p-0"
 						style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -372,7 +321,7 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
-            	<div class="d-none d-md-block col-2 d-flex justify-content-between p-0">
+            	<div class="col-2 d-flex justify-content-end p-0">
             		<form action="/search" method="get" id="searchForm">
                			<input type="text" class="underlineSearch" name="text"> 
                			<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchIcon">
@@ -384,10 +333,10 @@ input.underlineSearch:focus {
 
 		<!-- -------------- Logo, nav 영역 -------------- -->
 
-		<div class="navBox-nonType row d-none d-md-inline-flex justify-content-between align-items-end">
+		<div class="navBox-nonType row justify-content-between align-items-end">
 			<!-- ***** 비반응형 : Logo ***** -->
 			<div class="col-4 p-0 d-flex justify-content-center">
-				<div class="logo 	">
+				<div class="logo">
 					<a href="/"><img src="/resources/images/logo.png" style="width: 10rem;"></a>
 				</div>
 			</div>
@@ -412,10 +361,10 @@ input.underlineSearch:focus {
 							</c:when>
 						</c:choose>
 						<li class="nav-item">
-						    <a href="/toIntroduce">
-						        <button class="dropbtn">Intro</button>
-						    </a>
-						</li>
+ 							   <a href="/toIntroduce">
+      							  <button class="dropbtn">Intro</button>
+  							  </a>
+							</li>
 						<li class="nav-item dropdown">
 							<button class="dropbtn" id="">&nbspBook&nbsp</button>
 							<div class="dropdown-content">

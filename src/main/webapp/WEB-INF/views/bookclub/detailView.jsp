@@ -66,8 +66,8 @@ h4 {
 #detail {
 	width: 100%;
 	height: 140px;
-	border: none;
 	resize: none;
+	font-size: 20px;
 }
 textarea {
 	resize: none;
@@ -134,7 +134,7 @@ font-weight:bold;
 <body>
 
 	<div class="container">
-	
+	<%-- *************************** header *************************** --%>
 	<div class="header">
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
@@ -281,7 +281,7 @@ font-weight:bold;
 						</c:if>
 			</div>
 		</div>
-
+<%-- *************************** footer *************************** --%>
 <div class=footer>
 		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	</div>
@@ -293,7 +293,7 @@ font-weight:bold;
 	<form id="reportBookroomForm" action="/club/reportBookroom" method="post">
 		<div class="modal" id="reportBookroomModal">
 			<div class="modal-dialog">
-				<div class="modal-content">
+				<div class="modal-content" style="height: 402px;">
 					<div class="modal-header">
 						<h2 class="modal-title">신고하기</h2>
 	                </div>
@@ -331,7 +331,7 @@ font-weight:bold;
 	<form id="mydescForm" action="/club/recruit" method="post">
 		<div class="modal" tabindex="-1" id="recruitModal">
 			<div class="modal-dialog">
-				<div class="modal-content">
+				<div class="modal-content" style="height: 402px;">
 					<div class="modal-header">
 						<h5 class="modal-title">
 							리더에게 보낼 간단한 지원동기를 작성해주세요<br>( 10자 이상, 300자 이하 )

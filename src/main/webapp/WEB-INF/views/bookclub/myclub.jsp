@@ -21,6 +21,14 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
+
+/*content-container*/
+.content-container {
+	margin-top: 2rem;
+	padding-left: 6rem;
+	padding-right: 6rem;
+}
+
 h4 {
 	text-align: left;
 }
@@ -57,8 +65,8 @@ h4 {
 #detail {
 	width: 100%;
 	height: 140px;
-	border: none;
 	resize: none;
+	font-size: 20px;
 }
 textarea {
 	resize: none;
@@ -141,6 +149,7 @@ td, th {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		
+		<div class="content-container">
 		
 			<div class="row">
 				<div class="col">
@@ -241,9 +250,7 @@ td, th {
 					</div>
 
 					<div class="row">
-						<div class="col" id="detail">
-							<p>${dto.room_detail}</p>
-						</div>
+						<textarea readonly id="detail">${dto.room_detail}</textarea>
 					</div>
 				</div>
 			</div>	
@@ -301,6 +308,7 @@ td, th {
 					</tbody>
 				</table>
 			</div>
+		</div>	
 	<%-- *************************** footer *************************** --%>
 	<div class=footer>
 		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
@@ -311,7 +319,7 @@ td, th {
 			<!-- 소개글 보기 modal -->
 			<div class="modal" id="myModal" tabindex="-1">
 				<div class="modal-dialog">
-					<div class="modal-content">
+					<div class="modal-content" style="height: 402px;">
 						<div class="modal-header">
 							<h5 class="modal-title">소개글</h5>
 						</div>
@@ -321,7 +329,6 @@ td, th {
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal" id="modalCancel">닫기</button>
-
 						</div>
 					</div>
 				</div>

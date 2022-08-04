@@ -30,7 +30,6 @@ div {
 }
 .contentBox {
 	padding-left: 40px;
-	height: 100vh;
 }
 
 
@@ -50,7 +49,14 @@ div {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
 }
+
+.bookTitle a {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}	
 
 .bookAuthor {
 	overflow: hidden;
@@ -95,18 +101,6 @@ div {
 					</div>
 				</div>
 			</c:forEach>
-		</div>
-		<div class="row navBox d-flex justify-content-center">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination d-flex justify-content-center">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-					</a></li>
-				</ul>
-			</nav>
 		</div>
 		<!---------------------------------- footer ---------------------------------->
 		<div class="footer">

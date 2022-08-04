@@ -25,7 +25,8 @@ public class ReviewService {
 		
 		int img_no = fileDao.selectImgNo();
 		System.out.println(img_no);
-		//dto.setImg_no(img_no);
+		dto.setImg_no(img_no);
+		dto.toString();
 		dao.insertReview(dto);
 		
 		// 파일 업로드 - 서버 root에 폴더가 있는지 확인

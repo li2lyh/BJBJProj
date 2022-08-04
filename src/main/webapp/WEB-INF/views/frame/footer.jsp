@@ -22,6 +22,7 @@
 <style>
 /* ******** 기준 ******** */
 .foot-container {
+	margin-top:5rem;
 	font-size: 20px;
 }
 /* ******** policyBox ******** */
@@ -57,7 +58,7 @@
 /* ******** 북적북적 ~ 주소 ******** */
 .resInfo {
 	margin-top: 0.5rem;
-	margin-bottom: 5rem;
+	margin-bottom: 3.5rem;
 }
 
 .resInfo p {

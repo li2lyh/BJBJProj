@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>전체회원 리스트</title>
 <style>
-
 /*폰트*/
 @font-face {
     font-family: 'MapoGoldenPier';
@@ -17,17 +16,13 @@
     font-weight: normal;
     font-style: normal;
 }
-
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
-
 .nanumgothiccoding * {
  font-family: 'Nanum Gothic Coding', monospace;
 }
-
 *{
 	font-family : 'MapoGoldenPier';
 }
-
 /*버튼*/
 .eachAddBtn{
 	margin: 2px;
@@ -45,7 +40,6 @@
 	background-color:white;	
 	border-color:gray;
 }
-
 .sendBtn {
 	margin: 2px;
 	width: 150px;
@@ -90,17 +84,14 @@
 	width: 300px;
 	height: 500px;
 }
-
 .contentBox textarea {
 	width: 300px;
 	height: 200px;
 	resize: none;
 }
-
 .sendTo {
 	width: 300px;
 }
-
 .letterTitle {
 	width: 300px;
 }
@@ -112,11 +103,9 @@
 .modalEach .modal-content{
 	height:480px;
 }
-
 .modalCheck .modal-content{
 	height:450px;
 }
-
 /*leftBox*/
 .leftPageBox h5{
 	margin: 5px;
@@ -124,7 +113,6 @@
 .leftPageBox h6{
 	margin: 8px;
 }
-
 .leftPageBox a {
 	text-decoration: none;
 	color: black;
@@ -134,16 +122,13 @@
 	font-family : 'Nanum Gothic Coding' ;
 	text-align:center;
 }
-
 .rightPage td{
 	font-family : 'Nanum Gothic Coding';
 	text-align:center;
 }
-
 .selectBox {
 	margin: 1px;
 }
-
 .inputContent {
 	margin: 1px;
 }
@@ -183,7 +168,7 @@
 			</div>
 			<div class="col-9 rightPage">
 				<div class="reportContainer">
-					<form id="searchForm">
+					<form id="searchmemForm">
 						<div class="row">
 							<div class="col-5">
 								<h3>전체 회원</h3>
@@ -350,7 +335,7 @@
 		
 			//전체 회원 검색
 			$(".searchBtn").on("click", function(){
-				let data = $("#searchForm").serialize();
+				let data = $("#searchmemForm").serialize();
 				console.log(data);
 				
 				$.ajax({
@@ -476,7 +461,6 @@
             	 }
              })
         
-
              
         </script>
 </body>
