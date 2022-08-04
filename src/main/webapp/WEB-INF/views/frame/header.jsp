@@ -214,6 +214,8 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
+		
+
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
 				<div class="col-3 d-flex justify-content-end p-0" style="margin-right: 1.9rem;">
@@ -360,10 +362,10 @@ input.underlineSearch:focus {
 							</c:when>
 						</c:choose>
 						<li class="nav-item">
-						    <a href="/toIntroduce">
-						        <button class="dropbtn">Intro</button>
-						    </a>
-						</li>
+ 							   <a href="/toIntroduce">
+      							  <button class="dropbtn">Intro</button>
+  							  </a>
+							</li>
 						<li class="nav-item dropdown">
 							<button class="dropbtn" id="">&nbspBook&nbsp</button>
 							<div class="dropdown-content">

@@ -27,6 +27,9 @@ public class ReviewController {
 	@RequestMapping(value = "/board")
 	public String toReviewBoard(Model model) throws Exception {
 		List<Map<String, Object>> boardList = service.selectAllReview();
+		
+		
+		
 		model.addAttribute("list", boardList);
 		return "/review/board";
 	}
@@ -48,12 +51,12 @@ public class ReviewController {
 	// 리뷰 작성 요청
 	@RequestMapping(value = "/writeProc")
 	public String insertReview(ReviewDTO dto, MultipartFile file) throws Exception {
-		System.out.println(dto.toString());
 		String path = session.getServletContext().getRealPath("photo");
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginSession");
-		System.out.println(memberDTO);
-		dto.setEmail(memberDTO.getEmail());
-		dto.setNickname(memberDTO.getNickname());
+
+		String email = ((MemberDTO) (session.getAttribute("loginSession"))).getEmail();
+		String nickname = ((MemberDTO) (session.getAttribute("loginSession"))).getNickname();
+		dto.setEmail(email);
+		dto.setNickname(nickname);
 		
 		service.insertReview(dto, path, file);
 		

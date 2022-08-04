@@ -238,23 +238,24 @@
 		</div>
 	</div>
 		<script>
-			//모임 검색
-			$(".searchBtn").on("click", function(){
-				let data = $("#searchclubForm").serialize();
-				console.log(data);
-				
-				$.ajax({
-					url:"/manager/toSearchBookclub"
-					, type : "get"
-					, data : data
-					, success : function(data){
-						console.log(data)
-						makeDynamicEl(data);
-					}, error : function(e){
-						console.log(e);
-					}
-				});
-			})
+		//모임 검색
+		$(".searchBtn").on("click", function(){
+			let data = $("#searchclubForm").serialize();
+			console.log(data);
+			
+			$.ajax({
+				url:"/manager/toSearchBookclub"
+				, type : "get"
+				, data : data
+				, success : function(data){
+					console.log("검색결과 data : " + data);
+					makeDynamicEl(data);
+				}, error : function(e){
+					console.log(e);
+				}
+			});
+		})
+
 			
 			function makeDynamicEl(data){
 				$("tbody").empty();

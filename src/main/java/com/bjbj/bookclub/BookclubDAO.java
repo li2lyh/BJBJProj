@@ -244,6 +244,11 @@ public class BookclubDAO {
 	return session.selectList("clubMapper.selectRoomIdByClosedate");
 	}
 	
+	//현재 날짜(sysdate)에 정상적으로 모임이 시작되는 클럽 room_id
+	public List<Integer> selectRoomIdByOpendate() throws Exception{
+	return session.selectList("clubMapper.selectRoomIdByOpendate");
+	}
+	
 	// 모임 종료
 	public void setEndStatus(int room_id) throws Exception{
 		session.update("clubMapper.setEndStatus", room_id);

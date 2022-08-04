@@ -114,5 +114,39 @@ public class Scheduler {
 		}
 	
 	}
+	
+	// 모임 시작 일정 스케툴러
+	@Scheduled(cron= "2 0 * * * *")
+	public void clubStart() {
+		
+		try {
+			if(clubService.selectRoomIdByOpendate() != null) {
+				
+				List<Integer> open_date = clubService.selectRoomIdByOpendate();
+				
+				for(int i = 0; i < open_date.size(); i++) {
+					
+					int room_id = open_date.get(i);
+					
+				
+				List<RoleDTO> list = clubService.selectRoleByRoom(room_id);
+					for (int j = 0; j < list.size(); j++) {
+						String email = list.get(j).getEmail();
+						String title = "[클럽]클럽이 시작되었습니다. ";
+						String content = "파이팅!";
+						letterService.insertLetter(new LetterDTO(0, email, title, content,"", null));
+					}
+				}
+			}
+
+			System.out.println("모임 시작 스케쥴링 완료");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+		
+	}
+	
 
 }
