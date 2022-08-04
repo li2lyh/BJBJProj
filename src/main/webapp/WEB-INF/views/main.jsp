@@ -20,13 +20,9 @@
 	crossorigin="anonymous"></script>
 <style>
 /* ******** 전체 기준 ******** */
-.container {
-	margin-bottom: 1.5rem;
-}
 .content-container {
 	font-size: 20px;
-	margin-top: 3rem;
-	margin-bottom: 5rem;
+	margin-top: 2rem;
 	padding-left: 6rem;
 	padding-right: 6rem;
 }
