@@ -7,7 +7,7 @@
 
 	<!-- 리뷰 등록하기 -->
 	<insert id="insert" parameterType="com.bjbj.review.ReviewDTO">
-		INSERT INTO review VALUES (seq_review.nextval, #{review_title}, 'A@gmail.com', 'null', 'nicky', sysdate, #{content}, 0, #{img_no})
+		INSERT INTO review VALUES (seq_review.nextval, #{review_title}, #{email}, #{book_title}, #{nickname}, sysdate, #{content}, 0, #{img_no})
 	</insert>
 	
 	<!-- 리뷰 삭제하기 -->

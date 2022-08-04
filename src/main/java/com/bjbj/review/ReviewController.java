@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bjbj.member.MemberDTO;
+
 @Controller
 @RequestMapping(value = "/review")
 public class ReviewController {
@@ -48,6 +50,11 @@ public class ReviewController {
 	public String insertReview(ReviewDTO dto, MultipartFile file) throws Exception {
 		System.out.println(dto.toString());
 		String path = session.getServletContext().getRealPath("photo");
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginSession");
+		System.out.println(memberDTO);
+		dto.setEmail(memberDTO.getEmail());
+		dto.setNickname(memberDTO.getNickname());
+		
 		service.insertReview(dto, path, file);
 		
 		return "redirect:/review/board";
