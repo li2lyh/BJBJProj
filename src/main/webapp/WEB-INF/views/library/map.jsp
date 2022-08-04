@@ -110,7 +110,7 @@ div {
 			<div class="col-4">
 				
 				<div class="selectLocRange">
-				<button type="button" class="" id="myLocation">내위치</button>
+				<button type="button" class="btn btn-outline-primary" id="myLocation">내위치</button>
 					<select class="form-select area1" style="width: 100px; display:inline;" aria-label="Default select example">
 						<option selected>시도명</option>
 

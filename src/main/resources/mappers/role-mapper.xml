@@ -44,6 +44,6 @@
 	<select id="selectExpirationRoleByEmail" parameterType="String" resultType="com.bjbj.bookclub.ExpirationRoleDTO">
 		select * from expirationRole where email = #{email}
 	</select>
-	
+
 
 </mapper>
