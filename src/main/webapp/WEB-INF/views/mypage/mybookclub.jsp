@@ -17,18 +17,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>참여 독서 모임</title>
 <style>
-/* Contents */
-.header{
-	height: 20%;
+/* content 길이 */
+.content{
+	height: 1500px;
 }
 
-.body{
-	height: 80%;
-}
-
-.footer{
-	height: 20%;
-}
 /* 메뉴 */
 div a {
 	color: black;
@@ -92,8 +85,8 @@ li > .page-link:hover {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		
-		<!-- body -->
-		<div class="body p-0">
+		<!-- content -->
+		<div class="content p-0">
 			<div class="row border-bottom border-dark">
 				<h2>MyBook</h2>
 			</div>
@@ -160,7 +153,7 @@ li > .page-link:hover {
 										<c:forEach items="${list}" var="dto">
 											<tr>
 												<td>${dto.rank}</td>
-												<td>${dto.book_title}</td>
+												<td><a href="/club/clubBoard?room_id="${dto.room_id}>${dto.book_title}</a></td>
 												<td>${dto.room_title}</td>
 												<td>${dto.open_date} ~ ${dto.close_date}</td>
 												<td>${dto.room_status}</td>

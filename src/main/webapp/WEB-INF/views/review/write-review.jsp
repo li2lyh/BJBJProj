@@ -137,8 +137,18 @@
 		
 		// 리뷰작성하기 버튼
 		document.getElementById('btnWrite').onclick = function() {
+			
+			if($("#book_title").val() == "") {
+				alert("책 제목을 입력해주세요")
+				return;
+			} else if($("#review_title").val() == "") {
+				alert("리뷰 제목을 입력해주세요")
+				return;
+			} else if($("#content").val() == "") {
+				alert("내용을 입력해주세요")
+				return;
+			}
 			let con = confirm('리뷰를 작성할까요?');
-			if($("#book_title").val())
 			if(con) {
 				document.getElementById('reviewForm').submit();
 			}

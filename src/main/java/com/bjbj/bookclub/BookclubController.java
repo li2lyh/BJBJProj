@@ -451,5 +451,10 @@ public class BookclubController {
 		e.printStackTrace();
 		return "redirect:/toError";
 	}
+	@ExceptionHandler
+	public String errorHandler(Exception e) {
+		e.printStackTrace();
+		return "redirect:/toError";
+	}
 
 }

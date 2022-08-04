@@ -75,8 +75,8 @@ h4 {
 #detail {
 	width: 100%;
 	height: 140px;
-	border: none;
 	resize: none;
+	font-size: 20px;
 }
 textarea {
 	resize: none;
@@ -218,7 +218,7 @@ a{
 /* 모임원 보여주는 테이블  */
 .containerR{
 	overflow: auto;
-	height:232px
+	height:215px
 }
 table{
 	margin: 0px;
@@ -431,7 +431,7 @@ table{
 		<form id="reportForm" action="/club/report" method="post">
 			<div class="modal" id="reportModal">
 				<div class="modal-dialog">
-					<div class="modal-content">
+					<div class="modal-content" style="height: 402px;">
 						<div class="modal-header">
 							<h2 class="modal-title">신고하기</h2>
 		                </div>
@@ -469,7 +469,7 @@ table{
 	<form id="modalForm" action="/club/insertReport" method="post">	
 		<div class="modal" id="boardModal" tabindex="-1">
 		 	<div class="modal-dialog">
-			    <div class="modal-content">
+			    <div class="modal-content" style="height: 402px;">
 			      <div class="modal-header">
 			        <h2 id="modalHeadTitle">새 글 작성</h2>
 			      </div>

@@ -57,10 +57,6 @@
 }
 
 /* 로그인 모달 */
-/* #login .modal-content {
-	width: 43rem;
-	height: 23rem;
-} */
 
 /* 모달 body */
 #login .modal-body {
@@ -68,6 +64,7 @@
 	padding-left: 4.3rem;
 	padding-right: 4.3rem;
 }
+
 
 #login .modal-body .logintitle {
 	padding-bottom: 0.9rem;
@@ -80,6 +77,8 @@
 /* 아이디 기억하기 / 아이디 비밀번호 찾기 / 회원가입*/
 .etcBox{
 	font-size: 0.75rem;
+
+}
 
 }
 
@@ -215,7 +214,6 @@ input.underlineSearch:focus {
 		<!-- -------------- 최상단 영역 -------------- -->
 		<div class="loginBox">
 			<div class="row d-flex justify-content-end">
-
 
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
@@ -363,10 +361,10 @@ input.underlineSearch:focus {
 							</c:when>
 						</c:choose>
 						<li class="nav-item">
-							<a href="/toIntroduce">
-								<button	class="dropbtn">Intro</button>
-							</a>
-						</li>
+ 							   <a href="/toIntroduce">
+      							  <button class="dropbtn">Intro</button>
+  							  </a>
+							</li>
 						<li class="nav-item dropdown">
 							<button class="dropbtn" id="">&nbspBook&nbsp</button>
 							<div class="dropdown-content">

@@ -41,7 +41,9 @@ div {
 	top: 10%;
 	left: 20%;
 	border-radius: 50%;
-	background-color: rgba(255, 122, 255, 0.5);
+	background-color: rgba(0, 0, 0, 0.5);
+	color : white;
+	font-weight: bold;
 	width: 40px;
 	height: 40px;
 	text-align: center;
@@ -101,6 +103,12 @@ div {
 	white-space: nowrap;
 }
 
+.bookTitle a {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}	
+
 .bookAuthor {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -153,7 +161,6 @@ div {
 		<div class="row genreRow">
 			<div class="col-12">종합도서</div>
 		</div>
-		${likeBookList}
 		<!-- 갤러리 형식으로 보기 -->
 		<div id="bookPhotoAll" class="carousel carousel-dark slide bookList"
 			data-bs-ride="carousel">
@@ -173,14 +180,13 @@ div {
 									<c:if test="${likeBook.book_isbn eq item.isbn}">
 										<c:set var="checkLike" value="true" />
 									</c:if>
-									<c:if test="${checkLike}">
-									
-									
-									</c:if>
-									<c:if test="${not checkLike}">
-									<img class="likeBtn" src="/resources/images/like-disabled.png">
-									</c:if>
 								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
@@ -202,22 +208,36 @@ div {
 					<div class="carousel-item">
 						<c:set var="beginCnt" value="${beginCnt + 5}" />
 						<c:set var="endCnt" value="${endCnt + 5}" />
-						<c:set var="cnt" value="${beginCnt+1}" />
+						<c:set var="cnt" value="${beginCnt}" />
 
 						<c:forEach items="${all}" var="item" begin="${beginCnt}"
 							end="${endCnt}">
+							<c:set var="cnt" value="${cnt+1}" />
 							<div class="contentBox d-flex flex-column justify-content-center">
-								<c:set var="cnt" value="${beginCnt+1}" />
 								<div class="ranking">${cnt}위</div>
+								
 								<div class="imgBox">
 									<a href="${item.link}"><img class="thumbImg"
 										src="${item.cover}"></a>
 								</div>
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
 								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -252,7 +272,7 @@ div {
 								<c:set var="cnt" value="${cnt+1}" />
 								<tr>
 									<td width="50px">${cnt}위</td>
-									<td class="bookTitle">${item.title}</td>
+									<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 									<td class="bookAuthor">${item.author}</td>
 								</tr>
 							</c:forEach>
@@ -275,7 +295,7 @@ div {
 									<c:set var="cnt" value="${cnt+1}" />
 									<tr>
 										<td width="50px">${cnt}위</td>
-										<td class="bookTitle">${item.title}</td>
+										<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 										<td class="bookAuthor">${item.author}</td>
 									</tr>
 								</c:forEach>
@@ -308,11 +328,24 @@ div {
 								<a href="${item.link}"><img class="thumbImg"
 									src="${item.cover}"></a>
 							</div>
-							<img class="likeBtn" src="/resources/images/like-disabled.png">
-							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
-							<input type="text" class="book_title" style="display:none;" value="${item.title}">
-							<input type="text" class="book_author" style="display:none;" value="${item.author}">
-							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
+								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
+								<input type="text" class="book_title" style="display:none;" value="${item.title}">
+								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -337,11 +370,24 @@ div {
 									<a href="${item.link}"><img class="thumbImg"
 										src="${item.cover}"></a>
 								</div>
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
 								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -377,7 +423,7 @@ div {
 								<c:set var="cnt" value="${cnt+1}" />
 								<tr>
 									<td width="50px">${cnt}위</td>
-									<td class="bookTitle">${item.title}</td>
+									<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 									<td class="bookAuthor">${item.author}</td>
 								</tr>
 							</c:forEach>
@@ -400,7 +446,7 @@ div {
 									<c:set var="cnt" value="${cnt+1}" />
 									<tr>
 										<td width="50px">${cnt}위</td>
-										<td class="bookTitle">${item.title}</td>
+										<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 										<td class="bookAuthor">${item.author}</td>
 									</tr>
 								</c:forEach>
@@ -435,11 +481,24 @@ div {
 								<a href="${item.link}"><img class="thumbImg"
 									src="${item.cover}"></a>
 							</div>
-							<img class="likeBtn" src="/resources/images/like-disabled.png">
-							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
-							<input type="text" class="book_title" style="display:none;" value="${item.title}">
-							<input type="text" class="book_author" style="display:none;" value="${item.author}">
-							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
+								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
+								<input type="text" class="book_title" style="display:none;" value="${item.title}">
+								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -464,11 +523,24 @@ div {
 									<a href="${item.link}"><img class="thumbImg"
 										src="${item.cover}"></a>
 								</div>
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
 								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -504,7 +576,7 @@ div {
 								<c:set var="cnt" value="${cnt+1}" />
 								<tr>
 									<td width="50px">${cnt}위</td>
-									<td class="bookTitle">${item.title}</td>
+									<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 									<td class="bookAuthor">${item.author}</td>
 								</tr>
 							</c:forEach>
@@ -527,7 +599,7 @@ div {
 									<c:set var="cnt" value="${cnt+1}" />
 									<tr>
 										<td width="50px">${cnt}위</td>
-										<td class="bookTitle">${item.title}</td>
+										<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 										<td class="bookAuthor">${item.author}</td>
 									</tr>
 								</c:forEach>
@@ -559,11 +631,24 @@ div {
 								<a href="${item.link}"><img class="thumbImg"
 									src="${item.cover}"></a>
 							</div>
-							<img class="likeBtn" src="/resources/images/like-disabled.png">
-							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
-							<input type="text" class="book_title" style="display:none;" value="${item.title}">
-							<input type="text" class="book_author" style="display:none;" value="${item.author}">
-							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
+								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
+								<input type="text" class="book_title" style="display:none;" value="${item.title}">
+								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -588,11 +673,24 @@ div {
 									<a href="${item.link}"><img class="thumbImg"
 										src="${item.cover}"></a>
 								</div>
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
 								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -627,7 +725,7 @@ div {
 								<c:set var="cnt" value="${cnt+1}" />
 								<tr>
 									<td width="50px">${cnt}위</td>
-									<td class="bookTitle">${item.title}</td>
+									<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 									<td class="bookAuthor">${item.author}</td>
 								</tr>
 							</c:forEach>
@@ -650,7 +748,7 @@ div {
 									<c:set var="cnt" value="${cnt+1}" />
 									<tr>
 										<td width="50px">${cnt}위</td>
-										<td class="bookTitle">${item.title}</td>
+										<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 										<td class="bookAuthor">${item.author}</td>
 									</tr>
 								</c:forEach>
@@ -683,11 +781,24 @@ div {
 								<a href="${item.link}"><img class="thumbImg"
 									src="${item.cover}"></a>
 							</div>
-							<img class="likeBtn" src="/resources/images/like-disabled.png">
-							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
-							<input type="text" class="book_title" style="display:none;" value="${item.title}">
-							<input type="text" class="book_author" style="display:none;" value="${item.author}">
-							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
+								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
+								<input type="text" class="book_title" style="display:none;" value="${item.title}">
+								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -712,11 +823,24 @@ div {
 									<a href="${item.link}"><img class="thumbImg"
 										src="${item.cover}"></a>
 								</div>
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
 								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -752,7 +876,7 @@ div {
 								<c:set var="cnt" value="${cnt+1}" />
 								<tr>
 									<td width="50px">${cnt}위</td>
-									<td class="bookTitle">${item.title}</td>
+									<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 									<td class="bookAuthor">${item.author}</td>
 								</tr>
 							</c:forEach>
@@ -775,7 +899,7 @@ div {
 									<c:set var="cnt" value="${cnt+1}" />
 									<tr>
 										<td width="50px">${cnt}위</td>
-										<td class="bookTitle">${item.title}</td>
+										<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 										<td class="bookAuthor">${item.author}</td>
 									</tr>
 								</c:forEach>
@@ -809,11 +933,24 @@ div {
 								<a href="${item.link}"><img class="thumbImg"
 									src="${item.cover}"></a>
 							</div>
-							<img class="likeBtn" src="/resources/images/like-disabled.png">
-							<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
-							<input type="text" class="book_title" style="display:none;" value="${item.title}">
-							<input type="text" class="book_author" style="display:none;" value="${item.author}">
-							<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
+								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
+								<input type="text" class="book_title" style="display:none;" value="${item.title}">
+								<input type="text" class="book_author" style="display:none;" value="${item.author}">
+								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 							<div class="descBox">
 								<div class="bookTitle">
 									<a href="${item.link}">${item.title}</a>
@@ -838,11 +975,24 @@ div {
 									<a href="${item.link}"><img class="thumbImg"
 										src="${item.cover}"></a>
 								</div>
-								<img class="likeBtn" src="/resources/images/like-disabled.png">
+							<div class="likeBox">
+								<c:set var="checkLike" value="false" />
+								<c:forEach items="${likeBookList}" var="likeBook">
+									<c:if test="${likeBook.book_isbn eq item.isbn}">
+										<c:set var="checkLike" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${checkLike}">
+									<img class="likeBtn" src="/resources/images/like-enabled.png">
+								</c:if>
+								<c:if test="${not checkLike}">
+									<img class="likeBtn" src="/resources/images/like-disabled.png">
+								</c:if>
 								<input type="text" class="book_isbn" style="display:none;" value="${item.isbn}">
 								<input type="text" class="book_title" style="display:none;" value="${item.title}">
 								<input type="text" class="book_author" style="display:none;" value="${item.author}">
 								<input type="text" class="book_cover" style="display:none;" value="${item.cover}">
+							</div>
 								<div class="descBox">
 									<div class="bookTitle">
 										<a href="${item.link}">${item.title}</a>
@@ -867,7 +1017,7 @@ div {
 		</div>
 
 		<!-- 목록 형식으로 보기 -->
-		<div id="bookListLiterature"
+		<div id="bookListEssay"
 			class="carousel carousel-dark slide bookList2"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
@@ -878,7 +1028,7 @@ div {
 								<c:set var="cnt" value="${cnt+1}" />
 								<tr>
 									<td width="50px">${cnt}위</td>
-									<td class="bookTitle">${item.title}</td>
+									<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 									<td class="bookAuthor">${item.author}</td>
 								</tr>
 							</c:forEach>
@@ -901,7 +1051,7 @@ div {
 									<c:set var="cnt" value="${cnt+1}" />
 									<tr>
 										<td width="50px">${cnt}위</td>
-										<td class="bookTitle">${item.title}</td>
+										<td class="bookTitle"><a href="${item.link}">${item.title}</a></td>
 										<td class="bookAuthor">${item.author}</td>
 									</tr>
 								</c:forEach>
@@ -911,11 +1061,11 @@ div {
 				</c:forEach>
 			</div>
 			<button class="carousel-control-prev" type="button"
-				data-bs-target="#bookListLiterature" data-bs-slide="prev">
+				data-bs-target="#bookListEssay" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			</button>
 			<button class="carousel-control-next" type="button"
-				data-bs-target="#bookListLiterature" data-bs-slide="next">
+				data-bs-target="#bookListEssay" data-bs-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 			</button>
 		</div>

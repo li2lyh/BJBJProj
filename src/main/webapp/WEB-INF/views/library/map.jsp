@@ -107,6 +107,7 @@ div {
 				<h1>Library</h1>
 				<span>주변 도서관 정보를 보여줍니다. 모임을 할 장소를 찾아보세요!</span>
 			</div>
+
 			
 			<div class="row">
 				<div class="col-8">
@@ -116,19 +117,17 @@ div {
 							<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
 						</div>
 					</div>
+
+			<div class="col-4">
+				<div class="selectLocRange">
+					<select class="form-select area1" style="width: 100px; display:inline;" aria-label="Default select example">
+						<option selected>시도명</option>
+					</select>
+					<select class="form-select area2" style="width: auto; display:inline;" aria-label="Default select example">
+						<option selected>시군구명</option>
+					</select>
+
 				</div>
-				<div class="col-4">
-					
-					<div class="selectLocRange">
-					<button type="button" class="" id="myLocation">내위치</button>
-						<select class="form-select area1" style="width: 100px; display:inline;" aria-label="Default select example">
-							<option selected>시도명</option>
-	
-						</select>
-						<select class="form-select area2" style="width: auto; display:inline;" aria-label="Default select example">
-							<option selected>시군구명</option>
-						</select>
-					</div>
 					<div class="loc_list">
 						<div class="loc_item">
 							<span><a href="#">도서관 이름</a></span>
