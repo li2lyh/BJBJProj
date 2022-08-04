@@ -139,7 +139,11 @@ public class BookclubService {
 		return dao.selectRoleByRoom(room_id);
 	}
 
-	
+	// room_id 에 따른 닉네임 리스트
+	public List<RoleDTO>selectNickByRoom(int room_id)throws Exception{
+		return dao.selectNickByRoom(room_id);
+	}
+		
 	// 클럽내 게시판 글쓰기
 	public void insertBoard(BoardDTO dto) throws Exception {
 		dao.insertBoard(dto);
