@@ -110,6 +110,12 @@
 		select room_id from bookroom where close_date = TO_CHAR(SYSDATE,'yyyy-MM-dd') and room_status = '진행중'
 	</select>
 	
+	<!-- 현재 날짜(sysdate)에 모임이 시작 '진행중' 클럽 room_id -->
+	<select id="selectRoomIdByOpendate" resultType="int">
+		select room_id from bookroom where open_date = TO_CHAR(SYSDATE,'yyyy-MM-dd') and room_status = '진행중'
+	</select>
+	
+	
 	<update id="setEndStatus" parameterType="int">
 		update bookroom set room_status = '종료' where room_id = #{room_id}
 	</update>

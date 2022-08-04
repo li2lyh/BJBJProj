@@ -199,6 +199,12 @@ public class BookclubService {
 	public List<Integer> selectRoomIdByClosedate() throws Exception{
 	return dao.selectRoomIdByClosedate();
 	}
+	
+	//현재 날짜(sysdate)에 정상적으로 모임이 시작되는 클럽 room_id
+	public List<Integer> selectRoomIdByOpendate() throws Exception{
+	return dao.selectRoomIdByOpendate();
+	}
+	
 
 	// 모임 종료
 	public void setEndStatus(int room_id) throws Exception{
@@ -232,7 +238,12 @@ public class BookclubService {
 	// 검색페이지 북클럽 검색
 	public List<BookclubDTO> searchByTitle(String keyword) throws Exception{
 		return dao.searchByTitle(keyword);
-		}
+	}
+	
+	// room_id 로 해당 멤버 닉네임 출력
+		public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
+			return dao.selectNickByRoom(room_id);
+	}
 	
 }
 
