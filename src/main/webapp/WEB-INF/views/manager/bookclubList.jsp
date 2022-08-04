@@ -142,7 +142,7 @@
 			</div>
 			<div class="col-9 rightPage">
 				<div class="reportContainer">
-					<form id="searchForm">
+					<form id="searchclubForm">
 					<div class="row">
 						<div class="col-5">
 							<h3>전체 모임</h3>
@@ -238,23 +238,23 @@
 		</div>
 	</div>
 		<script>
-			//모임 검색
-			$(".searchBtn").on("click", function(){
-				let data = $("#searchForm").serialize();
-				console.log(data);
-				
-				$.ajax({
-					url:"/manager/toSearchBookclub"
-					, type : "get"
-					, data : data
-					, success : function(data){
-						console.log(data)
-						makeDynamicEl(data);
-					}, error : function(e){
-						console.log(e);
-					}
-				});
-			})
+		//모임 검색
+		$(".searchBtn").on("click", function(){
+			let data = $("#searchclubForm").serialize();
+			console.log(data);
+			
+			$.ajax({
+				url:"/manager/toSearchBookclub"
+				, type : "get"
+				, data : data
+				, success : function(data){
+					console.log("검색결과 data : " + data);
+					makeDynamicEl(data);
+				}, error : function(e){
+					console.log(e);
+				}
+			});
+		})
 			
 			function makeDynamicEl(data){
 				$("tbody").empty();

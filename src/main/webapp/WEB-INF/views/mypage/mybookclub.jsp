@@ -160,7 +160,7 @@ li > .page-link:hover {
 										<c:forEach items="${list}" var="dto">
 											<tr>
 												<td>${dto.rank}</td>
-												<td>${dto.book_title}</td>
+												<td><a href="/club/clubBoard?room_id="${dto.room_id}>${dto.book_title}</a></td>
 												<td>${dto.room_title}</td>
 												<td>${dto.open_date} ~ ${dto.close_date}</td>
 												<td>${dto.room_status}</td>
