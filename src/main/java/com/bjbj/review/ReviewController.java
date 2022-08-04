@@ -52,6 +52,7 @@ public class ReviewController {
 	@RequestMapping(value = "/writeProc")
 	public String insertReview(ReviewDTO dto, MultipartFile file) throws Exception {
 		String path = session.getServletContext().getRealPath("photo");
+
 		String email = ((MemberDTO) (session.getAttribute("loginSession"))).getEmail();
 		String nickname = ((MemberDTO) (session.getAttribute("loginSession"))).getNickname();
 		dto.setEmail(email);

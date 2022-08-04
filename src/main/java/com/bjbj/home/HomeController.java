@@ -81,19 +81,6 @@ public class HomeController {
 
 		return "search";
 	}
-
-
-	// Error
-	@RequestMapping(value = "/toError")
-	public String toError() {
-		return "error";
-	}
-	@ExceptionHandler
-	public String errorHandler(Exception e) {
-		e.printStackTrace();
-		return "redirect:/toError";
-	}
-
 	
 	//introducce
 	@RequestMapping(value = "/toIntroduce")
@@ -101,4 +88,16 @@ public class HomeController {
 		return "introduce";
 	}
 	
+	// Error
+	@RequestMapping(value = "/toError")
+	public String toError() {
+		return "error";
+	}
+	
+	// 에러 핸들링
+	@ExceptionHandler
+	public String errorHandler(Exception e) {
+		e.printStackTrace();
+		return "redirect:/toError";
+	}
 }

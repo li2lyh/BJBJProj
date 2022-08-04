@@ -26,6 +26,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
+
 </head>
 <style>
 /*폰트*/
@@ -95,7 +96,7 @@
 
 /* Search 창 */
 input.underlineSearch {
-	width: 11rem;
+	width: 10rem;
 	height: 1.3rem;
 	padding-left: 0.5rem;
 	padding-right:0.5rem;
@@ -148,7 +149,7 @@ input.underlineSearch:focus {
 	display: none;
 	position: absolute;
 	width: 8.5rem;
-	height: 5.5rem;
+	height: auto;
 	min-width: auto;
 	z-index: 1;
 	font-size: 1rem;
@@ -217,7 +218,7 @@ input.underlineSearch:focus {
 
 				<!-- ------------------------------ 비반응형 ------------------------------ -->
 				<!-- -------------- Login -------------- -->
-				<div class="d-none d-md-block col-3 d-flex justify-content-start p-0" style="margin-right: 1.9rem;">
+				<div class="col-3 d-flex justify-content-end p-0" style="margin-right: 1.9rem;">
 					<!-- Button trigger modal -->
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -296,7 +297,7 @@ input.underlineSearch:focus {
 					</div>
 				</div>
 				<!-- -------------- myBook -------------- -->
-				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+				<div class="col-1 d-flex justify-content-center p-0"
 					style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -309,7 +310,7 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- SignUp/LogOut -------------- -->
-				<div class="d-none d-md-block col-1 d-flex justify-content-start p-0"
+				<div class="col-1 d-flex justify-content-center p-0"
 						style="text-align: center;">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
@@ -321,7 +322,7 @@ input.underlineSearch:focus {
 					</c:choose>
 				</div>
 				<!-- -------------- Search -------------- -->
-            	<div class="d-none d-md-block col-2 d-flex justify-content-between p-0">
+            	<div class="col-2 d-flex justify-content-end p-0">
             		<form action="/search" method="get" id="searchForm">
                			<input type="text" class="underlineSearch" name="text"> 
                			<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchIcon">
@@ -333,10 +334,10 @@ input.underlineSearch:focus {
 
 		<!-- -------------- Logo, nav 영역 -------------- -->
 
-		<div class="navBox-nonType row d-none d-md-inline-flex justify-content-between align-items-end">
+		<div class="navBox-nonType row justify-content-between align-items-end">
 			<!-- ***** 비반응형 : Logo ***** -->
 			<div class="col-4 p-0 d-flex justify-content-center">
-				<div class="logo 	">
+				<div class="logo">
 					<a href="/"><img src="/resources/images/logo.png" style="width: 10rem;"></a>
 				</div>
 			</div>

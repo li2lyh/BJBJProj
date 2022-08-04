@@ -63,7 +63,8 @@ public class ManagerDAO {
 	public List<Map<String, Object>> selectBookroom() throws Exception{ //전체 모임 조회
 		return session.selectList("managerMapper.selectBookroom");
 	}
-	public List<BookclubDTO>searchBookclub(String category, String keyword)throws Exception{
+	
+	public List<Map<String, Object>> searchBookclub(String category, String keyword)throws Exception{ //모임 검색
 		Map<String, String> map = new HashMap<>();
 		map.put("category", category);
 		map.put("keyword", keyword);

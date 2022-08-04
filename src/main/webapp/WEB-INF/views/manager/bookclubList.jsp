@@ -255,6 +255,7 @@
 				}
 			});
 		})
+
 			
 			function makeDynamicEl(data){
 				$("tbody").empty();

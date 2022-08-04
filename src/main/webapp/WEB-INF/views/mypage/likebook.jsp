@@ -18,18 +18,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>찜 도서</title>
 <style>
-/* Contents */
-.header{
-	height: 20%;
+/* content 길이 */
+.content{
+	height: 1500px;
 }
 
-.body{
-	height: 80%;
-}
-
-.footer{
-	height: 20%;
-}
 /* 메뉴 */
 div a {
 	color: black;
@@ -100,8 +93,8 @@ div > .card-text {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		
-		<!-- body -->
-		<div class="body p-0">
+		<!-- content -->
+		<div class="content p-0">
 			<div class="row border-bottom border-dark">
 				<h2>MyBook</h2>
 			</div>
@@ -156,8 +149,7 @@ div > .card-text {
 												<img class="card-img-top" src="/resources/images/noImg.png" id="noImg">
 											</c:when>
 											<c:otherwise>		
-												<img src="/resources/images/noImg.png" id="noImg">							
-											<%-- 	<img src="/profile/${dto.book_cover}" id="bookImg"> --%>
+												<img src="${dto.book_cover}" id="bookImg">
 											</c:otherwise>								
 										</c:choose>
 										<div class="card-body border-top">
