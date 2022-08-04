@@ -21,6 +21,14 @@
 	border-bottom: 1px solid lightgray;
 	text-align: left;
 }
+
+/*content-container*/
+.content-container {
+	margin-top: 2rem;
+	padding-left: 6rem;
+	padding-right: 6rem;
+}
+
 h4 {
 	text-align: left;
 }
@@ -141,6 +149,7 @@ td, th {
 			<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		</div>
 		
+		<div class="content-container">
 		
 			<div class="row">
 				<div class="col">
@@ -301,6 +310,7 @@ td, th {
 					</tbody>
 				</table>
 			</div>
+		</div>	
 	<%-- *************************** footer *************************** --%>
 	<div class=footer>
 		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
