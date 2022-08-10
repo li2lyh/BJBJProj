@@ -237,7 +237,7 @@ div > .card-text {
 													<img src="/resources/images/noImg.png" id="noImg">
 												</c:when>
 												<c:otherwise>
-													<img src="${dto.img_no}" id="reviewImg">
+													 <img src="${dto.img_no}" id="reviewImg">
 												</c:otherwise>
 											</c:choose>
 										</div>

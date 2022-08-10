@@ -245,16 +245,5 @@ public class BookclubService {
 	}
 	
 
-	// room_id 로 해당 멤버 닉네임 출력
-		public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
-			return dao.selectNickByRoom(room_id);
-	}
-	
-
-	// room_id 로 해당 멤버 닉네임 출력
-    public List<RoleDTO>selectNickByRoom(int room_id) throws Exception {
-        return dao.selectNickByRoom(room_id);
-  }
-
 }
 

@@ -191,26 +191,18 @@ public class MemberController {
 		return "/member/signup-kakao";
 	}
 
-	// 카카오 회원가입 요청
-	@RequestMapping(value = "/kakaoSignUp")
-	public String kakaoSingUp(MemberDTO dto) throws Exception {
-		System.out.println("카카오 회원가입 요청");
-		if (dto.getPassword() == "") {
-			// 랜덤으로 비밀번호 생성
-			String ranPw = Mservice.makePw(dto.getEmail());
-			
-			// 비밀번호 암호화
-			ranPw = EncryptionUtils.getSHA512(ranPw);
-			
-			// 비밀번호 설정
-			dto.setPassword(ranPw);
-			
-			
-		}
-		System.out.println(dto.toString());
-		Mservice.signUp(dto);
-		return "redirect:/";
-	}
+   // 카카오 회원가입 요청
+   @RequestMapping(value = "/kakaoSignUp")
+   public String kakaoSingUp(MemberDTO dto) throws Exception{
+      System.out.println("카카오 회원가입 요청");
+      if(dto.getPassword() == "") {
+         String ranPw = Mservice.makePw(dto.getEmail());
+         dto.setPassword(ranPw);
+      }
+      System.out.println(dto.toString());
+      Mservice.signUp(dto);
+      return "redirect:/";
+   }
 
 	// 이메일 중복 확인
 	@RequestMapping(value = "/confirmEmail")
@@ -342,7 +334,7 @@ public class MemberController {
 		System.out.println(email + " : " + password + " : " + nickname + " : " + mydesc);
 		email = ((MemberDTO) session.getAttribute("loginSession")).getEmail();
 		// pw 암호화
-		password = EncryptionUtils.getSHA512(password);
+		// password = EncryptionUtils.getSHA512(password);
 
 		int rs = Mservice.updateInfo(email, password, nickname, mydesc);
 		if (rs > 0) {
@@ -358,8 +350,6 @@ public class MemberController {
 	@RequestMapping(value = "/toDelete")
 	@ResponseBody
 	public String toDelete(String email, String password) throws Exception {
-		// pw 암호화
-		password = EncryptionUtils.getSHA512(password);
 		
 		System.out.println(email + " : " + password);
 		
